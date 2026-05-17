@@ -1,0 +1,35 @@
+name: Refresh schedule data
+
+on:
+  # Every Monday at 06:00 UTC (≈ 07:00 / 08:00 Brussels depending on DST)
+  schedule:
+    - cron: "0 6 * * 1"
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Allow the workflow's bot to commit the updated index.html back to the repo.
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run update.ps1
+        shell: pwsh
+        run: ./update.ps1
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No data changes this run."
+          else
+            git commit -m "chore: refresh schedule data (auto)"
+            git push
+          fi
