@@ -16,7 +16,7 @@
 
 param(
     [int]$DaysForward = 90,
-    [int]$DaysBack    = 60,  # results endpoint silently returns 0 rows beyond ~60 days
+    [int]$DaysBack    = 180,  # results endpoint caps each call ~30d; we paginate in 25d windows
     [string]$ClubId   = "CC6VJ83"
 )
 
