@@ -134,11 +134,12 @@
   }
   .week-team h3 .team-meta { font-size:12px; color:var(--muted); font-weight:400; letter-spacing:0; text-transform:none; }
 
-  /* Layout view: spatial map of the club (Veld 2 | Veld 1 | Clubhuis  /  · | Veld 5 | ·) */
+  /* Layout view: spatial map of the club. Clubhuis is a slim vertical bar on the right
+     (spans both rows) — mirrors where it physically sits at Wilrijkse Plein. */
   .fields-row {
-    display:grid; grid-template-columns: 1fr 1fr 0.55fr;
+    display:grid; grid-template-columns: 1fr 1fr 56px;
     grid-template-rows: auto auto;
-    gap:20px; align-items:start; max-width:1400px; margin:0 auto;
+    gap:20px; align-items:stretch; max-width:1400px; margin:0 auto;
   }
   .field-card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
   .field-card h3 { margin:0 0 12px; font-size:18px; display:flex; justify-content:space-between; align-items:center; }
@@ -148,16 +149,25 @@
     background: repeating-linear-gradient(90deg, #1b3f25, #1b3f25 8px, #1d4528 8px, #1d4528 16px);
     border:2px solid #2d6a3e; border-radius:6px; overflow:hidden;
   }
-  /* Clubhuis is a static wayfinding marker — no games, just an orange box for orientation. */
-  .field-card.clubhuis { background:rgba(217,124,68,.08); border-color:rgba(217,124,68,.45); }
-  .field-card.clubhuis h3 { color:#e89968; }
+  /* Clubhuis bar — narrow strip, full-height, vertical text */
+  .field-card.clubhuis {
+    background:rgba(217,124,68,.10); border-color:rgba(217,124,68,.50);
+    padding:6px; display:flex; align-items:stretch; justify-content:center;
+    min-height:180px;
+  }
   .clubhuis-box {
-    width:100%; aspect-ratio: 55/91;
+    width:100%; flex:1; aspect-ratio: auto;
     background: linear-gradient(160deg, #d97c44 0%, #b85e2e 100%);
     border:2px solid #8a4520; border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; font-size:20px; font-weight:600; letter-spacing:.5px;
-    text-shadow:0 1px 3px rgba(0,0,0,.35);
+    display:flex; flex-direction:column; align-items:center; justify-content:space-evenly;
+    padding:14px 2px; color:#fff;
+    text-shadow:0 1px 3px rgba(0,0,0,.4);
+  }
+  .clubhuis-icon { font-size:32px; line-height:1; opacity:.95; }
+  .clubhuis-text {
+    writing-mode:vertical-rl; text-orientation:mixed;
+    font-weight:700; font-size:13px; letter-spacing:4px;
+    transform:rotate(180deg);   /* reads top→bottom, normal letter orientation */
   }
   .subcell {
     position:absolute; border:1px solid rgba(255,255,255,.18);
@@ -435,15 +445,10 @@
     header .tabs button { padding:6px 10px; font-size:13px; }
     main { padding:14px 14px 60px; }
 
-    /* Inline style="grid-column:X;grid-row:Y" on cards has higher specificity than
-       plain selectors, so the column/row overrides need !important here. */
-    .fields-row { grid-template-columns: 1fr 1fr; }
-    .field-card.clubhuis { grid-column: 2 !important; grid-row: 2 !important; }
-    /* Place Veld 5 across both columns on row 3 */
-    .field-card:not(.clubhuis):nth-child(4) {
-      grid-column: 1 / span 2 !important; grid-row: 3 !important;
-      max-width:520px; margin:0 auto;
-    }
+    /* Tablet: keep Clubhuis as a slim right-side column spanning both rows */
+    .fields-row { grid-template-columns: 1fr 1fr 50px; }
+    .field-card.clubhuis { grid-column: 3 !important; grid-row: 1 / span 2 !important; }
+    .clubhuis-text { font-size:12px; letter-spacing:3px; }
 
     .team-section.pool-row { grid-template-columns: 1fr; }
     table.standing-table { font-size:13px; }
@@ -506,12 +511,32 @@
     }
     /* JS renders only the selected field's column on mobile — no CSS hiding needed */
 
-    /* LAYOUT view: single column, full width, no max-width tweaks */
+    /* LAYOUT view: single column, full width. Clubhuis hidden by default on phone (saves
+       vertical room). In landscape phone, bring it back as a narrow right-side bar. */
     .fields-row { grid-template-columns: 1fr; max-width:none; gap:12px; }
     .field-card { grid-column: 1 !important; grid-row: auto !important; padding:10px; }
-    .field-card.clubhuis { display:none; }   /* save space on phone — clubhuis is a wayfinding nicety */
+    .field-card.clubhuis { display:none; }
     .field-card:not(.clubhuis):nth-child(4) { max-width:none; margin:0; }
     .subcell .game-mini .div { display:none; }
+  }
+  @media (max-width: 720px) and (orientation: landscape) {
+    /* Phone landscape: revive Clubhuis as a thin right-edge bar so people still get
+       the spatial reference even when squeezed horizontally. */
+    .fields-row {
+      grid-template-columns: 1fr 1fr 44px !important;
+      max-width:none !important;
+    }
+    .field-card { grid-column: auto !important; grid-row: auto !important; }
+    .field-card.clubhuis {
+      display:flex !important;
+      grid-column: 3 !important; grid-row: 1 / span 2 !important;
+      padding:4px; min-height:0;
+    }
+    .field-card:not(.clubhuis):nth-child(4) {
+      grid-column: 1 / span 2 !important; grid-row: 2 !important;
+    }
+    .clubhuis-icon { font-size:22px; }
+    .clubhuis-text { font-size:11px; letter-spacing:2px; }
 
     /* MATCH-ROW as a 2-line card */
     .match-row {
@@ -629,7 +654,7 @@ const FIELDS = [
 const LAYOUT_GRID = [
   { type: "field",    code: "2", label: "Veld 2",   col: 1, row: 1 },
   { type: "field",    code: "1", label: "Veld 1",   col: 2, row: 1 },
-  { type: "clubhuis",            label: "Clubhuis", col: 3, row: 1 },
+  { type: "clubhuis",            label: "Clubhuis", col: 3, row: "1 / span 2" },
   { type: "field",    code: "5", label: "Veld 5",   col: 2, row: 2 },
 ];
 const TIMELINE_START_H = 8;
@@ -953,9 +978,12 @@ function renderLayout(games, activeSlot) {
   for (const cell of LAYOUT_GRID) {
     const gridStyle = `grid-column:${cell.col};grid-row:${cell.row};`;
     if (cell.type === "clubhuis") {
-      html += `<div class="field-card clubhuis" style="${gridStyle}">
-        <h3>${cell.label}</h3>
-        <div class="clubhuis-box">${cell.label}</div>
+      // Slim vertical bar to the right of the pitches — house icon + vertical "CLUBHUIS" text.
+      html += `<div class="field-card clubhuis" style="${gridStyle}" title="${escape(cell.label)}">
+        <div class="clubhuis-box" aria-label="${escape(cell.label)}">
+          <span class="clubhuis-icon" aria-hidden="true">⌂</span>
+          <span class="clubhuis-text">CLUBHUIS</span>
+        </div>
       </div>`;
       continue;
     }
