@@ -381,9 +381,11 @@
     border-radius:7px;
   }
   .view-toggle button.active { background:var(--accent); color:#0b1320; }
-  .vb-controls #vb-field-select {
+  .vb-controls #vb-field-select,
+  .vb-controls #vb-slot-select {
     background:var(--panel2); color:var(--text); border:1px solid var(--line);
-    border-radius:8px; padding:7px 12px; font:inherit; font-size:14px; font-weight:500; cursor:pointer;
+    border-radius:8px; padding:7px 12px; font:inherit; font-size:14px; font-weight:600;
+    cursor:pointer; font-variant-numeric:tabular-nums;
   }
   .club-map .map-pitch.selected { stroke:var(--accent); stroke-width:3; fill:#2a5a3a; }
   .club-map .map-pitch.has-games:not(.selected) { fill:#2a5a3a; stroke:var(--accent2); stroke-width:2; }
@@ -690,7 +692,8 @@
     .vb-controls { gap:8px; }
     .view-toggle { flex:1; }
     .view-toggle button { flex:1; padding:7px 8px; font-size:13px; }
-    .vb-controls #vb-field-select { width:100%; flex-basis:100%; }
+    .vb-controls #vb-field-select,
+    .vb-controls #vb-slot-select { width:100%; flex-basis:100%; }
 
     /* Team controls — compact, wrap favorite button */
     .team-controls { padding:10px; gap:8px; flex-wrap:wrap; }
@@ -1062,18 +1065,21 @@ function renderClubMapHtml(games, highlightedField) {
   </div>`;
 }
 
-// "Veldbezetting" tab — replaces the old Veldindeling slot-picker AND Tijdlijn views.
-// Layout: club mini-map (always) + slider [Alle velden | Eén veld] + full-day timeline.
+// "Veldbezetting" tab — two modes via slider:
+//   Alle velden = pick a time slot, see all 3 pitches with the games occupying each
+//                 subdivision RIGHT NOW (the spatial / "where is everything happening").
+//   Eén veld    = pick one field, see its full-day timeline.
+// Mini-map always sits on top as a wayfinding reference.
 function renderVeldbezetting() {
   const main = document.getElementById("main");
   const games = gamesOnDate(state.fieldGames, state.date);
   const isMobile = window.matchMedia("(max-width: 720px)").matches;
 
-  // Default mode based on viewport: mobile defaults to single-field, desktop to all-fields
   if (!state.veldbezettingMode) {
-    state.veldbezettingMode = isMobile ? "one" : "all";
+    // Default: "all" everywhere (the slot view scales fine on phones)
+    state.veldbezettingMode = "all";
   }
-  // Default selected field (busiest today)
+  // Default selected field (busiest today) for single-field mode
   if (!state.selectedField || !FIELDS.find(f => f.code === state.selectedField)) {
     let best = FIELDS[0].code, bestN = -1;
     for (const f of FIELDS) {
@@ -1083,18 +1089,35 @@ function renderVeldbezetting() {
     state.selectedField = best;
   }
   const mode = state.veldbezettingMode;
-  const visibleFields = (mode === "all") ? FIELDS : [FIELDS.find(f => f.code === state.selectedField)];
 
   // 1. Mini map (always at top, highlights selected field in single-field mode)
   let html = renderClubMapHtml(games, mode === "one" ? state.selectedField : null);
 
-  // 2. Slider + (in single-field mode) field selector
+  // 2. Slider
   html += `<div class="vb-controls">
     <div class="view-toggle" role="tablist">
       <button data-vmode="all" class="${mode==='all'?'active':''}" role="tab">Alle velden</button>
       <button data-vmode="one" class="${mode==='one'?'active':''}" role="tab">Eén veld</button>
     </div>`;
-  if (mode === "one") {
+
+  if (games.length === 0) {
+    html += `</div>`;
+    html += `<div class="empty">Geen wedstrijden op deze dag.</div>`;
+    main.innerHTML = html;
+    wireVbInteractions(main);
+    return;
+  }
+
+  // 3. Secondary control — slot picker (in "all" mode) OR field picker (in "one" mode)
+  if (mode === "all") {
+    const slots = [...new Set(games.map(g => g.time))].sort();
+    if (!state.activeSlot || !slots.includes(state.activeSlot)) {
+      state.activeSlot = pickDefaultSlot(slots);
+    }
+    html += `<select id="vb-slot-select">
+      ${slots.map(s => `<option value="${s}"${s===state.activeSlot?" selected":""}>${escape(s)}</option>`).join("")}
+    </select>`;
+  } else {
     html += `<select id="vb-field-select">`;
     for (const f of FIELDS) {
       const n = games.filter(g => g.field.fieldCode === f.code).length;
@@ -1105,79 +1128,23 @@ function renderVeldbezetting() {
   }
   html += `</div>`;
 
-  // 3. Full-day timeline (3-col if all, 1-col if one)
-  if (games.length === 0) {
-    html += `<div class="empty">Geen wedstrijden op deze dag.</div>`;
+  // 4. Body
+  if (mode === "all") {
+    html += renderAllFieldsAtSlot(games, state.activeSlot);
   } else {
-    const hourHeight = PX_PER_HOUR;
-    const totalH = (TIMELINE_END_H - TIMELINE_START_H) * hourHeight;
-    const axisW = isMobile ? 44 : 60;
-    const colTemplate = `${axisW}px repeat(${visibleFields.length}, 1fr)`;
-
-    html += `<div class="timeline-wrap" style="grid-template-rows: auto ${totalH}px; grid-template-columns: ${colTemplate};">`;
-    html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
-    for (const f of visibleFields) {
-      const n = games.filter(g => g.field.fieldCode === f.code).length;
-      html += `<div class="col-header">${f.label} <span class="count">${n} wedstrijden</span></div>`;
-    }
-    html += `<div class="time-axis" style="position:relative; height:${totalH}px;">`;
-    for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
-      const top = (h - TIMELINE_START_H) * hourHeight;
-      html += `<div class="hour" style="top:${top}px">${String(h).padStart(2,"0")}:00</div>`;
-    }
-    html += `</div>`;
-
-    for (const f of visibleFields) {
-      html += `<div class="field-col" style="height:${totalH}px">`;
-      for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
-        const top = (h - TIMELINE_START_H) * hourHeight;
-        html += `<div class="hour-line" style="top:${top}px"></div>`;
-      }
-      const fieldGames = games.filter(g => g.field.fieldCode === f.code);
-      const byTime = new Map();
-      fieldGames.forEach(g => { if (!byTime.has(g.time)) byTime.set(g.time, []); byTime.get(g.time).push(g); });
-      for (const [time, list] of byTime) {
-        const [hh, mm] = time.split(":").map(Number);
-        const top = ((hh + mm/60) - TIMELINE_START_H) * hourHeight;
-        const height = hourHeight * 1.0 - 4;
-        const cols = new Map();
-        list.forEach(g => {
-          const r = g.field.subpath.length ? subpathToRectTimeline(g.field.subpath) : { x:0, y:0, w:100, h:100 };
-          const key = `${r.x}|${r.w}`;
-          if (!cols.has(key)) cols.set(key, { x: r.x, w: r.w, items: [] });
-          cols.get(key).items.push({ g, r });
-        });
-        for (const col of cols.values()) {
-          col.items.forEach(({ g, r }) => {
-            const subTop    = top + (r.y / 100) * height;
-            const subHeight = (r.h / 100) * height - 2;
-            const ageCls = `age-${ageClass(g.home)}`;
-            const subLabel = g.field.subpath.length ? g.field.subpath.join("") : "";
-            const cramped = subHeight < 80 || g.field.subpath.length >= 3;
-            const showDiv = subHeight >= 70;
-            html += `<div class="game ${ageCls}${cramped ? ' cramped' : ''}" style="
-                top:${subTop}px; height:${subHeight}px;
-                left: calc(${col.x}% + 4px);
-                width: calc(${col.w}% - 8px);
-                ">
-              <div class="time">${time}${subLabel?` <span class="sub">${subLabel}</span>`:""}</div>
-              <div class="teams"><span class="team-link" data-team="${escape(g.home.team)}">${escape(g.home.team)}</span> – ${escape(g.away.club)} ${escape(g.away.team)}</div>
-              ${showDiv ? `<div class="div">${escape(cleanDivision(g.division))}</div>` : ``}
-            </div>`;
-          });
-        }
-      }
-      html += `</div>`;
-    }
-    html += `</div>`;
-    html += renderLegend();
+    html += renderSingleFieldTimeline(games, FIELDS.find(f => f.code === state.selectedField), isMobile);
   }
+  html += renderLegend();
   main.innerHTML = html;
+  wireVbInteractions(main);
+}
 
-  // Wire interactions
+function wireVbInteractions(main) {
   main.querySelectorAll(".view-toggle button").forEach(b => {
     b.addEventListener("click", () => { state.veldbezettingMode = b.dataset.vmode; render(); });
   });
+  const vss = main.querySelector("#vb-slot-select");
+  if (vss) vss.addEventListener("change", e => { state.activeSlot = e.target.value; render(); });
   const vfs = main.querySelector("#vb-field-select");
   if (vfs) vfs.addEventListener("change", e => { state.selectedField = e.target.value; render(); });
   main.querySelectorAll(".club-map [data-mapfield]").forEach(el => {
@@ -1187,6 +1154,135 @@ function renderVeldbezetting() {
       render();
     });
   });
+}
+
+// "Alle velden" body — 3 pitches showing games active at activeSlot, with subdivisions.
+function renderAllFieldsAtSlot(games, activeSlot) {
+  let html = `<div class="fields-row">`;
+  for (const cell of LAYOUT_GRID) {
+    const gridStyle = `grid-column:${cell.col};grid-row:${cell.row};`;
+    if (cell.type === "clubhuis") {
+      html += `<div class="field-card clubhuis" style="${gridStyle}" title="${escape(cell.label)}">
+        <div class="clubhuis-box" aria-label="${escape(cell.label)}">
+          <span class="clubhuis-icon" aria-hidden="true">⌂</span>
+          <span class="clubhuis-text">CLUBHUIS</span>
+        </div>
+      </div>`;
+      continue;
+    }
+    const f = cell;
+    const activeGames = games.filter(g => isActiveAt(g, activeSlot) && g.field.fieldCode === f.code);
+    const cells = planFieldSubcells(activeGames.map(g => ({ subpath: g.field.subpath, game: g })));
+    const idle = activeGames.length === 0;
+    html += `<div class="field-card ${idle?"idle":""}" style="${gridStyle}">
+      <h3>${f.label} <span class="meta">${activeGames.length} wedstrijd${activeGames.length===1?"":"en"}</span></h3>
+      <div class="pitch">`;
+    for (const c of cells) {
+      const r = c.rect;
+      const subLabel = c.subpath.length ? c.subpath.join("") : "vol veld";
+      if (c.empty) {
+        html += `<div class="subcell empty" style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;">
+          <span class="label empty-lbl">${subLabel}</span></div>`;
+      } else {
+        const g = c.game.game;
+        const ageCls = `age-${ageClass(g.home)}`;
+        const depth = g.field.subpath.length;
+        const fs = fontForDepth(depth);
+        const isCarry = g.time !== activeSlot;
+        html += `<div class="subcell filled ${ageCls} ${isCarry?'carryover':''}"
+            style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;font-size:${fs}px;">
+          <span class="label">${subLabel}</span>
+          ${isCarry ? `<span class="carry-tag">${g.time}</span>` : ''}
+          <div class="game-mini">
+            <span class="team">${olympiaLink(g.home.team)}</span>
+            <span class="vs">vs</span>
+            <span class="team">${escape(g.away.club)} ${escape(g.away.team)}</span>
+            ${depth < 2 ? `<span class="div">${escape(shortDiv(g.division))}</span>` : ''}
+          </div>
+        </div>`;
+      }
+    }
+    html += `</div>`;
+    if (activeGames.length === 0) {
+      html += `<div class="games-list">Geen wedstrijd in dit tijdslot</div>`;
+    } else {
+      html += `<div class="games-list">`;
+      activeGames.forEach(g => {
+        const sp = g.field.subpath.length ? g.field.subpath.join("") : "vol veld";
+        const carry = g.time !== activeSlot;
+        html += `<div class="row${carry?' carry':''}">
+          <span class="t">${g.time}</span>
+          <span class="s">
+            <span class="match-teams">${olympiaLink(g.home.team)} – ${escape(g.away.club)} ${escape(g.away.team)}</span>
+            <span class="match-div">${escape(cleanDivision(g.division))}</span>
+          </span>
+          <span class="sub-tag">${sp}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+// "Eén veld" body — single field, full-day timeline
+function renderSingleFieldTimeline(games, f, isMobile) {
+  const hourHeight = PX_PER_HOUR;
+  const totalH = (TIMELINE_END_H - TIMELINE_START_H) * hourHeight;
+  const axisW = isMobile ? 44 : 60;
+  let html = `<div class="timeline-wrap" style="grid-template-rows: auto ${totalH}px; grid-template-columns: ${axisW}px 1fr;">`;
+  html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
+  const n = games.filter(g => g.field.fieldCode === f.code).length;
+  html += `<div class="col-header">${f.label} <span class="count">${n} wedstrijden</span></div>`;
+  html += `<div class="time-axis" style="position:relative; height:${totalH}px;">`;
+  for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
+    const top = (h - TIMELINE_START_H) * hourHeight;
+    html += `<div class="hour" style="top:${top}px">${String(h).padStart(2,"0")}:00</div>`;
+  }
+  html += `</div>`;
+  html += `<div class="field-col" style="height:${totalH}px">`;
+  for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
+    const top = (h - TIMELINE_START_H) * hourHeight;
+    html += `<div class="hour-line" style="top:${top}px"></div>`;
+  }
+  const fieldGames = games.filter(g => g.field.fieldCode === f.code);
+  const byTime = new Map();
+  fieldGames.forEach(g => { if (!byTime.has(g.time)) byTime.set(g.time, []); byTime.get(g.time).push(g); });
+  for (const [time, list] of byTime) {
+    const [hh, mm] = time.split(":").map(Number);
+    const top = ((hh + mm/60) - TIMELINE_START_H) * hourHeight;
+    const height = hourHeight * 1.0 - 4;
+    const cols = new Map();
+    list.forEach(g => {
+      const r = g.field.subpath.length ? subpathToRectTimeline(g.field.subpath) : { x:0, y:0, w:100, h:100 };
+      const key = `${r.x}|${r.w}`;
+      if (!cols.has(key)) cols.set(key, { x: r.x, w: r.w, items: [] });
+      cols.get(key).items.push({ g, r });
+    });
+    for (const col of cols.values()) {
+      col.items.forEach(({ g, r }) => {
+        const subTop    = top + (r.y / 100) * height;
+        const subHeight = (r.h / 100) * height - 2;
+        const ageCls = `age-${ageClass(g.home)}`;
+        const subLabel = g.field.subpath.length ? g.field.subpath.join("") : "";
+        const cramped = subHeight < 80 || g.field.subpath.length >= 3;
+        const showDiv = subHeight >= 70;
+        html += `<div class="game ${ageCls}${cramped ? ' cramped' : ''}" style="
+            top:${subTop}px; height:${subHeight}px;
+            left: calc(${col.x}% + 4px);
+            width: calc(${col.w}% - 8px);
+            ">
+          <div class="time">${time}${subLabel?` <span class="sub">${subLabel}</span>`:""}</div>
+          <div class="teams"><span class="team-link" data-team="${escape(g.home.team)}">${escape(g.home.team)}</span> – ${escape(g.away.club)} ${escape(g.away.team)}</div>
+          ${showDiv ? `<div class="div">${escape(cleanDivision(g.division))}</div>` : ``}
+        </div>`;
+      });
+    }
+  }
+  html += `</div></div>`;
+  return html;
 }
 
 // Stub: old renderLayout (slot-picker view) deleted — Veldbezetting replaces it.
