@@ -752,10 +752,18 @@
     .vb-controls #vb-field-select,
     .vb-controls #vb-slot-select { width:100%; flex-basis:100%; }
 
-    /* Team controls — compact, wrap favorite button */
-    .team-controls { padding:10px; gap:8px; flex-wrap:wrap; }
-    .team-controls .team-comp { font-size:13px; flex-basis:100%; }
-    .fav-toggle { font-size:12px; padding:5px 10px; }
+    /* Team controls — one tight row on phone */
+    .team-controls {
+      padding:8px 10px; gap:8px; flex-wrap:nowrap; align-items:center; overflow:hidden;
+    }
+    .team-controls label { display:none; }                     /* "Team" word is redundant */
+    .team-controls select { flex:0 0 auto; max-width:140px; min-width:90px; padding:6px 8px; font-size:13px; }
+    .team-controls .team-comp {
+      flex:1 1 auto; min-width:0; font-size:12px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .fav-toggle { flex:0 0 auto; font-size:14px; padding:5px 9px; }
+    .fav-toggle .fav-label { display:none; }                   /* show only the star */
   }
 </style>
 </head>
@@ -1724,7 +1732,7 @@ function renderTeams() {
     <select id="team-select">${optgroups.join("")}</select>
     <div class="team-comp">${escape(cleanDivision(team.division))}</div>
     <button id="fav-toggle" class="fav-toggle ${isFav?'active':''}" type="button" title="${isFav?'Verwijder uit favorieten':'Maak favoriet team'}">
-      ${isFav ? '★ Favoriet' : '☆ Favoriet'}
+      <span class="fav-icon">${isFav ? '★' : '☆'}</span><span class="fav-label"> Favoriet</span>
     </button>
   </div>`;
 
