@@ -59,6 +59,8 @@
     transform:translateY(-50%);
   }
   .field-col { position:relative; background:var(--panel); border:1px solid var(--line); border-radius:0 0 10px 10px; }
+  /* Field switcher row (phone only — desktop uses 3-column timeline) */
+  .mobile-field-switcher { display:none; }
   .field-col .hour-line {
     position:absolute; left:0; right:0; border-top:1px dashed var(--line); opacity:.5;
   }
@@ -219,54 +221,66 @@
   table.standing-table tr.ours td.team { color:var(--accent); font-weight:700; }
 
   ul.match-list { list-style:none; padding:0; margin:0; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
-  /* Two grid variants so date/score/outcome sit at fixed positions regardless of matchup length.
-     Default (results): date | matchup | score | outcome
-     Upcoming:          date | time    | matchup | loc-tag                                      */
+  /* One grid for ALL match-rows.
+     Desktop: date | matchup | trailing | outcome (4 cols, score/badge fixed at right).
+     Mobile (≤720): collapses to a 2-line card via grid-template-areas (see media query). */
   .match-row {
     display:grid;
-    grid-template-columns: 56px minmax(0, 1fr) 90px 36px;
-    gap:14px; align-items:center;
+    grid-template-columns: 64px minmax(0, 1fr) auto 36px;
+    grid-template-areas: "datecol matchup trailing outcome";
+    gap:12px; align-items:center;
     padding:10px 14px; border-bottom:1px solid var(--line); font-size:14px;
   }
-  .match-row.upcoming {
-    grid-template-columns: 56px 52px minmax(0, 1fr) 64px;
-  }
   .match-row:last-child { border-bottom:none; }
-  .match-row .date { color:var(--muted); font-variant-numeric:tabular-nums; font-weight:600; }
-  .match-row .time { color:var(--muted); font-variant-numeric:tabular-nums; }
-  .match-row .matchup { color:var(--text); min-width:0; overflow:hidden; text-overflow:ellipsis; }
-  .match-row .vs-dash { opacity:.45; margin:0 4px; }
+  .match-row .row-date {
+    grid-area:datecol; color:var(--muted); font-variant-numeric:tabular-nums;
+    font-weight:600; display:flex; flex-direction:column; gap:2px; line-height:1.1;
+  }
+  .match-row .row-date .row-time { color:var(--muted); font-weight:500; font-size:12px; }
+  .match-row .row-matchup {
+    grid-area:matchup; color:var(--text); min-width:0;
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:0 6px;
+  }
+  .match-row .row-matchup .vs-dash { opacity:.45; }
+  .match-row .row-matchup .row-div {
+    flex-basis:100%; font-size:12px; color:var(--muted); margin-top:2px;
+  }
+  .match-row .row-trailing { grid-area:trailing; display:flex; align-items:center; justify-content:flex-end; }
+  .match-row .row-outcome  { grid-area:outcome; text-align:center; font-weight:700; font-size:12px; padding:2px 0; border-radius:4px; min-width:24px; }
+  .match-row .row-outcome.win  { background:rgba(122,223,176,.25); color:#aef0c8; }
+  .match-row .row-outcome.loss { background:rgba(255,122,144,.22); color:#ffb3c0; }
+  .match-row .row-outcome.draw { background:rgba(255,184,107,.20); color:#ffd29a; }
+  /* Rows without an outcome shrink the last column to nothing */
+  .match-row:not(:has(.row-outcome)) { grid-template-columns: 64px minmax(0, 1fr) auto; grid-template-areas: "datecol matchup trailing"; }
+
+  /* Score pill — fixed compact width regardless of score text length */
   .match-row .score-pill {
     font-variant-numeric:tabular-nums; font-weight:700; font-size:14px;
     padding:3px 10px; border-radius:6px; background:var(--panel2); border:1px solid var(--line);
-    text-align:center; justify-self:stretch;
+    text-align:center; min-width:70px;
   }
   .match-row .score-pill.win  { background:rgba(122,223,176,.18); border-color:rgba(122,223,176,.45); color:#aef0c8; }
   .match-row .score-pill.loss { background:rgba(255,122,144,.16); border-color:rgba(255,122,144,.40); color:#ffb3c0; }
   .match-row .score-pill.draw { background:rgba(255,184,107,.14); border-color:rgba(255,184,107,.40); color:#ffd29a; }
-  .match-row .outcome {
-    width:24px; text-align:center; font-weight:700; font-size:12px;
-    padding:2px 0; border-radius:4px;
-  }
-  .match-row .outcome.win  { background:rgba(122,223,176,.25); color:#aef0c8; }
-  .match-row .outcome.loss { background:rgba(255,122,144,.22); color:#ffb3c0; }
-  .match-row .outcome.draw { background:rgba(255,184,107,.20); color:#ffd29a; }
+  .match-row .score-pill.upcoming { background:transparent; color:var(--muted); border-style:dashed; }
+
+  /* Location tag (thuis / uit) */
   .match-row .loc-tag {
-    display:inline-block; margin-left:8px; padding:2px 8px; border-radius:5px;
+    display:inline-block; padding:3px 9px; border-radius:5px;
     font-size:11px; font-weight:600; letter-spacing:.5px; text-transform:uppercase;
     background:var(--panel2); color:var(--muted); border:1px solid var(--line);
   }
   .match-row .loc-tag.home { background:rgba(58,163,255,.14); color:#7dbcff; border-color:rgba(58,163,255,.30); }
   .match-row .loc-tag.away { background:rgba(169,136,255,.14); color:#c4a8ff; border-color:rgba(169,136,255,.30); }
-  /* Field badge — appears on home rows in Komende wedstrijden, click navigates to
-     the field view scrolled to the right date + time slot. */
+
+  /* Field badge — clickable, navigates into Veldindeling */
   .match-row .field-badge {
     display:inline-flex; align-items:center; gap:5px;
-    padding:3px 9px; border-radius:5px; cursor:pointer;
+    padding:4px 10px; border-radius:5px; cursor:pointer;
     font-size:12px; font-weight:600; letter-spacing:.3px;
     background:rgba(122,223,176,.16); color:#aef0c8; border:1px solid rgba(122,223,176,.4);
     transition: background 120ms ease, border-color 120ms ease;
-    white-space:nowrap; justify-self:end;
+    white-space:nowrap;
   }
   .match-row .field-badge:hover { background:rgba(122,223,176,.32); border-color:rgba(122,223,176,.7); }
   .match-row .field-badge .field-arrow { opacity:.7; font-size:11px; }
@@ -408,53 +422,130 @@
     table.standing-table th, table.standing-table td { padding:7px 8px; }
   }
 
-  /* ======== RESPONSIVE — phone (<=720px) ======== */
+  /* ======== RESPONSIVE — phone (<=720px) ========
+     Strategy: compact sticky top bar (logo + title + date), tabs pushed to fixed
+     bottom nav, single-column content, match-rows as cards with everything inline. */
   @media (max-width: 720px) {
-    header { gap:8px; padding:8px 10px; }
-    header h1 { font-size:15px; flex-basis:100%; }
-    header input[type=date], header button, header .tabs button { padding:6px 8px; font-size:13px; }
+    /* HEADER: one tight row at the top */
+    header {
+      gap:8px; padding:8px 10px; flex-wrap:nowrap;
+    }
+    header .logo { height:28px; padding:2px; border-radius:6px; }
+    header h1 { font-size:14px; line-height:1.15; }
+    header h1 .sub { display:none; }
     header .grow { display:none; }
     header .status { display:none; }
-    header .tabs { flex-wrap:wrap; }
-
-    /* Timeline: keep 3-column geometry, allow horizontal scroll with sticky time axis */
-    .timeline-wrap { min-width:720px; }
-    main { overflow-x:auto; }
-
-    /* Field cards: single column, ignore both inline and tablet positioning so they stack */
-    .fields-row { grid-template-columns: 1fr; max-width:480px; margin:0 auto; }
-    .field-card { grid-column: 1 !important; grid-row: auto !important; }
-    .field-card:not(.clubhuis):nth-child(4) { max-width:none; }
-
-    /* Match rows collapse to two lines on phones */
-    .match-row {
-      grid-template-columns: auto 1fr auto !important; gap:8px; padding:10px;
-      align-items:start; font-size:13px;
+    header input[type=date] {
+      padding:5px 6px; font-size:12px; flex:1; min-width:0; max-width:130px;
     }
-    .match-row .date { min-width:auto; }
-    .match-row .time { display:none; }
-    .match-row .matchup { grid-column:1 / -1; order:2; line-height:1.3; }
-    .match-row .score-pill { font-size:13px; padding:2px 8px; min-width:54px; }
-    .match-row .outcome { width:20px; font-size:11px; }
-    .week-day .match-row { grid-template-columns: auto 1fr auto auto !important; }
-    .week-day .match-row .div-tag { display:none; }
+    header button { padding:5px 8px; font-size:12px; }
+    header #today { font-size:11px; padding:5px 8px; }
 
-    .team-controls, .week-controls { padding:10px; }
-    .team-controls .team-comp, .week-controls .week-range { font-size:14px; }
-    /* Stats strip: 2x2 grid on phones */
+    /* TABS → fixed bottom navigation bar (native-app feel) */
+    header .tabs {
+      position:fixed; bottom:0; left:0; right:0; z-index:50;
+      border-radius:0; padding:6px 4px; border:none; border-top:1px solid var(--line);
+      background:var(--panel); box-shadow:0 -2px 12px rgba(0,0,0,.45);
+      display:flex; justify-content:space-around; gap:2px;
+    }
+    header .tabs button {
+      flex:1; padding:8px 4px; font-size:11px; font-weight:600;
+      border-radius:8px; letter-spacing:.2px; text-align:center;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    header .tabs button.active { background:var(--accent); color:#0b1320; }
+    /* Body needs bottom padding to clear the fixed nav */
+    main { padding:14px 12px 80px; }
+
+    /* TIMELINE: switch from 3-column horizontal-scroll to single-field-at-a-time
+       via a field-switcher row. Logic in JS hides non-active columns. */
+    .timeline-wrap {
+      min-width:0;
+      grid-template-columns: 44px 1fr !important;
+      gap:4px;
+    }
+    .timeline-wrap .col-header { font-size:14px; padding:8px 6px; }
+    .mobile-field-switcher {
+      display:flex; gap:6px; margin-bottom:10px; overflow-x:auto;
+      padding-bottom:2px; -webkit-overflow-scrolling:touch;
+    }
+    .mobile-field-switcher button {
+      flex:0 0 auto; background:var(--panel2); color:var(--text);
+      border:1px solid var(--line); border-radius:8px; padding:8px 14px;
+      font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+      white-space:nowrap;
+    }
+    .mobile-field-switcher button.active { background:var(--accent); color:#0b1320; border-color:var(--accent); }
+    /* JS renders only the selected field's column on mobile — no CSS hiding needed */
+
+    /* LAYOUT view: single column, full width, no max-width tweaks */
+    .fields-row { grid-template-columns: 1fr; max-width:none; gap:12px; }
+    .field-card { grid-column: 1 !important; grid-row: auto !important; padding:10px; }
+    .field-card.clubhuis { display:none; }   /* save space on phone — clubhuis is a wayfinding nicety */
+    .field-card:not(.clubhuis):nth-child(4) { max-width:none; margin:0; }
+    .subcell .game-mini .div { display:none; }
+
+    /* MATCH-ROW as a 2-line card */
+    .match-row {
+      grid-template-columns: auto 1fr auto !important;
+      grid-template-areas:
+        "datecol matchup trailing"
+        "datecol matchup outcome" !important;
+      gap:6px 10px !important; padding:10px 12px !important;
+      align-items:center; font-size:13px;
+    }
+    .match-row:not(:has(.row-outcome)) {
+      grid-template-areas: "datecol matchup trailing" !important;
+    }
+    .match-row .row-date {
+      grid-area:datecol; flex-direction:column; gap:1px;
+      font-size:13px; line-height:1.1; min-width:42px;
+    }
+    .match-row .row-date .row-time { font-size:12px; }
+    .match-row .row-matchup {
+      grid-area:matchup; font-size:13px; line-height:1.3;
+    }
+    .match-row .row-matchup .row-div { font-size:11px; margin-top:1px; }
+    .match-row .row-trailing { grid-area:trailing; }
+    .match-row .row-outcome  { grid-area:outcome; justify-self:end; align-self:end; }
+    .match-row .score-pill { font-size:12px; padding:2px 8px; min-width:56px; }
+    .match-row .loc-tag    { font-size:10px; padding:2px 7px; }
+    .match-row .field-badge{ font-size:11px; padding:3px 8px; }
+
+    /* TEAMS: stack standings + pool-week */
+    .team-section.pool-row { grid-template-columns: 1fr; gap:16px; }
+    .team-section { max-width:none !important; }
+    .team-controls { padding:10px 12px; gap:8px; }
+    .team-controls .team-comp { font-size:13px; }
+    .team-controls select { font-size:14px; padding:6px 10px; min-width:100px; }
+
+    /* WEEK: stats 2x2 + tighter controls */
+    .week-controls { padding:10px 12px; gap:8px; }
+    .week-controls .week-range { font-size:14px; }
+    .week-controls .week-meta  { font-size:11px; }
     .week-stats { grid-template-columns: 1fr 1fr; gap:8px; }
     .week-stats .stat { padding:10px 12px; }
     .week-stats .stat-value { font-size:22px; }
+    .week-day h3 { font-size:13px; }
+
+    /* STANDINGS table — hide W/L/D, tighten padding, prevent wrap */
     table.standing-table { font-size:12px; }
-    table.standing-table th, table.standing-table td { padding:6px 6px; }
+    table.standing-table th, table.standing-table td { padding:6px 7px; }
     table.standing-table th { font-size:10px; }
-    /* Hide W/L/D/Draw columns on tiny screens — keep Rank, Team, Played, GF, GA, Points */
+    table.standing-table td.team { white-space:normal; line-height:1.2; }
     table.standing-table th:nth-child(4),
     table.standing-table td:nth-child(4),
     table.standing-table th:nth-child(5),
     table.standing-table td:nth-child(5),
     table.standing-table th:nth-child(6),
     table.standing-table td:nth-child(6) { display:none; }
+
+    /* POOL-MATCH (this-week-in-poule) — tighten too */
+    .pool-match { font-size:12px; padding:5px 7px; }
+    .pool-match .pool-score { min-width:48px; font-size:12px; padding:1px 6px; }
+
+    /* Legend chips — wrap freely */
+    .legend { font-size:10px; }
   }
 </style>
 </head>
@@ -677,9 +768,35 @@ function renderTimeline(games) {
   const hourHeight = PX_PER_HOUR;
   const totalH = (TIMELINE_END_H - TIMELINE_START_H) * hourHeight;
 
-  let html = `<div class="timeline-wrap" style="grid-template-rows: auto ${totalH}px;">`;
-  html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
+  // On phones, render ONE field column at a time (controlled by the pill switcher).
+  // Default to the field with the most games today so phone-users land on something useful.
+  const isMobile = window.matchMedia("(max-width: 720px)").matches;
+  if (!state.mobileTimelineField) {
+    let best = FIELDS[0].code, bestN = -1;
+    for (const f of FIELDS) {
+      const n = games.filter(g => g.field.fieldCode === f.code).length;
+      if (n > bestN) { bestN = n; best = f.code; }
+    }
+    state.mobileTimelineField = best;
+  }
+  const visibleFields = isMobile
+    ? FIELDS.filter(f => f.code === state.mobileTimelineField)
+    : FIELDS;
+  const axisW = isMobile ? 44 : 60;
+  const colTemplate = `${axisW}px repeat(${visibleFields.length}, 1fr)`;
+
+  // Field switcher pill row (CSS shows it only on mobile)
+  let html = `<div class="mobile-field-switcher">`;
   for (const f of FIELDS) {
+    const n = games.filter(g => g.field.fieldCode === f.code).length;
+    const active = f.code === state.mobileTimelineField ? " active" : "";
+    html += `<button class="${active.trim()}" data-mfield="${f.code}">${f.label} <span style="opacity:.6">(${n})</span></button>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="timeline-wrap" style="grid-template-rows: auto ${totalH}px; grid-template-columns: ${colTemplate};">`;
+  html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
+  for (const f of visibleFields) {
     const n = games.filter(g => g.field.fieldCode === f.code).length;
     html += `<div class="col-header">${f.label} <span class="count">${n} wedstrijden</span></div>`;
   }
@@ -690,7 +807,7 @@ function renderTimeline(games) {
   }
   html += `</div>`;
 
-  for (const f of FIELDS) {
+  for (const f of visibleFields) {
     html += `<div class="field-col" style="height:${totalH}px">`;
     for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
       const top = (h - TIMELINE_START_H) * hourHeight;
@@ -743,6 +860,14 @@ function renderTimeline(games) {
   html += `</div>`;
   html += renderLegend();
   main.innerHTML = html;
+
+  // Mobile field-switcher pills — re-render to swap the visible column
+  main.querySelectorAll(".mobile-field-switcher button").forEach(b => {
+    b.addEventListener("click", () => {
+      state.mobileTimelineField = b.dataset.mfield;
+      render();
+    });
+  });
 }
 
 // ----- Rendering: LAYOUT -----
@@ -887,6 +1012,18 @@ function formatDDMM(iso) {
   return `${d}/${m}`;
 }
 
+// Unified match-row markup — used by team-page (past + upcoming), week view, and pool-this-week.
+// One structure means one set of responsive rules; mobile collapses naturally to a 2-line card.
+// Props: { date, time, homeHtml, awayHtml, division, trailing, outcome, className }
+function matchRowHtml(p) {
+  const cls = p.className ? `match-row ${p.className}` : "match-row";
+  const dateTime = (p.date || p.time) ? `<span class="row-date">${p.date ? escape(p.date) : ""}${p.time ? ` <span class="row-time">${escape(p.time)}</span>` : ""}</span>` : "";
+  const matchup = `<span class="row-matchup">${p.homeHtml || ""} <span class="vs-dash">–</span> ${p.awayHtml || ""}${p.division ? `<span class="row-div">${escape(p.division)}</span>` : ""}</span>`;
+  const trail = p.trailing ? `<span class="row-trailing">${p.trailing}</span>` : "";
+  const out = p.outcome ? `<span class="row-outcome ${p.outcomeCls || ""}">${escape(p.outcome)}</span>` : "";
+  return `<li class="${cls}">${dateTime}${matchup}${trail}${out}</li>`;
+}
+
 // Render an Olympia "Olympia X" reference as a click-to-team-page link.
 function olympiaLink(team) {
   if (!team) return "Olympia";
@@ -1001,29 +1138,31 @@ function renderWeek() {
         <h3>${formatDateLong(d)} ${d === today ? `<span class="today-tag">vandaag</span>` : ""}</h3>
         <ul class="match-list">`;
       for (const x of dayItems) {
-        const homeName = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
-        const awayName = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
+        const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
+        const awayHtml = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
         if (x.kind === "result") {
           const o = computeOutcome(x);
           const score = (x.olympiaScore != null && x.opponentScore != null)
             ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
             : (x.score || "—");
-          html += `<li class="match-row ${o.cls}">
-            <span class="time">${escape(x.time)}</span>
-            <span class="matchup">${homeName} <span class="vs-dash">–</span> ${awayName}</span>
-            <span class="div-tag">${escape(shortDiv(x.division))}</span>
-            <span class="score-pill ${o.cls}">${escape(score)}</span>
-            <span class="outcome ${o.cls}">${o.letter}</span>
-          </li>`;
+          html += matchRowHtml({
+            time: x.time,
+            homeHtml, awayHtml,
+            division: shortDiv(x.division),
+            trailing: `<span class="score-pill ${o.cls}">${escape(score)}</span>`,
+            outcome: o.letter,
+            outcomeCls: o.cls,
+            className: `result ${o.cls}`,
+          });
         } else {
           const loc = x.isHome ? `<span class="loc-tag home">thuis</span>` : `<span class="loc-tag away">uit</span>`;
-          html += `<li class="match-row upcoming">
-            <span class="time">${escape(x.time)}</span>
-            <span class="matchup">${homeName} <span class="vs-dash">–</span> ${awayName} ${loc}</span>
-            <span class="div-tag">${escape(shortDiv(x.division))}</span>
-            <span class="score-pill upcoming">—</span>
-            <span class="outcome"></span>
-          </li>`;
+          html += matchRowHtml({
+            time: x.time,
+            homeHtml, awayHtml,
+            division: shortDiv(x.division),
+            trailing: loc,
+            className: "upcoming",
+          });
         }
       }
       html += `</ul></section>`;
@@ -1190,10 +1329,8 @@ function renderTeams() {
   } else {
     html += `<ul class="match-list">`;
     for (const g of upcoming.slice(0, 12)) {
-      const homeName = g.isHome ? `<strong>${olympiaLink(g.olympiaTeam)}</strong>` : `${escape(g.opponentClub)} ${escape(g.opponentTeam)}`;
-      const awayName = g.isHome ? `${escape(g.opponentClub)} ${escape(g.opponentTeam)}` : `<strong>${olympiaLink(g.olympiaTeam)}</strong>`;
-      // For home games show a clickable "Veld X" badge that jumps to Veldindeling at
-      // the right date+slot. For away games show the plain "uit" tag.
+      const homeHtml = g.isHome ? `<strong>${olympiaLink(g.olympiaTeam)}</strong>` : `${escape(g.opponentClub)} ${escape(g.opponentTeam)}`;
+      const awayHtml = g.isHome ? `${escape(g.opponentClub)} ${escape(g.opponentTeam)}` : `<strong>${olympiaLink(g.olympiaTeam)}</strong>`;
       let trailing;
       if (g.isHome && g.fieldCode) {
         trailing = `<span class="field-badge" data-nav-date="${escape(g.date)}" data-nav-time="${escape(g.time)}" title="Open in Veldindeling">${escape(fieldLabel(g.fieldCode, g.subpath))} <span class="field-arrow">→</span></span>`;
@@ -1202,12 +1339,13 @@ function renderTeams() {
       } else {
         trailing = `<span class="loc-tag away">uit</span>`;
       }
-      html += `<li class="match-row upcoming">
-        <span class="date">${formatDDMM(g.date)}</span>
-        <span class="time">${escape(g.time)}</span>
-        <span class="matchup">${homeName} <span class="vs-dash">–</span> ${awayName}</span>
-        ${trailing}
-      </li>`;
+      html += matchRowHtml({
+        date: formatDDMM(g.date),
+        time: g.time,
+        homeHtml, awayHtml,
+        trailing,
+        className: "upcoming",
+      });
     }
     html += `</ul>`;
   }
@@ -1223,17 +1361,19 @@ function renderTeams() {
     html += `<ul class="match-list">`;
     for (const r of lastMatches) {
       const o = computeOutcome(r);
-      const homeName = r.isHome ? `<strong>${olympiaLink(r.olympiaTeam)}</strong>` : `${escape(r.opponentClub)} ${escape(r.opponentTeam)}`;
-      const awayName = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : `<strong>${olympiaLink(r.olympiaTeam)}</strong>`;
+      const homeHtml = r.isHome ? `<strong>${olympiaLink(r.olympiaTeam)}</strong>` : `${escape(r.opponentClub)} ${escape(r.opponentTeam)}`;
+      const awayHtml = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : `<strong>${olympiaLink(r.olympiaTeam)}</strong>`;
       const score = (r.olympiaScore != null && r.opponentScore != null)
         ? (r.isHome ? `${r.olympiaScore} – ${r.opponentScore}` : `${r.opponentScore} – ${r.olympiaScore}`)
         : (r.score || "—");
-      html += `<li class="match-row ${o.cls}">
-        <span class="date">${formatDDMM(r.date)}</span>
-        <span class="matchup">${homeName} <span class="vs-dash">–</span> ${awayName}</span>
-        <span class="score-pill ${o.cls}">${escape(score)}</span>
-        <span class="outcome ${o.cls}">${o.letter}</span>
-      </li>`;
+      html += matchRowHtml({
+        date: formatDDMM(r.date),
+        homeHtml, awayHtml,
+        trailing: `<span class="score-pill ${o.cls}">${escape(score)}</span>`,
+        outcome: o.letter,
+        outcomeCls: o.cls,
+        className: `result ${o.cls}`,
+      });
     }
     html += `</ul>`;
   }
@@ -1258,6 +1398,7 @@ const state = {
   activeSlot: null,
   selectedTeam: null,
   weekStart: null,  // Monday (YYYY-MM-DD) for the Week view
+  mobileTimelineField: null,   // which single field column to show on phones
   updated: null,
 };
 
