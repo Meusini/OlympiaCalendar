@@ -447,7 +447,7 @@
 
     /* Tablet: keep Clubhuis as a slim right-side column spanning both rows */
     .fields-row { grid-template-columns: 1fr 1fr 50px; }
-    .field-card.clubhuis { grid-column: 3 !important; grid-row: 1 / span 2 !important; }
+    .field-card.clubhuis { grid-column: 3 !important; grid-row: 1 !important; }
     .clubhuis-text { font-size:12px; letter-spacing:3px; }
 
     .team-section.pool-row { grid-template-columns: 1fr; }
@@ -529,7 +529,7 @@
     .field-card { grid-column: auto !important; grid-row: auto !important; }
     .field-card.clubhuis {
       display:flex !important;
-      grid-column: 3 !important; grid-row: 1 / span 2 !important;
+      grid-column: 3 !important; grid-row: 1 !important;
       padding:4px; min-height:0;
     }
     .field-card:not(.clubhuis):nth-child(4) {
@@ -654,7 +654,7 @@ const FIELDS = [
 const LAYOUT_GRID = [
   { type: "field",    code: "2", label: "Veld 2",   col: 1, row: 1 },
   { type: "field",    code: "1", label: "Veld 1",   col: 2, row: 1 },
-  { type: "clubhuis",            label: "Clubhuis", col: 3, row: "1 / span 2" },
+  { type: "clubhuis",            label: "Clubhuis", col: 3, row: 1 },
   { type: "field",    code: "5", label: "Veld 5",   col: 2, row: 2 },
 ];
 const TIMELINE_START_H = 8;
