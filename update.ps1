@@ -227,17 +227,23 @@ foreach ($row in $resResp.data) {
 Write-Host ("  results: {0} (dropped {1} dupes)" -f $results.Count, $dupRes)
 
 # ----- 5. Build Olympia team list (unique team codes + their division) -----
-# Use the first encountered division per team (teams may show up in multiple competitions
-# rarely — e.g. cup + league — but for standings we pick the most common one).
-$teamDivCounts = @{}
-function AddTeamDiv($team, $div) {
-    if (-not $teamDivCounts.ContainsKey($team)) { $teamDivCounts[$team] = @{} }
-    $bucket = $teamDivCounts[$team]
+# Teams often play in multiple competitions across a season (heenronde + terugronde,
+# cup, playoffs, indoor vs outdoor). For standings we want the CURRENTLY ACTIVE pool —
+# best signal is what they're playing this week / next week. Fall back to past games
+# only if the season has ended for that team.
+$teamDivUpcoming = @{}
+$teamDivPast     = @{}
+function AddDiv([hashtable]$dict, [string]$team, [string]$div) {
+    if (-not $dict.ContainsKey($team)) { $dict[$team] = @{} }
+    $bucket = $dict[$team]
     if (-not $bucket.ContainsKey($div)) { $bucket[$div] = 0 }
     $bucket[$div]++
 }
-foreach ($g in $teamGames) { AddTeamDiv $g.olympiaTeam $g.division }
-foreach ($g in $results)   { AddTeamDiv $g.olympiaTeam $g.division }
+foreach ($g in $teamGames) { AddDiv $teamDivUpcoming $g.olympiaTeam $g.division }
+foreach ($g in $results)   { AddDiv $teamDivPast     $g.olympiaTeam $g.division }
+$allTeamCodes = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($k in $teamDivUpcoming.Keys) { [void]$allTeamCodes.Add($k) }
+foreach ($k in $teamDivPast.Keys)     { [void]$allTeamCodes.Add($k) }
 
 # ----- 6. Map division string -> poolid by scraping kalender form -----
 Write-Host "Fetching pool-id mapping from kalender page..."
@@ -318,11 +324,19 @@ function FetchPoolGames([string]$poolId) {
     return ,$arr.ToArray()
 }
 
-foreach ($teamCode in ($teamDivCounts.Keys | Sort-Object)) {
+foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
     if ([string]::IsNullOrEmpty($teamCode)) { continue }
-    # Pick the division this team plays in most often
-    $divs = $teamDivCounts[$teamCode].GetEnumerator() | Sort-Object Value -Descending
-    $primaryDiv = $divs[0].Key
+    # Prefer the most common UPCOMING-game division (currently active pool).
+    # Only fall back to past-game frequency if the team has no scheduled games.
+    $primaryDiv = $null
+    if ($teamDivUpcoming.ContainsKey($teamCode) -and $teamDivUpcoming[$teamCode].Count -gt 0) {
+        $divs = $teamDivUpcoming[$teamCode].GetEnumerator() | Sort-Object Value -Descending
+        $primaryDiv = $divs[0].Key
+    } elseif ($teamDivPast.ContainsKey($teamCode) -and $teamDivPast[$teamCode].Count -gt 0) {
+        $divs = $teamDivPast[$teamCode].GetEnumerator() | Sort-Object Value -Descending
+        $primaryDiv = $divs[0].Key
+    }
+    if ([string]::IsNullOrEmpty($primaryDiv)) { continue }
     $poolId = $poolMap[$primaryDiv]
 
     $standing = $null
