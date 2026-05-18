@@ -134,6 +134,39 @@
   }
   .week-team h3 .team-meta { font-size:12px; color:var(--muted); font-weight:400; letter-spacing:0; text-transform:none; }
 
+  /* Resultaten mobile — compact date-grouped rows: home — score — away */
+  .week-day-compact { margin-bottom:18px; }
+  .week-day-compact h3 {
+    margin:0 0 8px; font-size:13px; color:var(--text);
+    text-transform:uppercase; letter-spacing:.5px; opacity:.85;
+    display:flex; align-items:center; gap:8px;
+  }
+  .week-day-compact.today h3 { color:var(--accent); opacity:1; }
+  .week-day-compact .today-tag {
+    font-size:10px; padding:1px 7px; border-radius:4px;
+    background:var(--accent); color:#0b1320; font-weight:700; letter-spacing:.5px;
+  }
+  ul.rd-list { list-style:none; padding:0; margin:0; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .rd-row {
+    display:grid; grid-template-columns: 1fr 64px 1fr;
+    gap:8px; align-items:center;
+    padding:8px 10px; border-bottom:1px solid var(--line);
+    font-size:13px; line-height:1.2;
+  }
+  .rd-row:last-child { border-bottom:none; }
+  .rd-row .rd-home { text-align:right; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rd-row .rd-away { text-align:left;  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rd-row .rd-score {
+    font-weight:700; font-variant-numeric:tabular-nums;
+    padding:2px 6px; border-radius:5px; text-align:center;
+    background:var(--panel2); border:1px solid var(--line);
+    font-size:12px;
+  }
+  .rd-row .rd-score.win  { background:rgba(122,223,176,.20); border-color:rgba(122,223,176,.45); color:#aef0c8; }
+  .rd-row .rd-score.loss { background:rgba(255,122,144,.16); border-color:rgba(255,122,144,.40); color:#ffb3c0; }
+  .rd-row .rd-score.draw { background:rgba(255,184,107,.16); border-color:rgba(255,184,107,.40); color:#ffd29a; }
+  .rd-row .rd-score.upcoming { background:transparent; color:var(--muted); border-style:dashed; }
+
   /* Layout view: spatial map of the club. Clubhuis is a slim vertical bar on the right
      (spans both rows) — mirrors where it physically sits at Wilrijkse Plein. */
   .fields-row {
@@ -1556,52 +1589,79 @@ function renderWeek() {
   if (all.length === 0) {
     html += `<div class="empty">Geen wedstrijden deze week.</div>`;
   } else {
-    // Group by Olympia team (instead of by date) — date is sub-sort within each team.
-    // Use the same sort order as the team dropdown so it's predictable.
-    const byTeam = new Map();
-    for (const x of all) {
-      if (!byTeam.has(x.olympiaTeam)) byTeam.set(x.olympiaTeam, []);
-      byTeam.get(x.olympiaTeam).push(x);
-    }
-    const teamOrder = [...byTeam.keys()].sort((a, b) =>
-      teamComparator({ code: a }, { code: b }));
-    for (const teamCode of teamOrder) {
-      const items = byTeam.get(teamCode).sort((a, b) =>
-        a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
-      html += `<section class="week-team">
-        <h3>${escape(teamCode)} <span class="team-meta">${items.length} wedstrijd${items.length===1?"":"en"}</span></h3>
-        <ul class="match-list">`;
-      for (const x of items) {
-        const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
-        const awayHtml = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
-        if (x.kind === "result") {
-          const o = computeOutcome(x);
-          const score = (x.olympiaScore != null && x.opponentScore != null)
-            ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
-            : (x.score || "—");
-          html += matchRowHtml({
-            date: formatDDMM(x.date),
-            time: x.time,
-            homeHtml, awayHtml,
-            division: shortDiv(x.division),
-            trailing: `<span class="score-pill ${o.cls}">${escape(score)}</span>`,
-            outcome: o.letter,
-            outcomeCls: o.cls,
-            className: `result ${o.cls}`,
-          });
-        } else {
-          const loc = x.isHome ? `<span class="loc-tag home">thuis</span>` : `<span class="loc-tag away">uit</span>`;
-          html += matchRowHtml({
-            date: formatDDMM(x.date),
-            time: x.time,
-            homeHtml, awayHtml,
-            division: shortDiv(x.division),
-            trailing: loc,
-            className: "upcoming",
-          });
+    const isMobile = window.matchMedia("(max-width: 720px)").matches;
+    if (isMobile) {
+      // Mobile: compact date-grouped view. Each row = home — score — away. No division,
+      // no time, no location tag — those just add noise on a 375px screen.
+      const dateOrder = [...new Set(all.map(x => x.date))].sort();
+      for (const d of dateOrder) {
+        const dayItems = all.filter(x => x.date === d).sort((a, b) =>
+          teamComparator({ code: a.olympiaTeam }, { code: b.olympiaTeam }));
+        const isToday = d === fmtDateAPI(new Date());
+        html += `<section class="week-day-compact ${isToday?'today':''}">
+          <h3>${formatDateLong(d)}${isToday?` <span class="today-tag">vandaag</span>`:""}</h3>
+          <ul class="rd-list">`;
+        for (const x of dayItems) {
+          const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
+          const awayHtml = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
+          let scoreCell;
+          if (x.kind === "result") {
+            const o = computeOutcome(x);
+            // Forfeits / "Niet (uit)gespeelde wedstrijd" → short "n/g" so it fits the score column.
+            const score = (x.olympiaScore != null && x.opponentScore != null)
+              ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
+              : "n/g";
+            scoreCell = `<span class="rd-score ${o.cls}">${escape(score)}</span>`;
+          } else {
+            scoreCell = `<span class="rd-score upcoming">${escape(x.time)}</span>`;
+          }
+          html += `<li class="rd-row">
+            <span class="rd-home">${homeHtml}</span>
+            ${scoreCell}
+            <span class="rd-away">${awayHtml}</span>
+          </li>`;
         }
+        html += `</ul></section>`;
       }
-      html += `</ul></section>`;
+    } else {
+      // Desktop: detailed team-grouped view (unchanged from before)
+      const byTeam = new Map();
+      for (const x of all) {
+        if (!byTeam.has(x.olympiaTeam)) byTeam.set(x.olympiaTeam, []);
+        byTeam.get(x.olympiaTeam).push(x);
+      }
+      const teamOrder = [...byTeam.keys()].sort((a, b) =>
+        teamComparator({ code: a }, { code: b }));
+      for (const teamCode of teamOrder) {
+        const items = byTeam.get(teamCode).sort((a, b) =>
+          a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+        html += `<section class="week-team">
+          <h3>${escape(teamCode)} <span class="team-meta">${items.length} wedstrijd${items.length===1?"":"en"}</span></h3>
+          <ul class="match-list">`;
+        for (const x of items) {
+          const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
+          const awayHtml = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
+          if (x.kind === "result") {
+            const o = computeOutcome(x);
+            const score = (x.olympiaScore != null && x.opponentScore != null)
+              ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
+              : (x.score || "—");
+            html += matchRowHtml({
+              date: formatDDMM(x.date), time: x.time, homeHtml, awayHtml,
+              division: shortDiv(x.division),
+              trailing: `<span class="score-pill ${o.cls}">${escape(score)}</span>`,
+              outcome: o.letter, outcomeCls: o.cls, className: `result ${o.cls}`,
+            });
+          } else {
+            const loc = x.isHome ? `<span class="loc-tag home">thuis</span>` : `<span class="loc-tag away">uit</span>`;
+            html += matchRowHtml({
+              date: formatDDMM(x.date), time: x.time, homeHtml, awayHtml,
+              division: shortDiv(x.division), trailing: loc, className: "upcoming",
+            });
+          }
+        }
+        html += `</ul></section>`;
+      }
     }
   }
   main.innerHTML = html;
