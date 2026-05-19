@@ -1378,13 +1378,16 @@ function renderTimelineFields(games, fieldsArr, isMobile) {
 //   outer border, centre line, both 23-m lines (solid), two D shooting circles (solid),
 //   two 5-m broken lines outside each D, penalty spots, goals.
 function pitchMarkingsSvg() {
-  // White-ish strokes at high opacity so they read clearly against the green pitch
-  // background. Widths are in viewBox units (1 = 1 real meter).
+  // White strokes high-opacity so they read on the green pitch.
+  // For the D circles we draw FULL circles centred on the goal mouth (y=0 / y=91) —
+  // the .pitch's overflow:hidden naturally clips off the half outside the field,
+  // leaving a clean semicircle. This avoids the degenerate arc rendering issue
+  // where chord == diameter (some browsers refuse to draw such arcs).
   const SOLID = "rgba(255,255,255,.70)";
   const DASH  = "rgba(255,255,255,.55)";
-  const W_OUT = 0.55;   // outer border / centre line / 23m / D
-  const W_DASH= 0.45;   // 5m broken line
-  return `<svg class="pitch-lines" viewBox="0 0 55 91" preserveAspectRatio="none" aria-hidden="true">
+  const W_OUT = 0.55;
+  const W_DASH= 0.45;
+  return `<svg class="pitch-lines" viewBox="0 0 55 91" preserveAspectRatio="none" aria-hidden="true" overflow="visible">
     <!-- Outer border -->
     <rect x="0.3" y="0.3" width="54.4" height="90.4" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
     <!-- Centre line (solid) -->
@@ -1392,15 +1395,15 @@ function pitchMarkingsSvg() {
     <!-- 23-meter lines (solid) -->
     <line x1="0" y1="22.9" x2="55" y2="22.9" stroke="${SOLID}" stroke-width="${W_OUT}"/>
     <line x1="0" y1="68.1" x2="55" y2="68.1" stroke="${SOLID}" stroke-width="${W_OUT}"/>
-    <!-- TOP D shooting circle (radius 14.63m from goal line) -->
-    <path d="M 12.87 0 A 14.63 14.63 0 0 1 42.13 0" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
-    <!-- TOP 5-m broken line (parallel to D, 5m outside it) -->
-    <path d="M 7.87 0 A 19.63 19.63 0 0 1 47.13 0" fill="none" stroke="${DASH}" stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
+    <!-- TOP D shooting circle (radius 14.63m). Full circle, top half clipped by .pitch overflow. -->
+    <circle cx="27.5" cy="0"  r="14.63" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <!-- TOP 5-m broken line (5m outside the D) -->
+    <circle cx="27.5" cy="0"  r="19.63" fill="none" stroke="${DASH}"  stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
     <!-- BOTTOM D -->
-    <path d="M 12.87 91 A 14.63 14.63 0 0 0 42.13 91" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <circle cx="27.5" cy="91" r="14.63" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
     <!-- BOTTOM 5-m broken line -->
-    <path d="M 7.87 91 A 19.63 19.63 0 0 0 47.13 91" fill="none" stroke="${DASH}" stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
-    <!-- Penalty spots (6.4m from goal line, centred horizontally) -->
+    <circle cx="27.5" cy="91" r="19.63" fill="none" stroke="${DASH}"  stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
+    <!-- Penalty spots (6.4m from goal line) -->
     <circle cx="27.5" cy="6.4"  r="0.6" fill="${SOLID}"/>
     <circle cx="27.5" cy="84.6" r="0.6" fill="${SOLID}"/>
     <!-- Goals (3.66m wide, protruding just outside the goal line) -->
