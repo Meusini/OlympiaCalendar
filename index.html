@@ -722,16 +722,24 @@
     .rd-row .rd-score { font-size:12px; padding:2px 6px; min-width:54px; }
     .rd-row .rd-mid { min-width:60px; }
 
-    /* STANDINGS on phones — keep #, Team, P, Pt, Ds, +, -. Hide only W/D/L.
-       Tighten padding + font so all 7 cols fit on a 375px viewport. */
-    table.standing-table { font-size:11px; }
-    table.standing-table th, table.standing-table td { padding:5px 5px; }
+    /* STANDINGS on phones — show ALL 10 cols. Fixed table layout, narrow numeric cols,
+       team name wraps to 2 lines. Padding/font shrunk so it fits 375px without overflow. */
+    table.standing-table { font-size:11px; table-layout:fixed; width:100%; }
+    table.standing-table th, table.standing-table td { padding:5px 3px; }
     table.standing-table th { font-size:9px; letter-spacing:0; }
-    table.standing-table td.team { white-space:normal; line-height:1.2; font-size:11px; }
-    table.standing-table td.rank { padding-left:6px; }
-    table.standing-table .col-3,    /* W */
-    table.standing-table .col-4,    /* D */
-    table.standing-table .col-5     /* L */ { display:none; }
+    table.standing-table td.team { white-space:normal; line-height:1.2; font-size:11px; padding-left:5px; }
+    table.standing-table td.rank, table.standing-table th.col-0 { padding-left:5px; }
+    /* Per-column widths (sum < 350px so it fits a 375px viewport with body padding) */
+    table.standing-table .col-0 { width:22px;  text-align:left; }   /* # */
+    /* Team gets all remaining space (col-1 = auto) */
+    table.standing-table .col-2,                                    /* P */
+    table.standing-table .col-3,                                    /* W */
+    table.standing-table .col-4,                                    /* D */
+    table.standing-table .col-5,                                    /* L */
+    table.standing-table .col-6 { width:21px; text-align:center; }  /* Pt */
+    table.standing-table .col-7 { width:30px; text-align:center; }  /* Ds (signed) */
+    table.standing-table .col-8,                                    /* + */
+    table.standing-table .col-9 { width:24px; text-align:center; }  /* - */
 
     /* POOL-MATCH (this-week-in-poule) — tighten too */
     .pool-match { font-size:12px; padding:5px 7px; }
