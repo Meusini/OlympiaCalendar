@@ -1,9 +1,9 @@
 name: Refresh schedule data
 
 on:
-  # Every Monday at 06:00 UTC (≈ 07:00 / 08:00 Brussels depending on DST)
+  # Daily at 06:00 UTC (≈ 07:00 / 08:00 Brussels depending on DST)
   schedule:
-    - cron: "0 6 * * 1"
+    - cron: "0 6 * * *"
   # Allow manual trigger from the Actions tab
   workflow_dispatch:
 

@@ -24,6 +24,19 @@ $ErrorActionPreference = "Stop"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $htmlPath = Join-Path $here "index.html"
 
+# Throttle: 200ms between hockey.be calls keeps us under 5 req/s so we never trip the
+# server's rate limiter (it has none documented for the public connector, but bursts of
+# ~120 calls in 60s could plausibly attract attention). Adds ~25s to a full run.
+$CallDelayMs = 200
+function ApiGet([string]$url) {
+    Start-Sleep -Milliseconds $CallDelayMs
+    return Invoke-RestMethod -Uri $url -UseBasicParsing
+}
+function ApiGetWeb([string]$url) {
+    Start-Sleep -Milliseconds $CallDelayMs
+    return Invoke-WebRequest -Uri $url -UseBasicParsing
+}
+
 if (-not (Test-Path $htmlPath)) { throw "index.html not found in $here" }
 
 $today = Get-Date
@@ -79,7 +92,7 @@ function NormalizePoolLabel([string]$label) {
 # ----- 1. Fetch the upcoming program (home + away) -----
 $progUrl = "https://hockey.be/wp-json/sportlink-api/program?clubid=$ClubId&from=$from&to=$to"
 Write-Host "Fetching program: $progUrl"
-$progResp = Invoke-RestMethod -Uri $progUrl -UseBasicParsing
+$progResp = ApiGet $progUrl
 Write-Host ("  {0} rows (raw, includes API duplicates)" -f $progResp.data.Count)
 
 # ----- 2. Fetch past results (home + away). The results endpoint silently caps at
@@ -94,7 +107,7 @@ while ($totalBack -lt $DaysBack) {
     $wTo   = $cursor.ToString("yyyy-MM-dd")
     $u = "https://hockey.be/wp-json/sportlink-api/results?clubid=$ClubId&from=$wFrom&to=$wTo"
     Write-Host "Fetching results: $u"
-    $r = Invoke-RestMethod -Uri $u -UseBasicParsing
+    $r = ApiGet $u
     foreach ($row in $r.data) { $resRows.Add($row) }
     Write-Host ("  +{0} rows" -f $r.data.Count)
     $cursor = $cursor.AddDays(-$chunkDays)
@@ -247,7 +260,7 @@ foreach ($k in $teamDivPast.Keys)     { [void]$allTeamCodes.Add($k) }
 
 # ----- 6. Map division string -> poolid by scraping kalender form -----
 Write-Host "Fetching pool-id mapping from kalender page..."
-$kalPage = Invoke-WebRequest -UseBasicParsing "https://hockey.be/nl/competitie/kalender-resultaten-en-rangschikkingen/"
+$kalPage = ApiGetWeb "https://hockey.be/nl/competitie/kalender-resultaten-en-rangschikkingen/"
 $selMatch = [regex]::Match($kalPage.Content, '<select name="poolid"[^>]*>(.*?)</select>')
 $poolMap = @{}    # normalized label -> poolid
 if ($selMatch.Success) {
@@ -278,7 +291,7 @@ function FetchPoolGames([string]$poolId) {
 
     # --- past results ---
     try {
-        $rr = Invoke-RestMethod -Uri "https://hockey.be/wp-json/sportlink-api/results?poolid=$poolId&from=$resFrom&to=$resTo" -UseBasicParsing
+        $rr = ApiGet "https://hockey.be/wp-json/sportlink-api/results?poolid=$poolId&from=$resFrom&to=$resTo"
         foreach ($row in $rr.data) {
             $dateStr = StripHtml $row[0]   # results endpoint: pure date, no field
             $time = if ($row[1]) { $row[1].Substring(0,[Math]::Min(5,$row[1].Length)) } else { "" }
@@ -301,7 +314,7 @@ function FetchPoolGames([string]$poolId) {
 
     # --- upcoming program ---
     try {
-        $pr = Invoke-RestMethod -Uri "https://hockey.be/wp-json/sportlink-api/program?poolid=$poolId&from=$progFrom&to=$progTo" -UseBasicParsing
+        $pr = ApiGet "https://hockey.be/wp-json/sportlink-api/program?poolid=$poolId&from=$progFrom&to=$progTo"
         foreach ($row in $pr.data) {
             # row[0] is HTML with date + field; for pool views we just want the date
             $c0 = StripHtml $row[0]
@@ -345,7 +358,7 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
             $standing = $standingCache[$poolId]
         } else {
             try {
-                $stResp = Invoke-RestMethod -Uri "https://hockey.be/wp-json/sportlink-api/standing?poolid=$poolId" -UseBasicParsing
+                $stResp = ApiGet "https://hockey.be/wp-json/sportlink-api/standing?poolid=$poolId"
                 if ($stResp.data -and $stResp.data.Count -gt 0) {
                     $cleanRows = @()
                     foreach ($row in $stResp.data) {

@@ -1378,30 +1378,34 @@ function renderTimelineFields(games, fieldsArr, isMobile) {
 //   outer border, centre line, both 23-m lines (solid), two D shooting circles (solid),
 //   two 5-m broken lines outside each D, penalty spots, goals.
 function pitchMarkingsSvg() {
-  const STROKE = "rgba(255,255,255,.40)";
-  const STROKE_DASH = "rgba(255,255,255,.30)";
+  // White-ish strokes at high opacity so they read clearly against the green pitch
+  // background. Widths are in viewBox units (1 = 1 real meter).
+  const SOLID = "rgba(255,255,255,.70)";
+  const DASH  = "rgba(255,255,255,.55)";
+  const W_OUT = 0.55;   // outer border / centre line / 23m / D
+  const W_DASH= 0.45;   // 5m broken line
   return `<svg class="pitch-lines" viewBox="0 0 55 91" preserveAspectRatio="none" aria-hidden="true">
     <!-- Outer border -->
-    <rect x="0.25" y="0.25" width="54.5" height="90.5" fill="none" stroke="${STROKE}" stroke-width="0.35"/>
+    <rect x="0.3" y="0.3" width="54.4" height="90.4" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
     <!-- Centre line (solid) -->
-    <line x1="0" y1="45.5" x2="55" y2="45.5" stroke="${STROKE}" stroke-width="0.35"/>
-    <!-- 23-meter lines (solid, like the reference diagram) -->
-    <line x1="0" y1="22.9" x2="55" y2="22.9" stroke="${STROKE}" stroke-width="0.3"/>
-    <line x1="0" y1="68.1" x2="55" y2="68.1" stroke="${STROKE}" stroke-width="0.3"/>
-    <!-- TOP D (shooting circle: arc 14.63m from goal-line) -->
-    <path d="M 12.87 0 A 14.63 14.63 0 0 1 42.13 0" fill="none" stroke="${STROKE}" stroke-width="0.4"/>
-    <!-- TOP 5-m broken line (parallel to D, 5m outside) -->
-    <path d="M 7.87 0 A 19.63 19.63 0 0 1 47.13 0" fill="none" stroke="${STROKE_DASH}" stroke-width="0.3" stroke-dasharray="1.6,1.2"/>
+    <line x1="0" y1="45.5" x2="55" y2="45.5" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <!-- 23-meter lines (solid) -->
+    <line x1="0" y1="22.9" x2="55" y2="22.9" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <line x1="0" y1="68.1" x2="55" y2="68.1" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <!-- TOP D shooting circle (radius 14.63m from goal line) -->
+    <path d="M 12.87 0 A 14.63 14.63 0 0 1 42.13 0" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
+    <!-- TOP 5-m broken line (parallel to D, 5m outside it) -->
+    <path d="M 7.87 0 A 19.63 19.63 0 0 1 47.13 0" fill="none" stroke="${DASH}" stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
     <!-- BOTTOM D -->
-    <path d="M 12.87 91 A 14.63 14.63 0 0 0 42.13 91" fill="none" stroke="${STROKE}" stroke-width="0.4"/>
+    <path d="M 12.87 91 A 14.63 14.63 0 0 0 42.13 91" fill="none" stroke="${SOLID}" stroke-width="${W_OUT}"/>
     <!-- BOTTOM 5-m broken line -->
-    <path d="M 7.87 91 A 19.63 19.63 0 0 0 47.13 91" fill="none" stroke="${STROKE_DASH}" stroke-width="0.3" stroke-dasharray="1.6,1.2"/>
-    <!-- Penalty spots (6.4m from goal line, centred) -->
-    <circle cx="27.5" cy="6.4"  r="0.45" fill="${STROKE}"/>
-    <circle cx="27.5" cy="84.6" r="0.45" fill="${STROKE}"/>
-    <!-- Goals (3.66m wide, just outside the goal line) -->
-    <rect x="25.67" y="-0.6" width="3.66" height="1.2" fill="rgba(255,255,255,.50)"/>
-    <rect x="25.67" y="90.4" width="3.66" height="1.2" fill="rgba(255,255,255,.50)"/>
+    <path d="M 7.87 91 A 19.63 19.63 0 0 0 47.13 91" fill="none" stroke="${DASH}" stroke-width="${W_DASH}" stroke-dasharray="1.8,1.2"/>
+    <!-- Penalty spots (6.4m from goal line, centred horizontally) -->
+    <circle cx="27.5" cy="6.4"  r="0.6" fill="${SOLID}"/>
+    <circle cx="27.5" cy="84.6" r="0.6" fill="${SOLID}"/>
+    <!-- Goals (3.66m wide, protruding just outside the goal line) -->
+    <rect x="25.67" y="-0.8" width="3.66" height="1.6" fill="rgba(255,255,255,.75)"/>
+    <rect x="25.67" y="90.2" width="3.66" height="1.6" fill="rgba(255,255,255,.75)"/>
   </svg>`;
 }
 
