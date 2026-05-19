@@ -722,16 +722,16 @@
     .rd-row .rd-score { font-size:12px; padding:2px 6px; min-width:54px; }
     .rd-row .rd-mid { min-width:60px; }
 
-    /* STANDINGS — keep #, Team, P, Pt, Ds; hide W/D/L/+/- on phones */
-    table.standing-table { font-size:12px; }
-    table.standing-table th, table.standing-table td { padding:6px 7px; }
-    table.standing-table th { font-size:10px; }
-    table.standing-table td.team { white-space:normal; line-height:1.2; }
+    /* STANDINGS on phones — keep #, Team, P, Pt, Ds, +, -. Hide only W/D/L.
+       Tighten padding + font so all 7 cols fit on a 375px viewport. */
+    table.standing-table { font-size:11px; }
+    table.standing-table th, table.standing-table td { padding:5px 5px; }
+    table.standing-table th { font-size:9px; letter-spacing:0; }
+    table.standing-table td.team { white-space:normal; line-height:1.2; font-size:11px; }
+    table.standing-table td.rank { padding-left:6px; }
     table.standing-table .col-3,    /* W */
     table.standing-table .col-4,    /* D */
-    table.standing-table .col-5,    /* L */
-    table.standing-table .col-8,    /* + */
-    table.standing-table .col-9     /* - */ { display:none; }
+    table.standing-table .col-5     /* L */ { display:none; }
 
     /* POOL-MATCH (this-week-in-poule) — tighten too */
     .pool-match { font-size:12px; padding:5px 7px; }
