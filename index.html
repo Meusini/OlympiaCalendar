@@ -305,6 +305,43 @@
   table.standing-table tr.ours td.team { color:var(--accent); font-weight:700; }
 
   ul.match-list { list-style:none; padding:0; margin:0; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+
+  /* ======== UNIFIED MATCH ROW (umr) — used by every match list everywhere ======== */
+  ul.umr-list { list-style:none; padding:0; margin:0; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .umr {
+    display:grid;
+    grid-template-columns: 60px minmax(0,1fr) 80px minmax(0,1fr) 100px;
+    gap:12px; align-items:center;
+    padding:10px 14px; border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .umr:last-child { border-bottom:none; }
+  .umr-date { color:var(--muted); font-variant-numeric:tabular-nums; font-weight:600; font-size:13px; }
+  .umr-home { text-align:right; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .umr-away { text-align:left;  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .umr-mid {
+    font-variant-numeric:tabular-nums; font-weight:700;
+    text-align:center; padding:4px 8px; border-radius:6px;
+    background:var(--panel2); border:1px solid var(--line);
+    font-size:13px; justify-self:center; min-width:70px;
+  }
+  .umr-mid.win  { background:rgba(122,223,176,.20); border-color:rgba(122,223,176,.45); color:#aef0c8; }
+  .umr-mid.loss { background:rgba(255,122,144,.16); border-color:rgba(255,122,144,.40); color:#ffb3c0; }
+  .umr-mid.draw { background:rgba(255,184,107,.16); border-color:rgba(255,184,107,.40); color:#ffd29a; }
+  .umr-mid.time { background:transparent; color:var(--muted); border-style:dashed; font-weight:600; }
+  .umr-mid.empty { background:transparent; border:none; color:var(--muted); }
+  .umr-trail { display:flex; justify-content:flex-end; align-items:center; gap:6px; min-width:0; }
+  .umr-outcome {
+    width:26px; text-align:center; font-weight:700; font-size:12px;
+    padding:2px 0; border-radius:4px;
+  }
+  .umr-outcome.win  { background:rgba(122,223,176,.25); color:#aef0c8; }
+  .umr-outcome.loss { background:rgba(255,122,144,.22); color:#ffb3c0; }
+  .umr-outcome.draw { background:rgba(255,184,107,.20); color:#ffd29a; }
+  .umr.our-match { background:rgba(58,163,255,.10); }
+  /* Field-badge and map-link styling kept consistent in trail column */
+  .umr-trail .field-badge,
+  .umr-trail .loc-tag { white-space:nowrap; }
   /* One grid for ALL match-rows.
      Desktop: date | matchup | trailing | outcome (4 cols, score/badge fixed at right).
      Mobile (≤720): collapses to a 2-line card via grid-template-areas (see media query). */
@@ -721,6 +758,16 @@
     .rd-row .rd-div { display:none; }
     .rd-row .rd-score { font-size:12px; padding:2px 6px; min-width:54px; }
     .rd-row .rd-mid { min-width:60px; }
+    /* Unified row tighter on phones, keeps the 5-column shape */
+    .umr {
+      grid-template-columns: 44px minmax(0,1fr) 64px minmax(0,1fr) 56px;
+      gap:6px; padding:8px 10px; font-size:12px;
+    }
+    .umr-date { font-size:11px; }
+    .umr-mid  { font-size:11px; padding:3px 5px; min-width:56px; }
+    .umr-outcome { width:22px; font-size:10px; }
+    .umr-trail .field-badge,
+    .umr-trail .loc-tag { font-size:10px; padding:2px 6px; }
 
     /* STANDINGS on phones — show ALL 10 cols. Fixed table layout, narrow numeric cols,
        team name wraps to 2 lines. Padding/font shrunk so it fits 375px without overflow. */
@@ -1561,16 +1608,29 @@ function formatDDMM(iso) {
   return `${d}/${m}`;
 }
 
-// Unified match-row markup — used by team-page (past + upcoming), week view, and pool-this-week.
-// One structure means one set of responsive rules; mobile collapses naturally to a 2-line card.
-// Props: { date, time, homeHtml, awayHtml, division, trailing, outcome, className }
+// Unified match-row markup — same shape for every match list (Resultaten, Komende, Laatste,
+// Vorige speeldag uitslagen, Veldverdeling games-list). Five columns:
+//   date | homeTeam (right-aligned) | mid pill (score / time) | awayTeam (left-aligned) | trail
+// The mid pill colors itself by outcome (win/loss/draw) for past results, or sits as a quiet
+// time chip for upcoming games. Trail is outcome letter (past), or field-badge / map link (upcoming).
+function unifiedMatchRow(p) {
+  const cls = p.className ? `umr ${p.className}` : "umr";
+  const date = `<span class="umr-date">${p.date ? escape(p.date) : ""}</span>`;
+  const home = `<span class="umr-home">${p.homeHtml || ""}</span>`;
+  const midCls = p.midCls ? `umr-mid ${p.midCls}` : "umr-mid";
+  const mid  = `<span class="${midCls}">${p.mid ? escape(p.mid) : ""}</span>`;
+  const away = `<span class="umr-away">${p.awayHtml || ""}</span>`;
+  const trail = `<span class="umr-trail">${p.trailHtml || ""}</span>`;
+  return `<li class="${cls}">${date}${home}${mid}${away}${trail}</li>`;
+}
+// Legacy alias kept for any callers that haven't migrated yet — same shape.
 function matchRowHtml(p) {
-  const cls = p.className ? `match-row ${p.className}` : "match-row";
-  const dateTime = (p.date || p.time) ? `<span class="row-date">${p.date ? escape(p.date) : ""}${p.time ? ` <span class="row-time">${escape(p.time)}</span>` : ""}</span>` : "";
-  const matchup = `<span class="row-matchup">${p.homeHtml || ""} <span class="vs-dash">–</span> ${p.awayHtml || ""}${p.division ? `<span class="row-div">${escape(p.division)}</span>` : ""}</span>`;
-  const trail = p.trailing ? `<span class="row-trailing">${p.trailing}</span>` : "";
-  const out = p.outcome ? `<span class="row-outcome ${p.outcomeCls || ""}">${escape(p.outcome)}</span>` : "";
-  return `<li class="${cls}">${dateTime}${matchup}${trail}${out}</li>`;
+  return unifiedMatchRow({
+    date: p.date, homeHtml: p.homeHtml, awayHtml: p.awayHtml,
+    mid: p.time || "", midCls: p.outcomeCls || "time",
+    trailHtml: p.trailing || (p.outcome ? `<span class="umr-outcome ${p.outcomeCls||''}">${escape(p.outcome)}</span>` : ""),
+    className: p.className,
+  });
 }
 
 // Render an Olympia "Olympia X" reference as a click-to-team-page link.
@@ -1679,8 +1739,7 @@ function renderWeek() {
   if (all.length === 0) {
     html += `<div class="empty">Geen wedstrijden deze week.</div>`;
   } else {
-    // Unified date-grouped compact view on both viewports.
-    // Desktop adds the division name in a small line under the score; mobile hides it.
+    // Date-grouped unified rows — same shape as everywhere else.
     const dateOrder = [...new Set(all.map(x => x.date))].sort();
     for (const d of dateOrder) {
       const dayItems = all.filter(x => x.date === d).sort((a, b) =>
@@ -1688,28 +1747,32 @@ function renderWeek() {
       const isToday = d === fmtDateAPI(new Date());
       html += `<section class="week-day-compact ${isToday?'today':''}">
         <h3>${formatDateLong(d)}${isToday?` <span class="today-tag">vandaag</span>`:""}</h3>
-        <ul class="rd-list">`;
+        <ul class="umr-list">`;
       for (const x of dayItems) {
         const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
         const awayHtml = x.isHome ? teamLabel(x.opponentClub, x.opponentTeam) : olympiaLink(x.olympiaTeam);
-        let scoreSpan;
         if (x.kind === "result") {
           const o = computeOutcome(x);
           const score = (x.olympiaScore != null && x.opponentScore != null)
             ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
             : "n/g";
-          scoreSpan = `<span class="rd-score ${o.cls}">${escape(score)}</span>`;
+          html += unifiedMatchRow({
+            date: formatDDMM(x.date),
+            homeHtml, awayHtml,
+            mid: score, midCls: o.cls,
+            trailHtml: o.letter ? `<span class="umr-outcome ${o.cls}">${o.letter}</span>` : "",
+            className: `result ${o.cls}`,
+          });
         } else {
-          scoreSpan = `<span class="rd-score upcoming">${escape(x.time)}</span>`;
+          const loc = x.isHome ? `<span class="loc-tag home">thuis</span>` : `<span class="loc-tag away">uit</span>`;
+          html += unifiedMatchRow({
+            date: formatDDMM(x.date),
+            homeHtml, awayHtml,
+            mid: x.time, midCls: "time",
+            trailHtml: loc,
+            className: "upcoming",
+          });
         }
-        html += `<li class="rd-row">
-          <span class="rd-home">${homeHtml}</span>
-          <div class="rd-mid">
-            ${scoreSpan}
-            <span class="rd-div">${escape(cleanDivision(x.division))}</span>
-          </div>
-          <span class="rd-away">${awayHtml}</span>
-        </li>`;
       }
       html += `</ul></section>`;
     }
@@ -1887,7 +1950,7 @@ function renderTeams() {
     if (recent.length === 0) {
       html += `<div class="empty-section">Geen uitslagen vorige week (${priorMon.getDate()}/${priorMon.getMonth()+1} – ${priorSun.getDate()}/${priorSun.getMonth()+1}).</div>`;
     } else {
-      html += `<ul class="match-list pool-week-matches">`;
+      html += `<ul class="umr-list">`;
       for (const p of recent) {
         const isOlympiaHome = p.homeClub === "Olympia";
         const isOlympiaAway = p.awayClub === "Olympia";
@@ -1895,11 +1958,23 @@ function renderTeams() {
         const home = isOlympiaHome ? olympiaLink(p.homeTeam) : `${escape(p.homeClub)} ${escape(p.homeTeam)}`;
         const away = isOlympiaAway ? olympiaLink(p.awayTeam) : `${escape(p.awayClub)} ${escape(p.awayTeam)}`;
         const score = (p.homeScore != null && p.awayScore != null)
-          ? `${p.homeScore} – ${p.awayScore}` : (p.score || "—");
-        html += `<li class="pool-match ${isOurMatch ? "our-match" : ""}">
-          <span class="pool-teams">${home} <span class="vs-dash">–</span> ${away}</span>
-          <span class="pool-score played">${escape(score)}</span>
-        </li>`;
+          ? `${p.homeScore} – ${p.awayScore}` : "n/g";
+        // Outcome relative to the selected team (our row gets a W/V/G chip too)
+        let outcomeHtml = "";
+        if (isOurMatch && p.homeScore != null && p.awayScore != null) {
+          const olympiaScore = isOlympiaHome ? p.homeScore : p.awayScore;
+          const opponentScore = isOlympiaHome ? p.awayScore : p.homeScore;
+          const cls = olympiaScore > opponentScore ? "win" : olympiaScore < opponentScore ? "loss" : "draw";
+          const letter = cls === "win" ? "W" : cls === "loss" ? "V" : "G";
+          outcomeHtml = `<span class="umr-outcome ${cls}">${letter}</span>`;
+        }
+        html += unifiedMatchRow({
+          date: formatDDMM(p.date),
+          homeHtml: home, awayHtml: away,
+          mid: score, midCls: "",
+          trailHtml: outcomeHtml,
+          className: isOurMatch ? "our-match" : "",
+        });
       }
       html += `</ul>`;
     }
@@ -1914,25 +1989,24 @@ function renderTeams() {
   if (upcoming.length === 0) {
     html += `<div class="empty-section">Geen geplande wedstrijden.</div>`;
   } else {
-    html += `<ul class="match-list">`;
+    html += `<ul class="umr-list">`;
     for (const g of upcoming.slice(0, 12)) {
       const homeHtml = g.isHome ? `<strong>${olympiaLink(g.olympiaTeam)}</strong>` : `${escape(g.opponentClub)} ${escape(g.opponentTeam)}`;
       const awayHtml = g.isHome ? `${escape(g.opponentClub)} ${escape(g.opponentTeam)}` : `<strong>${olympiaLink(g.olympiaTeam)}</strong>`;
-      let trailing;
+      let trailHtml;
       if (g.isHome && g.fieldCode) {
-        trailing = `<span class="field-badge" data-nav-date="${escape(g.date)}" data-nav-time="${escape(g.time)}" title="Open in Veldbezetting">${escape(fieldLabel(g.fieldCode, g.subpath))} <span class="field-arrow">→</span></span>`;
+        trailHtml = `<span class="field-badge" data-nav-date="${escape(g.date)}" data-nav-time="${escape(g.time)}" title="Open in Veldbezetting">${escape(fieldLabel(g.fieldCode, g.subpath))} <span class="field-arrow">→</span></span>`;
       } else if (g.isHome) {
-        trailing = `<span class="loc-tag home">thuis</span>`;
+        trailHtml = `<span class="loc-tag home">thuis</span>`;
       } else {
-        // Away game — link the location tag to Google Maps for that opponent's club
         const mapQ = encodeURIComponent(`${g.opponentClub} hockey club Belgium`);
-        trailing = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open locatie in Google Maps">uit ↗</a>`;
+        trailHtml = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open locatie in Google Maps">uit ↗</a>`;
       }
-      html += matchRowHtml({
+      html += unifiedMatchRow({
         date: formatDDMM(g.date),
-        time: g.time,
         homeHtml, awayHtml,
-        trailing,
+        mid: g.time, midCls: "time",
+        trailHtml,
         className: "upcoming",
       });
     }
@@ -1947,53 +2021,24 @@ function renderTeams() {
   if (lastMatches.length === 0) {
     html += `<div class="empty-section">Geen recente wedstrijden gevonden.</div>`;
   } else {
-    const isMobile = window.matchMedia("(max-width: 720px)").matches;
-    if (isMobile) {
-      // Mobile: same date-grouped compact format as Resultaten — home — score — away.
-      const dateOrder = [...new Set(lastMatches.map(r => r.date))].sort().reverse();
-      for (const d of dateOrder) {
-        const dayItems = lastMatches.filter(r => r.date === d);
-        html += `<section class="week-day-compact">
-          <h3>${formatDateLong(d)}</h3>
-          <ul class="rd-list">`;
-        for (const r of dayItems) {
-          const o = computeOutcome(r);
-          const homeHtml = r.isHome ? olympiaLink(r.olympiaTeam) : `${escape(r.opponentClub)} ${escape(r.opponentTeam)}`;
-          const awayHtml = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : olympiaLink(r.olympiaTeam);
-          const score = (r.olympiaScore != null && r.opponentScore != null)
-            ? (r.isHome ? `${r.olympiaScore} – ${r.opponentScore}` : `${r.opponentScore} – ${r.olympiaScore}`)
-            : "n/g";
-          html += `<li class="rd-row">
-            <span class="rd-home">${homeHtml}</span>
-            <div class="rd-mid"><span class="rd-score ${o.cls}">${escape(score)}</span></div>
-            <span class="rd-away">${awayHtml}</span>
-          </li>`;
-        }
-        html += `</ul></section>`;
-      }
-    } else {
-      html += `<ul class="match-list">`;
-      for (const r of lastMatches) {
-        const o = computeOutcome(r);
-        const homeHtml = r.isHome ? `<strong>${olympiaLink(r.olympiaTeam)}</strong>` : `${escape(r.opponentClub)} ${escape(r.opponentTeam)}`;
-        const awayHtml = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : `<strong>${olympiaLink(r.olympiaTeam)}</strong>`;
-        const score = (r.olympiaScore != null && r.opponentScore != null)
-          ? (r.isHome ? `${r.olympiaScore} – ${r.opponentScore}` : `${r.opponentScore} – ${r.olympiaScore}`)
-          : (r.score || "—");
-        html += matchRowHtml({
-          date: formatDDMM(r.date),
-          homeHtml, awayHtml,
-          trailing: `<span class="score-pill ${o.cls}">${escape(score)}</span>`,
-          outcome: o.letter,
-          outcomeCls: o.cls,
-          className: `result ${o.cls}`,
-        });
-      }
-      html += `</ul>`;
+    html += `<ul class="umr-list">`;
+    for (const r of lastMatches) {
+      const o = computeOutcome(r);
+      const homeHtml = r.isHome ? `<strong>${olympiaLink(r.olympiaTeam)}</strong>` : `${escape(r.opponentClub)} ${escape(r.opponentTeam)}`;
+      const awayHtml = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : `<strong>${olympiaLink(r.olympiaTeam)}</strong>`;
+      const score = (r.olympiaScore != null && r.opponentScore != null)
+        ? (r.isHome ? `${r.olympiaScore} – ${r.opponentScore}` : `${r.opponentScore} – ${r.olympiaScore}`)
+        : "n/g";
+      html += unifiedMatchRow({
+        date: formatDDMM(r.date),
+        homeHtml, awayHtml,
+        mid: score, midCls: o.cls,
+        trailHtml: o.letter ? `<span class="umr-outcome ${o.cls}">${o.letter}</span>` : "",
+        className: `result ${o.cls}`,
+      });
     }
+    html += `</ul>`;
   }
-  html += `</section>`;
-
   main.innerHTML = html;
   const favBtn = document.getElementById("fav-toggle");
   if (favBtn) favBtn.addEventListener("click", () => {
