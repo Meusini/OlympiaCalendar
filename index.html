@@ -310,7 +310,7 @@
   ul.umr-list { list-style:none; padding:0; margin:0; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
   .umr {
     display:grid;
-    grid-template-columns: 60px minmax(0,1fr) 80px minmax(0,1fr) 100px;
+    grid-template-columns: 60px minmax(0,1fr) 80px minmax(0,1fr) 110px;
     gap:12px; align-items:center;
     padding:10px 14px; border-bottom:1px solid var(--line);
     font-size:14px;
@@ -481,17 +481,23 @@
   .club-map .map-pitch.selected { stroke:var(--accent); stroke-width:3; fill:#2a5a3a; }
   .club-map .map-pitch.has-games:not(.selected) { fill:#2a5a3a; stroke:var(--accent2); stroke-width:2; }
 
-  /* Field badge — clickable, navigates into Veldindeling */
-  .match-row .field-badge {
+  /* Field badge — clickable, navigates into Veldbezetting.
+     Dotted underline signals "this is interactive" without competing with the colored chip. */
+  .field-badge {
     display:inline-flex; align-items:center; gap:5px;
     padding:4px 10px; border-radius:5px; cursor:pointer;
     font-size:12px; font-weight:600; letter-spacing:.3px;
     background:rgba(122,223,176,.16); color:#aef0c8; border:1px solid rgba(122,223,176,.4);
     transition: background 120ms ease, border-color 120ms ease;
     white-space:nowrap;
+    text-decoration:underline; text-decoration-style:dotted;
+    text-decoration-color:rgba(174,240,200,.6); text-underline-offset:3px;
   }
-  .match-row .field-badge:hover { background:rgba(122,223,176,.32); border-color:rgba(122,223,176,.7); }
-  .match-row .field-badge .field-arrow { opacity:.7; font-size:11px; }
+  .field-badge:hover {
+    background:rgba(122,223,176,.32); border-color:rgba(122,223,176,.7);
+    text-decoration-color:#aef0c8;
+  }
+  .field-badge .field-arrow { opacity:.7; font-size:11px; text-decoration:none; }
 
   /* Clickable Olympia team names — visible wherever a team name is rendered. */
   .team-link {
@@ -1760,16 +1766,25 @@ function renderWeek() {
             date: formatDDMM(x.date),
             homeHtml, awayHtml,
             mid: score, midCls: o.cls,
-            trailHtml: o.letter ? `<span class="umr-outcome ${o.cls}">${o.letter}</span>` : "",
+            trailHtml: "",   // outcome conveyed by the colored pill
             className: `result ${o.cls}`,
           });
         } else {
-          const loc = x.isHome ? `<span class="loc-tag home">thuis</span>` : `<span class="loc-tag away">uit</span>`;
+          // Upcoming: home → clickable field badge to Veldbezetting; away → Google Maps link
+          let trailHtml;
+          if (x.isHome && x.fieldCode) {
+            trailHtml = `<span class="field-badge" data-nav-date="${escape(x.date)}" data-nav-time="${escape(x.time)}" title="Open in Veldbezetting">${escape(fieldLabel(x.fieldCode, x.subpath))} <span class="field-arrow">→</span></span>`;
+          } else if (x.isHome) {
+            trailHtml = `<span class="loc-tag home">thuis</span>`;
+          } else {
+            const mapQ = encodeURIComponent(`${x.opponentClub} hockey club Belgium`);
+            trailHtml = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open locatie in Google Maps">uit ↗</a>`;
+          }
           html += unifiedMatchRow({
             date: formatDDMM(x.date),
             homeHtml, awayHtml,
             mid: x.time, midCls: "time",
-            trailHtml: loc,
+            trailHtml,
             className: "upcoming",
           });
         }
@@ -1959,20 +1974,19 @@ function renderTeams() {
         const away = isOlympiaAway ? olympiaLink(p.awayTeam) : `${escape(p.awayClub)} ${escape(p.awayTeam)}`;
         const score = (p.homeScore != null && p.awayScore != null)
           ? `${p.homeScore} – ${p.awayScore}` : "n/g";
-        // Outcome relative to the selected team (our row gets a W/V/G chip too)
-        let outcomeHtml = "";
+        // Color OUR row's score pill by outcome — others stay neutral
+        let midCls = "";
         if (isOurMatch && p.homeScore != null && p.awayScore != null) {
           const olympiaScore = isOlympiaHome ? p.homeScore : p.awayScore;
           const opponentScore = isOlympiaHome ? p.awayScore : p.homeScore;
-          const cls = olympiaScore > opponentScore ? "win" : olympiaScore < opponentScore ? "loss" : "draw";
-          const letter = cls === "win" ? "W" : cls === "loss" ? "V" : "G";
-          outcomeHtml = `<span class="umr-outcome ${cls}">${letter}</span>`;
+          midCls = olympiaScore > opponentScore ? "win"
+                 : olympiaScore < opponentScore ? "loss" : "draw";
         }
         html += unifiedMatchRow({
           date: formatDDMM(p.date),
           homeHtml: home, awayHtml: away,
-          mid: score, midCls: "",
-          trailHtml: outcomeHtml,
+          mid: score, midCls,
+          trailHtml: "",
           className: isOurMatch ? "our-match" : "",
         });
       }
@@ -2033,7 +2047,7 @@ function renderTeams() {
         date: formatDDMM(r.date),
         homeHtml, awayHtml,
         mid: score, midCls: o.cls,
-        trailHtml: o.letter ? `<span class="umr-outcome ${o.cls}">${o.letter}</span>` : "",
+        trailHtml: "",   // colored score pill already conveys W/V/G
         className: `result ${o.cls}`,
       });
     }
