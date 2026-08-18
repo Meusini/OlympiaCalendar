@@ -28,13 +28,32 @@ $htmlPath = Join-Path $here "index.html"
 # server's rate limiter (it has none documented for the public connector, but bursts of
 # ~120 calls in 60s could plausibly attract attention). Adds ~25s to a full run.
 $CallDelayMs = 200
+# Identify ourselves instead of sending the default PowerShell agent string, and retry
+# twice before giving up so a single 5xx or timeout does not red the whole cron run.
+# When we do give up, the message carries the URL and status code -- the old code threw
+# a bare WebException that said nothing about which endpoint died.
+$UserAgent   = "OlympiaCalendar/1.0 (+https://github.com/Meusini/OlympiaCalendar)"
+$MaxAttempts = 3
+function ApiCall([scriptblock]$call, [string]$url) {
+    for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+        Start-Sleep -Milliseconds $CallDelayMs
+        try { return & $call }
+        catch {
+            $status = ""
+            if ($_.Exception.Response) { $status = [int]$_.Exception.Response.StatusCode }
+            if ($attempt -eq $MaxAttempts) {
+                throw "GET $url failed after $MaxAttempts attempts (HTTP $status): $($_.Exception.Message)"
+            }
+            Write-Host ("  retry {0}/{1} (HTTP {2}) {3}" -f $attempt, $MaxAttempts, $status, $url)
+            Start-Sleep -Seconds (2 * $attempt)
+        }
+    }
+}
 function ApiGet([string]$url) {
-    Start-Sleep -Milliseconds $CallDelayMs
-    return Invoke-RestMethod -Uri $url -UseBasicParsing
+    return ApiCall { Invoke-RestMethod -Uri $url -UseBasicParsing -UserAgent $UserAgent -TimeoutSec 60 } $url
 }
 function ApiGetWeb([string]$url) {
-    Start-Sleep -Milliseconds $CallDelayMs
-    return Invoke-WebRequest -Uri $url -UseBasicParsing
+    return ApiCall { Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent $UserAgent -TimeoutSec 60 } $url
 }
 
 if (-not (Test-Path $htmlPath)) { throw "index.html not found in $here" }
@@ -63,12 +82,13 @@ function ParseField([string]$raw) {
     return $null
 }
 function SplitTeam([string]$full) {
-    # "Olympia D-2 Outdoor Week" -> club="Olympia", team="D-2"
+    # "Olympia D-2 Outdoor Week" -> club="Olympia", team="D-2", season="outdoor"
     $clean = ($full -replace '\s+', ' ').Trim()
     $parts = $clean -split ' ', 3
     [pscustomobject]@{
-        club = $parts[0]
-        team = $(if ($parts.Count -gt 1) { $parts[1] } else { "" })
+        club   = $parts[0]
+        team   = $(if ($parts.Count -gt 1) { $parts[1] } else { "" })
+        season = SeasonOf $clean
     }
 }
 function ParseIsoDate([string]$ddmmyyyy) {
@@ -76,24 +96,56 @@ function ParseIsoDate([string]$ddmmyyyy) {
     if ($d.Count -ne 3) { return $null }
     "{0}-{1}-{2}" -f $d[2], $d[1], $d[0]
 }
-# Normalize a poolid <option> label so it matches the division string in game rows.
-# Pool: "Open League Women Outdoor Week - HV 2 - OL - A"
-# Div : "Open League Women - HV 2 - OL A"
-function NormalizePoolLabel([string]$label) {
-    $s = $label
-    $s = $s -replace ' Outdoor Week', ''
-    $s = $s -replace ' Indoor Week',  ''
-    $s = $s -replace ' Trimmers Week', ''
-    $s = $s -replace ' Recreatief Week', ''
-    $s = $s -replace ' - ([A-Za-z0-9]+)\s*$', ' $1'
-    return $s.Trim()
+# Match a poolid <option> label to the division string on a game row. The two spell the
+# same pool differently, and the 2026-27 season moved the separators again:
+#   Pool option : "Open League Women Outdoor Week - Reg. 2 - OL - HV - A"
+#   Game row div: "Open League Women - Reg. 2 - OL HV - A"
+# Chasing those separator rules is what broke -- the old last-segment rule silently
+# stopped matching the seven adult pools (D-2..D-5, G-1..G-3, H-3), so they lost their
+# standings. Squash both sides to a key instead: drop the season marker, then drop every
+# non-alphanumeric character. Both become "openleaguewomenreg2olhva", and across all 427
+# published pools that key is still unique.
+# SeasonOf stays separate so an Indoor and an Outdoor pool sharing a name can be told
+# apart while both are listed (the Jan-Feb overlap).
+$SeasonMarker = '\b(Outdoor|Indoor|Trimmers|Recreatief)\s+Week\b'
+function PoolKey([string]$s) {
+    if ([string]::IsNullOrWhiteSpace($s)) { return "" }
+    $core = $s -replace $SeasonMarker, ''
+    return ($core -replace '[^A-Za-z0-9]', '').ToLowerInvariant()
+}
+function SeasonOf([string]$s) {
+    if ($s -match $SeasonMarker) { return $matches[1].ToLowerInvariant() }
+    return ""
 }
 
 # ----- 1. Fetch the upcoming program (home + away) -----
-$progUrl = "https://hockey.be/wp-json/sportlink-api/program?clubid=$ClubId&from=$from&to=$to"
-Write-Host "Fetching program: $progUrl"
-$progResp = ApiGet $progUrl
-Write-Host ("  {0} rows (raw, includes API duplicates)" -f $progResp.data.Count)
+# The connector returns an EMPTY array once a single query would exceed ~500 rows. It
+# does not truncate and it does not error -- an over-wide window looks exactly like an
+# empty week. One 90-day club-wide call blows past that as soon as a season is running
+# (Olympia produces ~270 raw rows per fortnight), so page forward in 14-day windows and
+# merge. Duplicates are dropped by the $seenTeam / $seenField keys below.
+$progUrl  = "https://hockey.be/wp-json/sportlink-api/program?clubid=$ClubId&from=$from&to=$to"
+$progWin  = 14
+$progRows = New-Object System.Collections.Generic.List[object]
+$pCursor  = $today
+$fwdDone  = 0
+while ($fwdDone -lt $DaysForward) {
+    $chunkDays = [Math]::Min($progWin, $DaysForward - $fwdDone)
+    $wFrom = $pCursor.ToString("yyyy-MM-dd")
+    $wTo   = $pCursor.AddDays($chunkDays).ToString("yyyy-MM-dd")
+    $u = "https://hockey.be/wp-json/sportlink-api/program?clubid=$ClubId&from=$wFrom&to=$wTo"
+    Write-Host "Fetching program: $u"
+    $p = ApiGet $u
+    foreach ($row in $p.data) { $progRows.Add($row) }
+    Write-Host ("  +{0} rows" -f $p.data.Count)
+    if ($p.data.Count -ge 450) {
+        Write-Host "  WARN: close to the connector row cap -- shorten the progWin setting."
+    }
+    $pCursor = $pCursor.AddDays($chunkDays)
+    $fwdDone += $chunkDays
+}
+$progResp = [pscustomobject]@{ data = $progRows }
+Write-Host ("Program total: {0} rows (raw, includes API duplicates)" -f $progResp.data.Count)
 
 # ----- 2. Fetch past results (home + away). The results endpoint silently caps at
 # roughly 30 days worth of rows, so we paginate in 25-day windows and merge.
@@ -121,6 +173,7 @@ $fieldGames  = New-Object System.Collections.Generic.List[object]
 $teamGames   = New-Object System.Collections.Generic.List[object]
 $seenField   = @{}
 $seenTeam    = @{}
+$teamSeason  = @{}   # team code -> "outdoor" / "indoor", used to disambiguate pool lookup
 $dupField = 0; $dupTeam = 0
 
 foreach ($row in $progResp.data) {
@@ -143,6 +196,8 @@ foreach ($row in $progResp.data) {
     $ourTeam   = if ($isHome) { $h.team } else { $a.team }
     $oppClub   = if ($isHome) { $a.club } else { $h.club }
     $oppTeam   = if ($isHome) { $a.team } else { $h.team }
+    $ourSeason = if ($isHome) { $h.season } else { $a.season }
+    if ($ourSeason) { $teamSeason[$ourTeam] = $ourSeason }
 
     # Parse field for home games (used by both fieldGames + teamGames so the Teams view
     # can show a "Veld X" badge that links into Veldindeling).
@@ -268,8 +323,14 @@ if ($selMatch.Success) {
     foreach ($it in $items) {
         $id = $it.Groups[1].Value
         $label = $it.Groups[2].Value
-        $norm = NormalizePoolLabel $label
-        if (-not $poolMap.ContainsKey($norm)) { $poolMap[$norm] = $id }
+        $k   = PoolKey $label
+        $mrk = SeasonOf $label
+        if ($k) {
+            # Store both the bare key and a season-qualified one; the lookup prefers the
+            # qualified match and falls back to bare.
+            if (-not $poolMap.ContainsKey($k))       { $poolMap[$k] = $id }
+            if (-not $poolMap.ContainsKey("$k|$mrk")) { $poolMap["$k|$mrk"] = $id }
+        }
     }
     Write-Host ("  {0} pools mapped" -f $poolMap.Count)
 }
@@ -350,7 +411,12 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
         $primaryDiv = $divs[0].Key
     }
     if ([string]::IsNullOrEmpty($primaryDiv)) { continue }
-    $poolId = $poolMap[$primaryDiv]
+    # Prefer the season-qualified key so an indoor team never picks up an outdoor pool.
+    $divKey = PoolKey $primaryDiv
+    $poolId = $null
+    if ($teamSeason.ContainsKey($teamCode)) { $poolId = $poolMap["$divKey|$($teamSeason[$teamCode])"] }
+    if (-not $poolId) { $poolId = $poolMap[$divKey] }
+    if (-not $poolId) { Write-Host ("  WARN: no poolid for {0} -- division '{1}'" -f $teamCode, $primaryDiv) }
 
     $standing = $null
     if ($poolId) {
@@ -399,6 +465,16 @@ $teamGamesArr  = @($teamGames  | Sort-Object date, time)
 $resultsArr    = @($results    | Sort-Object @{Expression='date';Descending=$true}, @{Expression='time';Descending=$true})
 # Use List.ToArray() — @($list) trips on mixed-shape pscustomobjects.
 $teamsArr      = $teams.ToArray()
+
+# Between seasons every endpoint legitimately returns [], and so does a connector that
+# has gone dark. Writing that out replaces a working page with a blank one — which is
+# exactly what left the site showing nothing from June 2026 onward while the cron kept
+# reporting green. Keep whatever is already embedded and exit clean instead.
+if ($fieldGamesArr.Count -eq 0 -and $teamGamesArr.Count -eq 0 -and $resultsArr.Count -eq 0) {
+    Write-Host "No games returned for this window (off-season, or the connector is down)."
+    Write-Host "Leaving the existing embedded data in index.html untouched."
+    exit 0
+}
 
 # Use ordered hashtable (NOT [pscustomobject]@{}) — that cast trips on List<object> values
 # with mixed-type entries ("Argument types do not match").
