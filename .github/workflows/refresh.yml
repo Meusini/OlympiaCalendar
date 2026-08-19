@@ -1,19 +1,21 @@
 name: Refresh schedule data
 
+# The daily cron is OFF, and the data refresh now runs on Bart's machine via the
+# "OlympiaCalendar Refresh" scheduled task (refresh-local.ps1).
+#
+# Reason: hockey.be sits behind Cloudflare, which serves its "Just a moment..."
+# JavaScript challenge to GitHub-hosted runners. The first request of a process gets
+# through and every one after it returns 403. Verified 2026-08-19 — the same call
+# succeeded from a probe step and then 403'd on the script's second call, at 200ms,
+# 4s, 15s and 45s spacing alike. It is not a rate limit and there is no polite way
+# around a JS challenge, so the job belongs on a non-datacenter connection.
+#
+# The manual trigger below is kept for the day this repo gets a self-hosted runner on
+# a normal connection — point `runs-on` at it and this works again unchanged. Running
+# it on `ubuntu-latest` will fail at the second API call.
+
 on:
-  # Daily at 06:00 UTC (≈ 07:00 / 08:00 Brussels depending on DST)
-  schedule:
-    - cron: "0 6 * * *"
-  # Allow manual trigger from the Actions tab
   workflow_dispatch:
-  # TEMPORARY (2026-08-19): run on pushes that touch the refresh path, so the
-  # diagnostic step below can be iterated without waiting a day for the cron.
-  # Remove this trigger once the connector failure is understood.
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/refresh.yml'
-      - 'update.ps1'
 
 # Allow the workflow's bot to commit the updated index.html back to the repo.
 permissions:
@@ -26,59 +28,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # TEMPORARY (2026-08-19). update.ps1 has failed on every scheduled run since
-      # 2026-08-07, always on its first call to hockey.be and always instantly. The
-      # run log is only visible to repo admins, so this step republishes the useful
-      # bits as workflow annotations, which the check-runs API exposes publicly.
-      # Delete this step once the cause is known.
-      - name: Probe the connector
-        continue-on-error: true
-        run: |
-          URL='https://hockey.be/wp-json/sportlink-api/program?clubid=CC6VJ83&from=2026-09-01&to=2026-09-15'
-          echo "::warning title=egress-ip::$(curl -sS --max-time 15 https://api.ipify.org || echo unavailable)"
-          CODE=$(curl -sS -o /tmp/probe.txt -w '%{http_code}' --max-time 30 "$URL" 2>/tmp/err.txt) || CODE=curl-failed
-          echo "::warning title=curl-default-ua::status=$CODE bytes=$(wc -c </tmp/probe.txt) err=$(tr -d '\n' </tmp/err.txt | head -c 150)"
-          echo "::warning title=curl-body-head::$(head -c 150 /tmp/probe.txt | tr -d '\n')"
-
-      - name: Probe the connector from pwsh
-        shell: pwsh
-        continue-on-error: true
-        run: |
-          $url = 'https://hockey.be/wp-json/sportlink-api/program?clubid=CC6VJ83&from=2026-09-01&to=2026-09-15'
-          # Exactly the call update.ps1 makes, so a difference vs curl above points at
-          # the client (TLS, user agent) rather than at the network path.
-          try {
-              $r = Invoke-RestMethod -Uri $url -UseBasicParsing -TimeoutSec 30 `
-                     -UserAgent "OlympiaCalendar/1.0 (+https://github.com/Meusini/OlympiaCalendar)"
-              Write-Host "::warning title=pwsh-probe::OK rows=$($r.data.Count)"
-          } catch {
-              $s = ""
-              if ($_.Exception.Response) { $s = [int]$_.Exception.Response.StatusCode }
-              $m = ($_.Exception.Message -replace '\s+', ' ')
-              Write-Host "::warning title=pwsh-probe::FAILED status=$s type=$($_.Exception.GetType().Name) msg=$($m.Substring(0, [Math]::Min(200, $m.Length)))"
-          }
-
       - name: Run update.ps1
         shell: pwsh
-        run: |
-          # TEMPORARY (2026-08-19): mirror the failure and the last lines of output into
-          # annotations, since the log itself is admin-only. Restore to a bare
-          # `./update.ps1` once the cause is known.
-          $log    = "$env:RUNNER_TEMP/update.log"
-          $failed = $false
-          try {
-              # 4s between calls: Cloudflare 403s this runner's IP at 200ms spacing.
-              ./update.ps1 -CallDelayMs 4000 *>&1 | Tee-Object -FilePath $log
-          } catch {
-              $failed = $true
-              $err = ($_ | Out-String) -replace '\s+', ' '
-              Write-Host "::error title=update-error::$($err.Substring(0, [Math]::Min(700, $err.Length)))"
-          }
-          if (Test-Path $log) {
-              $tail = ((Get-Content $log -Tail 15) -join ' || ') -replace '\s+', ' '
-              Write-Host "::warning title=update-tail::$($tail.Substring(0, [Math]::Min(900, $tail.Length)))"
-          }
-          if ($failed) { exit 1 }
+        run: ./update.ps1
 
       - name: Commit & push if changed
         run: |

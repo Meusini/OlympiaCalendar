@@ -21,6 +21,16 @@ block inside `index.html`.
 
 ## Published online
 
-Deployed via GitHub Pages from this repo's `main` branch. A GitHub Actions workflow
-(`.github/workflows/refresh.yml`) runs `update.ps1` every Monday at 06:00 UTC, commits
-the refreshed `index.html`, and pushes. Pages then serves the new version.
+Deployed via GitHub Pages from this repo's `main` branch.
+
+The daily refresh runs on Bart's machine, not in CI. The **OlympiaCalendar Refresh**
+scheduled task runs `refresh-local.ps1` at 07:30 — it pulls, runs `update.ps1`, and
+commits and pushes `index.html` if the data changed. Pages then serves the new version.
+
+It lives there because hockey.be sits behind Cloudflare, which serves its JavaScript
+challenge to GitHub-hosted runners: the first request of a process succeeds and every
+one after it returns 403, whatever the pacing. From a home connection all ~150 calls of
+a full run pass untouched. `.github/workflows/refresh.yml` is kept on manual trigger
+only, for the day a self-hosted runner on a normal connection makes CI viable again.
+
+Check on it with `Get-ScheduledTask OlympiaCalendar*`, or read `refresh-local.log`.
