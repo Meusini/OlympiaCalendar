@@ -60,7 +60,24 @@ jobs:
 
       - name: Run update.ps1
         shell: pwsh
-        run: ./update.ps1
+        run: |
+          # TEMPORARY (2026-08-19): mirror the failure and the last lines of output into
+          # annotations, since the log itself is admin-only. Restore to a bare
+          # `./update.ps1` once the cause is known.
+          $log    = "$env:RUNNER_TEMP/update.log"
+          $failed = $false
+          try {
+              ./update.ps1 *>&1 | Tee-Object -FilePath $log
+          } catch {
+              $failed = $true
+              $err = ($_ | Out-String) -replace '\s+', ' '
+              Write-Host "::error title=update-error::$($err.Substring(0, [Math]::Min(700, $err.Length)))"
+          }
+          if (Test-Path $log) {
+              $tail = ((Get-Content $log -Tail 15) -join ' || ') -replace '\s+', ' '
+              Write-Host "::warning title=update-tail::$($tail.Substring(0, [Math]::Min(900, $tail.Length)))"
+          }
+          if ($failed) { exit 1 }
 
       - name: Commit & push if changed
         run: |
