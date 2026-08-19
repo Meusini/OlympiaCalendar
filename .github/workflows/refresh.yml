@@ -67,7 +67,8 @@ jobs:
           $log    = "$env:RUNNER_TEMP/update.log"
           $failed = $false
           try {
-              ./update.ps1 *>&1 | Tee-Object -FilePath $log
+              # 4s between calls: Cloudflare 403s this runner's IP at 200ms spacing.
+              ./update.ps1 -CallDelayMs 4000 *>&1 | Tee-Object -FilePath $log
           } catch {
               $failed = $true
               $err = ($_ | Out-String) -replace '\s+', ' '

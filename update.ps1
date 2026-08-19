@@ -17,7 +17,11 @@
 param(
     [int]$DaysForward = 90,
     [int]$DaysBack    = 180,  # results endpoint caps each call ~30d; we paginate in 25d windows
-    [string]$ClubId   = "CC6VJ83"
+    [string]$ClubId   = "CC6VJ83",
+    # Gap between hockey.be calls. 200ms is fine from a home connection. From a cloud IP
+    # Cloudflare starts returning 403 challenges after the second request, so the runner
+    # passes something much larger -- see the note on $CallDelayMs below.
+    [int]$CallDelayMs = 200
 )
 
 $ErrorActionPreference = "Stop"
@@ -27,7 +31,13 @@ $htmlPath = Join-Path $here "index.html"
 # Throttle: 200ms between hockey.be calls keeps us under 5 req/s so we never trip the
 # server's rate limiter (it has none documented for the public connector, but bursts of
 # ~120 calls in 60s could plausibly attract attention). Adds ~25s to a full run.
-$CallDelayMs = 200
+# hockey.be sits behind Cloudflare. From a residential IP all ~150 calls of a full run
+# go through untouched. From a GitHub-hosted runner (Azure address space) the first one
+# or two succeed and everything after that gets a 403 challenge page, so the pace below
+# is what the workflow overrides. If even a slow pace gets challenged, the honest read is
+# that Cloudflare does not want datacenter traffic on this endpoint and the job belongs
+# on a machine with a normal connection -- do not try to look like a browser to get past
+# it.
 # Identify ourselves instead of sending the default PowerShell agent string, and retry
 # twice before giving up so a single 5xx or timeout does not red the whole cron run.
 # When we do give up, the message carries the URL and status code -- the old code threw
@@ -45,7 +55,9 @@ function ApiCall([scriptblock]$call, [string]$url) {
                 throw "GET $url failed after $MaxAttempts attempts (HTTP $status): $($_.Exception.Message)"
             }
             Write-Host ("  retry {0}/{1} (HTTP {2}) {3}" -f $attempt, $MaxAttempts, $status, $url)
-            Start-Sleep -Seconds (2 * $attempt)
+            # Back off hard: a 403 here means a rate threshold was tripped, and retrying
+            # quickly just digs the hole deeper.
+            Start-Sleep -Seconds (15 * $attempt)
         }
     }
 }
