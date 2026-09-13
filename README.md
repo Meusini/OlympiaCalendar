@@ -19,6 +19,17 @@ This script pulls upcoming games, past results, pool standings, and pool-wide we
 from `hockey.be/wp-json/sportlink-api/*`, then rewrites the `<script id="games-data">`
 block inside `index.html`.
 
+## Training schedule
+
+The weekly outdoor training schedule (Sportieve Cel sheet, versie 25/6/26) is embedded as a
+static block in `index.html` — the `TRAINING_SCHEDULE` constant near the top of the script.
+Trainings render inside Veldbezetting next to the matches (hatched, dashed blocks; quarters
+A–D as on the sheet). Conditietraining is left out because it uses no pitch. The schedule only
+applies inside the outdoor windows in `TRAINING_SEASONS` (late Aug → end Nov, Mar → Jun);
+edit both constants by hand when the club publishes a new version. `update.ps1` never touches
+them — it only rewrites the `<script id="games-data">` block. A training that collides with a
+home match on the same pitch area is flagged ⚠ rather than hidden.
+
 ## Published online
 
 Deployed via GitHub Pages from this repo's `main` branch.

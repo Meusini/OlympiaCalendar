@@ -12,7 +12,7 @@
     --u7:#9b8cff; --u8:#7ad6ff; --u9:#7adfb0; --u10:#a7e26a;
     --u11:#d8db5a; --u12:#ffc36e; --u14:#ff9d6e; --u16:#ff7a90;
     --u19:#ff7adf; --senior:#3aa3ff; --gent:#a988ff; --junior:#56e3d3;
-    --trim:#888;
+    --trim:#888; --gk:#5fd3c8; --other:#6b7280;
   }
   * { box-sizing:border-box; }
   html,body { margin:0; padding:0; background:var(--bg); color:var(--text);
@@ -93,6 +93,24 @@
   .game.age-gent   { border-left:4px solid var(--gent); }
   .game.age-junior { border-left:4px solid var(--junior); }
   .game.age-trim   { border-left:4px solid var(--trim); }
+  .game.age-gk     { border-left:4px solid var(--gk); }
+  .game.age-other  { border-left:4px solid var(--other); }
+  /* Training blocks: dashed outline + hatched fill so they read as "reserved", not "match". */
+  .game.training {
+    border-style:dashed; border-color:rgba(255,255,255,.22);
+    background:repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 6px, transparent 6px 12px), var(--panel);
+    z-index:0;
+  }
+  .game.match { z-index:1; }
+  .game .kind {
+    display:inline-block; padding:1px 5px; border-radius:4px; margin-left:6px;
+    font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    background:rgba(255,255,255,.08); color:var(--muted);
+  }
+  .game.cramped .kind { font-size:9px; padding:0 4px; margin-left:4px; }
+  .game.training .teams { font-weight:500; }
+  .game.conflict { border-color:rgba(255,122,144,.6); }
+  .game.conflict .kind { background:rgba(255,122,144,.2); color:#ffb3c0; }
 
   /* ======== FIELD LAYOUT VIEW ======== */
   .layout-controls { display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
@@ -246,6 +264,18 @@
   .subcell.age-gent   { background: rgba(169,136,255,.25); }
   .subcell.age-junior { background: rgba(86,227,211,.22); }
   .subcell.age-trim   { background: rgba(150,150,150,.22); }
+  .subcell.age-gk     { background: rgba(95,211,200,.22); }
+  .subcell.age-other  { background: rgba(107,114,128,.22); }
+  .subcell.training   { border-style:dashed; border-color:rgba(255,255,255,.35); }
+  .subcell.training .game-mini .team { font-weight:600; }
+  .subcell .kind-tag {
+    position:absolute; top:3px; right:5px; font-size:9px; letter-spacing:.6px;
+    color:rgba(255,255,255,.65); background:rgba(0,0,0,.3); padding:1px 5px; border-radius:3px;
+    text-transform:uppercase; font-weight:700;
+  }
+  .field-card .games-list .row.training .t { color:var(--muted); }
+  .field-card .games-list .row .conflict-tag { font-size:11px; color:#ffb3c0; }
+  .legend .chip .sw.dashed { background:transparent; border:1px dashed var(--muted); }
   .field-card .games-list { margin-top:12px; font-size:14px; color:var(--muted); }
   .field-card .games-list .row { display:flex; gap:10px; padding:4px 0; align-items:baseline; }
   .field-card .games-list .row .t { color:var(--text); font-variant-numeric:tabular-nums; font-weight:600; min-width:46px; }
@@ -890,8 +920,185 @@ const LAYOUT_GRID = [
   { type: "field",    code: "5", label: "Veld 5",   col: 2, row: 2 },
 ];
 const TIMELINE_START_H = 8;
-const TIMELINE_END_H = 22;
+const TIMELINE_END_H = 23;   // last training slot ends 22:30
 const PX_PER_HOUR = 130;  // 1h block = 130px so stacked half-cells are still ~63px tall
+
+// ============================================================
+// TRAINING SCHEDULE (static) — HC Olympia Trainingsschema 2026-2027, versie 25/6/26.
+// Conditietraining is left out (no pitch). Edit this block when the Sportieve Cel
+// publishes a new version; update.ps1 never touches it (it only rewrites #games-data).
+//
+// Quarters follow the club sheet: A B C D are the four 23m zones of a pitch from one
+// end to the other. Mapped onto the Sportlink subpath model used for matches:
+//   ABCD = full pitch, AB = half A, CD = half B, A = A1, B = A2, C = B1, D = B2.
+// ============================================================
+// Outdoor windows in which the weekly schedule applies (inclusive, YYYY-MM-DD).
+// Outdoor stops end of November (indoor season) and restarts in March.
+const TRAINING_SEASONS = [
+  ["2026-08-24", "2026-11-30"],
+  ["2027-03-01", "2027-06-30"],
+];
+// day: 1=Mon … 5=Fri. q = quarters. Times HH:MM. t = title as printed on the sheet.
+const TRAINING_SCHEDULE = [
+  // Maandag
+  { d:1, f:"1", q:"ABCD", s:"18:30", e:"20:30", t:"KBHB" },
+  { d:1, f:"2", q:"ABCD", s:"18:30", e:"20:30", t:"KBHB" },
+  { d:1, f:"2", q:"ABCD", s:"20:30", e:"22:00", t:"Junior Ladies" },
+  { d:1, f:"5", q:"AB",   s:"17:30", e:"19:00", t:"u14B-1" },
+  { d:1, f:"5", q:"CD",   s:"17:30", e:"19:00", t:"u14G-1" },
+  { d:1, f:"5", q:"AB",   s:"19:00", e:"20:30", t:"u16B-1" },
+  { d:1, f:"5", q:"CD",   s:"19:00", e:"20:30", t:"u16G-1" },
+  { d:1, f:"5", q:"ABCD", s:"20:30", e:"22:00", t:"Gents" },
+  // Dinsdag
+  { d:2, f:"1", q:"AB",   s:"18:30", e:"20:30", t:"u19B-1" },
+  { d:2, f:"1", q:"CD",   s:"18:30", e:"20:30", t:"u19G-1" },
+  { d:2, f:"1", q:"ABCD", s:"20:30", e:"22:00", t:"H1" },
+  { d:2, f:"2", q:"CD",   s:"17:00", e:"18:00", t:"S2H MB" },
+  { d:2, f:"2", q:"AB",   s:"18:00", e:"19:30", t:"u16G-2" },
+  { d:2, f:"2", q:"CD",   s:"18:00", e:"19:30", t:"u19G-2" },
+  { d:2, f:"2", q:"ABCD", s:"19:30", e:"21:00", t:"D-1" },
+  { d:2, f:"5", q:"ABCD", s:"17:00", e:"18:00", t:"Extra training MB" },
+  { d:2, f:"5", q:"ABCD", s:"18:00", e:"19:00", t:"u10G-1 u10B-1 u11G-1 u11B-1 u12G-1 u12B-1" },
+  { d:2, f:"5", q:"AB",   s:"19:00", e:"20:30", t:"GK" },
+  { d:2, f:"5", q:"CD",   s:"19:00", e:"20:30", t:"u19G-3" },
+  { d:2, f:"5", q:"ABCD", s:"20:30", e:"22:30", t:"Trimmers Starters" },
+  // Woensdag
+  { d:3, f:"1", q:"ABCD", s:"14:00", e:"15:00", t:"u7" },
+  { d:3, f:"1", q:"ABCD", s:"15:00", e:"16:00", t:"u9" },
+  { d:3, f:"1", q:"AB",   s:"16:00", e:"17:00", t:"u14B-1" },
+  { d:3, f:"1", q:"CD",   s:"16:00", e:"17:00", t:"u14G-1" },
+  { d:3, f:"1", q:"AB",   s:"17:00", e:"18:00", t:"u16B-1" },
+  { d:3, f:"1", q:"CD",   s:"17:00", e:"18:00", t:"u16G-1" },
+  { d:3, f:"1", q:"ABCD", s:"20:30", e:"22:00", t:"Wedstrijd Trimmers / D5" },
+  { d:3, f:"2", q:"ABCD", s:"14:00", e:"15:00", t:"U8" },
+  { d:3, f:"2", q:"A",    s:"15:00", e:"16:00", t:"u10B-1" },
+  { d:3, f:"2", q:"B",    s:"15:00", e:"16:00", t:"u10G-1" },
+  { d:3, f:"2", q:"C",    s:"15:00", e:"16:00", t:"u10B-2" },
+  { d:3, f:"2", q:"D",    s:"15:00", e:"16:00", t:"u10B-3" },
+  { d:3, f:"2", q:"A",    s:"16:00", e:"17:00", t:"u11B-1" },
+  { d:3, f:"2", q:"B",    s:"16:00", e:"17:00", t:"u11B-2" },
+  { d:3, f:"2", q:"C",    s:"16:00", e:"17:00", t:"u11G-1" },
+  { d:3, f:"2", q:"D",    s:"16:00", e:"17:00", t:"u11G-2" },
+  { d:3, f:"2", q:"AB",   s:"17:00", e:"18:00", t:"u14G-2" },
+  { d:3, f:"2", q:"CD",   s:"17:00", e:"18:00", t:"u14G-3" },
+  { d:3, f:"2", q:"ABCD", s:"20:30", e:"22:00", t:"D2 & D3" },
+  { d:3, f:"5", q:"ABCD", s:"14:00", e:"15:00", t:"Olympiaantjes + Jespo" },
+  { d:3, f:"5", q:"A",    s:"15:00", e:"16:00", t:"u10G-2" },
+  { d:3, f:"5", q:"B",    s:"15:00", e:"16:00", t:"u10G-3" },
+  { d:3, f:"5", q:"C",    s:"15:00", e:"16:00", t:"S2H BB" },
+  { d:3, f:"5", q:"D",    s:"15:00", e:"16:00", t:"GK u11 and u12B" },
+  { d:3, f:"5", q:"A",    s:"16:00", e:"17:00", t:"u12B-1" },
+  { d:3, f:"5", q:"B",    s:"16:00", e:"17:00", t:"u12B-2" },
+  { d:3, f:"5", q:"CD",   s:"16:00", e:"17:00", t:"GK u10 and u12G" },
+  { d:3, f:"5", q:"A",    s:"17:00", e:"18:00", t:"u12G-1" },
+  { d:3, f:"5", q:"B",    s:"17:00", e:"18:00", t:"u12G-2" },
+  { d:3, f:"5", q:"C",    s:"17:00", e:"18:00", t:"u12G-3" },
+  { d:3, f:"5", q:"D",    s:"17:00", e:"18:00", t:"GK u14 u16" },
+  { d:3, f:"5", q:"AB",   s:"18:00", e:"19:30", t:"u14B-2" },
+  { d:3, f:"5", q:"CD",   s:"18:00", e:"19:30", t:"u14B-3" },
+  { d:3, f:"5", q:"ABCD", s:"20:30", e:"22:00", t:"H3 & D4" },
+  // Donderdag
+  { d:4, f:"1", q:"AB",   s:"17:30", e:"19:00", t:"u14B-1" },
+  { d:4, f:"1", q:"CD",   s:"17:30", e:"19:00", t:"u14G-1" },
+  { d:4, f:"1", q:"AB",   s:"19:00", e:"20:30", t:"u19B-1" },
+  { d:4, f:"1", q:"CD",   s:"19:00", e:"20:30", t:"u19G-1" },
+  { d:4, f:"1", q:"ABCD", s:"20:30", e:"22:00", t:"H1" },
+  { d:4, f:"2", q:"AB",   s:"18:00", e:"19:30", t:"u16G-2" },
+  { d:4, f:"2", q:"CD",   s:"18:00", e:"19:30", t:"u19G-2" },
+  { d:4, f:"2", q:"ABCD", s:"19:30", e:"21:00", t:"D-1" },
+  { d:4, f:"5", q:"AB",   s:"17:30", e:"19:00", t:"u16G-1" },
+  { d:4, f:"5", q:"CD",   s:"17:30", e:"19:00", t:"u16B-1" },
+  { d:4, f:"5", q:"CD",   s:"19:00", e:"20:30", t:"u19G-3" },
+  { d:4, f:"5", q:"ABCD", s:"20:30", e:"22:30", t:"H2 + Trimmers" },
+  // Vrijdag
+  { d:5, f:"1", q:"ABCD", s:"17:00", e:"18:00", t:"u7" },
+  { d:5, f:"1", q:"A",    s:"18:00", e:"19:00", t:"u12B-2" },
+  { d:5, f:"1", q:"C",    s:"18:00", e:"19:00", t:"u12G-2" },
+  { d:5, f:"1", q:"D",    s:"18:00", e:"19:00", t:"u12G-3" },
+  { d:5, f:"1", q:"AB",   s:"19:00", e:"20:30", t:"u14G-2" },
+  { d:5, f:"1", q:"CD",   s:"19:00", e:"20:30", t:"u14G-3" },
+  { d:5, f:"2", q:"ABCD", s:"17:00", e:"18:00", t:"U8" },
+  { d:5, f:"2", q:"A",    s:"18:00", e:"19:00", t:"u10B-1" },
+  { d:5, f:"2", q:"B",    s:"18:00", e:"19:00", t:"u10G-1" },
+  { d:5, f:"2", q:"C",    s:"18:00", e:"19:00", t:"u11G-1" },
+  { d:5, f:"2", q:"D",    s:"18:00", e:"19:00", t:"u11G-2" },
+  { d:5, f:"2", q:"AB",   s:"19:00", e:"20:30", t:"u14B-2" },
+  { d:5, f:"2", q:"CD",   s:"19:00", e:"20:30", t:"u14B-3" },
+  { d:5, f:"5", q:"ABCD", s:"17:00", e:"18:00", t:"U9" },
+  { d:5, f:"5", q:"A",    s:"18:00", e:"19:00", t:"u10G-2" },
+  { d:5, f:"5", q:"B",    s:"18:00", e:"19:00", t:"u10G-3" },
+  { d:5, f:"5", q:"C",    s:"18:00", e:"19:00", t:"u10B-2" },
+  { d:5, f:"5", q:"D",    s:"18:00", e:"19:00", t:"u10B-3" },
+  { d:5, f:"5", q:"A",    s:"19:00", e:"20:00", t:"u12B-1" },
+  { d:5, f:"5", q:"B",    s:"19:00", e:"20:00", t:"u12G-1" },
+  { d:5, f:"5", q:"C",    s:"19:00", e:"20:00", t:"u11B-1" },
+  { d:5, f:"5", q:"D",    s:"19:00", e:"20:00", t:"u11B-2" },
+];
+const QUARTER_SUBPATH = { ABCD: [], AB: ["A"], CD: ["B"], A: ["A","1"], B: ["A","2"], C: ["B","1"], D: ["B","2"] };
+
+function inTrainingSeason(dateStr) {
+  return TRAINING_SEASONS.some(([a, b]) => dateStr >= a && dateStr <= b);
+}
+// Colour class for a training title (mirrors ageClass for teams).
+function trainingAge(title) {
+  const t = title.trim();
+  if (/^u\d+/i.test(t)) return ageClass({ team: t.toUpperCase() });
+  if (/^GK/i.test(t)) return "gk";
+  if (/^[DH]-?\d/i.test(t)) return "senior";
+  if (/junior/i.test(t)) return "junior";
+  if (/gents/i.test(t)) return "gent";
+  if (/trimmers/i.test(t)) return "trim";
+  if (/olympiaantjes/i.test(t)) return "u7";
+  return "other";
+}
+// Training entries for one date, in the same shape as fieldGames so the field
+// views can mix them with matches. Empty outside the outdoor windows and on weekends.
+function trainingsOnDate(dateStr) {
+  if (!inTrainingSeason(dateStr)) return [];
+  const dow = new Date(dateStr + "T00:00:00").getDay();   // 0=Sun … 6=Sat
+  return TRAINING_SCHEDULE.filter(x => x.d === dow).map(x => ({
+    kind: "training",
+    date: dateStr,
+    time: x.s,
+    end:  x.e,
+    field: { fieldCode: x.f, subpath: QUARTER_SUBPATH[x.q] || [] },
+    quarters: x.q,
+    title: x.t,
+    age: trainingAge(x.t),
+    home: { club: "Olympia", team: x.t.split(/\s+/)[0] },
+  }));
+}
+function ageOf(g) { return g.age || ageClass(g.home); }
+function itemEnd(g) { return g.end || addMin(g.time, 60); }
+function addMin(hhmm, n) {
+  const m = toMin(hhmm) + n;
+  return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+}
+function rectsOverlap(a, b) {
+  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+}
+// Matches + trainings for one date. A training that collides with a match on the same
+// pitch area is kept but flagged (conflict) — the match takes the field.
+function itemsOnDate(dateStr) {
+  const matches = gamesOnDate(state.fieldGames, dateStr);
+  const trainings = trainingsOnDate(dateStr);
+  for (const t of trainings) {
+    const tr = subpathToRectPitch(t.field.subpath);
+    t.conflict = matches.some(m =>
+      m.field.fieldCode === t.field.fieldCode &&
+      toMin(m.time) < toMin(t.end) && toMin(t.time) < toMin(itemEnd(m)) &&
+      rectsOverlap(tr, subpathToRectPitch(m.field.subpath)));
+  }
+  return [...matches, ...trainings].sort((a, b) => a.time.localeCompare(b.time));
+}
+function countLabel(items) {
+  const m = items.filter(g => g.kind !== "training").length;
+  const t = items.filter(g => g.kind === "training").length;
+  const parts = [];
+  if (m || !t) parts.push(`${m} wedstrijd${m === 1 ? "" : "en"}`);
+  if (t) parts.push(`${t} training${t === 1 ? "" : "en"}`);
+  return parts.join(" · ");
+}
 
 // ----- Load embedded data -----
 function loadEmbedded() {
@@ -908,6 +1115,7 @@ function loadEmbedded() {
   // Older schema (single "games" array of home games) — fall back.
   const rawField = json.fieldGames || json.games || [];
   const fieldGames = rawField.map(g => ({
+    kind: "match",
     date: g.date,
     time: g.time,
     field: { fieldCode: g.fieldCode, subpath: asArr(g.subpath) },
@@ -1161,7 +1369,7 @@ function renderTimeline(games) {
 function toMin(hhmm) { const [h,m] = hhmm.split(":").map(Number); return h*60+m; }
 function isActiveAt(game, slot) {
   const g = toMin(game.time), s = toMin(slot);
-  return s >= g && s < g + 60;
+  return s >= g && s < toMin(itemEnd(game));
 }
 // Font sizing by subdivision depth: full field gets huge text; subdivided cells smaller.
 function fontForDepth(depth) {
@@ -1204,7 +1412,7 @@ function renderClubMapHtml(games, highlightedField) {
 // Mini-map always sits on top as a wayfinding reference.
 function renderVeldbezetting() {
   const main = document.getElementById("main");
-  const games = gamesOnDate(state.fieldGames, state.date);
+  const games = itemsOnDate(state.date);   // matches + trainings, same shape
   const isMobile = window.matchMedia("(max-width: 720px)").matches;
 
   // Modes: "day" (Dagplanning — full-day timeline) | "slot" (Veldverdeling — pitch view per slot)
@@ -1235,7 +1443,7 @@ function renderVeldbezetting() {
 
   if (games.length === 0) {
     html += `</div>`;
-    html += `<div class="empty">Geen wedstrijden op deze dag.</div>`;
+    html += `<div class="empty">Geen wedstrijden of trainingen op deze dag.</div>`;
     main.innerHTML = html;
     wireVbInteractions(main);
     return;
@@ -1254,9 +1462,8 @@ function renderVeldbezetting() {
     // Desktop Dagplanning shows all 3 fields side-by-side — no dropdown needed.
     html += `<select id="vb-field-select">`;
     for (const f of FIELDS) {
-      const n = games.filter(g => g.field.fieldCode === f.code).length;
       const sel = f.code === state.selectedField ? " selected" : "";
-      html += `<option value="${f.code}"${sel}>${escape(f.label)} — ${n} wedstrijd${n===1?"":"en"}</option>`;
+      html += `<option value="${f.code}"${sel}>${escape(f.label)} — ${countLabel(games.filter(g => g.field.fieldCode === f.code))}</option>`;
     }
     html += `</select>`;
   }
@@ -1307,10 +1514,12 @@ function renderAllFieldsAtSlot(games, activeSlot) {
     }
     const f = cell;
     const activeGames = games.filter(g => isActiveAt(g, activeSlot) && g.field.fieldCode === f.code);
-    const cells = planFieldSubcells(activeGames.map(g => ({ subpath: g.field.subpath, game: g })));
+    // On the pitch drawing a conflicting training would sit under the match — draw only the match.
+    const drawn = activeGames.filter(g => !(g.kind === "training" && g.conflict));
+    const cells = planFieldSubcells(drawn.map(g => ({ subpath: g.field.subpath, game: g })));
     const idle = activeGames.length === 0;
     html += `<div class="field-card ${idle?"idle":""}" style="${gridStyle}">
-      <h3>${f.label} <span class="meta">${activeGames.length} wedstrijd${activeGames.length===1?"":"en"}</span></h3>
+      <h3>${f.label} <span class="meta">${countLabel(activeGames)}</span></h3>
       <div class="pitch">${pitchMarkingsSvg()}`;
     for (const c of cells) {
       const r = c.rect;
@@ -1318,6 +1527,19 @@ function renderAllFieldsAtSlot(games, activeSlot) {
       if (c.empty) {
         html += `<div class="subcell empty" style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;">
           <span class="label empty-lbl">${subLabel}</span></div>`;
+      } else if (c.game.game.kind === "training") {
+        const g = c.game.game;
+        const depth = g.field.subpath.length;
+        const fs = fontForDepth(depth);
+        html += `<div class="subcell filled training age-${ageOf(g)}"
+            style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;font-size:${fs}px;">
+          <span class="label">${escape(g.quarters === "ABCD" ? "vol veld" : g.quarters)}</span>
+          <span class="kind-tag">training</span>
+          <div class="game-mini">
+            <span class="team">${escape(g.title)}</span>
+            ${depth < 2 ? `<span class="div">${g.time}–${g.end}</span>` : ''}
+          </div>
+        </div>`;
       } else {
         const g = c.game.game;
         const ageCls = `age-${ageClass(g.home)}`;
@@ -1339,10 +1561,21 @@ function renderAllFieldsAtSlot(games, activeSlot) {
     }
     html += `</div>`;
     if (activeGames.length === 0) {
-      html += `<div class="games-list">Geen wedstrijd in dit tijdslot</div>`;
+      html += `<div class="games-list">Geen wedstrijd of training in dit tijdslot</div>`;
     } else {
       html += `<div class="games-list">`;
       activeGames.forEach(g => {
+        if (g.kind === "training") {
+          html += `<div class="row training">
+            <span class="t">${g.time}</span>
+            <span class="s">
+              <span class="match-teams">${escape(g.title)}</span>
+              <span class="match-div">Training · tot ${g.end}${g.conflict ? ' · <span class="conflict-tag">⚠ wedstrijd op dit veld</span>' : ''}</span>
+            </span>
+            <span class="sub-tag">${escape(g.quarters === "ABCD" ? "vol veld" : g.quarters)}</span>
+          </div>`;
+          return;
+        }
         const sp = g.field.subpath.length ? g.field.subpath.join("") : "vol veld";
         const carry = g.time !== activeSlot;
         html += `<div class="row${carry?' carry':''}">
@@ -1371,8 +1604,7 @@ function renderTimelineFields(games, fieldsArr, isMobile) {
   let html = `<div class="timeline-wrap" style="grid-template-rows: auto ${totalH}px; grid-template-columns: ${axisW}px repeat(${fieldsArr.length}, 1fr);">`;
   html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
   for (const f of fieldsArr) {
-    const n = games.filter(g => g.field.fieldCode === f.code).length;
-    html += `<div class="col-header">${f.label} <span class="count">${n} wedstrijden</span></div>`;
+    html += `<div class="col-header">${f.label} <span class="count">${countLabel(games.filter(g => g.field.fieldCode === f.code))}</span></div>`;
   }
   html += `<div class="time-axis" style="position:relative; height:${totalH}px;">`;
   for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
@@ -1387,39 +1619,35 @@ function renderTimelineFields(games, fieldsArr, isMobile) {
       html += `<div class="hour-line" style="top:${top}px"></div>`;
     }
     const fieldGames = games.filter(g => g.field.fieldCode === f.code);
-    const byTime = new Map();
-    fieldGames.forEach(g => { if (!byTime.has(g.time)) byTime.set(g.time, []); byTime.get(g.time).push(g); });
-    for (const [time, list] of byTime) {
-      const [hh, mm] = time.split(":").map(Number);
-      const top = ((hh + mm/60) - TIMELINE_START_H) * hourHeight;
-      const height = hourHeight * 1.0 - 4;
-      const cols = new Map();
-      list.forEach(g => {
-        const r = g.field.subpath.length ? subpathToRectTimeline(g.field.subpath) : { x:0, y:0, w:100, h:100 };
-        const key = `${r.x}|${r.w}`;
-        if (!cols.has(key)) cols.set(key, { x: r.x, w: r.w, items: [] });
-        cols.get(key).items.push({ g, r });
-      });
-      for (const col of cols.values()) {
-        col.items.forEach(({ g, r }) => {
-          const subTop    = top + (r.y / 100) * height;
-          const subHeight = (r.h / 100) * height - 2;
-          const ageCls = `age-${ageClass(g.home)}`;
-          const subLabel = g.field.subpath.length ? g.field.subpath.join("") : "";
-          const cramped = subHeight < 80 || g.field.subpath.length >= 3;
-          const showDiv = subHeight >= 70;
-          html += `<div class="game ${ageCls}${cramped ? ' cramped' : ''}" style="
-              top:${subTop}px; height:${subHeight}px;
-              left: calc(${col.x}% + 4px);
-              width: calc(${col.w}% - 8px);
-              ">
-            <div class="time">${time}${subLabel?` <span class="sub">${subLabel}</span>`:""}</div>
-            <div class="teams"><span class="team-link" data-team="${escape(g.home.team)}">${escape(g.home.team)}</span> – ${escape(g.away.club)} ${escape(g.away.team)}</div>
-            ${showDiv ? `<div class="div">${escape(cleanDivision(g.division))}</div>` : ``}
-          </div>`;
-        });
+    // Each block is positioned independently: top from its start, height from its own
+    // duration (matches = 60 min, trainings = sheet end time), x/width from the subpath.
+    fieldGames.forEach(g => {
+      const time = g.time;
+      const top = (toMin(time) / 60 - TIMELINE_START_H) * hourHeight;
+      const height = ((toMin(itemEnd(g)) - toMin(time)) / 60) * hourHeight - 4;
+      const r = g.field.subpath.length ? subpathToRectTimeline(g.field.subpath) : { x:0, y:0, w:100, h:100 };
+      const subTop    = top + (r.y / 100) * height;
+      const subHeight = (r.h / 100) * height - 2;
+      const ageCls = `age-${ageOf(g)}`;
+      const cramped = subHeight < 80 || g.field.subpath.length >= 3;
+      const showDiv = subHeight >= 70;
+      const pos = `top:${subTop}px; height:${subHeight}px; left: calc(${r.x}% + 4px); width: calc(${r.w}% - 8px);`;
+      if (g.kind === "training") {
+        const subLabel = g.quarters === "ABCD" ? "" : g.quarters;
+        html += `<div class="game training ${ageCls}${cramped ? ' cramped' : ''}${g.conflict ? ' conflict' : ''}" style="${pos}"
+              title="Training ${escape(g.title)} ${time}–${g.end}${g.conflict ? ' — wedstrijd op dit veld' : ''}">
+          <div class="time">${time}–${g.end}${subLabel?` <span class="sub">${subLabel}</span>`:""}<span class="kind">${g.conflict ? '⚠ training' : 'training'}</span></div>
+          <div class="teams">${escape(g.title)}</div>
+        </div>`;
+        return;
       }
-    }
+      const subLabel = g.field.subpath.length ? g.field.subpath.join("") : "";
+      html += `<div class="game match ${ageCls}${cramped ? ' cramped' : ''}" style="${pos}">
+        <div class="time">${time}${subLabel?` <span class="sub">${subLabel}</span>`:""}</div>
+        <div class="teams"><span class="team-link" data-team="${escape(g.home.team)}">${escape(g.home.team)}</span> – ${escape(g.away.club)} ${escape(g.away.team)}</div>
+        ${showDiv ? `<div class="div">${escape(cleanDivision(g.division))}</div>` : ``}
+      </div>`;
+    });
     html += `</div>`;
   }
   html += `</div>`;
@@ -1589,11 +1817,11 @@ function renderLegend() {
     ["U7","var(--u7)"],["U8","var(--u8)"],["U9","var(--u9)"],["U10","var(--u10)"],
     ["U11","var(--u11)"],["U12","var(--u12)"],["U14","var(--u14)"],["U16","var(--u16)"],
     ["U19","var(--u19)"],["Senior (D/H)","var(--senior)"],["Gentlemen","var(--gent)"],
-    ["Junior","var(--junior)"],["Trimmers","var(--trim)"],
+    ["Junior","var(--junior)"],["Trimmers","var(--trim)"],["Keepers","var(--gk)"],["Ander","var(--other)"],
   ];
   return `<div class="legend">${items.map(([n,c]) =>
     `<span class="chip"><span class="sw" style="background:${c}"></span>${n}</span>`
-  ).join("")}</div>`;
+  ).join("")}<span class="chip"><span class="sw dashed"></span>Training (gestreept)</span></div>`;
 }
 
 function shortDiv(div) {
