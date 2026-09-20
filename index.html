@@ -560,31 +560,37 @@
   .week-controls .week-label { flex:1; display:flex; flex-direction:column; gap:2px; }
   .week-controls .week-range { font-size:17px; font-weight:600; letter-spacing:.2px; }
   .week-controls .week-meta { color:var(--muted); font-size:12px; }
-  /* Week stats strip — 4 tiles below the week controls (played + W/D/L percentages). */
-  .week-stats {
-    display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;
-    max-width:900px; margin:0 auto 18px;
+  /* ======== STATISTIEK ======== */
+  .stats { max-width:900px; margin:0 auto; }
+  .stats-filters { display:flex; flex-wrap:wrap; gap:10px 12px; align-items:center; margin-bottom:22px; }
+  .stats-filters select, .stats-filters input[type=date] {
+    background:var(--panel2); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:7px 10px; font:inherit; font-size:14px; font-variant-numeric:tabular-nums;
   }
-  .week-stats .stat {
-    background:var(--panel); border:1px solid var(--line); border-radius:10px;
-    padding:14px 16px;
-  }
-  .week-stats .stat-value {
-    font-size:26px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums;
-    letter-spacing:.5px;
-  }
-  .week-stats .stat-label {
-    font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px;
-    margin-top:6px;
-  }
-  .week-stats .stat-label .stat-count { color:var(--text); font-weight:600; }
-  .week-stats .stat.played .stat-value { color:var(--text); }
-  .week-stats .stat.win   { border-color:rgba(122,223,176,.35); }
-  .week-stats .stat.win   .stat-value { color:#aef0c8; }
-  .week-stats .stat.draw  { border-color:rgba(255,184,107,.35); }
-  .week-stats .stat.draw  .stat-value { color:#ffd29a; }
-  .week-stats .stat.loss  { border-color:rgba(255,122,144,.30); }
-  .week-stats .stat.loss  .stat-value { color:#ffb3c0; }
+  .stats-filters .dash { color:var(--muted); }
+  .stats-filters .break { flex-basis:100%; height:0; }
+  .stats-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px; }
+  .stats-head .big { font-size:40px; font-weight:700; letter-spacing:-.02em; line-height:1; font-variant-numeric:tabular-nums; color:#aef0c8; }
+  .stats-head .big small { font-size:14px; font-weight:500; color:var(--muted); letter-spacing:0; margin-left:6px; }
+  .stats-head .n { color:var(--muted); font-size:14px; font-variant-numeric:tabular-nums; }
+  .wdl { display:flex; height:30px; border-radius:8px; overflow:hidden; background:var(--panel2); font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .wdl span { display:flex; align-items:center; justify-content:center; min-width:0; overflow:hidden; white-space:nowrap; }
+  .wdl .w { background:rgba(122,223,176,.30); color:#aef0c8; }
+  .wdl .d { background:rgba(255,184,107,.26); color:#ffd29a; }
+  .wdl .l { background:rgba(255,122,144,.26); color:#ffb3c0; }
+  .wdl.mini { height:10px; border-radius:5px; }
+  .wdl-key { display:flex; gap:16px; margin:8px 0 26px; color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
+  .wdl-key b { color:var(--text); font-weight:600; }
+  table.stats-table { width:100%; border-collapse:collapse; font-size:14px; }
+  table.stats-table th { text-align:left; color:var(--muted); font-weight:600; font-size:11px; letter-spacing:.5px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--line); }
+  table.stats-table td { padding:9px 8px; border-bottom:1px solid var(--line); }
+  table.stats-table tr:last-child td { border-bottom:none; }
+  table.stats-table .num { text-align:right; font-variant-numeric:tabular-nums; width:40px; }
+  table.stats-table .pct { width:52px; font-weight:700; }
+  table.stats-table .barcell { width:34%; }
+  table.stats-table tbody tr { cursor:pointer; }
+  table.stats-table tbody tr:hover td { background:var(--panel); }
+  .stats-note { color:var(--muted); font-size:12px; margin-top:14px; }
 
   .week-day { max-width:1100px; margin-bottom:18px; }
   .week-day h3 {
@@ -789,9 +795,11 @@
     .week-controls { padding:10px 12px; gap:8px; }
     .week-controls .week-range { font-size:14px; }
     .week-controls .week-meta  { font-size:11px; }
-    .week-stats { grid-template-columns: 1fr 1fr; gap:8px; }
-    .week-stats .stat { padding:10px 12px; }
-    .week-stats .stat-value { font-size:22px; }
+    .stats-head .big { font-size:34px; }
+    .stats-filters { gap:8px; margin-bottom:18px; }
+    .stats-filters .view-toggle { flex:1 1 100%; }
+    table.stats-table .wdlnum { display:none; }
+    table.stats-table .barcell { width:30%; }
     .week-day h3 { font-size:13px; }
 
     /* Resultaten mobile: hide division line (kept on desktop) + tighter rows */
@@ -887,6 +895,7 @@
   <div class="tabs">
     <button data-view="layout" class="active">Veldbezetting</button>
     <button data-view="week">Resultaten</button>
+    <button data-view="stats">Statistiek</button>
     <button data-view="teams">Teams</button>
   </div>
   <span id="status" class="status"></span>
@@ -1960,18 +1969,6 @@ function renderWeek() {
   const today = fmtDateAPI(new Date());
   const isCurrent = state.weekStart === fmtDateAPI(mondayOf(new Date()));
 
-  // Aggregate W/V/G across all played games in this week
-  let played = 0, wins = 0, draws = 0, losses = 0;
-  for (const r of past) {
-    const o = computeOutcome(r);
-    if (!o.cls) continue;     // no score → skip
-    played++;
-    if (o.cls === "win")  wins++;
-    else if (o.cls === "draw") draws++;
-    else if (o.cls === "loss") losses++;
-  }
-  const pct = n => played > 0 ? Math.round(n / played * 100) : 0;
-
   let html = `<div class="week-controls">
     <button id="week-prev" title="Vorige week">◀</button>
     <div class="week-label">
@@ -1981,24 +1978,7 @@ function renderWeek() {
     <button id="week-next" title="Volgende week">▶</button>
     <button id="week-today" ${isCurrent ? "disabled" : ""}>Deze week</button>
   </div>
-  <div class="week-stats" aria-label="Weekstatistieken">
-    <div class="stat played">
-      <div class="stat-value">${played}</div>
-      <div class="stat-label">Gespeeld</div>
-    </div>
-    <div class="stat win">
-      <div class="stat-value">${pct(wins)}%</div>
-      <div class="stat-label">Gewonnen <span class="stat-count">(${wins})</span></div>
-    </div>
-    <div class="stat draw">
-      <div class="stat-value">${pct(draws)}%</div>
-      <div class="stat-label">Gelijk <span class="stat-count">(${draws})</span></div>
-    </div>
-    <div class="stat loss">
-      <div class="stat-value">${pct(losses)}%</div>
-      <div class="stat-label">Verloren <span class="stat-count">(${losses})</span></div>
-    </div>
-  </div>`;
+`;
 
   if (all.length === 0) {
     html += `<div class="empty">Geen wedstrijden deze week.</div>`;
@@ -2048,6 +2028,140 @@ function renderWeek() {
     render();
   });
 }
+// ======== STATISTIEK ========
+// W/G/V over the played results, filtered by period and by group.
+//   period: whole season | one speeldag (Mon–Sun week) | free date range
+//   cat:    all | youth (U-teams) | adult (D, H, G, JL, T)
+//   sex:    all | B (boys, heren, gentlemen) | G (girls, dames, junior ladies) — Trimmers are mixed
+//   age:    all | U10, U12, … | D, H, G, JL, T
+function statsGroup(code) {
+  const m = (code || "").match(/^U(\d+)([BG])/i);
+  if (m) return { age:"U"+m[1], sex:m[2].toUpperCase(), youth:true, key:"U"+m[1]+m[2].toUpperCase(),
+                  label:`U${m[1]} ${m[2].toUpperCase()==="B"?"Boys":"Girls"}` };
+  const c = teamCategory(code);
+  const sex = (c==="H"||c==="G"||c==="JM") ? "B" : (c==="D"||c==="JL") ? "G" : "";
+  return { age:c, sex, youth:false, key:c, label:(TEAM_GROUP_LABEL[c]||c).replace(" (senior)","") };
+}
+function tally(list) {
+  const t = { n:0, w:0, d:0, l:0 };
+  for (const r of list) {
+    const o = computeOutcome(r); if (!o.cls) continue;
+    t.n++; if (o.cls==="win") t.w++; else if (o.cls==="draw") t.d++; else t.l++;
+  }
+  return t;
+}
+const pctOf = (x, n) => n ? Math.round(x / n * 100) : 0;
+function wdlBar(t, mini) {
+  if (!t.n) return `<div class="wdl ${mini?'mini':''}"></div>`;
+  const seg = (cls, x) => x ? `<span class="${cls}" style="flex:${x} 1 0">${mini ? "" : pctOf(x,t.n)+"%"}</span>` : "";
+  return `<div class="wdl ${mini?'mini':''}">${seg("w",t.w)}${seg("d",t.d)}${seg("l",t.l)}</div>`;
+}
+function shortRange(a, b) {
+  const A = new Date(a+"T00:00:00"), B = new Date(b+"T00:00:00");
+  if (a === b) return `${A.getDate()} ${MONTHS_NL[A.getMonth()]}`;
+  if (A.getMonth() === B.getMonth()) return `${A.getDate()}–${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
+  return `${A.getDate()} ${MONTHS_NL[A.getMonth()]} – ${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
+}
+function renderStats() {
+  const main = document.getElementById("main");
+  const all = (state.results || []).filter(r => computeOutcome(r).cls);
+  if (!state.stats) state.stats = { period:"season", week:null, from:"", to:"", cat:"all", sex:"all", age:"all" };
+  const s = state.stats;
+
+  // Speeldagen = weeks that have at least one played result, newest first
+  const weeks = new Map();
+  for (const r of all) {
+    const k = fmtDateAPI(mondayOf(new Date(r.date+"T00:00:00")));
+    const w = weeks.get(k) || { min:r.date, max:r.date };
+    if (r.date < w.min) w.min = r.date; if (r.date > w.max) w.max = r.date;
+    weeks.set(k, w);
+  }
+  const weekKeys = [...weeks.keys()].sort().reverse();
+  if (!s.week || !weeks.has(s.week)) s.week = weekKeys[0] || null;
+  const dates = all.map(r => r.date).sort();
+  if (!s.from) s.from = dates[0] || ""; if (!s.to) s.to = dates[dates.length-1] || "";
+
+  // ---- filter ----
+  let list = all;
+  if (s.period === "week" && s.week) list = list.filter(r => fmtDateAPI(mondayOf(new Date(r.date+"T00:00:00"))) === s.week);
+  if (s.period === "range") list = list.filter(r => (!s.from || r.date >= s.from) && (!s.to || r.date <= s.to));
+  if (s.cat !== "all") list = list.filter(r => statsGroup(r.olympiaTeam).youth === (s.cat === "youth"));
+  if (s.sex !== "all") list = list.filter(r => statsGroup(r.olympiaTeam).sex === s.sex);
+  // Age options follow the other filters, so you never pick an empty one.
+  const ageSet = [...new Set(list.map(r => statsGroup(r.olympiaTeam).age))]
+    .sort((a,b) => TEAM_GROUP_ORDER.indexOf(a) - TEAM_GROUP_ORDER.indexOf(b));
+  if (s.age !== "all" && !ageSet.includes(s.age)) s.age = "all";
+  if (s.age !== "all") list = list.filter(r => statsGroup(r.olympiaTeam).age === s.age);
+
+  const t = tally(list);
+  const tog = (name, val, label) => `<button data-sf="${name}" data-sv="${val}" class="${s[name]===val?'active':''}">${label}</button>`;
+  let html = `<div class="stats"><div class="stats-filters">
+    <div class="view-toggle">${tog("period","season","Seizoen")}${tog("period","week","Speeldag")}${tog("period","range","Periode")}</div>`;
+  if (s.period === "week") html += `<select id="st-week" aria-label="Speeldag">${weekKeys.map(k =>
+      `<option value="${k}"${k===s.week?" selected":""}>${shortRange(weeks.get(k).min, weeks.get(k).max)}</option>`).join("")}</select>`;
+  if (s.period === "range") html += `<input type="date" id="st-from" value="${s.from}" aria-label="Van"><span class="dash">–</span><input type="date" id="st-to" value="${s.to}" aria-label="Tot">`;
+  html += `<span class="break"></span>
+    <div class="view-toggle">${tog("cat","all","Alle")}${tog("cat","youth","Jeugd")}${tog("cat","adult","Volwassenen")}</div>
+    <div class="view-toggle">${tog("sex","all","Alle")}${tog("sex","B","Boys")}${tog("sex","G","Girls")}</div>
+    <select id="st-age" aria-label="Leeftijdsgroep"><option value="all">Alle leeftijden</option>${ageSet.map(a =>
+      `<option value="${a}"${a===s.age?" selected":""}>${escape((TEAM_GROUP_LABEL[a]||a).replace(" (senior)",""))}</option>`).join("")}</select>
+  </div>`;
+
+  if (!t.n) {
+    html += `<div class="empty">Geen gespeelde wedstrijden voor deze selectie.</div></div>`;
+  } else {
+    html += `<div class="stats-head"><div class="big">${pctOf(t.w,t.n)}%<small>gewonnen</small></div><div class="n">${t.n} wedstrijd${t.n===1?"":"en"}</div></div>
+      ${wdlBar(t)}
+      <div class="wdl-key"><span><b>${t.w}</b> gewonnen</span><span><b>${t.d}</b> gelijk</span><span><b>${t.l}</b> verloren</span></div>`;
+
+    // Breakdown: by group, or by team once a single group is selected
+    const groupKeys = new Set(list.map(r => statsGroup(r.olympiaTeam).key));
+    const byTeam = groupKeys.size === 1;
+    const rows = new Map();
+    for (const r of list) {
+      const g = statsGroup(r.olympiaTeam);
+      const k = byTeam ? r.olympiaTeam : g.key;
+      if (!rows.has(k)) rows.set(k, { key:k, label: byTeam ? r.olympiaTeam : g.label, g, games:[] });
+      rows.get(k).games.push(r);
+    }
+    const sorted = [...rows.values()].sort((a,b) => teamComparator({code: byTeam?a.key:a.games[0].olympiaTeam}, {code: byTeam?b.key:b.games[0].olympiaTeam}) || a.label.localeCompare(b.label));
+    if (sorted.length > 1 || byTeam) {
+      html += `<table class="stats-table"><thead><tr><th>${byTeam?"Team":"Groep"}</th><th class="num">#</th>
+        <th class="num wdlnum">W</th><th class="num wdlnum">G</th><th class="num wdlnum">V</th><th></th><th class="num pct">W%</th></tr></thead><tbody>`;
+      for (const row of sorted) {
+        const x = tally(row.games);
+        html += `<tr ${byTeam ? `data-st-team="${escape(row.key)}"` : `data-st-age="${row.g.age}" data-st-sex="${row.g.sex}"`}>
+          <td>${escape(row.label)}</td><td class="num">${x.n}</td>
+          <td class="num wdlnum">${x.w}</td><td class="num wdlnum">${x.d}</td><td class="num wdlnum">${x.l}</td>
+          <td class="barcell">${wdlBar(x, true)}</td><td class="num pct">${pctOf(x.w,x.n)}%</td></tr>`;
+      }
+      html += `</tbody></table>`;
+    }
+    // Results without a filled-in score, under the same filters
+    const skipped = (state.results || []).filter(r => {
+      if (computeOutcome(r).cls) return false;
+      if (s.period === "week" && fmtDateAPI(mondayOf(new Date(r.date+"T00:00:00"))) !== s.week) return false;
+      if (s.period === "range" && ((s.from && r.date < s.from) || (s.to && r.date > s.to))) return false;
+      const g = statsGroup(r.olympiaTeam);
+      if (s.cat !== "all" && g.youth !== (s.cat === "youth")) return false;
+      if (s.sex !== "all" && g.sex !== s.sex) return false;
+      if (s.age !== "all" && g.age !== s.age) return false;
+      return true;
+    }).length;
+    if (skipped) html += `<div class="stats-note">${skipped} wedstrijd${skipped===1?"":"en"} zonder ingevulde score niet meegeteld.</div>`;
+    html += `</div>`;
+  }
+  main.innerHTML = html;
+
+  main.querySelectorAll("[data-sf]").forEach(b => b.addEventListener("click", () => { s[b.dataset.sf] = b.dataset.sv; render(); }));
+  const on = (id, fn) => { const el = main.querySelector(id); if (el) el.addEventListener("change", e => { fn(e.target.value); render(); }); };
+  on("#st-week", v => s.week = v); on("#st-from", v => s.from = v); on("#st-to", v => s.to = v); on("#st-age", v => s.age = v);
+  main.querySelectorAll("tr[data-st-age]").forEach(tr => tr.addEventListener("click", () => {
+    s.age = tr.dataset.stAge; s.sex = tr.dataset.stSex || "all"; render();
+  }));
+  main.querySelectorAll("tr[data-st-team]").forEach(tr => tr.addEventListener("click", () => navigateToTeam(tr.dataset.stTeam)));
+}
+
 function shiftWeek(deltaDays) {
   const d = new Date(state.weekStart + "T00:00:00");
   d.setDate(d.getDate() + deltaDays);
@@ -2344,6 +2458,7 @@ function render() {
   renderFavoriteChip();
   if (state.view === "teams") { renderTeams(); return; }
   if (state.view === "week")  { renderWeek();  return; }
+  if (state.view === "stats") { renderStats(); return; }
   // "layout" tab now means Veldbezetting (mini-map + slider + timeline)
   renderVeldbezetting();
 }
