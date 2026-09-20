@@ -882,9 +882,9 @@
   <input id="date" type="date" />
   <button id="next" title="Volgende dag">▶</button>
   <div class="tabs">
-    <button data-view="layout">Veldbezetting</button>
+    <button data-view="layout" class="active">Veldbezetting</button>
     <button data-view="week">Resultaten</button>
-    <button data-view="teams" class="active">Teams</button>
+    <button data-view="teams">Teams</button>
   </div>
   <span id="status" class="status"></span>
 </header>
@@ -1498,7 +1498,6 @@ function renderVeldbezetting() {
     const fieldsToShow = isMobile ? [FIELDS.find(f => f.code === state.selectedField)] : FIELDS;
     html += renderTimelineFields(games, fieldsToShow, isMobile);
   }
-  html += renderLegend();
   main.innerHTML = html;
   wireVbInteractions(main);
 }
@@ -2323,7 +2322,7 @@ function renderTeams() {
 const FAV_TEAM_KEY = "olympia_fav_team";
 const state = {
   date: fmtDateAPI(new Date()),
-  view: "teams",         // landing page
+  view: "layout",        // landing page = Veldbezetting
   fieldGames: [],
   teamGames: [],
   results: [],
