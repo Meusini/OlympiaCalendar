@@ -581,21 +581,22 @@
   .wdl.mini { height:10px; border-radius:5px; }
   .wdl-key { display:flex; gap:16px; margin:8px 0 26px; color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
   .wdl-key b { color:var(--text); font-weight:600; }
-  table.stats-table { width:100%; border-collapse:collapse; font-size:14px; }
-  table.stats-table th { text-align:left; color:var(--muted); font-weight:600; font-size:11px; letter-spacing:.5px; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--line); }
-  table.stats-table td { padding:9px 8px; border-bottom:1px solid var(--line); }
-  table.stats-table tr:last-child td { border-bottom:none; }
-  table.stats-table .num { text-align:right; font-variant-numeric:tabular-nums; width:40px; }
-  table.stats-table .pct { width:52px; font-weight:700; }
-  table.stats-table .barcell { width:34%; }
-  table.stats-table tbody tr { cursor:pointer; }
-  table.stats-table tbody tr:hover td { background:var(--panel); }
+  /* One row per club / group / team: rank · name · full W/G/V bar · matches */
+  .srows { list-style:none; margin:0; padding:0; }
+  .srow {
+    display:grid; grid-template-columns:26px 150px minmax(0,1fr) 34px; gap:10px; align-items:center;
+    padding:7px 0; border-bottom:1px solid var(--line); font-size:14px;
+  }
+  .srow:last-child { border-bottom:none; }
+  .srow.norank { grid-template-columns:150px minmax(0,1fr) 34px; }
+  .srow .rk { color:var(--muted); font-variant-numeric:tabular-nums; }
+  .srow .nm { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .srow .ct { text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .srow .wdl { height:22px; border-radius:6px; font-size:12px; }
+  .srow.click { cursor:pointer; }
+  .srow.click:hover .nm { color:var(--accent); }
+  .srow.ours .rk, .srow.ours .nm, .srow.ours .ct { color:var(--accent); font-weight:700; }
   .stats-note { color:var(--muted); font-size:12px; margin-top:14px; }
-  table.stats-table.static tbody tr { cursor:default; }
-  table.stats-table.static tbody tr:hover td { background:transparent; }
-  table.stats-table .rank { width:28px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  table.stats-table tr.ours td { color:var(--accent); font-weight:700; }
-  table.stats-table tr.ours td.rank { color:var(--accent); }
 
   .week-day { max-width:1100px; margin-bottom:18px; }
   .week-day h3 {
@@ -803,8 +804,10 @@
     .stats-head .big { font-size:34px; }
     .stats-filters { gap:8px; margin-bottom:18px; }
     .stats-filters .view-toggle { flex:1 1 100%; }
-    table.stats-table .wdlnum { display:none; }
-    table.stats-table .barcell { width:30%; }
+    /* Phone: name and count on one line, the bar full width underneath */
+    .srow { grid-template-columns:22px minmax(0,1fr) auto; grid-template-areas:"rk nm ct" "bar bar bar"; gap:4px 8px; padding:9px 0; }
+    .srow.norank { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"nm ct" "bar bar"; }
+    .srow .rk { grid-area:rk; } .srow .nm { grid-area:nm; } .srow .ct { grid-area:ct; } .srow .wdl { grid-area:bar; }
     .week-day h3 { font-size:13px; }
 
     /* Resultaten mobile: hide division line (kept on desktop) + tighter rows */
@@ -2058,8 +2061,14 @@ function tally(list) {
 const pctOf = (x, n) => n ? Math.round(x / n * 100) : 0;
 function wdlBar(t, mini) {
   if (!t.n) return `<div class="wdl ${mini?'mini':''}"></div>`;
-  const seg = (cls, x) => x ? `<span class="${cls}" style="flex:${x} 1 0">${mini ? "" : pctOf(x,t.n)+"%"}</span>` : "";
+  // A label needs room: below 8% the segment is drawn without its number.
+  const seg = (cls, x) => x ? `<span class="${cls}" style="flex:${x} 1 0">${mini || pctOf(x,t.n) < 8 ? "" : pctOf(x,t.n)+"%"}</span>` : "";
   return `<div class="wdl ${mini?'mini':''}">${seg("w",t.w)}${seg("d",t.d)}${seg("l",t.l)}</div>`;
+}
+// rank (optional) · name · full W/G/V bar with percentages · matches played
+function statRow(o) {
+  const cls = ["srow", o.rank == null ? "norank" : "", o.ours ? "ours" : "", o.attrs ? "click" : ""].filter(Boolean).join(" ");
+  return `<li class="${cls}" ${o.attrs || ""}>${o.rank == null ? "" : `<span class="rk">${o.rank}</span>`}<span class="nm">${escape(o.label)}</span>${wdlBar(o.t)}<span class="ct" title="wedstrijden">${o.t.n}</span></li>`;
 }
 function shortRange(a, b) {
   const A = new Date(a+"T00:00:00"), B = new Date(b+"T00:00:00");
@@ -2126,13 +2135,8 @@ function renderClubCompare(main, s) {
       const o = rows[me];
       html += `<div class="stats-head"><div class="big">${me+1}<small>van ${rows.length} clubs</small></div><div class="n">${pctOf(o.w,o.n)}% gewonnen · ${o.n} wedstrijden</div></div>`;
     }
-    html += `<table class="stats-table static"><thead><tr><th class="rank"></th><th>Club</th><th class="num wdlnum">Ploegen</th><th class="num">#</th><th></th><th class="num pct">W%</th></tr></thead><tbody>`;
-    rows.forEach((o, i) => {
-      html += `<tr class="${o.club==="Olympia"?"ours":""}"><td class="rank">${i+1}</td><td>${escape(o.club)}</td>
-        <td class="num wdlnum">${o.teams}</td><td class="num">${o.n}</td>
-        <td class="barcell">${wdlBar(o, true)}</td><td class="num pct">${pctOf(o.w,o.n)}%</td></tr>`;
-    });
-    html += `</tbody></table>
+    html += `<ul class="srows">` + rows.map((o, i) => statRow({ rank:i+1, label:o.club, t:o, ours:o.club==="Olympia" })).join("") + `</ul>`;
+    html += `
       <div class="stats-note">Stand van het seizoen, enkel in de ${poolCount} reeksen waar Olympia speelt.${hidden ? ` ${hidden} club${hidden===1?"":"s"} met minder dan ${CLUB_MIN_PLAYED} wedstrijden niet getoond.` : ""}</div></div>`;
   }
   main.innerHTML = html;
@@ -2206,16 +2210,10 @@ function renderStats() {
     }
     const sorted = [...rows.values()].sort((a,b) => teamComparator({code: byTeam?a.key:a.games[0].olympiaTeam}, {code: byTeam?b.key:b.games[0].olympiaTeam}) || a.label.localeCompare(b.label));
     if (sorted.length > 1 || byTeam) {
-      html += `<table class="stats-table"><thead><tr><th>${byTeam?"Team":"Groep"}</th><th class="num">#</th>
-        <th class="num wdlnum">W</th><th class="num wdlnum">G</th><th class="num wdlnum">V</th><th></th><th class="num pct">W%</th></tr></thead><tbody>`;
-      for (const row of sorted) {
-        const x = tally(row.games);
-        html += `<tr ${byTeam ? `data-st-team="${escape(row.key)}"` : `data-st-age="${row.g.age}" data-st-sex="${row.g.sex}"`}>
-          <td>${escape(row.label)}</td><td class="num">${x.n}</td>
-          <td class="num wdlnum">${x.w}</td><td class="num wdlnum">${x.d}</td><td class="num wdlnum">${x.l}</td>
-          <td class="barcell">${wdlBar(x, true)}</td><td class="num pct">${pctOf(x.w,x.n)}%</td></tr>`;
-      }
-      html += `</tbody></table>`;
+      html += `<ul class="srows">` + sorted.map(row => statRow({
+        label: row.label, t: tally(row.games),
+        attrs: byTeam ? `data-st-team="${escape(row.key)}"` : `data-st-age="${row.g.age}" data-st-sex="${row.g.sex}"`,
+      })).join("") + `</ul>`;
     }
     // Results without a filled-in score, under the same filters
     const skipped = (state.results || []).filter(r => {
@@ -2236,10 +2234,10 @@ function renderStats() {
   main.querySelectorAll("[data-sf]").forEach(b => b.addEventListener("click", () => { s[b.dataset.sf] = b.dataset.sv; render(); }));
   const on = (id, fn) => { const el = main.querySelector(id); if (el) el.addEventListener("change", e => { fn(e.target.value); render(); }); };
   on("#st-week", v => s.week = v); on("#st-from", v => s.from = v); on("#st-to", v => s.to = v); on("#st-age", v => s.age = v);
-  main.querySelectorAll("tr[data-st-age]").forEach(tr => tr.addEventListener("click", () => {
+  main.querySelectorAll("[data-st-age]").forEach(tr => tr.addEventListener("click", () => {
     s.age = tr.dataset.stAge; s.sex = tr.dataset.stSex || "all"; render();
   }));
-  main.querySelectorAll("tr[data-st-team]").forEach(tr => tr.addEventListener("click", () => navigateToTeam(tr.dataset.stTeam)));
+  main.querySelectorAll("[data-st-team]").forEach(tr => tr.addEventListener("click", () => navigateToTeam(tr.dataset.stTeam)));
 }
 
 function shiftWeek(deltaDays) {
