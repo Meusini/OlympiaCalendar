@@ -350,6 +350,7 @@
     font-size:14px;
   }
   .umr:last-child { border-bottom:none; }
+  .umr.umr-bare { grid-template-columns: minmax(0,1fr) 80px minmax(0,1fr); }
   .umr-date { color:var(--muted); font-variant-numeric:tabular-nums; font-weight:600; font-size:13px; }
   .umr-home { text-align:right; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .umr-away { text-align:left;  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -803,6 +804,8 @@
       grid-template-columns: 44px minmax(0,1fr) 64px minmax(0,1fr) 56px;
       gap:6px; padding:8px 10px; font-size:12px;
     }
+    .umr.umr-bare { grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr); gap:8px; }
+    .umr.umr-bare .umr-home, .umr.umr-bare .umr-away { white-space:normal; line-height:1.2; overflow:visible; }
     .umr-date { font-size:11px; }
     .umr-mid  { font-size:11px; padding:3px 5px; min-width:56px; }
     .umr-outcome { width:22px; font-size:10px; }
@@ -1880,6 +1883,8 @@ function unifiedMatchRow(p) {
   const mid  = `<span class="${midCls}">${p.mid ? escape(p.mid) : ""}</span>`;
   const away = `<span class="umr-away">${p.awayHtml || ""}</span>`;
   const trail = `<span class="umr-trail">${p.trailHtml || ""}</span>`;
+  // bare: the list is already grouped under a date heading and needs no location.
+  if (p.bare) return `<li class="${cls} umr-bare">${home}${mid}${away}</li>`;
   return `<li class="${cls}">${date}${home}${mid}${away}${trail}</li>`;
 }
 // Legacy alias kept for any callers that haven't migrated yet — same shape.
@@ -2016,28 +2021,17 @@ function renderWeek() {
             ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
             : "n/g";
           html += unifiedMatchRow({
-            date: formatDDMM(x.date),
+            bare: true,
             homeHtml, awayHtml,
             mid: score, midCls: o.cls,
-            trailHtml: "",   // outcome conveyed by the colored pill
             className: `result ${o.cls}`,
           });
         } else {
-          // Upcoming: home → clickable field badge to Veldbezetting; away → Google Maps link
-          let trailHtml;
-          if (x.isHome && x.fieldCode) {
-            trailHtml = `<span class="field-badge" data-nav-date="${escape(x.date)}" data-nav-time="${escape(x.time)}" title="Open in Veldbezetting">${escape(fieldLabel(x.fieldCode, x.subpath))} <span class="field-arrow">→</span></span>`;
-          } else if (x.isHome) {
-            trailHtml = `<span class="loc-tag home">thuis</span>`;
-          } else {
-            const mapQ = encodeURIComponent(`${x.opponentClub} hockey club Belgium`);
-            trailHtml = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open locatie in Google Maps">uit ↗</a>`;
-          }
+          // Upcoming: time only. Location lives in Veldbezetting and on the team page.
           html += unifiedMatchRow({
-            date: formatDDMM(x.date),
+            bare: true,
             homeHtml, awayHtml,
             mid: x.time, midCls: "time",
-            trailHtml,
             className: "upcoming",
           });
         }
