@@ -591,6 +591,11 @@
   table.stats-table tbody tr { cursor:pointer; }
   table.stats-table tbody tr:hover td { background:var(--panel); }
   .stats-note { color:var(--muted); font-size:12px; margin-top:14px; }
+  table.stats-table.static tbody tr { cursor:default; }
+  table.stats-table.static tbody tr:hover td { background:transparent; }
+  table.stats-table .rank { width:28px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  table.stats-table tr.ours td { color:var(--accent); font-weight:700; }
+  table.stats-table tr.ours td.rank { color:var(--accent); }
 
   .week-day { max-width:1100px; margin-bottom:18px; }
   .week-day h3 {
@@ -2062,11 +2067,85 @@ function shortRange(a, b) {
   if (A.getMonth() === B.getMonth()) return `${A.getDate()}–${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
   return `${A.getDate()} ${MONTHS_NL[A.getMonth()]} – ${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
 }
+// Club comparison — season W/G/V per club, summed over the standings of every pool in
+// which Olympia has a team. Costs no extra requests: update.ps1 already embeds those
+// standings for the team pages. Only like-for-like: a club's teams in pools without an
+// Olympia team are not in here.
+//   seg: all | adult | upper (U14, U16, U19) | mid (U10, U11, U12)     sex: all | B | G
+function clubOf(teamName) {
+  return String(teamName || "").replace(/\s+(U\d+[BG]?|D|H|G|JL|JM|T)\s?-?\s?\d+.*$/i, "").trim();
+}
+function segOf(g) {
+  if (!g.youth) return "adult";
+  const n = parseInt(g.age.slice(1), 10);
+  return n >= 14 ? "upper" : n >= 10 ? "mid" : "young";
+}
+function renderClubCompare(main, s) {
+  if (!s.seg) s.seg = "all"; if (!s.csex) s.csex = "all";
+  const tog = (name, val, label) => `<button data-sf="${name}" data-sv="${val}" class="${s[name]===val?'active':''}">${label}</button>`;
+
+  // One entry per pool (several Olympia teams can share a pool)
+  const pools = new Map();
+  for (const t of state.teams || []) {
+    if (!t.poolId || !t.standing || !Array.isArray(t.standing.rows) || pools.has(t.poolId)) continue;
+    pools.set(t.poolId, { g: statsGroup(t.code), st: t.standing });
+  }
+  const clubs = new Map();
+  let poolCount = 0;
+  for (const p of pools.values()) {
+    if (s.seg !== "all" && segOf(p.g) !== s.seg) continue;
+    if (s.csex !== "all" && p.g.sex !== s.csex) continue;
+    const c = p.st.columns || [], ix = n => c.indexOf(n);
+    const iT = ix("Team"), iP = ix("Played"), iW = ix("Won"), iD = ix("Draw"), iL = ix("Lost");
+    if (iT < 0 || iP < 0 || iW < 0 || iD < 0 || iL < 0) continue;
+    poolCount++;
+    for (const r of p.st.rows) {
+      const club = clubOf(r[iT]); if (!club) continue;
+      const o = clubs.get(club) || { club, teams:0, n:0, w:0, d:0, l:0 };
+      o.teams++; o.n += +r[iP] || 0; o.w += +r[iW] || 0; o.d += +r[iD] || 0; o.l += +r[iL] || 0;
+      clubs.set(club, o);
+    }
+  }
+  // Minimum played matches to be ranked: 8 overall, 5 once a filter narrows the pools.
+  const CLUB_MIN_PLAYED = (s.seg === "all" && s.csex === "all") ? 8 : 5;
+  const rows = [...clubs.values()]
+    .filter(o => o.n >= CLUB_MIN_PLAYED || (o.club === "Olympia" && o.n > 0))
+    .sort((a, b) => (b.w / b.n) - (a.w / a.n) || b.n - a.n || a.club.localeCompare(b.club));
+  const hidden = [...clubs.values()].filter(o => o.n > 0 && o.n < CLUB_MIN_PLAYED && o.club !== "Olympia").length;
+
+  let html = `<div class="stats"><div class="stats-filters">
+    <div class="view-toggle">${tog("mode","olympia","Olympia")}${tog("mode","clubs","Clubs")}</div><span class="break"></span>
+    <div class="view-toggle">${tog("seg","all","Alle")}${tog("seg","adult","Volwassenen")}${tog("seg","upper","Bovenbouw")}${tog("seg","mid","Middenbouw")}</div>
+    <div class="view-toggle">${tog("csex","all","Alle")}${tog("csex","B","Boys")}${tog("csex","G","Girls")}</div>
+  </div>`;
+  if (!rows.length) {
+    html += `<div class="empty">Nog geen gespeelde wedstrijden voor deze selectie.</div></div>`;
+  } else {
+    const me = rows.findIndex(o => o.club === "Olympia");
+    if (me >= 0) {
+      const o = rows[me];
+      html += `<div class="stats-head"><div class="big">${me+1}<small>van ${rows.length} clubs</small></div><div class="n">${pctOf(o.w,o.n)}% gewonnen · ${o.n} wedstrijden</div></div>`;
+    }
+    html += `<table class="stats-table static"><thead><tr><th class="rank"></th><th>Club</th><th class="num wdlnum">Ploegen</th><th class="num">#</th><th></th><th class="num pct">W%</th></tr></thead><tbody>`;
+    rows.forEach((o, i) => {
+      html += `<tr class="${o.club==="Olympia"?"ours":""}"><td class="rank">${i+1}</td><td>${escape(o.club)}</td>
+        <td class="num wdlnum">${o.teams}</td><td class="num">${o.n}</td>
+        <td class="barcell">${wdlBar(o, true)}</td><td class="num pct">${pctOf(o.w,o.n)}%</td></tr>`;
+    });
+    html += `</tbody></table>
+      <div class="stats-note">Stand van het seizoen, enkel in de ${poolCount} reeksen waar Olympia speelt.${hidden ? ` ${hidden} club${hidden===1?"":"s"} met minder dan ${CLUB_MIN_PLAYED} wedstrijden niet getoond.` : ""}</div></div>`;
+  }
+  main.innerHTML = html;
+  main.querySelectorAll("[data-sf]").forEach(b => b.addEventListener("click", () => { s[b.dataset.sf] = b.dataset.sv; render(); }));
+}
+
 function renderStats() {
   const main = document.getElementById("main");
   const all = (state.results || []).filter(r => computeOutcome(r).cls);
   if (!state.stats) state.stats = { period:"season", week:null, from:"", to:"", cat:"all", sex:"all", age:"all" };
   const s = state.stats;
+  if (!s.mode) s.mode = "olympia";
+  if (s.mode === "clubs") { renderClubCompare(main, s); return; }
 
   // Speeldagen = weeks that have at least one played result, newest first
   const weeks = new Map();
@@ -2096,6 +2175,7 @@ function renderStats() {
   const t = tally(list);
   const tog = (name, val, label) => `<button data-sf="${name}" data-sv="${val}" class="${s[name]===val?'active':''}">${label}</button>`;
   let html = `<div class="stats"><div class="stats-filters">
+    <div class="view-toggle">${tog("mode","olympia","Olympia")}${tog("mode","clubs","Clubs")}</div><span class="break"></span>
     <div class="view-toggle">${tog("period","season","Seizoen")}${tog("period","week","Speeldag")}${tog("period","range","Periode")}</div>`;
   if (s.period === "week") html += `<select id="st-week" aria-label="Speeldag">${weekKeys.map(k =>
       `<option value="${k}"${k===s.week?" selected":""}>${shortRange(weeks.get(k).min, weeks.get(k).max)}</option>`).join("")}</select>`;
