@@ -1605,34 +1605,15 @@ function renderAllFieldsAtSlot(games, activeSlot) {
       }
     }
     html += `</div>`;
-    if (activeGames.length === 0) {
-      html += `<div class="games-list">Geen wedstrijd of training in dit tijdslot</div>`;
-    } else {
-      html += `<div class="games-list">`;
-      activeGames.forEach(g => {
-        if (g.kind === "training") {
-          html += `<div class="row training">
-            <span class="t">${g.time}</span>
-            <span class="s">
-              <span class="match-teams">${escape(g.title)}</span>
-              <span class="match-div">Training · tot ${g.end}${g.conflict ? ' · <span class="conflict-tag">⚠ wedstrijd op dit veld</span>' : ''}</span>
-            </span>
-            <span class="sub-tag">${escape(g.quarters === "ABCD" ? "vol veld" : g.quarters)}</span>
-          </div>`;
-          return;
-        }
-        const sp = g.field.subpath.length ? g.field.subpath.join("") : "vol veld";
-        const carry = g.time !== activeSlot;
-        html += `<div class="row${carry?' carry':''}">
-          <span class="t">${g.time}</span>
-          <span class="s">
-            <span class="match-teams">${olympiaLink(g.home.team)} – ${escape(g.away.club)} ${escape(g.away.team)}</span>
-            <span class="match-div">${escape(cleanDivision(g.division))}</span>
-          </span>
-          <span class="sub-tag">${sp}</span>
-        </div>`;
-      });
-      html += `</div>`;
+    // The pitch already shows who plays where — no list underneath. Only a training that is
+    // hidden under a match (not drawn) gets a line, because nothing else shows it.
+    const hidden = activeGames.filter(g => g.kind === "training" && g.conflict);
+    if (hidden.length) {
+      html += `<div class="games-list">` + hidden.map(g => `<div class="row training">
+        <span class="t">${g.time}</span>
+        <span class="s"><span class="match-teams">${escape(g.title)}</span>
+          <span class="match-div">Training · <span class="conflict-tag">⚠ wedstrijd op dit veld</span></span></span>
+      </div>`).join("") + `</div>`;
     }
     html += `</div>`;
   }
