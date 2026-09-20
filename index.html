@@ -2344,7 +2344,9 @@ function renderTeams() {
   }
 
   // Standings + this-week-in-pool side-by-side (stacks on narrow viewports)
-  html += `<section class="team-section pool-row">`;
+  // U7-U9: no scores are kept, so there is never a standing or a results round to show.
+  const noScores = /^U[789][BG]/i.test(team.code);
+  html += `<section class="team-section pool-row"${noScores ? ' style="display:none"' : ''}>`;
   html += `<div class="pool-col standing-col"><h2>Rangschikking</h2>`;
   if (team.standing && team.standing.rows && team.standing.rows.length > 0) {
     // Source columns from API: Rank, Team, Played, Won, Lost, Draw, Own Goals, Against Goals, Points

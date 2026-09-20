@@ -431,7 +431,11 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
     if (-not $poolId) { Write-Host ("  WARN: no poolid for {0} -- division '{1}'" -f $teamCode, $primaryDiv) }
 
     $standing = $null
-    if ($poolId) {
+    # U7-U9: the federation keeps no scores for these ages, so their pools never have a
+    # standing or results (checked 2026-09-20: 14 pools, 0 past rows). Skip both calls --
+    # that was 66 of the ~200 requests of a run, for nothing.
+    $noScores = $teamCode -match '^U[789][BG]'
+    if ($poolId -and -not $noScores) {
         if ($standingCache.ContainsKey($poolId)) {
             $standing = $standingCache[$poolId]
         } else {
@@ -449,6 +453,9 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
                         rows    = $cleanRows
                     }
                     $standingCache[$poolId] = $standing
+                } else {
+                    # Remember an empty answer too, or every team in this pool asks again.
+                    $standingCache[$poolId] = $null
                 }
             } catch {
                 Write-Host "  WARN: standing fetch failed for poolid=$poolId ($teamCode): $_"
@@ -468,7 +475,7 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
     })
 }
 Write-Host ("  {0} Olympia teams; {1} unique pools with standings; {2} pools with games" -f `
-    $teams.Count, $standingCache.Count, $poolGames.Count)
+    $teams.Count, @($standingCache.Values | Where-Object { $_ }).Count, $poolGames.Count)
 
 # ----- 8. Sort team games & results, build payload -----
 # Sort then materialize as plain arrays (Sort-Object returns a scalar when given 1 item).
