@@ -488,6 +488,47 @@ if ($fieldGamesArr.Count -eq 0 -and $teamGamesArr.Count -eq 0 -and $resultsArr.C
     exit 0
 }
 
+# ----- 8b. Carry past field occupancy forward -----
+# The program endpoint only serves games that still have to be played, and the results
+# endpoint carries no field. Once a day is played its field occupancy is gone from the
+# API. So keep what is already embedded for every date before today; everything from
+# today on comes from the fresh fetch. Runs after the off-season guard on purpose:
+# carried history must never make an empty fetch look like a full one.
+$carried = 0
+try {
+    $existingHtml = Get-Content -Path $htmlPath -Raw -Encoding UTF8
+    $mOld = [regex]::Match($existingHtml, '(?s)<script id="games-data" type="application/json">(.*?)</script>')
+    if ($mOld.Success) {
+        $old      = $mOld.Groups[1].Value | ConvertFrom-Json
+        $keepFrom = (Get-Date).AddDays(-300).ToString("yyyy-MM-dd")
+        $past     = New-Object System.Collections.Generic.List[object]
+        foreach ($g in @($old.fieldGames)) {
+            if (-not $g -or -not $g.date) { continue }
+            if ($g.date -ge $from -or $g.date -lt $keepFrom) { continue }
+            # subpath round-trips as a string, an array, or {} (empty) — normalize to an array.
+            $sp = @()
+            if ($g.subpath -is [string]) { if ($g.subpath) { $sp = @($g.subpath) } }
+            elseif ($g.subpath -is [System.Array]) { $sp = @($g.subpath) }
+            $past.Add([pscustomobject]@{
+                date      = [string]$g.date
+                time      = [string]$g.time
+                fieldCode = [string]$g.fieldCode
+                subpath   = $sp
+                division  = $g.division
+                homeTeam  = $g.homeTeam
+                awayClub  = $g.awayClub
+                awayTeam  = $g.awayTeam
+            })
+        }
+        $carried = $past.Count
+        $fresh = @($fieldGamesArr | Where-Object { $_.date -ge $from })
+        $fieldGamesArr = @(@($past.ToArray()) + $fresh | Sort-Object date, time)
+    }
+} catch {
+    Write-Host ("  could not carry past field games: {0}" -f $_.Exception.Message)
+}
+Write-Host ("  carried {0} past field games; {1} field games in total" -f $carried, $fieldGamesArr.Count)
+
 # Use ordered hashtable (NOT [pscustomobject]@{}) — that cast trips on List<object> values
 # with mixed-type entries ("Argument types do not match").
 $payload = [ordered]@{
