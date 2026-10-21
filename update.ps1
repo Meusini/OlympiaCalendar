@@ -346,6 +346,18 @@ if ($selMatch.Success) {
     }
     Write-Host ("  {0} pools mapped" -f $poolMap.Count)
 }
+# Fallback: since 2026-10-19 the kalender page serves an empty poule list (its options
+# are no longer in the HTML). Pool ids are stable within a season, so keep the last
+# resolved team -> poolId map in pool_map.json and use it when the scrape yields nothing.
+$poolMapFile = Join-Path $here "pool_map.json"
+$poolSeed = @{}
+if ($poolMap.Count -eq 0 -and (Test-Path $poolMapFile)) {
+    try {
+        $saved = Get-Content -Path $poolMapFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        foreach ($p in $saved.teams.PSObject.Properties) { $poolSeed[$p.Name] = [string]$p.Value.poolId }
+        Write-Host ("  kalender page gave no pools -- using pool_map.json ({0} teams, saved {1})" -f $poolSeed.Count, $saved.updated)
+    } catch { Write-Host "  WARN: could not read pool_map.json: $_" }
+}
 
 # ----- 7. Resolve each Olympia team to a poolid, fetch standing + pool-wide games -----
 $teams = New-Object System.Collections.Generic.List[object]
@@ -428,6 +440,7 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
     $poolId = $null
     if ($teamSeason.ContainsKey($teamCode)) { $poolId = $poolMap["$divKey|$($teamSeason[$teamCode])"] }
     if (-not $poolId) { $poolId = $poolMap[$divKey] }
+    if (-not $poolId -and $poolSeed.ContainsKey($teamCode)) { $poolId = $poolSeed[$teamCode] }
     if (-not $poolId) { Write-Host ("  WARN: no poolid for {0} -- division '{1}'" -f $teamCode, $primaryDiv) }
 
     $standing = $null
@@ -476,6 +489,24 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
 }
 Write-Host ("  {0} Olympia teams; {1} unique pools with standings; {2} pools with games" -f `
     $teams.Count, @($standingCache.Values | Where-Object { $_ }).Count, $poolGames.Count)
+
+# ----- 7b. Persist the team -> poolId map for the fallback above -----
+# Only after a run that resolved pools from the live page; a fallback run must not
+# overwrite the seed with itself.
+if ($poolMap.Count -gt 0) {
+    try {
+        $tm = [ordered]@{}
+        foreach ($t in ($teams | Sort-Object code)) { if ($t.poolId) { $tm[$t.code] = [ordered]@{ poolId = [string]$t.poolId; division = $t.division } } }
+        if ($tm.Count -gt 0) {
+            $out = [ordered]@{
+                note    = "Fallback for update.ps1: team code -> poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none."
+                updated = (Get-Date).ToString("yyyy-MM-dd")
+                teams   = $tm
+            }
+            [System.IO.File]::WriteAllText($poolMapFile, (($out | ConvertTo-Json -Depth 4) + "`n"), (New-Object System.Text.UTF8Encoding $false))
+        }
+    } catch { Write-Host "  WARN: could not write pool_map.json: $_" }
+}
 
 # ----- 8. Sort team games & results, build payload -----
 # Sort then materialize as plain arrays (Sort-Object returns a scalar when given 1 item).

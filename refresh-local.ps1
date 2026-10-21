@@ -37,11 +37,11 @@ try {
 
     & (Join-Path $repo 'update.ps1')
 
-    if (-not (git status --porcelain -- index.html)) {
+    if (-not (git status --porcelain -- index.html pool_map.json)) {
         Write-Host "No data changes this run."
     }
     else {
-        git add index.html
+        git add index.html pool_map.json
         git commit --quiet -m "chore: refresh schedule data (auto)"
         if ($LASTEXITCODE -ne 0) { throw "git commit failed (exit $LASTEXITCODE)" }
         git push --quiet origin main
