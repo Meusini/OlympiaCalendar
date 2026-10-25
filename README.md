@@ -30,6 +30,22 @@ edit both constants by hand when the club publishes a new version. `update.ps1` 
 them — it only rewrites the `<script id="games-data">` block. A training that collides with a
 home match on the same pitch area is flagged ⚠ rather than hidden.
 
+## Standings archive (klassementen.html)
+
+`klassementen.html` shows the standing of every Belgian league pool, not just Olympia's,
+and keeps them after the season ends. `standings/archive.js` fetches them into
+`standings/<season>.json`; `standings/build_page.js` embeds those files into the page.
+
+- A pool's saved table is replaced only when its total of games played went up, so the
+  youth tables that end in November stay as they were on the last match day.
+- U7-U9 are skipped: the federation keeps no rankings there. Cups are skipped too.
+- The load is spread: each pool has one weekday slot (Mon-Thu, `poolId % 4`), so a full
+  sweep is ~100 calls a day, 3-8 s apart, after the weekend's games. Pools that have not
+  moved for 3 checks drop to every other week. Indoor pools are only checked Dec-Feb.
+- Runs from the **OlympiaCalendar Standings** scheduled task (`archive-local.ps1`,
+  Mon-Thu 12:15), which commits and pushes like the daily refresh. Log: `archive-local.log`.
+- Fill or re-check everything at once: `node standings/archive.js --all --gap=1500,3000`.
+
 ## Published online
 
 Deployed via GitHub Pages from this repo's `main` branch.

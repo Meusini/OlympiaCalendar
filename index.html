@@ -41,6 +41,8 @@
   header .tabs button { background:transparent; border:none; padding:6px 12px; border-radius:7px; color:var(--muted); }
   header .tabs button.active { background:var(--accent); color:#0b1320; font-weight:600; }
   header .status { font-size:12px; color:var(--muted); }
+  header .navlink { text-decoration:none; padding:7px 11px; border:1px solid var(--line); border-radius:8px; background:var(--panel2); white-space:nowrap; }
+  header .navlink:hover { border-color:var(--accent); }
 
   main { padding:18px 20px 60px; }
   .empty { padding:60px; text-align:center; color:var(--muted); }
@@ -906,6 +908,7 @@
     <button data-view="stats">Statistiek</button>
     <button data-view="teams">Teams</button>
   </div>
+  <a class="navlink" href="klassementen.html" title="Klassementen van alle Belgische competities">Klassementen ▶</a>
   <span id="status" class="status"></span>
 </header>
 
