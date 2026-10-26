@@ -1,322 +1,318 @@
 {
-  "note": "Fallback for update.ps1: team code -> poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none (it has served an empty poule list since 2026-10-19).",
-  "updated": "2026-10-18",
-  "teams": {
-    "D-1": {
-      "poolId": "11767",
-      "division": "Belgian League Women - Nat. 1 A"
-    },
-    "D-2": {
-      "poolId": "11895",
-      "division": "Open League Women - Reg. 2 - OL HV - B"
-    },
-    "D-3": {
-      "poolId": "11894",
-      "division": "Open League Women - Reg. 2 - OL HV - A"
-    },
-    "D-4": {
-      "poolId": "11880",
-      "division": "Fun League Women - Reg. 2 - FL HV - A"
-    },
-    "D-5": {
-      "poolId": "11881",
-      "division": "Fun League Women - Reg. 2 - FL HV - B"
-    },
-    "G-1": {
-      "poolId": "12256",
-      "division": "Open League Gentlemen - Reg. 1 - OL HV - B"
-    },
-    "G-2": {
-      "poolId": "12276",
-      "division": "Fun League Gentlemen - Reg. 2 - FL HV - C"
-    },
-    "G-3": {
-      "poolId": "12276",
-      "division": "Fun League Gentlemen - Reg. 2 - FL HV - C"
-    },
-    "G-4": {
-      "poolId": "12278",
-      "division": "Fun League Gentlemen - Reg. 3 - FL HV"
-    },
-    "H-1": {
-      "poolId": "11764",
-      "division": "Belgian League Men - Nat. 3 A"
-    },
-    "H-2": {
-      "poolId": "11900",
-      "division": "Open League Men - Reg. 1 - OL HV"
-    },
-    "H-3": {
-      "poolId": "11867",
-      "division": "Fun League Men - Reg. 3 - FL HV - B"
-    },
-    "JL-1": {
-      "poolId": "12235",
-      "division": "Junior Ladies - Reg. 2 HV"
-    },
-    "T-1": {
-      "poolId": "12344",
-      "division": "Trimmers - HV - TR D"
-    },
-    "U10B-1": {
-      "poolId": "11983",
-      "division": "U10 Boys - Reg. 1 C"
-    },
-    "U10B-2": {
-      "poolId": "11999",
-      "division": "U10 Boys - Reg. 3 G"
-    },
-    "U10B-3": {
-      "poolId": "11999",
-      "division": "U10 Boys - Reg. 3 G"
-    },
-    "U10G-1": {
-      "poolId": "11975",
-      "division": "U10 Girls - Reg. 2 F"
-    },
-    "U10G-2": {
-      "poolId": "11968",
-      "division": "U10 Girls - Reg. 3 E"
-    },
-    "U10G-3": {
-      "poolId": "11969",
-      "division": "U10 Girls - Reg. 3 F"
-    },
-    "U11B-1": {
-      "poolId": "12022",
-      "division": "U11 Boys - Reg. 1 E"
-    },
-    "U11B-2": {
-      "poolId": "12035",
-      "division": "U11 Boys - Reg. 3 F"
-    },
-    "U11G-1": {
-      "poolId": "12010",
-      "division": "U11 Girls - Reg. 2 E"
-    },
-    "U11G-2": {
-      "poolId": "12016",
-      "division": "U11 Girls - Reg. 3 E"
-    },
-    "U12B-1": {
-      "poolId": "12057",
-      "division": "U12 Boys - Reg. 1 C"
-    },
-    "U12B-2": {
-      "poolId": "12072",
-      "division": "U12 Boys - Reg. 3 F"
-    },
-    "U12G-1": {
-      "poolId": "12041",
-      "division": "U12 Girls - Reg. 1 E"
-    },
-    "U12G-2": {
-      "poolId": "12047",
-      "division": "U12 Girls - Reg. 2 F"
-    },
-    "U12G-3": {
-      "poolId": "12052",
-      "division": "U12 Girls - Reg. 3 D"
-    },
-    "U14B-1": {
-      "poolId": "12110",
-      "division": "U14 Boys - Reg. 1 D"
-    },
-    "U14B-2": {
-      "poolId": "12126",
-      "division": "U14 Boys - Reg. 2 G"
-    },
-    "U14B-3": {
-      "poolId": "12117",
-      "division": "U14 Boys - Reg. 3 F"
-    },
-    "U14G-1": {
-      "poolId": "12129",
-      "division": "U14 Girls - Reg. 1 B"
-    },
-    "U14G-2": {
-      "poolId": "12133",
-      "division": "U14 Girls - Reg. 2 D"
-    },
-    "U14G-3": {
-      "poolId": "12141",
-      "division": "U14 Girls - Reg. 3 F"
-    },
-    "U16B-1": {
-      "poolId": "12174",
-      "division": "U16 Boys - Reg. 2 H"
-    },
-    "U16G-1": {
-      "poolId": "12148",
-      "division": "U16 Girls - Reg. 1 D"
-    },
-    "U16G-2": {
-      "poolId": "12153",
-      "division": "U16 Girls - Reg. 2 E"
-    },
-    "U19B-1": {
-      "poolId": "12187",
-      "division": "U19 Boys - Reg. 2 C"
-    },
-    "U19G-1": {
-      "poolId": "12195",
-      "division": "U19 Girls - Reg. 1 B"
-    },
-    "U19G-2": {
-      "poolId": "12202",
-      "division": "U19 Girls - Reg. 2 F"
-    },
-    "U19G-3": {
-      "poolId": "12208",
-      "division": "U19 Girls - Reg. 3 E"
-    },
-    "U7B-1": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-2": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-3": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-4": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-5": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-6": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7B-7": {
-      "poolId": "12224",
-      "division": "U7 Boys - Reg. 2 A"
-    },
-    "U7G-1": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-2": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-3": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-4": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-5": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-6": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-7": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U7G-8": {
-      "poolId": "12221",
-      "division": "U7 Girls - Reg. 2 A"
-    },
-    "U8B-1": {
-      "poolId": "12229",
-      "division": "U8 Boys - Reg. 1 A"
-    },
-    "U8B-2": {
-      "poolId": "12229",
-      "division": "U8 Boys - Reg. 1 A"
-    },
-    "U8B-3": {
-      "poolId": "12229",
-      "division": "U8 Boys - Reg. 1 A"
-    },
-    "U8B-4": {
-      "poolId": "12230",
-      "division": "U8 Boys - Reg. 2 A"
-    },
-    "U8B-5": {
-      "poolId": "12230",
-      "division": "U8 Boys - Reg. 2 A"
-    },
-    "U8B-6": {
-      "poolId": "12230",
-      "division": "U8 Boys - Reg. 2 A"
-    },
-    "U8B-7": {
-      "poolId": "12230",
-      "division": "U8 Boys - Reg. 2 A"
-    },
-    "U8B-8": {
-      "poolId": "12231",
-      "division": "U8 Boys - Reg. 3 A"
-    },
-    "U8G-1": {
-      "poolId": "12226",
-      "division": "U8 Girls - Reg. 1 A"
-    },
-    "U8G-2": {
-      "poolId": "12226",
-      "division": "U8 Girls - Reg. 1 A"
-    },
-    "U8G-3": {
-      "poolId": "12227",
-      "division": "U8 Girls - Reg. 2 A"
-    },
-    "U8G-4": {
-      "poolId": "12227",
-      "division": "U8 Girls - Reg. 2 A"
-    },
-    "U8G-5": {
-      "poolId": "12227",
-      "division": "U8 Girls - Reg. 2 A"
-    },
-    "U8G-6": {
-      "poolId": "12227",
-      "division": "U8 Girls - Reg. 2 A"
-    },
-    "U8G-7": {
-      "poolId": "12228",
-      "division": "U8 Girls - Reg. 3 A"
-    },
-    "U8G-8": {
-      "poolId": "12228",
-      "division": "U8 Girls - Reg. 3 A"
-    },
-    "U9B-1": {
-      "poolId": "11944",
-      "division": "U9 Boys - Reg. 1 E"
-    },
-    "U9B-2": {
-      "poolId": "11953",
-      "division": "U9 Boys - Reg. 2 I"
-    },
-    "U9G-1": {
-      "poolId": "11922",
-      "division": "U9 Girls - Reg. 1 B"
-    },
-    "U9G-2": {
-      "poolId": "11923",
-      "division": "U9 Girls - Reg. 1 C"
-    },
-    "U9G-3": {
-      "poolId": "11930",
-      "division": "U9 Girls - Reg. 2 G"
-    },
-    "U9G-4": {
-      "poolId": "11938",
-      "division": "U9 Girls - Reg. 3 E"
-    }
-  }
+    "note":  "Fallback for update.ps1: team code -\u003e poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none.",
+    "updated":  "2026-10-26",
+    "teams":  {
+                  "D-1":  {
+                              "poolId":  "11767",
+                              "division":  "Belgian League Women - Nat. 1 A"
+                          },
+                  "D-2":  {
+                              "poolId":  "11895",
+                              "division":  "Open League Women - Reg. 2 - OL HV - B"
+                          },
+                  "D-3":  {
+                              "poolId":  "11894",
+                              "division":  "Open League Women - Reg. 2 - OL HV - A"
+                          },
+                  "D-4":  {
+                              "poolId":  "11880",
+                              "division":  "Fun League Women - Reg. 2 - FL HV - A"
+                          },
+                  "D-5":  {
+                              "poolId":  "11881",
+                              "division":  "Fun League Women - Reg. 2 - FL HV - B"
+                          },
+                  "G-1":  {
+                              "poolId":  "12256",
+                              "division":  "Open League Gentlemen - Reg. 1 - OL HV - B"
+                          },
+                  "G-2":  {
+                              "poolId":  "12276",
+                              "division":  "Fun League Gentlemen - Reg. 2 - FL HV - C"
+                          },
+                  "G-3":  {
+                              "poolId":  "12276",
+                              "division":  "Fun League Gentlemen - Reg. 2 - FL HV - C"
+                          },
+                  "G-4":  {
+                              "poolId":  "12278",
+                              "division":  "Fun League Gentlemen - Reg. 3 - FL HV"
+                          },
+                  "H-1":  {
+                              "poolId":  "11764",
+                              "division":  "Belgian League Men - Nat. 3 A"
+                          },
+                  "H-2":  {
+                              "poolId":  "11900",
+                              "division":  "Open League Men - Reg. 1 - OL HV"
+                          },
+                  "H-3":  {
+                              "poolId":  "11867",
+                              "division":  "Fun League Men - Reg. 3 - FL HV - B"
+                          },
+                  "JL-1":  {
+                               "poolId":  "12235",
+                               "division":  "Junior Ladies - Reg. 2 HV"
+                           },
+                  "T-1":  {
+                              "poolId":  "12344",
+                              "division":  "Trimmers - HV - TR D"
+                          },
+                  "U10B-1":  {
+                                 "poolId":  "11983",
+                                 "division":  "U10 Boys - Reg. 1 C"
+                             },
+                  "U10B-2":  {
+                                 "poolId":  "11999",
+                                 "division":  "U10 Boys - Reg. 3 G"
+                             },
+                  "U10B-3":  {
+                                 "poolId":  "11999",
+                                 "division":  "U10 Boys - Reg. 3 G"
+                             },
+                  "U10G-1":  {
+                                 "poolId":  "11975",
+                                 "division":  "U10 Girls - Reg. 2 F"
+                             },
+                  "U10G-2":  {
+                                 "poolId":  "11968",
+                                 "division":  "U10 Girls - Reg. 3 E"
+                             },
+                  "U10G-3":  {
+                                 "poolId":  "11969",
+                                 "division":  "U10 Girls - Reg. 3 F"
+                             },
+                  "U11B-1":  {
+                                 "poolId":  "12022",
+                                 "division":  "U11 Boys - Reg. 1 E"
+                             },
+                  "U11B-2":  {
+                                 "poolId":  "12035",
+                                 "division":  "U11 Boys - Reg. 3 F"
+                             },
+                  "U11G-1":  {
+                                 "poolId":  "12010",
+                                 "division":  "U11 Girls - Reg. 2 E"
+                             },
+                  "U11G-2":  {
+                                 "poolId":  "12016",
+                                 "division":  "U11 Girls - Reg. 3 E"
+                             },
+                  "U12B-1":  {
+                                 "poolId":  "12057",
+                                 "division":  "U12 Boys - Reg. 1 C"
+                             },
+                  "U12B-2":  {
+                                 "poolId":  "12072",
+                                 "division":  "U12 Boys - Reg. 3 F"
+                             },
+                  "U12G-1":  {
+                                 "poolId":  "12041",
+                                 "division":  "U12 Girls - Reg. 1 E"
+                             },
+                  "U12G-2":  {
+                                 "poolId":  "12047",
+                                 "division":  "U12 Girls - Reg. 2 F"
+                             },
+                  "U12G-3":  {
+                                 "poolId":  "12052",
+                                 "division":  "U12 Girls - Reg. 3 D"
+                             },
+                  "U14B-1":  {
+                                 "poolId":  "12110",
+                                 "division":  "U14 Boys - Reg. 1 D"
+                             },
+                  "U14B-2":  {
+                                 "poolId":  "12126",
+                                 "division":  "U14 Boys - Reg. 2 G"
+                             },
+                  "U14B-3":  {
+                                 "poolId":  "12117",
+                                 "division":  "U14 Boys - Reg. 3 F"
+                             },
+                  "U14G-1":  {
+                                 "poolId":  "12129",
+                                 "division":  "U14 Girls - Reg. 1 B"
+                             },
+                  "U14G-2":  {
+                                 "poolId":  "12133",
+                                 "division":  "U14 Girls - Reg. 2 D"
+                             },
+                  "U14G-3":  {
+                                 "poolId":  "12141",
+                                 "division":  "U14 Girls - Reg. 3 F"
+                             },
+                  "U16B-1":  {
+                                 "poolId":  "12174",
+                                 "division":  "U16 Boys - Reg. 2 H"
+                             },
+                  "U16G-1":  {
+                                 "poolId":  "12148",
+                                 "division":  "U16 Girls - Reg. 1 D"
+                             },
+                  "U16G-2":  {
+                                 "poolId":  "12153",
+                                 "division":  "U16 Girls - Reg. 2 E"
+                             },
+                  "U19B-1":  {
+                                 "poolId":  "12187",
+                                 "division":  "U19 Boys - Reg. 2 C"
+                             },
+                  "U19G-1":  {
+                                 "poolId":  "12195",
+                                 "division":  "U19 Girls - Reg. 1 B"
+                             },
+                  "U19G-2":  {
+                                 "poolId":  "12202",
+                                 "division":  "U19 Girls - Reg. 2 F"
+                             },
+                  "U19G-3":  {
+                                 "poolId":  "12208",
+                                 "division":  "U19 Girls - Reg. 3 E"
+                             },
+                  "U7B-1":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7B-2":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7B-3":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7B-4":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7B-5":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7B-7":  {
+                                "poolId":  "12224",
+                                "division":  "U7 Boys - Reg. 2 A"
+                            },
+                  "U7G-1":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-2":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-3":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-4":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-5":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-6":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-7":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U7G-8":  {
+                                "poolId":  "12221",
+                                "division":  "U7 Girls - Reg. 2 A"
+                            },
+                  "U8B-1":  {
+                                "poolId":  "12229",
+                                "division":  "U8 Boys - Reg. 1 A"
+                            },
+                  "U8B-2":  {
+                                "poolId":  "12229",
+                                "division":  "U8 Boys - Reg. 1 A"
+                            },
+                  "U8B-3":  {
+                                "poolId":  "12229",
+                                "division":  "U8 Boys - Reg. 1 A"
+                            },
+                  "U8B-4":  {
+                                "poolId":  "12230",
+                                "division":  "U8 Boys - Reg. 2 A"
+                            },
+                  "U8B-5":  {
+                                "poolId":  "12230",
+                                "division":  "U8 Boys - Reg. 2 A"
+                            },
+                  "U8B-6":  {
+                                "poolId":  "12230",
+                                "division":  "U8 Boys - Reg. 2 A"
+                            },
+                  "U8B-7":  {
+                                "poolId":  "12230",
+                                "division":  "U8 Boys - Reg. 2 A"
+                            },
+                  "U8B-8":  {
+                                "poolId":  "12231",
+                                "division":  "U8 Boys - Reg. 3 A"
+                            },
+                  "U8G-1":  {
+                                "poolId":  "12226",
+                                "division":  "U8 Girls - Reg. 1 A"
+                            },
+                  "U8G-2":  {
+                                "poolId":  "12226",
+                                "division":  "U8 Girls - Reg. 1 A"
+                            },
+                  "U8G-3":  {
+                                "poolId":  "12227",
+                                "division":  "U8 Girls - Reg. 2 A"
+                            },
+                  "U8G-4":  {
+                                "poolId":  "12227",
+                                "division":  "U8 Girls - Reg. 2 A"
+                            },
+                  "U8G-5":  {
+                                "poolId":  "12227",
+                                "division":  "U8 Girls - Reg. 2 A"
+                            },
+                  "U8G-6":  {
+                                "poolId":  "12227",
+                                "division":  "U8 Girls - Reg. 2 A"
+                            },
+                  "U8G-7":  {
+                                "poolId":  "12228",
+                                "division":  "U8 Girls - Reg. 3 A"
+                            },
+                  "U8G-8":  {
+                                "poolId":  "12228",
+                                "division":  "U8 Girls - Reg. 3 A"
+                            },
+                  "U9B-1":  {
+                                "poolId":  "11944",
+                                "division":  "U9 Boys - Reg. 1 E"
+                            },
+                  "U9B-2":  {
+                                "poolId":  "11953",
+                                "division":  "U9 Boys - Reg. 2 I"
+                            },
+                  "U9G-1":  {
+                                "poolId":  "11922",
+                                "division":  "U9 Girls - Reg. 1 B"
+                            },
+                  "U9G-2":  {
+                                "poolId":  "11923",
+                                "division":  "U9 Girls - Reg. 1 C"
+                            },
+                  "U9G-3":  {
+                                "poolId":  "11930",
+                                "division":  "U9 Girls - Reg. 2 G"
+                            },
+                  "U9G-4":  {
+                                "poolId":  "11938",
+                                "division":  "U9 Girls - Reg. 3 E"
+                            }
+              }
 }
