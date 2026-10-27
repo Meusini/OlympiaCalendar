@@ -1,6 +1,6 @@
 {
  "season": "2026-27",
- "updated": "2026-10-26T11:15:03.215Z",
+ "updated": "2026-10-27T12:20:33.991Z",
  "pools": {
   "11761": {
    "firstSeen": "2026-10-25",
@@ -11,7 +11,7 @@
    "gender": "M",
    "division": "Carlsberg Men's Hockey League",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:18.910Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:18.910Z",
@@ -173,7 +173,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:21.329Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:21.329Z",
@@ -335,7 +335,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:24.857Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:24.857Z",
@@ -497,7 +497,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:28.213Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:28.213Z",
@@ -659,7 +659,7 @@
    "gender": "M",
    "division": "Nat. 4",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:35.423Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:35.423Z",
@@ -832,7 +832,7 @@
    "gender": "F",
    "division": "Belfius Women's Hockey League",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:37.849Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:37.849Z",
@@ -994,7 +994,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:40.356Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:40.356Z",
@@ -1156,7 +1156,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:44.161Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:44.161Z",
@@ -1318,7 +1318,7 @@
    "gender": "",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:47.164Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:47.164Z",
@@ -1480,7 +1480,7 @@
    "gender": "",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:50.884Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:50.884Z",
@@ -1642,7 +1642,7 @@
    "gender": "F",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:54.595Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:54.595Z",
@@ -1826,7 +1826,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1st round",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11842": {
    "firstSeen": "2026-10-25",
@@ -1837,7 +1837,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1st round",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11843": {
    "firstSeen": "2026-10-25",
@@ -1848,7 +1848,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1st round",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11844": {
    "firstSeen": "2026-10-25",
@@ -1859,7 +1859,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1st round",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11845": {
    "firstSeen": "2026-10-25",
@@ -1870,7 +1870,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11846": {
    "firstSeen": "2026-10-25",
@@ -1881,7 +1881,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11847": {
    "firstSeen": "2026-10-25",
@@ -1892,7 +1892,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11848": {
    "firstSeen": "2026-10-25",
@@ -1903,7 +1903,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11849": {
    "firstSeen": "2026-10-25",
@@ -1914,7 +1914,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11850": {
    "firstSeen": "2026-10-25",
@@ -1925,7 +1925,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11851": {
    "firstSeen": "2026-10-25",
@@ -1936,7 +1936,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11852": {
    "firstSeen": "2026-10-25",
@@ -1947,7 +1947,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11853": {
    "firstSeen": "2026-10-25",
@@ -1958,7 +1958,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11854": {
    "firstSeen": "2026-10-25",
@@ -1969,7 +1969,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11855": {
    "firstSeen": "2026-10-25",
@@ -1980,7 +1980,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "K",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11856": {
    "firstSeen": "2026-10-25",
@@ -1991,7 +1991,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1st round",
    "group": "L",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11857": {
    "firstSeen": "2026-10-25",
@@ -2002,7 +2002,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1/16",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11858": {
    "firstSeen": "2026-10-25",
@@ -2013,7 +2013,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1/16",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11861": {
    "firstSeen": "2026-10-25",
@@ -2024,7 +2024,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "FL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:38:57.385Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:38:57.385Z",
@@ -2175,7 +2175,7 @@
    "gender": "M",
    "division": "Reg. 4",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:00.330Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:00.330Z",
@@ -2326,7 +2326,7 @@
    "gender": "M",
    "division": "Reg. 4",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:03.848Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:03.848Z",
@@ -2466,7 +2466,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:06.907Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:06.907Z",
@@ -2606,7 +2606,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:10.555Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:10.555Z",
@@ -2768,7 +2768,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:13.007Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:13.007Z",
@@ -2930,7 +2930,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:15.700Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:15.700Z",
@@ -3092,7 +3092,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:19.279Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:19.279Z",
@@ -3232,7 +3232,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:22.776Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:22.776Z",
@@ -3383,7 +3383,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:25.203Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:25.203Z",
@@ -3523,7 +3523,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:27.804Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:27.804Z",
@@ -3685,7 +3685,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:31.721Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:31.721Z",
@@ -3847,7 +3847,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:34.669Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:34.669Z",
@@ -3998,7 +3998,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:37.589Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:37.589Z",
@@ -4160,7 +4160,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "FL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:40.532Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:40.532Z",
@@ -4300,7 +4300,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "FL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:43.304Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:43.304Z",
@@ -4462,7 +4462,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "FL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:47.381Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:47.381Z",
@@ -4624,7 +4624,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "FL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:50.164Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:50.164Z",
@@ -4775,7 +4775,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "FL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:53.066Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:53.066Z",
@@ -4915,7 +4915,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:39:56.657Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:39:56.657Z",
@@ -5077,7 +5077,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:00.085Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:00.085Z",
@@ -5239,7 +5239,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:03.900Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:03.900Z",
@@ -5324,7 +5324,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:07.002Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:07.002Z",
@@ -5420,7 +5420,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:11.003Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:11.003Z",
@@ -5582,7 +5582,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:14.036Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:14.036Z",
@@ -5733,7 +5733,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "FL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:17.679Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:17.679Z",
@@ -5884,7 +5884,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "FL - HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:20.396Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:20.396Z",
@@ -6035,7 +6035,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "OL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:24.059Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:24.059Z",
@@ -6197,7 +6197,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "OL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:27.299Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:27.299Z",
@@ -6359,7 +6359,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "OL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:31.009Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:31.009Z",
@@ -6521,7 +6521,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "OL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:34.700Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:34.700Z",
@@ -6683,7 +6683,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "OL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:37.547Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:37.547Z",
@@ -6845,7 +6845,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "OL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:41.127Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:41.127Z",
@@ -7029,7 +7029,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "OL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:44.811Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:44.811Z",
@@ -7180,7 +7180,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "OL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:47.529Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:47.529Z",
@@ -7331,7 +7331,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "OL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:50.159Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:50.159Z",
@@ -7493,7 +7493,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "OL - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:52.655Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:52.655Z",
@@ -7655,7 +7655,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "OL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:55.367Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:55.367Z",
@@ -7806,7 +7806,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "OL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:40:58.835Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:40:58.835Z",
@@ -7968,7 +7968,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:01.673Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:01.673Z",
@@ -8130,7 +8130,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:04.493Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:04.493Z",
@@ -8303,7 +8303,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:08.264Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:08.264Z",
@@ -8454,7 +8454,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:10.985Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:10.985Z",
@@ -8605,7 +8605,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11922": {
    "firstSeen": "2026-10-25",
@@ -8616,7 +8616,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11923": {
    "firstSeen": "2026-10-25",
@@ -8627,7 +8627,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11924": {
    "firstSeen": "2026-10-25",
@@ -8638,7 +8638,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11925": {
    "firstSeen": "2026-10-25",
@@ -8649,7 +8649,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11926": {
    "firstSeen": "2026-10-25",
@@ -8660,7 +8660,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11927": {
    "firstSeen": "2026-10-25",
@@ -8671,7 +8671,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11928": {
    "firstSeen": "2026-10-25",
@@ -8682,7 +8682,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11929": {
    "firstSeen": "2026-10-25",
@@ -8693,7 +8693,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11930": {
    "firstSeen": "2026-10-25",
@@ -8704,7 +8704,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11931": {
    "firstSeen": "2026-10-25",
@@ -8715,7 +8715,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11932": {
    "firstSeen": "2026-10-25",
@@ -8726,7 +8726,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11933": {
    "firstSeen": "2026-10-25",
@@ -8737,7 +8737,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11934": {
    "firstSeen": "2026-10-25",
@@ -8748,7 +8748,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11935": {
    "firstSeen": "2026-10-25",
@@ -8759,7 +8759,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11936": {
    "firstSeen": "2026-10-25",
@@ -8770,7 +8770,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11937": {
    "firstSeen": "2026-10-25",
@@ -8781,7 +8781,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11938": {
    "firstSeen": "2026-10-25",
@@ -8792,7 +8792,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11939": {
    "firstSeen": "2026-10-25",
@@ -8803,7 +8803,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11940": {
    "firstSeen": "2026-10-25",
@@ -8814,7 +8814,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11941": {
    "firstSeen": "2026-10-25",
@@ -8825,7 +8825,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11942": {
    "firstSeen": "2026-10-25",
@@ -8836,7 +8836,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11943": {
    "firstSeen": "2026-10-25",
@@ -8847,7 +8847,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11944": {
    "firstSeen": "2026-10-25",
@@ -8858,7 +8858,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11945": {
    "firstSeen": "2026-10-25",
@@ -8869,7 +8869,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11946": {
    "firstSeen": "2026-10-25",
@@ -8880,7 +8880,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11947": {
    "firstSeen": "2026-10-25",
@@ -8891,7 +8891,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11948": {
    "firstSeen": "2026-10-25",
@@ -8902,7 +8902,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11949": {
    "firstSeen": "2026-10-25",
@@ -8913,7 +8913,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11950": {
    "firstSeen": "2026-10-25",
@@ -8924,7 +8924,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11951": {
    "firstSeen": "2026-10-25",
@@ -8935,7 +8935,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11952": {
    "firstSeen": "2026-10-25",
@@ -8946,7 +8946,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11953": {
    "firstSeen": "2026-10-25",
@@ -8957,7 +8957,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11954": {
    "firstSeen": "2026-10-25",
@@ -8968,7 +8968,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11955": {
    "firstSeen": "2026-10-25",
@@ -8979,7 +8979,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "K",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11956": {
    "firstSeen": "2026-10-25",
@@ -8990,7 +8990,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11957": {
    "firstSeen": "2026-10-25",
@@ -9001,7 +9001,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11958": {
    "firstSeen": "2026-10-25",
@@ -9012,7 +9012,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11959": {
    "firstSeen": "2026-10-25",
@@ -9023,7 +9023,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11960": {
    "firstSeen": "2026-10-25",
@@ -9034,7 +9034,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11961": {
    "firstSeen": "2026-10-25",
@@ -9045,7 +9045,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11962": {
    "firstSeen": "2026-10-25",
@@ -9056,7 +9056,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11963": {
    "firstSeen": "2026-10-25",
@@ -9067,7 +9067,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "11964": {
    "firstSeen": "2026-10-25",
@@ -9078,7 +9078,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:13.546Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:13.546Z",
@@ -9141,7 +9141,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:16.361Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:16.361Z",
@@ -9226,7 +9226,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:19.611Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:19.611Z",
@@ -9311,7 +9311,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:22.914Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:22.914Z",
@@ -9396,7 +9396,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:25.439Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:25.439Z",
@@ -9481,7 +9481,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:28.837Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:28.837Z",
@@ -9566,7 +9566,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:31.658Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:31.658Z",
@@ -9662,7 +9662,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:34.183Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:34.183Z",
@@ -9747,7 +9747,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:36.490Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:36.490Z",
@@ -9832,7 +9832,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:39.376Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:39.376Z",
@@ -9928,7 +9928,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:43.021Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:43.021Z",
@@ -10013,7 +10013,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:46.384Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:46.384Z",
@@ -10109,7 +10109,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:49.517Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:49.517Z",
@@ -10194,7 +10194,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:52.301Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:52.301Z",
@@ -10290,7 +10290,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:41:57.871Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:41:57.871Z",
@@ -10375,7 +10375,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:01.253Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:01.253Z",
@@ -10460,7 +10460,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:07.122Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:07.122Z",
@@ -10545,7 +10545,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:09.944Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:09.944Z",
@@ -10685,7 +10685,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:13.787Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:13.787Z",
@@ -10825,7 +10825,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:16.431Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:16.431Z",
@@ -10965,7 +10965,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:18.987Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:18.987Z",
@@ -11105,7 +11105,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:22.177Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:22.177Z",
@@ -11190,7 +11190,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:24.736Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:24.736Z",
@@ -11275,7 +11275,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:27.392Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:27.392Z",
@@ -11360,7 +11360,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:30.904Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:30.904Z",
@@ -11456,7 +11456,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:33.925Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:33.925Z",
@@ -11541,7 +11541,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:36.614Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:36.614Z",
@@ -11626,7 +11626,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:39.062Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:39.062Z",
@@ -11722,7 +11722,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:42.512Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:42.512Z",
@@ -11818,7 +11818,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:46.052Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:46.052Z",
@@ -11903,7 +11903,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:49.034Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:49.034Z",
@@ -11999,7 +11999,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:52.096Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:52.096Z",
@@ -12095,7 +12095,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:54.874Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:54.874Z",
@@ -12169,7 +12169,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:42:58.584Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:42:58.584Z",
@@ -12265,7 +12265,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:02.216Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:02.216Z",
@@ -12361,7 +12361,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:05.169Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:05.169Z",
@@ -12457,7 +12457,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:08.940Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:08.940Z",
@@ -12553,7 +12553,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "I",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:11.490Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:11.490Z",
@@ -12649,7 +12649,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:14.733Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:14.733Z",
@@ -12734,7 +12734,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:17.837Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:17.837Z",
@@ -12819,7 +12819,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:21.463Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:21.463Z",
@@ -12904,7 +12904,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:25.553Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:25.553Z",
@@ -12989,7 +12989,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:28.374Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:28.374Z",
@@ -13085,7 +13085,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:30.883Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:30.883Z",
@@ -13170,7 +13170,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:33.904Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:33.904Z",
@@ -13255,7 +13255,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:36.776Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:36.776Z",
@@ -13340,7 +13340,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:39.675Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:39.675Z",
@@ -13425,7 +13425,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:43.418Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:43.418Z",
@@ -13510,7 +13510,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:46.709Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:46.709Z",
@@ -13606,7 +13606,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:50.477Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:50.477Z",
@@ -13702,7 +13702,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:53.333Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:53.333Z",
@@ -13787,7 +13787,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:43:56.799Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:43:56.799Z",
@@ -13883,7 +13883,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:00.316Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:00.316Z",
@@ -13968,7 +13968,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:03.871Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:03.871Z",
@@ -14053,7 +14053,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:11.193Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:11.193Z",
@@ -14149,7 +14149,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:14.310Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:14.310Z",
@@ -14234,7 +14234,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:17.989Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:17.989Z",
@@ -14330,7 +14330,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:21.564Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:21.564Z",
@@ -14426,7 +14426,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:24.027Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:24.027Z",
@@ -14522,7 +14522,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:27.380Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:27.380Z",
@@ -14618,7 +14618,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:29.661Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:29.661Z",
@@ -14714,7 +14714,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:32.600Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:32.600Z",
@@ -14810,7 +14810,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:35.440Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:35.440Z",
@@ -14895,7 +14895,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:39.128Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:39.128Z",
@@ -14980,7 +14980,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:41.885Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:41.885Z",
@@ -15065,7 +15065,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:45.236Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:45.236Z",
@@ -15161,7 +15161,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:48.721Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:48.721Z",
@@ -15246,7 +15246,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:51.903Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:51.903Z",
@@ -15331,7 +15331,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:55.630Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:55.630Z",
@@ -15416,7 +15416,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:44:58.669Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:44:58.669Z",
@@ -15501,7 +15501,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:02.318Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:02.318Z",
@@ -15586,7 +15586,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:06.730Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:06.730Z",
@@ -15671,7 +15671,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:09.263Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:09.263Z",
@@ -15756,7 +15756,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:12.398Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:12.398Z",
@@ -15852,7 +15852,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:16.131Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:16.131Z",
@@ -15948,7 +15948,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:21.884Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:21.884Z",
@@ -16044,7 +16044,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:25.601Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:25.601Z",
@@ -16140,7 +16140,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:29.019Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:29.019Z",
@@ -16236,7 +16236,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:31.748Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:31.748Z",
@@ -16332,7 +16332,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:34.935Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:34.935Z",
@@ -16428,7 +16428,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:37.988Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:37.988Z",
@@ -16524,7 +16524,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:40.594Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:40.594Z",
@@ -16620,7 +16620,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:43.623Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:43.623Z",
@@ -16716,7 +16716,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:46.028Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:46.028Z",
@@ -16812,7 +16812,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:48.530Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:48.530Z",
@@ -16908,7 +16908,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:51.944Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:51.944Z",
@@ -16982,7 +16982,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:54.343Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:54.343Z",
@@ -17078,7 +17078,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:45:57.979Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:45:57.979Z",
@@ -17163,7 +17163,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:02.022Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:02.022Z",
@@ -17248,7 +17248,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:05.343Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:05.343Z",
@@ -17322,7 +17322,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:08.652Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:08.652Z",
@@ -17407,7 +17407,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:12.091Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:12.091Z",
@@ -17547,7 +17547,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:15.224Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:15.224Z",
@@ -17687,7 +17687,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:18.202Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:18.202Z",
@@ -17816,7 +17816,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:22.174Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:22.174Z",
@@ -17956,7 +17956,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:24.655Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:24.655Z",
@@ -18041,7 +18041,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:27.525Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:27.525Z",
@@ -18126,7 +18126,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:31.565Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:31.565Z",
@@ -18222,7 +18222,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:35.502Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:35.502Z",
@@ -18307,7 +18307,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:40.322Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:40.322Z",
@@ -18403,7 +18403,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:44.079Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:44.079Z",
@@ -18499,7 +18499,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:47.636Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:47.636Z",
@@ -18595,7 +18595,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:50.838Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:50.838Z",
@@ -18691,7 +18691,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:54.249Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:54.249Z",
@@ -18776,7 +18776,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:46:57.263Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:46:57.263Z",
@@ -18872,7 +18872,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:00.281Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:00.281Z",
@@ -18957,7 +18957,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:05.597Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:05.597Z",
@@ -19053,7 +19053,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:11.573Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:11.573Z",
@@ -19149,7 +19149,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:14.220Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:14.220Z",
@@ -19234,7 +19234,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:17.861Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:17.861Z",
@@ -19319,7 +19319,7 @@
    "gender": "",
    "division": "Campion",
    "group": "Campion",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12081": {
    "firstSeen": "2026-10-25",
@@ -19330,7 +19330,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HV - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12082": {
    "firstSeen": "2026-10-25",
@@ -19341,7 +19341,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HWB - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12083": {
    "firstSeen": "2026-10-25",
@@ -19352,7 +19352,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HV - B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12084": {
    "firstSeen": "2026-10-25",
@@ -19363,7 +19363,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:21.086Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:21.086Z",
@@ -19492,7 +19492,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:24.247Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:24.247Z",
@@ -19643,7 +19643,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "OL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:27.577Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:27.577Z",
@@ -19794,7 +19794,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "FL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:30.033Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:30.033Z",
@@ -19934,7 +19934,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "FL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:32.763Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:32.763Z",
@@ -20030,7 +20030,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:36.626Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:36.626Z",
@@ -20192,7 +20192,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:39.041Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:39.041Z",
@@ -20354,7 +20354,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:43.781Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:43.781Z",
@@ -20516,7 +20516,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:46.356Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:46.356Z",
@@ -20678,7 +20678,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:49.216Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:49.216Z",
@@ -20840,7 +20840,7 @@
    "gender": "F",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:52.656Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:52.656Z",
@@ -21002,7 +21002,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:56.382Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:56.382Z",
@@ -21164,7 +21164,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:47:59.552Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:47:59.552Z",
@@ -21326,7 +21326,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:02.865Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:02.865Z",
@@ -21488,7 +21488,7 @@
    "gender": "F",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:06.490Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:06.490Z",
@@ -21650,7 +21650,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:08.860Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:08.860Z",
@@ -21812,7 +21812,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:11.820Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:11.820Z",
@@ -21974,7 +21974,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:15.108Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:15.108Z",
@@ -22136,7 +22136,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:18.424Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:18.424Z",
@@ -22298,7 +22298,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:24.964Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:24.964Z",
@@ -22460,7 +22460,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:27.651Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:27.651Z",
@@ -22622,7 +22622,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:30.840Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:30.840Z",
@@ -22784,7 +22784,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:33.320Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:33.320Z",
@@ -22946,7 +22946,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:36.128Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:36.128Z",
@@ -23031,7 +23031,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:39.192Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:39.192Z",
@@ -23127,7 +23127,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:42.668Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:42.668Z",
@@ -23212,7 +23212,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:45.702Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:45.702Z",
@@ -23352,7 +23352,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:50.141Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:50.141Z",
@@ -23492,7 +23492,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:53.542Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:53.542Z",
@@ -23588,7 +23588,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:56.565Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:56.565Z",
@@ -23684,7 +23684,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:48:58.996Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:48:58.996Z",
@@ -23769,7 +23769,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:02.618Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:02.618Z",
@@ -23865,7 +23865,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:05.936Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:05.936Z",
@@ -23961,7 +23961,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:08.602Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:08.602Z",
@@ -24046,7 +24046,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:11.083Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:11.083Z",
@@ -24131,7 +24131,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:14.427Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:14.427Z",
@@ -24227,7 +24227,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:17.744Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:17.744Z",
@@ -24323,7 +24323,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:21.799Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:21.799Z",
@@ -24419,7 +24419,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:34.735Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:34.735Z",
@@ -24504,7 +24504,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:38.667Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:38.667Z",
@@ -24600,7 +24600,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:41.232Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:41.232Z",
@@ -24696,7 +24696,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:43.754Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:43.754Z",
@@ -24781,7 +24781,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:46.407Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:46.407Z",
@@ -24877,7 +24877,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:48.962Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:48.962Z",
@@ -24962,7 +24962,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:52.547Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:52.547Z",
@@ -25102,7 +25102,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:55.682Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:55.682Z",
@@ -25198,7 +25198,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:49:59.010Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:49:59.010Z",
@@ -25283,7 +25283,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:02.237Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:02.237Z",
@@ -25368,7 +25368,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:05.438Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:05.438Z",
@@ -25464,7 +25464,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:09.421Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:09.421Z",
@@ -25549,7 +25549,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:12.438Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:12.438Z",
@@ -25645,7 +25645,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:15.026Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:15.026Z",
@@ -25741,7 +25741,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:18.385Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:18.385Z",
@@ -25826,7 +25826,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:21.965Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:21.965Z",
@@ -25911,7 +25911,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:26.177Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:26.177Z",
@@ -25996,7 +25996,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:28.916Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:28.916Z",
@@ -26081,7 +26081,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:32.591Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:32.591Z",
@@ -26166,7 +26166,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:36.294Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:36.294Z",
@@ -26251,7 +26251,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:39.273Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:39.273Z",
@@ -26347,7 +26347,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:41.967Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:41.967Z",
@@ -26432,7 +26432,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "I",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:44.562Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:44.562Z",
@@ -26528,7 +26528,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:48.335Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:48.335Z",
@@ -26679,7 +26679,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:51.631Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:51.631Z",
@@ -26775,7 +26775,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:54.129Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:54.129Z",
@@ -26860,7 +26860,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:50:57.166Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:50:57.166Z",
@@ -26945,7 +26945,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:00.320Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:00.320Z",
@@ -27041,7 +27041,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:05.416Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:05.416Z",
@@ -27137,7 +27137,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:09.062Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:09.062Z",
@@ -27233,7 +27233,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:12.767Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:12.767Z",
@@ -27318,7 +27318,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:15.861Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:15.861Z",
@@ -27414,7 +27414,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:19.216Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:19.216Z",
@@ -27510,7 +27510,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:21.784Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:21.784Z",
@@ -27606,7 +27606,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:25.114Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:25.114Z",
@@ -27691,7 +27691,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:27.910Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:27.910Z",
@@ -27776,7 +27776,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:33.160Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:33.160Z",
@@ -27850,7 +27850,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:36.246Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:36.246Z",
@@ -27946,7 +27946,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:39.304Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:39.304Z",
@@ -28042,7 +28042,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:42.628Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:42.628Z",
@@ -28127,7 +28127,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:45.552Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:45.552Z",
@@ -28223,7 +28223,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:50.282Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:50.282Z",
@@ -28319,7 +28319,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:54.031Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:54.031Z",
@@ -28415,7 +28415,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:56.398Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:56.398Z",
@@ -28511,7 +28511,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:51:59.474Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:51:59.474Z",
@@ -28673,7 +28673,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:02.514Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:02.514Z",
@@ -28758,7 +28758,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:05.102Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:05.102Z",
@@ -28843,7 +28843,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:08.322Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:08.322Z",
@@ -28928,7 +28928,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:11.204Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:11.204Z",
@@ -29013,7 +29013,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:14.454Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:14.454Z",
@@ -29098,7 +29098,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:17.205Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:17.205Z",
@@ -29183,7 +29183,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:20.366Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:20.366Z",
@@ -29279,7 +29279,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:22.906Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:22.906Z",
@@ -29375,7 +29375,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:26.065Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:26.065Z",
@@ -29449,7 +29449,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:28.457Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:28.457Z",
@@ -29534,7 +29534,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:32.042Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:32.042Z",
@@ -29619,7 +29619,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:35.382Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:35.382Z",
@@ -29715,7 +29715,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:38.867Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:38.867Z",
@@ -29789,7 +29789,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:41.055Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:41.055Z",
@@ -29885,7 +29885,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:43.887Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:43.887Z",
@@ -30047,7 +30047,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:46.545Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:46.545Z",
@@ -30209,7 +30209,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:49.630Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:49.630Z",
@@ -30360,7 +30360,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:53.021Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:53.021Z",
@@ -30511,7 +30511,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:52:56.794Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:52:56.794Z",
@@ -30607,7 +30607,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:00.362Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:00.362Z",
@@ -30703,7 +30703,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:03.389Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:03.389Z",
@@ -30799,7 +30799,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:06.694Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:06.694Z",
@@ -30895,7 +30895,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:10.262Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:10.262Z",
@@ -30991,7 +30991,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:12.797Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:12.797Z",
@@ -31087,7 +31087,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:16.542Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:16.542Z",
@@ -31183,7 +31183,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:20.783Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:20.783Z",
@@ -31279,7 +31279,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:24.383Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:24.383Z",
@@ -31342,7 +31342,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:27.582Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:27.582Z",
@@ -31504,7 +31504,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:30.141Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:30.141Z",
@@ -31655,7 +31655,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:33.889Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:33.889Z",
@@ -31795,7 +31795,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:39.812Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:39.812Z",
@@ -31880,7 +31880,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:42.138Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:42.138Z",
@@ -31965,7 +31965,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:44.800Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:44.800Z",
@@ -32061,7 +32061,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:47.429Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:47.429Z",
@@ -32157,7 +32157,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:50.612Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:50.612Z",
@@ -32253,7 +32253,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:53.516Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:53.516Z",
@@ -32349,7 +32349,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:57.179Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:57.179Z",
@@ -32434,7 +32434,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:53:59.497Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:53:59.497Z",
@@ -32497,7 +32497,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:02.692Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:02.692Z",
@@ -32582,7 +32582,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:05.157Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:05.157Z",
@@ -32667,7 +32667,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:07.617Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:07.617Z",
@@ -32763,7 +32763,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:11.388Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:11.388Z",
@@ -32848,7 +32848,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:14.237Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:14.237Z",
@@ -32933,7 +32933,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:18.166Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:18.166Z",
@@ -33018,7 +33018,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:21.513Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:21.513Z",
@@ -33092,7 +33092,7 @@
    "gender": "",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:24.916Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:24.916Z",
@@ -33232,7 +33232,7 @@
    "gender": "",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:27.715Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:27.715Z",
@@ -33339,7 +33339,7 @@
    "gender": "",
    "division": "Nat. 2",
    "group": "B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:30.126Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:30.126Z",
@@ -33446,7 +33446,7 @@
    "gender": "",
    "division": "Belgium",
    "group": "Belgium",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12216": {
    "firstSeen": "2026-10-25",
@@ -33457,7 +33457,7 @@
    "gender": "",
    "division": "Lobet",
    "group": "Lobet",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12217": {
    "firstSeen": "2026-10-25",
@@ -33468,7 +33468,7 @@
    "gender": "",
    "division": "President",
    "group": "President",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12218": {
    "firstSeen": "2026-10-25",
@@ -33479,7 +33479,7 @@
    "gender": "",
    "division": "Sergant",
    "group": "Sergant",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12221": {
    "firstSeen": "2026-10-25",
@@ -33490,7 +33490,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12222": {
    "firstSeen": "2026-10-25",
@@ -33501,7 +33501,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12223": {
    "firstSeen": "2026-10-25",
@@ -33512,7 +33512,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12224": {
    "firstSeen": "2026-10-25",
@@ -33523,7 +33523,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12225": {
    "firstSeen": "2026-10-25",
@@ -33534,7 +33534,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12226": {
    "firstSeen": "2026-10-25",
@@ -33545,7 +33545,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12227": {
    "firstSeen": "2026-10-25",
@@ -33556,7 +33556,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12228": {
    "firstSeen": "2026-10-25",
@@ -33567,7 +33567,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12229": {
    "firstSeen": "2026-10-25",
@@ -33578,7 +33578,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12230": {
    "firstSeen": "2026-10-25",
@@ -33589,7 +33589,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12231": {
    "firstSeen": "2026-10-25",
@@ -33600,7 +33600,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12232": {
    "firstSeen": "2026-10-25",
@@ -33611,7 +33611,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:33.113Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:33.113Z",
@@ -33729,7 +33729,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:36.851Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:36.851Z",
@@ -33847,7 +33847,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:39.828Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:39.828Z",
@@ -33965,7 +33965,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:42.978Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:42.978Z",
@@ -34083,7 +34083,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:45.899Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:45.899Z",
@@ -34201,7 +34201,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:49.499Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:49.499Z",
@@ -34308,7 +34308,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:53.137Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:53.137Z",
@@ -34415,7 +34415,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:56.510Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:56.510Z",
@@ -34522,7 +34522,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:54:59.832Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:54:59.832Z",
@@ -34640,7 +34640,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:03.548Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:03.548Z",
@@ -34758,7 +34758,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:07.329Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:07.329Z",
@@ -34876,7 +34876,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:09.710Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:09.710Z",
@@ -34983,7 +34983,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:12.540Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:12.540Z",
@@ -35090,7 +35090,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:15.379Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:15.379Z",
@@ -35208,7 +35208,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:17.986Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:17.986Z",
@@ -35326,7 +35326,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:21.297Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:21.297Z",
@@ -35433,7 +35433,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:24.664Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:24.664Z",
@@ -35540,7 +35540,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:27.847Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:27.847Z",
@@ -35647,7 +35647,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:30.861Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:30.861Z",
@@ -35765,7 +35765,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:34.727Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:34.727Z",
@@ -35872,7 +35872,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:37.651Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:37.651Z",
@@ -35979,7 +35979,7 @@
    "gender": "F",
    "division": "Reg. 4",
    "group": "HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:40.987Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:40.987Z",
@@ -36064,7 +36064,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "OL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:47.432Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:47.432Z",
@@ -36171,7 +36171,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "OL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:50.870Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:50.870Z",
@@ -36289,7 +36289,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "OL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:55.267Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:55.267Z",
@@ -36407,7 +36407,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:55:58.782Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:55:58.782Z",
@@ -36503,7 +36503,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:03.064Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:03.064Z",
@@ -36621,7 +36621,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:06.901Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:06.901Z",
@@ -36728,7 +36728,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "OL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:09.821Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:09.821Z",
@@ -36835,7 +36835,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:12.757Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:12.757Z",
@@ -36942,7 +36942,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:16.169Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:16.169Z",
@@ -37049,7 +37049,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:19.107Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:19.107Z",
@@ -37167,7 +37167,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "OL - HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:22.025Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:22.025Z",
@@ -37274,7 +37274,7 @@
    "gender": "M",
    "division": "Reg. 4",
    "group": "OL - HWB",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:26.014Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:26.014Z",
@@ -37381,7 +37381,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:29.703Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:29.703Z",
@@ -37488,7 +37488,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:33.052Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:33.052Z",
@@ -37595,7 +37595,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:35.845Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:35.845Z",
@@ -37702,7 +37702,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "FL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:39.133Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:39.133Z",
@@ -37809,7 +37809,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:42.005Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:42.005Z",
@@ -37927,7 +37927,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:44.351Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:44.351Z",
@@ -38045,7 +38045,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:47.679Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:47.679Z",
@@ -38163,7 +38163,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:50.012Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:50.012Z",
@@ -38270,7 +38270,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:52.685Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:52.685Z",
@@ -38388,7 +38388,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:55.105Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:55.105Z",
@@ -38495,7 +38495,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:56:58.935Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:56:58.935Z",
@@ -38602,7 +38602,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "FL - HV - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:01.911Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:01.911Z",
@@ -38709,7 +38709,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HV",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:05.751Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:05.751Z",
@@ -38827,7 +38827,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:08.817Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:08.817Z",
@@ -38945,7 +38945,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:11.681Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:11.681Z",
@@ -39052,7 +39052,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:15.105Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:15.105Z",
@@ -39170,7 +39170,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "FL - HWB - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:17.436Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:17.436Z",
@@ -39288,7 +39288,7 @@
    "gender": "",
    "division": "Campion",
    "group": "Campion",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12321": {
    "firstSeen": "2026-10-25",
@@ -39299,7 +39299,7 @@
    "gender": "",
    "division": "Testklasse 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12341": {
    "firstSeen": "2026-10-25",
@@ -39310,7 +39310,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:20.615Z",
    "unchanged": 1
   },
@@ -39323,7 +39323,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - B",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:23.268Z",
    "unchanged": 1
   },
@@ -39336,7 +39336,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - C",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:26.835Z",
    "unchanged": 1
   },
@@ -39349,7 +39349,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - D",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:29.382Z",
    "unchanged": 1
   },
@@ -39362,7 +39362,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - E",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:32.674Z",
    "unchanged": 1
   },
@@ -39375,7 +39375,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - F",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:36.453Z",
    "unchanged": 1
   },
@@ -39388,7 +39388,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - G",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:38.809Z",
    "unchanged": 1
   },
@@ -39401,7 +39401,7 @@
    "gender": "",
    "division": "HV",
    "group": "TR - H",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:42.179Z",
    "unchanged": 1
   },
@@ -39414,7 +39414,7 @@
    "gender": "",
    "division": "HWB (Outdoor)",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:45.899Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:45.899Z",
@@ -39510,7 +39510,7 @@
    "gender": "",
    "division": "HWB (Outdoor)",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:48.334Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:48.334Z",
@@ -39584,7 +39584,7 @@
    "gender": "F",
    "division": "Dr. Oetker Hockey Cup Women 1/8",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12364": {
    "firstSeen": "2026-10-25",
@@ -39595,7 +39595,7 @@
    "gender": "M",
    "division": "Dr. Oetker Hockey Cup Men 1/8",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12365": {
    "firstSeen": "2026-10-25",
@@ -39606,7 +39606,7 @@
    "gender": "",
    "division": "HWB (Outdoor)",
    "group": "A",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:50.835Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:57:50.835Z",
@@ -39658,7 +39658,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Grez U19G-1 - Uccle Sport U19G-3",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:54.479Z",
    "unchanged": 1
   },
@@ -39671,7 +39671,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Argos U19G-1 - Wellington U19G-3",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:57:58.080Z",
    "unchanged": 1
   },
@@ -39684,7 +39684,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Rasante U19G-3 - Argos U19G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:01.206Z",
    "unchanged": 1
   },
@@ -39697,7 +39697,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Waterloo Ducks U19G-3 - Oree U19G-5",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:05.110Z",
    "unchanged": 1
   },
@@ -39710,7 +39710,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Waterloo Ducks U19G-3 - Grez U19G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:08.320Z",
    "unchanged": 1
   },
@@ -39723,7 +39723,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12402": {
    "firstSeen": "2026-10-25",
@@ -39734,7 +39734,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12404": {
    "firstSeen": "2026-10-25",
@@ -39745,7 +39745,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "White Star U10G-2 - Linkebeek U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:11.717Z",
    "unchanged": 1
   },
@@ -39758,7 +39758,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Linkebeek U10G-1 - Grez U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:15.118Z",
    "unchanged": 1
   },
@@ -39771,7 +39771,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Wolvendael U10G-1 - Linkebeek U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:18.443Z",
    "unchanged": 1
   },
@@ -39784,7 +39784,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Hoekies U10G-1 - Argos U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:21.833Z",
    "unchanged": 1
   },
@@ -39797,7 +39797,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Oree U10G-2 - Argos U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:24.850Z",
    "unchanged": 1
   },
@@ -39810,7 +39810,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Gantoise U10G-4 - Wolvendael U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:27.317Z",
    "unchanged": 1
   },
@@ -39823,7 +39823,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "Linkebeek U10G-1 - Argos U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:30.217Z",
    "unchanged": 1
   },
@@ -39836,7 +39836,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "White Star U10G-2 - Wolvendael U10G-1",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:37.224Z",
    "unchanged": 1
   },
@@ -39849,7 +39849,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12442": {
    "firstSeen": "2026-10-25",
@@ -39860,7 +39860,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12443": {
    "firstSeen": "2026-10-25",
@@ -39871,7 +39871,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12444": {
    "firstSeen": "2026-10-25",
@@ -39882,7 +39882,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12445": {
    "firstSeen": "2026-10-25",
@@ -39893,7 +39893,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12446": {
    "firstSeen": "2026-10-25",
@@ -39904,7 +39904,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12447": {
    "firstSeen": "2026-10-25",
@@ -39915,7 +39915,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12448": {
    "firstSeen": "2026-10-25",
@@ -39926,7 +39926,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12449": {
    "firstSeen": "2026-10-25",
@@ -39937,7 +39937,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12450": {
    "firstSeen": "2026-10-25",
@@ -39948,7 +39948,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12451": {
    "firstSeen": "2026-10-25",
@@ -39959,7 +39959,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12452": {
    "firstSeen": "2026-10-25",
@@ -39970,7 +39970,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12453": {
    "firstSeen": "2026-10-25",
@@ -39981,7 +39981,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12454": {
    "firstSeen": "2026-10-25",
@@ -39992,7 +39992,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12455": {
    "firstSeen": "2026-10-25",
@@ -40003,7 +40003,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12456": {
    "firstSeen": "2026-10-25",
@@ -40014,7 +40014,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12457": {
    "firstSeen": "2026-10-25",
@@ -40025,7 +40025,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12458": {
    "firstSeen": "2026-10-25",
@@ -40036,7 +40036,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12459": {
    "firstSeen": "2026-10-25",
@@ -40047,7 +40047,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12460": {
    "firstSeen": "2026-10-25",
@@ -40058,7 +40058,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12461": {
    "firstSeen": "2026-10-25",
@@ -40069,7 +40069,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12462": {
    "firstSeen": "2026-10-25",
@@ -40080,7 +40080,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12463": {
    "firstSeen": "2026-10-25",
@@ -40091,7 +40091,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12464": {
    "firstSeen": "2026-10-25",
@@ -40102,7 +40102,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12465": {
    "firstSeen": "2026-10-25",
@@ -40113,7 +40113,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12466": {
    "firstSeen": "2026-10-25",
@@ -40124,7 +40124,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12467": {
    "firstSeen": "2026-10-25",
@@ -40135,7 +40135,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12468": {
    "firstSeen": "2026-10-25",
@@ -40146,7 +40146,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12469": {
    "firstSeen": "2026-10-25",
@@ -40157,7 +40157,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12470": {
    "firstSeen": "2026-10-25",
@@ -40168,7 +40168,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12471": {
    "firstSeen": "2026-10-25",
@@ -40179,7 +40179,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12472": {
    "firstSeen": "2026-10-25",
@@ -40190,7 +40190,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12473": {
    "firstSeen": "2026-10-25",
@@ -40201,7 +40201,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12474": {
    "firstSeen": "2026-10-25",
@@ -40212,7 +40212,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12475": {
    "firstSeen": "2026-10-25",
@@ -40223,7 +40223,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12476": {
    "firstSeen": "2026-10-25",
@@ -40234,7 +40234,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12477": {
    "firstSeen": "2026-10-25",
@@ -40245,7 +40245,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12478": {
    "firstSeen": "2026-10-25",
@@ -40256,7 +40256,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12479": {
    "firstSeen": "2026-10-25",
@@ -40267,7 +40267,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12480": {
    "firstSeen": "2026-10-25",
@@ -40278,7 +40278,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12481": {
    "firstSeen": "2026-10-25",
@@ -40289,7 +40289,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12482": {
    "firstSeen": "2026-10-25",
@@ -40300,7 +40300,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12483": {
    "firstSeen": "2026-10-25",
@@ -40311,7 +40311,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12484": {
    "firstSeen": "2026-10-25",
@@ -40322,7 +40322,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12485": {
    "firstSeen": "2026-10-25",
@@ -40333,7 +40333,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12486": {
    "firstSeen": "2026-10-25",
@@ -40344,7 +40344,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12487": {
    "firstSeen": "2026-10-25",
@@ -40355,7 +40355,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12488": {
    "firstSeen": "2026-10-25",
@@ -40366,7 +40366,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12489": {
    "firstSeen": "2026-10-25",
@@ -40377,7 +40377,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12490": {
    "firstSeen": "2026-10-25",
@@ -40388,7 +40388,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12491": {
    "firstSeen": "2026-10-25",
@@ -40399,7 +40399,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12492": {
    "firstSeen": "2026-10-25",
@@ -40410,7 +40410,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12493": {
    "firstSeen": "2026-10-25",
@@ -40421,7 +40421,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12494": {
    "firstSeen": "2026-10-25",
@@ -40432,7 +40432,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12495": {
    "firstSeen": "2026-10-25",
@@ -40443,7 +40443,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12496": {
    "firstSeen": "2026-10-25",
@@ -40454,7 +40454,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12497": {
    "firstSeen": "2026-10-25",
@@ -40465,7 +40465,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12498": {
    "firstSeen": "2026-10-25",
@@ -40476,7 +40476,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12499": {
    "firstSeen": "2026-10-25",
@@ -40487,7 +40487,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12500": {
    "firstSeen": "2026-10-25",
@@ -40498,7 +40498,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12501": {
    "firstSeen": "2026-10-25",
@@ -40509,7 +40509,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12502": {
    "firstSeen": "2026-10-25",
@@ -40520,7 +40520,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12503": {
    "firstSeen": "2026-10-25",
@@ -40531,7 +40531,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12504": {
    "firstSeen": "2026-10-25",
@@ -40542,7 +40542,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12505": {
    "firstSeen": "2026-10-25",
@@ -40553,7 +40553,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12506": {
    "firstSeen": "2026-10-25",
@@ -40564,7 +40564,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12507": {
    "firstSeen": "2026-10-25",
@@ -40575,7 +40575,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12508": {
    "firstSeen": "2026-10-25",
@@ -40586,7 +40586,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12509": {
    "firstSeen": "2026-10-25",
@@ -40597,7 +40597,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12510": {
    "firstSeen": "2026-10-25",
@@ -40608,7 +40608,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12511": {
    "firstSeen": "2026-10-25",
@@ -40619,7 +40619,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12512": {
    "firstSeen": "2026-10-25",
@@ -40630,7 +40630,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12513": {
    "firstSeen": "2026-10-25",
@@ -40641,7 +40641,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12514": {
    "firstSeen": "2026-10-25",
@@ -40652,7 +40652,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12515": {
    "firstSeen": "2026-10-25",
@@ -40663,7 +40663,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12516": {
    "firstSeen": "2026-10-25",
@@ -40674,7 +40674,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12517": {
    "firstSeen": "2026-10-25",
@@ -40685,7 +40685,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12518": {
    "firstSeen": "2026-10-25",
@@ -40696,7 +40696,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12519": {
    "firstSeen": "2026-10-25",
@@ -40707,7 +40707,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12520": {
    "firstSeen": "2026-10-25",
@@ -40718,7 +40718,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12521": {
    "firstSeen": "2026-10-25",
@@ -40729,7 +40729,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12522": {
    "firstSeen": "2026-10-25",
@@ -40740,7 +40740,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12523": {
    "firstSeen": "2026-10-25",
@@ -40751,7 +40751,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12524": {
    "firstSeen": "2026-10-25",
@@ -40762,7 +40762,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12525": {
    "firstSeen": "2026-10-25",
@@ -40773,7 +40773,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12526": {
    "firstSeen": "2026-10-25",
@@ -40784,7 +40784,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12527": {
    "firstSeen": "2026-10-25",
@@ -40795,7 +40795,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12528": {
    "firstSeen": "2026-10-25",
@@ -40806,7 +40806,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12529": {
    "firstSeen": "2026-10-25",
@@ -40817,7 +40817,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12530": {
    "firstSeen": "2026-10-25",
@@ -40828,7 +40828,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12531": {
    "firstSeen": "2026-10-25",
@@ -40839,7 +40839,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12532": {
    "firstSeen": "2026-10-25",
@@ -40850,7 +40850,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12533": {
    "firstSeen": "2026-10-25",
@@ -40861,7 +40861,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12534": {
    "firstSeen": "2026-10-25",
@@ -40872,7 +40872,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12535": {
    "firstSeen": "2026-10-25",
@@ -40883,7 +40883,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12536": {
    "firstSeen": "2026-10-25",
@@ -40894,7 +40894,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12537": {
    "firstSeen": "2026-10-25",
@@ -40905,7 +40905,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12538": {
    "firstSeen": "2026-10-25",
@@ -40916,7 +40916,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12539": {
    "firstSeen": "2026-10-25",
@@ -40927,7 +40927,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12540": {
    "firstSeen": "2026-10-25",
@@ -40938,7 +40938,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12541": {
    "firstSeen": "2026-10-25",
@@ -40949,7 +40949,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12542": {
    "firstSeen": "2026-10-25",
@@ -40960,7 +40960,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12543": {
    "firstSeen": "2026-10-25",
@@ -40971,7 +40971,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12544": {
    "firstSeen": "2026-10-25",
@@ -40982,7 +40982,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12554": {
    "firstSeen": "2026-10-25",
@@ -40993,7 +40993,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12555": {
    "firstSeen": "2026-10-25",
@@ -41004,7 +41004,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12556": {
    "firstSeen": "2026-10-25",
@@ -41015,7 +41015,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12557": {
    "firstSeen": "2026-10-25",
@@ -41026,7 +41026,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12558": {
    "firstSeen": "2026-10-25",
@@ -41037,7 +41037,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12559": {
    "firstSeen": "2026-10-25",
@@ -41048,7 +41048,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12560": {
    "firstSeen": "2026-10-25",
@@ -41059,7 +41059,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12561": {
    "firstSeen": "2026-10-25",
@@ -41070,7 +41070,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12562": {
    "firstSeen": "2026-10-25",
@@ -41081,7 +41081,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12563": {
    "firstSeen": "2026-10-25",
@@ -41092,7 +41092,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12564": {
    "firstSeen": "2026-10-25",
@@ -41103,7 +41103,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12565": {
    "firstSeen": "2026-10-25",
@@ -41114,7 +41114,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12566": {
    "firstSeen": "2026-10-25",
@@ -41125,7 +41125,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12567": {
    "firstSeen": "2026-10-25",
@@ -41136,7 +41136,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12568": {
    "firstSeen": "2026-10-25",
@@ -41147,7 +41147,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12569": {
    "firstSeen": "2026-10-25",
@@ -41158,7 +41158,7 @@
    "gender": "F",
    "division": "Indoor 4 Games",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12570": {
    "firstSeen": "2026-10-25",
@@ -41169,7 +41169,7 @@
    "gender": "F",
    "division": "Indoor 4 Games",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12571": {
    "firstSeen": "2026-10-25",
@@ -41180,7 +41180,7 @@
    "gender": "F",
    "division": "Indoor 4 Games",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12572": {
    "firstSeen": "2026-10-25",
@@ -41191,7 +41191,7 @@
    "gender": "F",
    "division": "Indoor 4 Games",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12573": {
    "firstSeen": "2026-10-25",
@@ -41202,7 +41202,7 @@
    "gender": "F",
    "division": "Indoor 4 Games",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12574": {
    "firstSeen": "2026-10-25",
@@ -41213,7 +41213,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12575": {
    "firstSeen": "2026-10-25",
@@ -41224,7 +41224,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12576": {
    "firstSeen": "2026-10-25",
@@ -41235,7 +41235,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12577": {
    "firstSeen": "2026-10-25",
@@ -41246,7 +41246,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12578": {
    "firstSeen": "2026-10-25",
@@ -41257,7 +41257,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12579": {
    "firstSeen": "2026-10-25",
@@ -41268,7 +41268,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12580": {
    "firstSeen": "2026-10-25",
@@ -41279,7 +41279,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12581": {
    "firstSeen": "2026-10-25",
@@ -41290,7 +41290,7 @@
    "gender": "M",
    "division": "Indoor 4 Games",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12582": {
    "firstSeen": "2026-10-25",
@@ -41301,7 +41301,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12583": {
    "firstSeen": "2026-10-25",
@@ -41312,7 +41312,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12584": {
    "firstSeen": "2026-10-25",
@@ -41323,7 +41323,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12585": {
    "firstSeen": "2026-10-25",
@@ -41334,7 +41334,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12586": {
    "firstSeen": "2026-10-25",
@@ -41345,7 +41345,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12587": {
    "firstSeen": "2026-10-25",
@@ -41356,7 +41356,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12588": {
    "firstSeen": "2026-10-25",
@@ -41367,7 +41367,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12589": {
    "firstSeen": "2026-10-25",
@@ -41378,7 +41378,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12590": {
    "firstSeen": "2026-10-25",
@@ -41389,7 +41389,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12591": {
    "firstSeen": "2026-10-25",
@@ -41400,7 +41400,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12592": {
    "firstSeen": "2026-10-25",
@@ -41411,7 +41411,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12593": {
    "firstSeen": "2026-10-25",
@@ -41422,7 +41422,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12594": {
    "firstSeen": "2026-10-25",
@@ -41433,7 +41433,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12595": {
    "firstSeen": "2026-10-25",
@@ -41444,7 +41444,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12596": {
    "firstSeen": "2026-10-25",
@@ -41455,7 +41455,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12597": {
    "firstSeen": "2026-10-25",
@@ -41466,7 +41466,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12598": {
    "firstSeen": "2026-10-25",
@@ -41477,7 +41477,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12599": {
    "firstSeen": "2026-10-25",
@@ -41488,7 +41488,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12600": {
    "firstSeen": "2026-10-25",
@@ -41499,7 +41499,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12601": {
    "firstSeen": "2026-10-25",
@@ -41510,7 +41510,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12602": {
    "firstSeen": "2026-10-25",
@@ -41521,7 +41521,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12603": {
    "firstSeen": "2026-10-25",
@@ -41532,7 +41532,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12604": {
    "firstSeen": "2026-10-25",
@@ -41543,7 +41543,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12605": {
    "firstSeen": "2026-10-25",
@@ -41554,7 +41554,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12606": {
    "firstSeen": "2026-10-25",
@@ -41565,7 +41565,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12607": {
    "firstSeen": "2026-10-25",
@@ -41576,7 +41576,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12608": {
    "firstSeen": "2026-10-25",
@@ -41587,7 +41587,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12609": {
    "firstSeen": "2026-10-25",
@@ -41598,7 +41598,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12610": {
    "firstSeen": "2026-10-25",
@@ -41609,7 +41609,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12611": {
    "firstSeen": "2026-10-25",
@@ -41620,7 +41620,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12612": {
    "firstSeen": "2026-10-25",
@@ -41631,7 +41631,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12613": {
    "firstSeen": "2026-10-25",
@@ -41642,7 +41642,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12614": {
    "firstSeen": "2026-10-25",
@@ -41653,7 +41653,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12622": {
    "firstSeen": "2026-10-25",
@@ -41664,7 +41664,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12623": {
    "firstSeen": "2026-10-25",
@@ -41675,7 +41675,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12624": {
    "firstSeen": "2026-10-25",
@@ -41686,7 +41686,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12625": {
    "firstSeen": "2026-10-25",
@@ -41697,7 +41697,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12626": {
    "firstSeen": "2026-10-25",
@@ -41708,7 +41708,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12627": {
    "firstSeen": "2026-10-25",
@@ -41719,7 +41719,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12628": {
    "firstSeen": "2026-10-25",
@@ -41730,7 +41730,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12629": {
    "firstSeen": "2026-10-25",
@@ -41741,7 +41741,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12630": {
    "firstSeen": "2026-10-25",
@@ -41752,7 +41752,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12631": {
    "firstSeen": "2026-10-25",
@@ -41763,7 +41763,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12632": {
    "firstSeen": "2026-10-25",
@@ -41774,7 +41774,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12633": {
    "firstSeen": "2026-10-25",
@@ -41785,7 +41785,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12634": {
    "firstSeen": "2026-10-25",
@@ -41796,7 +41796,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12635": {
    "firstSeen": "2026-10-25",
@@ -41807,7 +41807,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12636": {
    "firstSeen": "2026-10-25",
@@ -41818,7 +41818,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12637": {
    "firstSeen": "2026-10-25",
@@ -41829,7 +41829,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12638": {
    "firstSeen": "2026-10-25",
@@ -41840,7 +41840,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12639": {
    "firstSeen": "2026-10-25",
@@ -41851,7 +41851,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12640": {
    "firstSeen": "2026-10-25",
@@ -41862,7 +41862,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12641": {
    "firstSeen": "2026-10-25",
@@ -41873,7 +41873,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12642": {
    "firstSeen": "2026-10-25",
@@ -41884,7 +41884,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12643": {
    "firstSeen": "2026-10-25",
@@ -41895,7 +41895,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12644": {
    "firstSeen": "2026-10-25",
@@ -41906,7 +41906,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12645": {
    "firstSeen": "2026-10-25",
@@ -41917,7 +41917,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "J",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12654": {
    "firstSeen": "2026-10-25",
@@ -41928,7 +41928,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12655": {
    "firstSeen": "2026-10-25",
@@ -41939,7 +41939,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12656": {
    "firstSeen": "2026-10-25",
@@ -41950,7 +41950,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12657": {
    "firstSeen": "2026-10-25",
@@ -41961,7 +41961,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12658": {
    "firstSeen": "2026-10-25",
@@ -41972,7 +41972,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12659": {
    "firstSeen": "2026-10-25",
@@ -41983,7 +41983,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12660": {
    "firstSeen": "2026-10-25",
@@ -41994,7 +41994,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12661": {
    "firstSeen": "2026-10-25",
@@ -42005,7 +42005,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12662": {
    "firstSeen": "2026-10-25",
@@ -42016,7 +42016,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12663": {
    "firstSeen": "2026-10-25",
@@ -42027,7 +42027,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12664": {
    "firstSeen": "2026-10-25",
@@ -42038,7 +42038,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12665": {
    "firstSeen": "2026-10-25",
@@ -42049,7 +42049,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12666": {
    "firstSeen": "2026-10-25",
@@ -42060,7 +42060,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12667": {
    "firstSeen": "2026-10-25",
@@ -42071,7 +42071,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12668": {
    "firstSeen": "2026-10-25",
@@ -42082,7 +42082,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12669": {
    "firstSeen": "2026-10-25",
@@ -42093,7 +42093,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12670": {
    "firstSeen": "2026-10-25",
@@ -42104,7 +42104,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12671": {
    "firstSeen": "2026-10-25",
@@ -42115,7 +42115,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12672": {
    "firstSeen": "2026-10-25",
@@ -42126,7 +42126,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12673": {
    "firstSeen": "2026-10-25",
@@ -42137,7 +42137,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12674": {
    "firstSeen": "2026-10-25",
@@ -42148,7 +42148,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12675": {
    "firstSeen": "2026-10-25",
@@ -42159,7 +42159,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12676": {
    "firstSeen": "2026-10-25",
@@ -42170,7 +42170,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12677": {
    "firstSeen": "2026-10-25",
@@ -42181,7 +42181,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12678": {
    "firstSeen": "2026-10-25",
@@ -42192,7 +42192,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12679": {
    "firstSeen": "2026-10-25",
@@ -42203,7 +42203,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12680": {
    "firstSeen": "2026-10-25",
@@ -42214,7 +42214,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12681": {
    "firstSeen": "2026-10-25",
@@ -42225,7 +42225,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12682": {
    "firstSeen": "2026-10-25",
@@ -42236,7 +42236,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12683": {
    "firstSeen": "2026-10-25",
@@ -42247,7 +42247,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12684": {
    "firstSeen": "2026-10-25",
@@ -42258,7 +42258,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12685": {
    "firstSeen": "2026-10-25",
@@ -42269,7 +42269,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12686": {
    "firstSeen": "2026-10-25",
@@ -42280,7 +42280,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12687": {
    "firstSeen": "2026-10-25",
@@ -42291,7 +42291,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12688": {
    "firstSeen": "2026-10-25",
@@ -42302,7 +42302,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12689": {
    "firstSeen": "2026-10-25",
@@ -42313,7 +42313,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12690": {
    "firstSeen": "2026-10-25",
@@ -42324,7 +42324,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12691": {
    "firstSeen": "2026-10-25",
@@ -42335,7 +42335,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12692": {
    "firstSeen": "2026-10-25",
@@ -42346,7 +42346,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12693": {
    "firstSeen": "2026-10-25",
@@ -42357,7 +42357,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12694": {
    "firstSeen": "2026-10-25",
@@ -42368,7 +42368,7 @@
    "gender": "M",
    "division": "Reg. 3",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12695": {
    "firstSeen": "2026-10-25",
@@ -42379,7 +42379,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12696": {
    "firstSeen": "2026-10-25",
@@ -42390,7 +42390,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12697": {
    "firstSeen": "2026-10-25",
@@ -42401,7 +42401,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12698": {
    "firstSeen": "2026-10-25",
@@ -42412,7 +42412,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12699": {
    "firstSeen": "2026-10-25",
@@ -42423,7 +42423,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12700": {
    "firstSeen": "2026-10-25",
@@ -42434,7 +42434,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12701": {
    "firstSeen": "2026-10-25",
@@ -42445,7 +42445,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "G",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12702": {
    "firstSeen": "2026-10-25",
@@ -42456,7 +42456,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "H",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12703": {
    "firstSeen": "2026-10-25",
@@ -42467,7 +42467,7 @@
    "gender": "M",
    "division": "Reg. 2",
    "group": "I",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12704": {
    "firstSeen": "2026-10-25",
@@ -42478,7 +42478,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12705": {
    "firstSeen": "2026-10-25",
@@ -42489,7 +42489,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12706": {
    "firstSeen": "2026-10-25",
@@ -42500,7 +42500,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12707": {
    "firstSeen": "2026-10-25",
@@ -42511,7 +42511,7 @@
    "gender": "M",
    "division": "Reg. 1",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12708": {
    "firstSeen": "2026-10-25",
@@ -42522,7 +42522,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12709": {
    "firstSeen": "2026-10-25",
@@ -42533,7 +42533,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12710": {
    "firstSeen": "2026-10-25",
@@ -42544,7 +42544,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12711": {
    "firstSeen": "2026-10-25",
@@ -42555,7 +42555,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12712": {
    "firstSeen": "2026-10-25",
@@ -42566,7 +42566,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12713": {
    "firstSeen": "2026-10-25",
@@ -42577,7 +42577,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12714": {
    "firstSeen": "2026-10-25",
@@ -42588,7 +42588,7 @@
    "gender": "F",
    "division": "Reg. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12715": {
    "firstSeen": "2026-10-25",
@@ -42599,7 +42599,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12716": {
    "firstSeen": "2026-10-25",
@@ -42610,7 +42610,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12717": {
    "firstSeen": "2026-10-25",
@@ -42621,7 +42621,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12718": {
    "firstSeen": "2026-10-25",
@@ -42632,7 +42632,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12719": {
    "firstSeen": "2026-10-25",
@@ -42643,7 +42643,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "E",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12720": {
    "firstSeen": "2026-10-25",
@@ -42654,7 +42654,7 @@
    "gender": "F",
    "division": "Reg. 2",
    "group": "F",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12721": {
    "firstSeen": "2026-10-25",
@@ -42665,7 +42665,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12722": {
    "firstSeen": "2026-10-25",
@@ -42676,7 +42676,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12723": {
    "firstSeen": "2026-10-25",
@@ -42687,7 +42687,7 @@
    "gender": "F",
    "division": "Reg. 1",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12724": {
    "firstSeen": "2026-10-25",
@@ -42698,7 +42698,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12725": {
    "firstSeen": "2026-10-25",
@@ -42709,7 +42709,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12726": {
    "firstSeen": "2026-10-25",
@@ -42720,7 +42720,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12727": {
    "firstSeen": "2026-10-25",
@@ -42731,7 +42731,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12741": {
    "firstSeen": "2026-10-25",
@@ -42742,7 +42742,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "OL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12742": {
    "firstSeen": "2026-10-25",
@@ -42753,7 +42753,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "OL - B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12743": {
    "firstSeen": "2026-10-25",
@@ -42764,7 +42764,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "OL - C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12744": {
    "firstSeen": "2026-10-25",
@@ -42775,7 +42775,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12745": {
    "firstSeen": "2026-10-25",
@@ -42786,7 +42786,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12746": {
    "firstSeen": "2026-10-25",
@@ -42797,7 +42797,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12747": {
    "firstSeen": "2026-10-25",
@@ -42808,7 +42808,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12748": {
    "firstSeen": "2026-10-25",
@@ -42819,7 +42819,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12749": {
    "firstSeen": "2026-10-25",
@@ -42830,7 +42830,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12750": {
    "firstSeen": "2026-10-25",
@@ -42841,7 +42841,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12751": {
    "firstSeen": "2026-10-25",
@@ -42852,7 +42852,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12752": {
    "firstSeen": "2026-10-25",
@@ -42863,7 +42863,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12753": {
    "firstSeen": "2026-10-25",
@@ -42874,7 +42874,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12754": {
    "firstSeen": "2026-10-25",
@@ -42885,7 +42885,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12755": {
    "firstSeen": "2026-10-25",
@@ -42896,7 +42896,7 @@
    "gender": "M",
    "division": "Indoor 4 Fun",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12756": {
    "firstSeen": "2026-10-25",
@@ -42907,7 +42907,7 @@
    "gender": "M",
    "division": "Indoor 4 Fun",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12757": {
    "firstSeen": "2026-10-25",
@@ -42918,7 +42918,7 @@
    "gender": "M",
    "division": "Indoor 4 Fun",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12758": {
    "firstSeen": "2026-10-25",
@@ -42929,7 +42929,7 @@
    "gender": "M",
    "division": "Indoor 4 Fun",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12759": {
    "firstSeen": "2026-10-25",
@@ -42940,7 +42940,7 @@
    "gender": "F",
    "division": "Indoor 4 Fun",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12760": {
    "firstSeen": "2026-10-25",
@@ -42951,7 +42951,7 @@
    "gender": "F",
    "division": "Indoor 4 Fun",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12761": {
    "firstSeen": "2026-10-25",
@@ -42962,7 +42962,7 @@
    "gender": "F",
    "division": "Indoor 4 Fun",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12762": {
    "firstSeen": "2026-10-25",
@@ -42973,7 +42973,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "OL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12763": {
    "firstSeen": "2026-10-25",
@@ -42984,7 +42984,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "OL - B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12764": {
    "firstSeen": "2026-10-25",
@@ -42995,7 +42995,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "FL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12765": {
    "firstSeen": "2026-10-25",
@@ -43006,7 +43006,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "FL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12766": {
    "firstSeen": "2026-10-25",
@@ -43017,7 +43017,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "FL - B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12767": {
    "firstSeen": "2026-10-25",
@@ -43028,7 +43028,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "FL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12768": {
    "firstSeen": "2026-10-25",
@@ -43039,7 +43039,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "FL - B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12769": {
    "firstSeen": "2026-10-25",
@@ -43050,7 +43050,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "FL - A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12770": {
    "firstSeen": "2026-10-25",
@@ -43061,7 +43061,7 @@
    "gender": "M",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12771": {
    "firstSeen": "2026-10-25",
@@ -43072,7 +43072,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12772": {
    "firstSeen": "2026-10-25",
@@ -43083,7 +43083,7 @@
    "gender": "M",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12773": {
    "firstSeen": "2026-10-25",
@@ -43094,7 +43094,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12774": {
    "firstSeen": "2026-10-25",
@@ -43105,7 +43105,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12775": {
    "firstSeen": "2026-10-25",
@@ -43116,7 +43116,7 @@
    "gender": "M",
    "division": "Nat. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12776": {
    "firstSeen": "2026-10-25",
@@ -43127,7 +43127,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12777": {
    "firstSeen": "2026-10-25",
@@ -43138,7 +43138,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12778": {
    "firstSeen": "2026-10-25",
@@ -43149,7 +43149,7 @@
    "gender": "M",
    "division": "Nat. 3",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12779": {
    "firstSeen": "2026-10-25",
@@ -43160,7 +43160,7 @@
    "gender": "F",
    "division": "Nat. Honour",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12780": {
    "firstSeen": "2026-10-25",
@@ -43171,7 +43171,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12781": {
    "firstSeen": "2026-10-25",
@@ -43182,7 +43182,7 @@
    "gender": "F",
    "division": "Nat. 1",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12782": {
    "firstSeen": "2026-10-25",
@@ -43193,7 +43193,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "A",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12783": {
    "firstSeen": "2026-10-25",
@@ -43204,7 +43204,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "B",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12784": {
    "firstSeen": "2026-10-25",
@@ -43215,7 +43215,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "C",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12785": {
    "firstSeen": "2026-10-25",
@@ -43226,7 +43226,7 @@
    "gender": "F",
    "division": "Nat. 2",
    "group": "D",
-   "lastListed": "2026-10-26"
+   "lastListed": "2026-10-27"
   },
   "12801": {
    "firstSeen": "2026-10-25",
@@ -43237,7 +43237,7 @@
    "gender": "",
    "division": "Nat. 2",
    "group": "Top 8",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:40.784Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:58:40.784Z",
@@ -43355,7 +43355,7 @@
    "gender": "",
    "division": "Nat. 2",
    "group": "Bottom 6",
-   "lastListed": "2026-10-26",
+   "lastListed": "2026-10-27",
    "lastChecked": "2026-10-25T06:58:44.187Z",
    "snapshot": {
     "fetchedAt": "2026-10-25T06:58:44.187Z",
