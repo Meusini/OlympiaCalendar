@@ -1,6 +1,6 @@
 {
     "note":  "Fallback for update.ps1: team code -\u003e poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none.",
-    "updated":  "2026-10-28",
+    "updated":  "2026-10-30",
     "teams":  {
                   "D-1":  {
                               "poolId":  "11767",
