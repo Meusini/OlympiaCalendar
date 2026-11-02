@@ -64,6 +64,17 @@ function ApiCall([scriptblock]$call, [string]$url) {
 function ApiGet([string]$url) {
     return ApiCall { Invoke-RestMethod -Uri $url -UseBasicParsing -UserAgent $UserAgent -TimeoutSec 60 } $url
 }
+# hockey.be sometimes answers a valid query with an empty list and no error: the same
+# 25-day results window gave 0 rows at 06:30 and 210 rows later that morning (2026-11-02).
+# So ask again before believing an empty answer.
+function ApiGetRows([string]$url, [int]$retries = 2) {
+    for ($try = 0; $try -le $retries; $try++) {
+        $r = ApiGet $url
+        if ($r.data.Count -gt 0 -or $try -eq $retries) { return $r }
+        Write-Host ("  empty answer, asking again ({0}/{1})" -f ($try + 1), $retries)
+        Start-Sleep -Seconds 20
+    }
+}
 function ApiGetWeb([string]$url) {
     return ApiCall { Invoke-WebRequest -Uri $url -UseBasicParsing -UserAgent $UserAgent -TimeoutSec 60 } $url
 }
@@ -147,7 +158,8 @@ while ($fwdDone -lt $DaysForward) {
     $wTo   = $pCursor.AddDays($chunkDays).ToString("yyyy-MM-dd")
     $u = "https://hockey.be/wp-json/sportlink-api/program?clubid=$ClubId&from=$wFrom&to=$wTo"
     Write-Host "Fetching program: $u"
-    $p = ApiGet $u
+    # Only the coming weeks are worth a second try; far ahead an empty window is normal.
+    $p = ApiGetRows $u $(if ($fwdDone -lt 42) { 2 } else { 0 })
     foreach ($row in $p.data) { $progRows.Add($row) }
     Write-Host ("  +{0} rows" -f $p.data.Count)
     if ($p.data.Count -ge 450) {
@@ -171,7 +183,7 @@ while ($totalBack -lt $DaysBack) {
     $wTo   = $cursor.ToString("yyyy-MM-dd")
     $u = "https://hockey.be/wp-json/sportlink-api/results?clubid=$ClubId&from=$wFrom&to=$wTo"
     Write-Host "Fetching results: $u"
-    $r = ApiGet $u
+    $r = ApiGetRows $u $(if ($totalBack -lt 75) { 2 } else { 0 })
     foreach ($row in $r.data) { $resRows.Add($row) }
     Write-Host ("  +{0} rows" -f $r.data.Count)
     $cursor = $cursor.AddDays(-$chunkDays)
@@ -532,7 +544,7 @@ if ($fieldGamesArr.Count -eq 0 -and $teamGamesArr.Count -eq 0 -and $resultsArr.C
 # API. So keep what is already embedded for every date before today; everything from
 # today on comes from the fresh fetch. Runs after the off-season guard on purpose:
 # carried history must never make an empty fetch look like a full one.
-$carried = 0
+$carried = 0; $carriedRes = 0
 try {
     $existingHtml = Get-Content -Path $htmlPath -Raw -Encoding UTF8
     $mOld = [regex]::Match($existingHtml, '(?s)<script id="games-data" type="application/json">(.*?)</script>')
@@ -561,11 +573,28 @@ try {
         $carried = $past.Count
         $fresh = @($fieldGamesArr | Where-Object { $_.date -ge $from })
         $fieldGamesArr = @(@($past.ToArray()) + $fresh | Sort-Object date, time)
+
+        # Results get the same protection: an empty answer for one window must not wipe
+        # weeks of results and statistics from the page. A fresh row always wins.
+        $resKey = { param($g) "$($g.date)|$($g.time)|$($g.olympiaTeam)|$($g.opponentClub)|$($g.opponentTeam)|$($g.isHome)" }
+        $have = @{}
+        foreach ($g in $resultsArr) { $have[(& $resKey $g)] = $true }
+        $extra = New-Object System.Collections.Generic.List[object]
+        foreach ($g in @($old.results)) {
+            if (-not $g -or -not $g.date) { continue }
+            if ($g.date -ge $from -or $g.date -lt $backFrom) { continue }
+            if (-not $have.ContainsKey((& $resKey $g))) { $extra.Add($g) }
+        }
+        $carriedRes = $extra.Count
+        if ($carriedRes) {
+            $resultsArr = @(@($resultsArr) + $extra.ToArray() | Sort-Object @{Expression='date';Descending=$true}, @{Expression='time';Descending=$true})
+        }
     }
 } catch {
-    Write-Host ("  could not carry past field games: {0}" -f $_.Exception.Message)
+    Write-Host ("  could not carry past games: {0}" -f $_.Exception.Message)
 }
 Write-Host ("  carried {0} past field games; {1} field games in total" -f $carried, $fieldGamesArr.Count)
+Write-Host ("  carried {0} results missing from this fetch; {1} results in total" -f $carriedRes, $resultsArr.Count)
 
 # Use ordered hashtable (NOT [pscustomobject]@{}) — that cast trips on List<object> values
 # with mixed-type entries ("Argument types do not match").
@@ -595,4 +624,4 @@ Move-Item -Path $tmp -Destination $htmlPath -Force
 
 $jsonKb = [Math]::Round($json.Length / 1024, 1)
 Write-Host ("OK -- wrote {0} field games, {1} team games, {2} results, {3} teams ({4} KB JSON) to {5}" -f `
-    $fieldGames.Count, $teamGames.Count, $results.Count, $teams.Count, $jsonKb, $htmlPath)
+    $fieldGames.Count, $teamGames.Count, $resultsArr.Count, $teams.Count, $jsonKb, $htmlPath)
