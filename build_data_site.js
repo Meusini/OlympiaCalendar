@@ -62,7 +62,7 @@ async function main() {
 
   const page = html.replace(marker, '<html lang="nl" data-site="data">')
     .replace('<title>HC Olympia — Velden vandaag</title>', '<title>HC Olympia — Statistiek</title>')
-    .replace('<head>', '<head>\n<meta name="robots" content="noindex" />')
+    .replace('<head>', '<head>\n<meta name="robots" content="noindex" />\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />')
     .replace(DATA_RE, (_, open, __, close) => open + '{}' + close +
       '\n<script id="stats-key" type="application/json">' + wrapped + '</script>' +
       '\n<script id="stats-box" type="application/json">' + JSON.stringify(box) + '</script>');

@@ -891,6 +891,15 @@
     .fav-toggle { flex:0 0 auto; font-size:14px; padding:5px 9px; }
     .fav-toggle .fav-label { display:none; }                   /* show only the star */
   }
+  /* OlympiaData only (data-site="data"): match the Clubs en teams design layer. The calendar site is unaffected. */
+  html[data-site="data"] { --ol:#ffb86b; --gut:max(20px, calc((100vw - 1360px) / 2 + 20px)); }
+  html[data-site="data"] body { font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  html[data-site="data"] main { padding:18px var(--gut) 64px; }
+  html[data-site="data"] header { padding-left:var(--gut); padding-right:var(--gut); }
+  html[data-site="data"] .stats { max-width:none; margin:0; }
+  html[data-site="data"] .srow.ours .rk, html[data-site="data"] .srow.ours .nm, html[data-site="data"] .srow.ours .ct { color:var(--ol); }
+  html[data-site="data"] .srow.ours { background:rgba(255,184,107,.08); box-shadow:inset 3px 0 0 var(--ol); padding-left:8px; padding-right:8px; border-radius:6px; }
+  html[data-site="data"] .srow .wdl { border-radius:7px; }
 </style>
 </head>
 <body>
