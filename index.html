@@ -898,7 +898,7 @@
   html[data-site="data"] header { padding-left:var(--gut); padding-right:var(--gut); }
   html[data-site="data"] .stats { max-width:none; margin:0; }
   html[data-site="data"] .srow.ours .rk, html[data-site="data"] .srow.ours .nm, html[data-site="data"] .srow.ours .ct { color:var(--ol); }
-  html[data-site="data"] .srow.ours { background:rgba(255,184,107,.08); box-shadow:inset 3px 0 0 var(--ol); padding-left:8px; padding-right:8px; border-radius:6px; }
+  html[data-site="data"] .srow.ours { background:rgba(255,184,107,.08); box-shadow:-8px 0 0 rgba(255,184,107,.08), 8px 0 0 rgba(255,184,107,.08), -11px 0 0 var(--ol); }
   html[data-site="data"] .srow .wdl { border-radius:7px; }
 </style>
 </head>
@@ -1169,7 +1169,8 @@ function loadEmbedded() {
     teamGames,
     results:    json.results   || [],
     teams:      json.teams     || [],
-    poolGames:  json.poolGames || {},   // poolId -> array of pool-wide games (all teams in pool)
+    poolGames:  json.poolGames || {},
+    allClubs:   json.allClubs || null,   // OlympiaData only: W/G/V per club over every Belgian pool (build_data_site.js)   // poolId -> array of pool-wide games (all teams in pool)
   };
 }
 
@@ -2108,14 +2109,26 @@ function renderClubCompare(main, s) {
   if (!s.seg) s.seg = "all"; if (!s.csex) s.csex = "all";
   const tog = (name, val, label) => `<button data-sf="${name}" data-sv="${val}" class="${s[name]===val?'active':''}">${label}</button>`;
 
+  const A = state.allClubs;
+  const clubs = new Map();
+  let poolCount = 0;
+  if (A) {
+    // OlympiaData: every outdoor league pool in Belgium, pre-summed per club / segment / gender.
+    for (const [club, seg, sex, n, w, d, l, teams] of A.rows) {
+      if (s.seg !== "all" && seg !== s.seg) continue;
+      if (s.csex !== "all" && sex !== s.csex) continue;
+      const o = clubs.get(club) || { club, teams:0, n:0, w:0, d:0, l:0 };
+      o.teams += teams; o.n += n; o.w += w; o.d += d; o.l += l;
+      clubs.set(club, o);
+    }
+    poolCount = A.pools;
+  } else {
   // One entry per pool (several Olympia teams can share a pool)
   const pools = new Map();
   for (const t of state.teams || []) {
     if (!t.poolId || !t.standing || !Array.isArray(t.standing.rows) || pools.has(t.poolId)) continue;
     pools.set(t.poolId, { g: statsGroup(t.code), st: t.standing });
   }
-  const clubs = new Map();
-  let poolCount = 0;
   for (const p of pools.values()) {
     if (s.seg !== "all" && segOf(p.g) !== s.seg) continue;
     if (s.csex !== "all" && p.g.sex !== s.csex) continue;
@@ -2130,8 +2143,10 @@ function renderClubCompare(main, s) {
       clubs.set(club, o);
     }
   }
+  }
   // Minimum played matches to be ranked: 8 overall, 5 once a filter narrows the pools.
-  const CLUB_MIN_PLAYED = (s.seg === "all" && s.csex === "all") ? 8 : 5;
+  // With every Belgian pool (OlympiaData) a one-team club would top the list on 12 games, so the bar is higher there.
+  const CLUB_MIN_PLAYED = (s.seg === "all" && s.csex === "all") ? (A ? 20 : 8) : (A ? 10 : 5);
   const rows = [...clubs.values()]
     .filter(o => o.n >= CLUB_MIN_PLAYED || (o.club === "Olympia" && o.n > 0))
     .sort((a, b) => (b.w / b.n) - (a.w / a.n) || b.n - a.n || a.club.localeCompare(b.club));
@@ -2152,7 +2167,7 @@ function renderClubCompare(main, s) {
     }
     html += `<ul class="srows">` + rows.map((o, i) => statRow({ rank:i+1, label:o.club, t:o, ours:o.club==="Olympia" })).join("") + `</ul>`;
     html += `
-      <div class="stats-note">Stand van het seizoen, enkel in de ${poolCount} reeksen waar Olympia speelt.${hidden ? ` ${hidden} club${hidden===1?"":"s"} met minder dan ${CLUB_MIN_PLAYED} wedstrijden niet getoond.` : ""}</div></div>`;
+      <div class="stats-note">${A ? `Stand van het seizoen in alle ${poolCount} outdoor competitiereeksen van België (U10 tot volwassenen; U7–U9 en bekers hebben geen klassement), bijgewerkt tot ${A.asOf}.${A.joint ? ` ${A.joint} gezamenlijke teams van twee clubs niet meegeteld.` : ""}` : `Stand van het seizoen, enkel in de ${poolCount} reeksen waar Olympia speelt.`}${hidden ? ` ${hidden} club${hidden===1?"":"s"} met minder dan ${CLUB_MIN_PLAYED} wedstrijden niet getoond.` : ""}</div></div>`;
   }
   main.innerHTML = html;
   main.querySelectorAll("[data-sf]").forEach(b => b.addEventListener("click", () => { s[b.dataset.sf] = b.dataset.sv; render(); }));
@@ -2640,6 +2655,7 @@ function init() {
   state.results    = data.results;
   state.teams      = data.teams;
   state.poolGames  = data.poolGames;
+  state.allClubs   = data.allClubs;
   state.updated    = data.updated;
   document.getElementById("status").textContent = `Bijgewerkt: ${fmtUpdated(data.updated)}`;
 

@@ -25,6 +25,48 @@ const unb64 = s => new Uint8Array(Buffer.from(s, 'base64'));
 const DATA_RE = /(<script id="games-data" type="application\/json">)([\s\S]*?)(<\/script>)/;
 const BOX_RE = /<script id="stats-box" type="application\/json">([\s\S]*?)<\/script>/;
 
+// Statistiek > Clubs: W/G/V per club over every outdoor league pool in Belgium, from the standings
+// archive (standings/<season>.json, kept by archive.js). U7-U9 and cups have no standings.
+// Joint teams of two clubs ("Ping/Well M-1") are left out: they belong to neither club alone.
+// Row: [club, seg, sex, played, won, draw, lost, teams]; seg adult|upper|mid, sex B|G|X (mixed).
+const MONTHS = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+function clubOf(team) {
+  return String(team || '').replace(/\s+(U\d+[BG]?|D|H|G|JL|JM|M|L|T)\s?-?\s?\d+.*$/i, '').trim();
+}
+function allClubs() {
+  const dir = path.join(__dirname, 'standings');
+  const file = fs.readdirSync(dir).filter(f => /^\d{4}-\d{2}\.json$/.test(f)).sort().pop();
+  if (!file) return null;
+  const pools = Object.values(JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8')).pools || {});
+  const agg = new Map();
+  let used = 0, joint = 0, last = '';
+  for (const p of pools) {
+    const st = p.snapshot;
+    if (!st || p.kind !== 'outdoor' || /cup|test/i.test(p.comp || '')) continue;
+    const c = st.columns || [], ix = n => c.indexOf(n);
+    const iT = ix('Team'), iP = ix('Played'), iW = ix('Won'), iD = ix('Draw'), iL = ix('Lost');
+    if ([iT, iP, iW, iD, iL].some(i => i < 0)) continue;
+    const age = p.age == null ? null : +p.age;
+    if (age !== null && age < 10) continue;
+    const seg = age === null ? 'adult' : age >= 14 ? 'upper' : 'mid';
+    const sex = p.gender === 'M' ? 'B' : p.gender === 'F' ? 'G' : 'X';
+    used++;
+    if ((p.lastChecked || '') > last) last = p.lastChecked;
+    for (const r of st.rows) {
+      if (/\//.test(r[iT])) { joint++; continue; }
+      const club = clubOf(r[iT]);
+      if (!club || !(+r[iP] > 0)) continue;
+      const k = club + '|' + seg + '|' + sex;
+      const o = agg.get(k) || [club, seg, sex, 0, 0, 0, 0, 0];
+      o[3] += +r[iP] || 0; o[4] += +r[iW] || 0; o[5] += +r[iD] || 0; o[6] += +r[iL] || 0; o[7]++;
+      agg.set(k, o);
+    }
+  }
+  const d = last ? new Date(last) : null;
+  return { pools: used, joint, asOf: d ? d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() : '',
+    rows: [...agg.values()].sort((a, b) => a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]) || a[2].localeCompare(b[2])) };
+}
+
 async function main() {
   if (!fs.existsSync(outDir)) { console.error('FAIL: ' + outDir + ' does not exist'); process.exit(1); }
   if (!fs.existsSync(dekFile) || !fs.existsSync(keyFile)) {
@@ -36,8 +78,9 @@ async function main() {
   if (!html.includes(marker)) { console.error('FAIL: site marker not found in index.html'); process.exit(1); }
   const m = html.match(DATA_RE);
   if (!m) { console.error('FAIL: games-data block not found'); process.exit(1); }
-  const plain = m[2];
-  JSON.parse(plain);   // refuse to encrypt garbage
+  const games = JSON.parse(m[2]);   // refuse to encrypt garbage
+  games.allClubs = allClubs();
+  const plain = JSON.stringify(games);
 
   const key = await crypto.subtle.importKey('raw', unb64(fs.readFileSync(dekFile, 'utf8').trim()), 'AES-GCM', false, ['encrypt', 'decrypt']);
 
