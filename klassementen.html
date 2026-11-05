@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="nl">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Klassementen België</title>
+<title>Belgian hockey standings</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
 <style>
   :root {
     --bg:#0f1115; --panel:#171a21; --panel2:#1f232c; --line:#2a2f3a;
@@ -59,32 +60,62 @@
     .grid { grid-template-columns:1fr; }
     th.hide-sm, td.hide-sm { display:none; }
   }
+
+  /* ===== Design layer (2026-11-05): same look as OlympiaCalendar / OlympiaData ===== */
+  :root { --ol:#ffb86b; --ol-bg:rgba(255,184,107,.11); --gut:max(20px, calc((100vw - 1360px) / 2 + 20px)); }
+  html,body { font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  td:not(.team) { font-variant-numeric:tabular-nums; } table { font-variant-numeric:normal; }
+  header { padding:12px var(--gut); background:rgba(23,26,33,.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); gap:8px 10px; }
+  header h1 { font-size:18px; font-weight:700; letter-spacing:-.01em; } header h1 .sub { font-size:12.5px; }
+  header .back { color:var(--text); }
+  main { padding:18px var(--gut) 60px; }
+  .cols { column-width:380px; column-gap:14px; }
+  .compblock { display:block; }
+  .compblock .grid { display:block; }
+  h2.comp { font-size:12px; font-weight:600; letter-spacing:.7px; margin:6px 0 8px; break-after:avoid; }
+  .pool { break-inside:avoid; margin-bottom:14px; border-radius:12px; }
+  .pool .ph b { font-weight:600; }
+  tr.ours td { background:var(--ol-bg); } tr.ours td:first-child { box-shadow:inset 3px 0 0 var(--ol); }
+  tr.ours td.team { color:var(--ol); }
+  /* embedded in the calendar: no title bar, filters as a plain row */
+  html.embed body { background:transparent; }
+  html.embed header { position:static; padding:0 0 14px; background:transparent; border-bottom:none; backdrop-filter:none; -webkit-backdrop-filter:none; }
+  html.embed header .back, html.embed header h1, html.embed header .grow { display:none; }
+  html.embed main { padding:0 0 24px; }
+  @media (max-width: 720px) {
+    header { padding:10px 16px; display:grid; grid-template-columns:1fr 1fr; }
+    header .back, header h1, header .status, header input[type=search] { grid-column:1 / -1; }
+    header .grow { display:none; }
+    header select, header input[type=search] { width:100%; font-size:13px; }
+    html.embed header { padding:0 0 12px; }
+    .cols { column-width:auto; columns:1; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="back" href="index.html">◀ Velden</a>
-  <h1>Klassementen <span class="sub">alle Belgische competities</span></h1>
+  <a class="back" href="index.html">◀ Calendar</a>
+  <h1>Standings <span class="sub">all Belgian competitions</span></h1>
   <div class="grow"></div>
-  <select id="season" title="Seizoen"></select>
+  <select id="season" title="Season"></select>
   <select id="kind" title="Outdoor / indoor">
     <option value="outdoor">Outdoor</option>
     <option value="indoor">Indoor</option>
-    <option value="other">Trimmers / recreatief</option>
+    <option value="other">Trimmers / recreational</option>
   </select>
-  <select id="cat" title="Categorie"></select>
-  <select id="gender" title="Geslacht">
-    <option value="">Jongens + meisjes</option>
-    <option value="M">Heren / jongens</option>
-    <option value="F">Dames / meisjes</option>
+  <select id="cat" title="Category"></select>
+  <select id="gender" title="Gender">
+    <option value="">Boys + girls</option>
+    <option value="M">Men / boys</option>
+    <option value="F">Women / girls</option>
   </select>
-  <input id="q" type="search" placeholder="Zoek club…" />
-  <label class="chk"><input id="ours" type="checkbox" /> Enkel Olympia</label>
+  <input id="q" type="search" placeholder="Search club…" />
+  <label class="chk"><input id="ours" type="checkbox" /> Only Olympia</label>
   <span id="status" class="status"></span>
 </header>
 
-<main id="main"><div class="empty">Laden…</div></main>
+<main id="main"><div class="empty">Loading…</div></main>
 
 <!-- ============================================================
      Standings are embedded below by standings/build_page.js from
@@ -96,6 +127,8 @@
 
 <script>
 (function () {
+  // ?embed=1: shown inside OlympiaCalendar's Standings tab, so no title bar of its own.
+  if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');
   const OUR_CLUB = 'Olympia';
   const DATA = JSON.parse(document.getElementById('standings-data').textContent);
   const $ = id => document.getElementById(id);
@@ -120,7 +153,7 @@
   // ----- controls -----
   const seasons = DATA.seasons.slice().sort((a, b) => b.season.localeCompare(a.season));
   $('season').innerHTML = seasons.map(s => `<option>${esc(s.season)}</option>`).join('');
-  const CATS = [['', 'Alle categorieën'], ['adult', 'Volwassenen'], ...[19, 16, 14, 12, 11, 10].map(a => ['U' + a, 'U' + a])];
+  const CATS = [['', 'All categories'], ['adult', 'Adults'], ...[19, 16, 14, 12, 11, 10].map(a => ['U' + a, 'U' + a])];
   $('cat').innerHTML = CATS.map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
 
   // Remember the viewer's filters between visits; the page works without it.
@@ -135,7 +168,7 @@
   }
 
   const teamClub = t => String(t).replace(/\s+\S+$/, '');   // "Waterloo Ducks U19B-4" -> "Waterloo Ducks"
-  const fmtDate = iso => iso ? new Date(iso).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short', year: 'numeric' }) : '?';
+  const fmtDate = iso => iso ? new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '?';
 
   function isFinal(p) {
     const iP = p.cols.indexOf('Played');
@@ -165,19 +198,19 @@
     const title = [p.division, p.group].filter(Boolean).join(' · ');
     return `<div class="pool">
       <div class="ph"><b>${esc(title || p.comp)}</b><span class="grow"></span>
-        ${isFinal(p) ? '<span class="badge final">afgerond</span>' : ''}</div>
-      <table><thead><tr><th>#</th><th class="team">Team</th><th title="Gespeeld">G</th>
-        <th class="hide-sm" title="Gewonnen">W</th><th class="hide-sm" title="Gelijk">GL</th><th class="hide-sm" title="Verloren">V</th>
-        <th class="hide-sm" title="Doelpunten voor–tegen">DP</th><th title="Doelsaldo">+/−</th><th title="Punten">Ptn</th></tr></thead>
+        ${isFinal(p) ? '<span class="badge final">final</span>' : ''}</div>
+      <table><thead><tr><th>#</th><th class="team">Team</th><th title="Played">P</th>
+        <th class="hide-sm" title="Won">W</th><th class="hide-sm" title="Drawn">D</th><th class="hide-sm" title="Lost">L</th>
+        <th class="hide-sm" title="Goals for–against">GF–GA</th><th title="Goal difference">GD</th><th title="Points">Pts</th></tr></thead>
         <tbody>${body}</tbody></table>
-      <div class="pf">Stand van ${fmtDate(p.fetchedAt)} · laatst gecontroleerd ${fmtDate(p.lastChecked)}</div>
+      <div class="pf">Standing as of ${fmtDate(p.fetchedAt)} · last checked ${fmtDate(p.lastChecked)}</div>
     </div>`;
   }
 
   function render() {
     persist();
     const s = seasons.find(x => x.season === $('season').value);
-    if (!s) { $('main').innerHTML = '<div class="empty">Nog geen klassementen bewaard.</div>'; return; }
+    if (!s) { $('main').innerHTML = '<div class="empty">No standings saved yet.</div>'; return; }
     const kind = $('kind').value, cat = $('cat').value, g = $('gender').value;
     const q = $('q').value.trim().toLowerCase(), ours = $('ours').checked;
 
@@ -193,19 +226,19 @@
     }).sort((a, b) => compRank(a) - compRank(b) || a.comp.localeCompare(b.comp) ||
                       divRank(a.division) - divRank(b.division) || a.group.localeCompare(b.group));
 
-    $('status').textContent = `${pools.length} poules · bijgewerkt ${fmtDate(s.updated)}`;
-    if (!pools.length) { $('main').innerHTML = '<div class="empty">Geen poules voor deze selectie.</div>'; return; }
+    $('status').textContent = `${pools.length} pools · updated ${fmtDate(s.updated)}`;
+    if (!pools.length) { $('main').innerHTML = '<div class="empty">No pools for this selection.</div>'; return; }
 
     let html = '', cur = null;
     for (const p of pools) {
       if (p.comp !== cur) {
-        if (cur !== null) html += '</div>';
-        html += `<h2 class="comp">${esc(p.comp)}</h2><div class="grid">`;
+        if (cur !== null) html += '</div></section>';
+        html += `<section class="compblock"><h2 class="comp">${esc(p.comp)}</h2><div class="grid">`;
         cur = p.comp;
       }
       html += poolCard(p, q);
     }
-    $('main').innerHTML = html + '</div>';
+    $('main').innerHTML = '<div class="cols">' + html + '</div></section></div>';
   }
 
   for (const id of ['season', 'kind', 'cat', 'gender', 'ours']) $(id).addEventListener('change', render);

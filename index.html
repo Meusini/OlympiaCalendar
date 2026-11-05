@@ -6,7 +6,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HC Olympia — Velden vandaag</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+<title>HC Olympia — Pitches & results</title>
 <style>
   :root {
     --bg:#0f1115; --panel:#171a21; --panel2:#1f232c; --line:#2a2f3a;
@@ -900,6 +901,70 @@
   html[data-site="data"] .srow.ours .rk, html[data-site="data"] .srow.ours .nm, html[data-site="data"] .srow.ours .ct { color:var(--ol); }
   html[data-site="data"] .srow.ours { background:rgba(255,184,107,.08); box-shadow:-8px 0 0 rgba(255,184,107,.08), 8px 0 0 rgba(255,184,107,.08), -11px 0 0 var(--ol); }
   html[data-site="data"] .srow .wdl { border-radius:7px; }
+
+  /* ===== Design layer, OlympiaCalendar only (2026-11-05): same header, width, type and Olympia colour as OlympiaData. ===== */
+  html[data-site="calendar"] { --ol:#ffb86b; --ol-bg:rgba(255,184,107,.11); --wrap:1360px; --gut:max(20px, calc((100vw - var(--wrap)) / 2 + 20px)); }
+  html[data-site="calendar"] body { font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 500px at 50% -200px, rgba(58,163,255,.06), transparent 70%), var(--bg); background-attachment:fixed; }
+  html[data-site="calendar"] header { flex-wrap:wrap; gap:10px 14px; padding:12px var(--gut); background:rgba(23,26,33,.92);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  html[data-site="calendar"] header .logo { height:34px; width:34px; padding:3px; border-radius:9px; box-shadow:none; }
+  html[data-site="calendar"] header h1 { font-size:18px; font-weight:700; letter-spacing:-.01em; display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 10px; flex:1; min-width:0; }
+  html[data-site="calendar"] header h1 .sub { margin-left:0; font-size:12.5px; display:inline; }
+  html[data-site="calendar"] header h1 .status { font-size:11.5px; font-weight:400; color:var(--muted); opacity:.8; }
+  html[data-site="calendar"] header h1 .status::before { content:"· "; }
+  html[data-site="calendar"] header .hnav { flex-basis:100%; display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; }
+  html[data-site="calendar"] header .tabs { border-radius:10px; }
+  html[data-site="calendar"] header .tabs button { padding:6px 13px; font-weight:500; }
+  html[data-site="calendar"] header .tabs button:hover { color:var(--text); }
+  html[data-site="calendar"] header .tabs button.active { font-weight:600; box-shadow:0 1px 6px rgba(58,163,255,.35); }
+  html[data-site="calendar"] .datebar { display:flex; align-items:center; gap:6px; }
+  html[data-site="calendar"] .datewrap { position:relative; display:inline-flex; }
+  html[data-site="calendar"] #date-btn { min-width:118px; font-weight:600; }
+  html[data-site="calendar"] #date { position:absolute; inset:0; opacity:0; pointer-events:none; width:100%; padding:0; border:0; }
+  html[data-site="calendar"] main { padding:18px var(--gut) 64px; }
+  html[data-site="calendar"] .embed-frame { width:100%; min-height:70vh; border:0; display:block; }
+  /* Olympia in orange */
+  html[data-site="calendar"] .team-link { color:var(--ol); border-bottom-color:rgba(255,184,107,.35); }
+  html[data-site="calendar"] .team-link:hover { color:#ffd29a; border-bottom-color:#ffd29a; }
+  html[data-site="calendar"] table.standing-table tr.ours { background:var(--ol-bg); box-shadow:inset 3px 0 0 var(--ol); }
+  html[data-site="calendar"] table.standing-table tr.ours td.team, html[data-site="calendar"] table.standing-table tr.ours td.team .team-link { color:var(--ol); }
+  html[data-site="calendar"] .pool-match.our-match { background:var(--ol-bg); }
+  /* Results: outcome stripe on Olympia's side, quiet solid time chips */
+  html[data-site="calendar"] .umr.result.win.ol-home  { box-shadow:inset 4px 0 0 #7adfb0; }
+  html[data-site="calendar"] .umr.result.loss.ol-home { box-shadow:inset 4px 0 0 #ff7a90; }
+  html[data-site="calendar"] .umr.result.draw.ol-home { box-shadow:inset 4px 0 0 #8b93a3; }
+  html[data-site="calendar"] .umr.result.win.ol-away  { box-shadow:inset -4px 0 0 #7adfb0; }
+  html[data-site="calendar"] .umr.result.loss.ol-away { box-shadow:inset -4px 0 0 #ff7a90; }
+  html[data-site="calendar"] .umr.result.draw.ol-away { box-shadow:inset -4px 0 0 #8b93a3; }
+  html[data-site="calendar"] .umr-mid.time { border-style:solid; border-color:transparent; background:rgba(255,255,255,.05); color:#c3c8d2; }
+  /* Pitch map: quieter clubhouse, compacter pitches */
+  html[data-site="calendar"] .field-card.clubhuis { background:var(--panel); border-color:var(--line); }
+  html[data-site="calendar"] .clubhuis-box { background:var(--panel2); border:1px solid var(--line); color:var(--muted); text-shadow:none; }
+  html[data-site="calendar"] .clubhuis-icon { font-size:28px; opacity:.6; }
+  html[data-site="calendar"] .clubhuis-text { font-size:13px; letter-spacing:4px; font-weight:600; }
+  html[data-site="calendar"] .field-card .pitch { width:min(100%, 380px); margin:0 auto; }
+  /* Headings, cards, empty states */
+  html[data-site="calendar"] .team-section h2, html[data-site="calendar"] .pool-col h2 { font-size:12px; font-weight:600; letter-spacing:.7px; color:var(--muted); text-transform:uppercase; }
+  html[data-site="calendar"] .week-day-compact h3, html[data-site="calendar"] .week-day h3 { font-size:12px; font-weight:600; letter-spacing:.7px; color:var(--muted); }
+  html[data-site="calendar"] .week-day-compact.today h3 { color:var(--accent); }
+  html[data-site="calendar"] .empty { margin:24px auto; max-width:460px; padding:36px 24px; border:1px dashed var(--line); border-radius:14px; background:rgba(23,26,33,.6); }
+  @media (max-width: 720px) {
+    html[data-site="calendar"] header { padding:10px 16px; gap:8px; flex-wrap:wrap; }
+    html[data-site="calendar"] header .logo { height:30px; width:30px; }
+    html[data-site="calendar"] header h1 { font-size:16px; }
+    html[data-site="calendar"] header h1 .sub, html[data-site="calendar"] header h1 .status { display:none; }
+    /* tabs back in the header as one swipeable row, like OlympiaData */
+    html[data-site="calendar"] header .hnav { gap:8px; }
+    html[data-site="calendar"] header .tabs { position:static; box-shadow:none; border:1px solid var(--line); border-radius:10px; background:var(--panel2);
+      padding:3px; width:100%; overflow-x:auto; flex-wrap:nowrap; justify-content:flex-start; scrollbar-width:none; }
+    html[data-site="calendar"] header .tabs::-webkit-scrollbar { display:none; }
+    html[data-site="calendar"] header .tabs button { flex:1 0 auto; padding:7px 12px; font-size:13px; font-weight:500; }
+    html[data-site="calendar"] .datebar { width:100%; }
+    html[data-site="calendar"] .datewrap { flex:1; } html[data-site="calendar"] #date-btn { width:100%; }
+    html[data-site="calendar"] header .datebar button { padding:7px 12px; font-size:13px; }
+    html[data-site="calendar"] main { padding:14px 16px 40px; }
+  }
 </style>
 </head>
 <body>
@@ -909,23 +974,25 @@
        If the file isn't there the <img> hides itself and the title remains. -->
   <img class="logo" src="olympia-logo.png" alt="HC Olympia"
        onerror="this.style.display='none'" />
-  <h1>HC Olympia <span class="sub">Velden — wedstrijden op één dag</span></h1>
-  <div class="grow"></div>
-  <button id="prev" title="Vorige dag">◀</button>
-  <input id="date" type="date" />
-  <button id="next" title="Volgende dag">▶</button>
-  <div class="tabs">
-    <button data-view="layout" class="active">Veldbezetting</button>
-    <button data-view="week">Resultaten</button>
-    <button data-view="stats">Statistiek</button>
-    <button data-view="teams">Teams</button>
-  </div>
-  <a class="navlink" href="klassementen.html" title="Klassementen van alle Belgische competities">Klassementen ▶</a>
-  <span id="status" class="status"></span>
+  <h1>HC Olympia <span class="sub">Pitches, results, teams and standings</span><span id="status" class="status"></span></h1>
+  <nav class="hnav">
+    <div class="tabs">
+      <button data-view="layout" class="active">Pitches</button>
+      <button data-view="week">Results</button>
+      <button data-view="stats">Statistiek</button>
+      <button data-view="teams">Teams</button>
+      <button data-view="standings">Standings</button>
+    </div>
+    <div class="datebar" id="datebar">
+      <button id="prev" title="Previous day">◀</button>
+      <span class="datewrap"><button id="date-btn" type="button" title="Pick a date"></button><input id="date" type="date" tabindex="-1" aria-hidden="true" /></span>
+      <button id="next" title="Next day">▶</button>
+    </div>
+  </nav>
 </header>
 
 <main id="main">
-  <div class="empty">Laden…</div>
+  <div class="empty">Loading…</div>
 </main>
 
 <!-- ============================================================
@@ -945,18 +1012,18 @@
 // ============================================================
 
 const FIELDS = [
-  { code: "1", label: "Veld 1" },
-  { code: "2", label: "Veld 2" },
-  { code: "5", label: "Veld 5" },
+  { code: "1", label: "Pitch 1" },
+  { code: "2", label: "Pitch 2" },
+  { code: "5", label: "Pitch 5" },
 ];
 
 // Spatial map for the LAYOUT VIEW — mirrors the actual club site at Wilrijkse Plein.
 // Top row: Veld 2 | Veld 1 | Clubhuis. Bottom row: Veld 5 below Veld 1.
 const LAYOUT_GRID = [
-  { type: "field",    code: "2", label: "Veld 2",   col: 1, row: 1 },
-  { type: "field",    code: "1", label: "Veld 1",   col: 2, row: 1 },
-  { type: "clubhuis",            label: "Clubhuis", col: 3, row: 1 },
-  { type: "field",    code: "5", label: "Veld 5",   col: 2, row: 2 },
+  { type: "field",    code: "2", label: "Pitch 2",   col: 1, row: 1 },
+  { type: "field",    code: "1", label: "Pitch 1",   col: 2, row: 1 },
+  { type: "clubhuis",            label: "Clubhouse", col: 3, row: 1 },
+  { type: "field",    code: "5", label: "Pitch 5",   col: 2, row: 2 },
 ];
 const TIMELINE_START_H = 8;
 const TIMELINE_END_H = 23;   // last training slot ends 22:30
@@ -1134,8 +1201,8 @@ function countLabel(items) {
   const m = items.filter(g => g.kind !== "training").length;
   const t = items.filter(g => g.kind === "training").length;
   const parts = [];
-  if (m || !t) parts.push(`${m} wedstrijd${m === 1 ? "" : "en"}`);
-  if (t) parts.push(`${t} training${t === 1 ? "" : "en"}`);
+  if (m || !t) parts.push(`${m} match${m === 1 ? "" : "es"}`);
+  if (t) parts.push(`${t} training${t === 1 ? "" : "s"}`);
   return parts.join(" · ");
 }
 
@@ -1185,7 +1252,7 @@ function fmtDateAPI(d) {
 function fmtUpdated(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return "—";
-  return d.toLocaleString("nl-BE", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
+  return d.toLocaleString(SITE === "data" ? "nl-BE" : "en-GB", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
 }
 
 // ----- Age class from team name (U7G-3, D-2, G-1, JL-1, T-1) -----
@@ -1312,7 +1379,7 @@ function gamesOnDate(games, dateStr) {
 function renderTimeline(games) {
   const main = document.getElementById("main");
   if (games.length === 0) {
-    main.innerHTML = `<div class="empty">Geen wedstrijden op deze dag.</div>`;
+    main.innerHTML = `<div class="empty">No matches on this day.</div>`;
     return;
   }
   const hourHeight = PX_PER_HOUR;
@@ -1337,12 +1404,12 @@ function renderTimeline(games) {
 
   // Field switcher dropdown (CSS shows it only on mobile). Native <select> = native picker.
   let html = `<div class="mobile-field-switcher">
-    <label for="mfield-select">Veld:</label>
+    <label for="mfield-select">Pitch:</label>
     <select id="mfield-select">`;
   for (const f of FIELDS) {
     const n = games.filter(g => g.field.fieldCode === f.code).length;
     const sel = f.code === state.mobileTimelineField ? " selected" : "";
-    html += `<option value="${f.code}"${sel}>${escape(f.label)} — ${n} wedstrijd${n===1?"":"en"}</option>`;
+    html += `<option value="${f.code}"${sel}>${escape(f.label)} — ${n} match${n===1?"":"es"}</option>`;
   }
   html += `</select></div>`;
 
@@ -1350,7 +1417,7 @@ function renderTimeline(games) {
   html += `<div class="col-header" style="background:transparent;border:none;"></div>`;
   for (const f of visibleFields) {
     const n = games.filter(g => g.field.fieldCode === f.code).length;
-    html += `<div class="col-header">${f.label} <span class="count">${n} wedstrijden</span></div>`;
+    html += `<div class="col-header">${f.label} <span class="count">${n} match${n===1?"":"es"}</span></div>`;
   }
   html += `<div class="time-axis" style="position:relative; height:${totalH}px;">`;
   for (let h = TIMELINE_START_H; h <= TIMELINE_END_H; h++) {
@@ -1449,16 +1516,16 @@ function renderClubMapHtml(games, highlightedField) {
     return c.join(" ");
   };
   const ct = code => cellCounts[code] > 0 ? `<tspan class="map-count"> · ${cellCounts[code]}</tspan>` : "";
-  return `<div class="club-map" aria-label="Plattegrond club">
+  return `<div class="club-map" aria-label="Club map">
     <svg viewBox="0 0 300 175" preserveAspectRatio="xMidYMid meet">
       <rect class="map-pitch ${cls('2')}" data-mapfield="2" x="6"   y="6"   width="80" height="76" rx="6"/>
-      <text class="map-label"             x="46"  y="50" text-anchor="middle">Veld 2${ct('2')}</text>
+      <text class="map-label"             x="46"  y="50" text-anchor="middle">Pitch 2${ct('2')}</text>
       <rect class="map-pitch ${cls('1')}" data-mapfield="1" x="96"  y="6"   width="80" height="76" rx="6"/>
-      <text class="map-label"             x="136" y="50" text-anchor="middle">Veld 1${ct('1')}</text>
+      <text class="map-label"             x="136" y="50" text-anchor="middle">Pitch 1${ct('1')}</text>
       <rect class="map-clubhouse"                             x="216" y="6"   width="60" height="76" rx="6"/>
-      <text class="map-label clubhouse-label" x="246" y="50" text-anchor="middle">Clubhuis</text>
+      <text class="map-label clubhouse-label" x="246" y="50" text-anchor="middle">Clubhouse</text>
       <rect class="map-pitch ${cls('5')}" data-mapfield="5" x="96"  y="92"  width="80" height="76" rx="6"/>
-      <text class="map-label"             x="136" y="136" text-anchor="middle">Veld 5${ct('5')}</text>
+      <text class="map-label"             x="136" y="136" text-anchor="middle">Pitch 5${ct('5')}</text>
     </svg>
   </div>`;
 }
@@ -1495,13 +1562,13 @@ function renderVeldbezetting() {
   // 2. Slider
   html += `<div class="vb-controls">
     <div class="view-toggle" role="tablist">
-      <button data-vmode="day"  class="${mode==='day' ?'active':''}" role="tab">Dagplanning</button>
-      <button data-vmode="slot" class="${mode==='slot'?'active':''}" role="tab">Veldverdeling</button>
+      <button data-vmode="day"  class="${mode==='day' ?'active':''}" role="tab">Day plan</button>
+      <button data-vmode="slot" class="${mode==='slot'?'active':''}" role="tab">Pitch map</button>
     </div>`;
 
   if (games.length === 0) {
     html += `</div>`;
-    html += `<div class="empty">Geen wedstrijden of trainingen op deze dag.</div>`;
+    html += `<div class="empty empty-day">No matches or trainings on this day.</div>`;
     main.innerHTML = html;
     wireVbInteractions(main);
     return;
@@ -1564,7 +1631,7 @@ function renderAllFieldsAtSlot(games, activeSlot) {
       html += `<div class="field-card clubhuis" style="${gridStyle}" title="${escape(cell.label)}">
         <div class="clubhuis-box" aria-label="${escape(cell.label)}">
           <span class="clubhuis-icon" aria-hidden="true">⌂</span>
-          <span class="clubhuis-text">CLUBHUIS</span>
+          <span class="clubhuis-text">CLUBHOUSE</span>
         </div>
       </div>`;
       continue;
@@ -1602,7 +1669,7 @@ function renderAllFieldsAtSlot(games, activeSlot) {
       const r = c.rect;
       // Filled cells keep the label from the data (what parents see on hockey.be).
       const labelPath = c.empty ? c.subpath : c.game.game.field.subpath;
-      const subLabel = labelPath.length ? labelPath.join("") : "vol veld";
+      const subLabel = labelPath.length ? labelPath.join("") : "full pitch";
       if (c.empty) {
         const safety = safetyBands.has(c.subpath.join(""));
         html += `<div class="subcell empty${safety ? ' safety' : ''}" style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;">
@@ -1613,7 +1680,7 @@ function renderAllFieldsAtSlot(games, activeSlot) {
         const fs = fontForDepth(depth);
         html += `<div class="subcell filled training age-${ageOf(g)}"
             style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;font-size:${fs}px;">
-          <span class="label">${escape(g.quarters === "ABCD" ? "vol veld" : g.quarters)}</span>
+          <span class="label">${escape(g.quarters === "ABCD" ? "full pitch" : g.quarters)}</span>
           <span class="kind-tag">training</span>
           <div class="game-mini">
             <span class="team">${escape(g.title)}</span>
@@ -1647,7 +1714,7 @@ function renderAllFieldsAtSlot(games, activeSlot) {
       html += `<div class="games-list">` + hidden.map(g => `<div class="row training">
         <span class="t">${g.time}</span>
         <span class="s"><span class="match-teams">${escape(g.title)}</span>
-          <span class="match-div">Training · <span class="conflict-tag">⚠ wedstrijd op dit veld</span></span></span>
+          <span class="match-div">Training · <span class="conflict-tag">⚠ match on this pitch</span></span></span>
       </div>`).join("") + `</div>`;
     }
     html += `</div>`;
@@ -1696,7 +1763,7 @@ function renderTimelineFields(games, fieldsArr, isMobile) {
       if (g.kind === "training") {
         const subLabel = g.quarters === "ABCD" ? "" : g.quarters;
         html += `<div class="game training ${ageCls}${cramped ? ' cramped' : ''}${g.conflict ? ' conflict' : ''}" style="${pos}"
-              title="Training ${escape(g.title)} ${time}–${g.end}${g.conflict ? ' — wedstrijd op dit veld' : ''}">
+              title="Training ${escape(g.title)} ${time}–${g.end}${g.conflict ? ' — match on this pitch' : ''}">
           <div class="time">${time}–${g.end}${subLabel?` <span class="sub">${subLabel}</span>`:""}<span class="kind">${g.conflict ? '⚠ training' : 'training'}</span></div>
           <div class="teams">${escape(g.title)}</div>
         </div>`;
@@ -1765,7 +1832,7 @@ function _renderLayoutLegacy(games, activeSlot) {
   const main = document.getElementById("main");
   const slots = [...new Set(games.map(g => g.time))].sort();
   if (games.length === 0) {
-    main.innerHTML = `<div class="empty">Geen wedstrijden op deze dag.</div>`;
+    main.innerHTML = `<div class="empty">No matches on this day.</div>`;
     return;
   }
   if (!activeSlot || !slots.includes(activeSlot)) activeSlot = pickDefaultSlot(slots);
@@ -1783,7 +1850,7 @@ function _renderLayoutLegacy(games, activeSlot) {
       html += `<div class="field-card clubhuis" style="${gridStyle}" title="${escape(cell.label)}">
         <div class="clubhuis-box" aria-label="${escape(cell.label)}">
           <span class="clubhuis-icon" aria-hidden="true">⌂</span>
-          <span class="clubhuis-text">CLUBHUIS</span>
+          <span class="clubhuis-text">CLUBHOUSE</span>
         </div>
       </div>`;
       continue;
@@ -1794,11 +1861,11 @@ function _renderLayoutLegacy(games, activeSlot) {
     const cells = planFieldSubcells(activeGames.map(g => ({ subpath: g.field.subpath, game: g })));
     const idle = activeGames.length === 0;
     html += `<div class="field-card ${idle?"idle":""}" style="${gridStyle}">
-      <h3>${f.label} <span class="meta">${activeGames.length} wedstrijd${activeGames.length===1?"":"en"}</span></h3>
+      <h3>${f.label} <span class="meta">${activeGames.length} match${activeGames.length===1?"":"es"}</span></h3>
       <div class="pitch">${pitchMarkingsSvg()}`;
     for (const c of cells) {
       const r = c.rect;
-      const subLabel = c.subpath.length ? c.subpath.join("") : "vol veld";
+      const subLabel = c.subpath.length ? c.subpath.join("") : "full pitch";
       if (c.empty) {
         html += `<div class="subcell empty" style="left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%;">
           <span class="label empty-lbl">${subLabel}</span></div>`;
@@ -1823,11 +1890,11 @@ function _renderLayoutLegacy(games, activeSlot) {
     }
     html += `</div>`;
     if (activeGames.length === 0) {
-      html += `<div class="games-list">Geen wedstrijd in dit tijdslot</div>`;
+      html += `<div class="games-list">No match in this time slot</div>`;
     } else {
       html += `<div class="games-list">`;
       activeGames.forEach(g => {
-        const sp = g.field.subpath.length ? g.field.subpath.join("") : "vol veld";
+        const sp = g.field.subpath.length ? g.field.subpath.join("") : "full pitch";
         const carry = g.time !== activeSlot;
         html += `<div class="row${carry?' carry':''}">
           <span class="t">${g.time}</span>
@@ -1958,16 +2025,18 @@ function mondayOf(date) {
 }
 const DAYS_NL = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
 const MONTHS_NL = ["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
+const DAYS_EN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTHS_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function formatDateLong(iso) {
   const [y,m,d] = iso.split("-").map(Number);
   const dt = new Date(y, m-1, d);
-  return `${DAYS_NL[dt.getDay()]} ${d} ${MONTHS_NL[m-1]}`;
+  return `${DAYS_EN[dt.getDay()]} ${d} ${MONTHS_EN[m-1]}`;
 }
 function formatWeekRange(monIso) {
   const [y,m,d] = monIso.split("-").map(Number);
   const start = new Date(y, m-1, d);
   const end = new Date(start); end.setDate(start.getDate() + 6);
-  return `${start.getDate()} ${MONTHS_NL[start.getMonth()]} – ${end.getDate()} ${MONTHS_NL[end.getMonth()]} ${end.getFullYear()}`;
+  return `${start.getDate()} ${MONTHS_EN[start.getMonth()]} – ${end.getDate()} ${MONTHS_EN[end.getMonth()]} ${end.getFullYear()}`;
 }
 
 // ----- Rendering: WEEK -----
@@ -1994,18 +2063,18 @@ function renderWeek() {
   const isCurrent = state.weekStart === fmtDateAPI(mondayOf(new Date()));
 
   let html = `<div class="week-controls">
-    <button id="week-prev" title="Vorige week">◀</button>
+    <button id="week-prev" title="Previous week">◀</button>
     <div class="week-label">
       <div class="week-range">${formatWeekRange(state.weekStart)}</div>
-      <div class="week-meta">${past.length} resultaten · ${future.length} geplande wedstrijden</div>
+      <div class="week-meta">${past.length} result${past.length===1?"":"s"} · ${future.length} scheduled match${future.length===1?"":"es"}</div>
     </div>
-    <button id="week-next" title="Volgende week">▶</button>
-    <button id="week-today" ${isCurrent ? "disabled" : ""}>Deze week</button>
+    <button id="week-next" title="Next week">▶</button>
+    <button id="week-today" ${isCurrent ? "disabled" : ""}>This week</button>
   </div>
 `;
 
   if (all.length === 0) {
-    html += `<div class="empty">Geen wedstrijden deze week.</div>`;
+    html += `<div class="empty">No matches this week.</div>`;
   } else {
     // Date-grouped unified rows — same shape as everywhere else.
     const dateOrder = [...new Set(all.map(x => x.date))].sort();
@@ -2014,7 +2083,7 @@ function renderWeek() {
         teamComparator({ code: a.olympiaTeam }, { code: b.olympiaTeam }));
       const isToday = d === fmtDateAPI(new Date());
       html += `<section class="week-day-compact ${isToday?'today':''}">
-        <h3>${formatDateLong(d)}${isToday?` <span class="today-tag">vandaag</span>`:""}</h3>
+        <h3>${formatDateLong(d)}${isToday?` <span class="today-tag">today</span>`:""}</h3>
         <ul class="umr-list">`;
       for (const x of dayItems) {
         const homeHtml = x.isHome ? olympiaLink(x.olympiaTeam) : teamLabel(x.opponentClub, x.opponentTeam);
@@ -2023,12 +2092,12 @@ function renderWeek() {
           const o = computeOutcome(x);
           const score = (x.olympiaScore != null && x.opponentScore != null)
             ? (x.isHome ? `${x.olympiaScore} – ${x.opponentScore}` : `${x.opponentScore} – ${x.olympiaScore}`)
-            : "n/g";
+            : "n/p";
           html += unifiedMatchRow({
             bare: true,
             homeHtml, awayHtml,
             mid: score, midCls: o.cls,
-            className: `result ${o.cls}`,
+            className: `result ${o.cls} ${x.isHome ? "ol-home" : "ol-away"}`,
           });
         } else {
           // Upcoming: time only. Location lives in Veldbezetting and on the team page.
@@ -2300,15 +2369,15 @@ function teamComparator(a, b) {
 function computeOutcome(r) {
   if (r.olympiaScore == null || r.opponentScore == null) return { cls:"", letter:"" };
   if (r.olympiaScore >  r.opponentScore) return { cls:"win",  letter:"W" };
-  if (r.olympiaScore <  r.opponentScore) return { cls:"loss", letter:"V" };
-  return { cls:"draw", letter:"G" };
+  if (r.olympiaScore <  r.opponentScore) return { cls:"loss", letter:"L" };
+  return { cls:"draw", letter:"D" };
 }
 
 function renderTeams() {
   const main = document.getElementById("main");
   const teams = state.teams || [];
   if (teams.length === 0) {
-    main.innerHTML = `<div class="empty">Geen team-data — run <code>update.ps1</code> opnieuw.</div>`;
+    main.innerHTML = `<div class="empty">No team data — run <code>update.ps1</code> again.</div>`;
     return;
   }
   // Default to favorite team if set; otherwise first team in the list.
@@ -2341,8 +2410,8 @@ function renderTeams() {
     <label for="team-select">Team</label>
     <select id="team-select">${optgroups.join("")}</select>
     <div class="team-comp">${escape(cleanDivision(team.division))}</div>
-    <button id="fav-toggle" class="fav-toggle ${isFav?'active':''}" type="button" title="${isFav?'Verwijder uit favorieten':'Maak favoriet team'}">
-      <span class="fav-icon">${isFav ? '★' : '☆'}</span><span class="fav-label"> Favoriet</span>
+    <button id="fav-toggle" class="fav-toggle ${isFav?'active':''}" type="button" title="${isFav?'Remove from favourites':'Make favourite team'}">
+      <span class="fav-icon">${isFav ? '★' : '☆'}</span><span class="fav-label"> Favourite</span>
     </button>
   </div>`;
 
@@ -2356,12 +2425,12 @@ function renderTeams() {
       locHtml = `<span class="field-badge" data-nav-date="${escape(nextMatch.date)}" data-nav-time="${escape(nextMatch.time)}">${escape(fieldLabel(nextMatch.fieldCode, nextMatch.subpath))} <span class="field-arrow">→</span></span>`;
     } else if (!nextMatch.isHome) {
       const mapQ = encodeURIComponent(`${nextMatch.opponentClub} hockey club Belgium`);
-      locHtml = `<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener">UIT bij ${escape(nextMatch.opponentClub)} <span class="map-icon">↗</span></a>`;
+      locHtml = `<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener">AWAY at ${escape(nextMatch.opponentClub)} <span class="map-icon">↗</span></a>`;
     } else {
       locHtml = `<span class="loc-tag home">thuis</span>`;
     }
     html += `<div class="next-match-hero">
-      <div class="hero-tag">Volgende wedstrijd</div>
+      <div class="hero-tag">Next match</div>
       <div class="hero-teams">${homeHtml} <span class="hero-vs">vs</span> ${awayHtml}</div>
       <div class="hero-meta">
         <span>${formatDateLong(nextMatch.date)}</span>
@@ -2377,11 +2446,11 @@ function renderTeams() {
   // U7-U9: no scores are kept, so there is never a standing or a results round to show.
   const noScores = /^U[789][BG]/i.test(team.code);
   html += `<section class="team-section pool-row"${noScores ? ' style="display:none"' : ''}>`;
-  html += `<div class="pool-col standing-col"><h2>Rangschikking</h2>`;
+  html += `<div class="pool-col standing-col"><h2>Standings</h2>`;
   if (team.standing && team.standing.rows && team.standing.rows.length > 0) {
     // Source columns from API: Rank, Team, Played, Won, Lost, Draw, Own Goals, Against Goals, Points
     // Display order: Rank, Team, P, W, D, L, Pt, Ds, +, - (with Ds = own - against computed here).
-    const headers = ["#", "Team", "P", "W", "D", "L", "Pt", "Ds", "+", "-"];
+    const headers = ["#", "Team", "P", "W", "D", "L", "Pts", "GD", "GF", "GA"];
     const myLabel = `Olympia ${team.code}`;
     html += `<div class="standing-wrap"><table class="standing-table">
       <thead><tr>${headers.map((h, i) => `<th class="col-${i}">${escape(h)}</th>`).join("")}</tr></thead>
@@ -2410,16 +2479,16 @@ function renderTeams() {
       }).join("")}</tbody>
     </table></div>`;
   } else {
-    html += `<div class="empty-section">Geen rangschikking beschikbaar voor deze competitie.</div>`;
+    html += `<div class="empty-section">No standings available for this competition.</div>`;
   }
   html += `</div>`;  // .standing-col
 
   // Pool-wide games this calendar week (Mon-Sun) — all teams in the competition,
   // not just Olympia. Shows results for past days and scheduled matches for upcoming.
-  html += `<div class="pool-col pool-week-col"><h2>Vorige speeldag uitslagen</h2>`;
+  html += `<div class="pool-col pool-week-col"><h2>Last match day results</h2>`;
   const poolList = (state.poolGames && team.poolId) ? (state.poolGames[team.poolId] || []) : [];
   if (poolList.length === 0) {
-    html += `<div class="empty-section">Geen poule-wedstrijden gevonden.</div>`;
+    html += `<div class="empty-section">No pool matches found.</div>`;
   } else {
     // Strict "prior calendar week" — Mon-Sun of the week BEFORE the one we're currently in.
     // If today is in the same week as a matchday, those games still count (they were
@@ -2434,7 +2503,7 @@ function renderTeams() {
       .filter(p => p.isPast && p.date >= priorMonIso && p.date <= priorSunIso)
       .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
     if (recent.length === 0) {
-      html += `<div class="empty-section">Geen uitslagen vorige week (${priorMon.getDate()}/${priorMon.getMonth()+1} – ${priorSun.getDate()}/${priorSun.getMonth()+1}).</div>`;
+      html += `<div class="empty-section">No results last week (${priorMon.getDate()}/${priorMon.getMonth()+1} – ${priorSun.getDate()}/${priorSun.getMonth()+1}).</div>`;
     } else {
       html += `<ul class="umr-list">`;
       for (const p of recent) {
@@ -2444,7 +2513,7 @@ function renderTeams() {
         const home = isOlympiaHome ? olympiaLink(p.homeTeam) : `${escape(p.homeClub)} ${escape(p.homeTeam)}`;
         const away = isOlympiaAway ? olympiaLink(p.awayTeam) : `${escape(p.awayClub)} ${escape(p.awayTeam)}`;
         const score = (p.homeScore != null && p.awayScore != null)
-          ? `${p.homeScore} – ${p.awayScore}` : "n/g";
+          ? `${p.homeScore} – ${p.awayScore}` : "n/p";
         // Color OUR row's score pill by outcome — others stay neutral
         let midCls = "";
         if (isOurMatch && p.homeScore != null && p.awayScore != null) {
@@ -2470,9 +2539,9 @@ function renderTeams() {
   // Upcoming matches first (teamGames — sorted ascending by update.ps1)
   const upcoming = (state.teamGames || []).filter(g => g.olympiaTeam === team.code);
   html += `<section class="team-section">
-    <h2>Komende wedstrijden</h2>`;
+    <h2>Upcoming matches</h2>`;
   if (upcoming.length === 0) {
-    html += `<div class="empty-section">Geen geplande wedstrijden.</div>`;
+    html += `<div class="empty-section">No scheduled matches.</div>`;
   } else {
     html += `<ul class="umr-list">`;
     for (const g of upcoming.slice(0, 12)) {
@@ -2480,12 +2549,12 @@ function renderTeams() {
       const awayHtml = g.isHome ? `${escape(g.opponentClub)} ${escape(g.opponentTeam)}` : `<strong>${olympiaLink(g.olympiaTeam)}</strong>`;
       let trailHtml;
       if (g.isHome && g.fieldCode) {
-        trailHtml = `<span class="field-badge" data-nav-date="${escape(g.date)}" data-nav-time="${escape(g.time)}" title="Open in Veldbezetting">${escape(fieldLabel(g.fieldCode, g.subpath))} <span class="field-arrow">→</span></span>`;
+        trailHtml = `<span class="field-badge" data-nav-date="${escape(g.date)}" data-nav-time="${escape(g.time)}" title="Open in Pitches">${escape(fieldLabel(g.fieldCode, g.subpath))} <span class="field-arrow">→</span></span>`;
       } else if (g.isHome) {
         trailHtml = `<span class="loc-tag home">thuis</span>`;
       } else {
         const mapQ = encodeURIComponent(`${g.opponentClub} hockey club Belgium`);
-        trailHtml = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open locatie in Google Maps">uit ↗</a>`;
+        trailHtml = `<a class="loc-tag away map-loc" href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" rel="noopener" title="Open location in Google Maps">away ↗</a>`;
       }
       html += unifiedMatchRow({
         date: formatDDMM(g.date),
@@ -2502,9 +2571,9 @@ function renderTeams() {
   // Last matches (results — already sorted by update.ps1 most-recent-first)
   const lastMatches = (state.results || []).filter(r => r.olympiaTeam === team.code).slice(0, 10);
   html += `<section class="team-section">
-    <h2>Laatste wedstrijden</h2>`;
+    <h2>Recent matches</h2>`;
   if (lastMatches.length === 0) {
-    html += `<div class="empty-section">Geen recente wedstrijden gevonden.</div>`;
+    html += `<div class="empty-section">No recent matches found.</div>`;
   } else {
     html += `<ul class="umr-list">`;
     for (const r of lastMatches) {
@@ -2513,7 +2582,7 @@ function renderTeams() {
       const awayHtml = r.isHome ? `${escape(r.opponentClub)} ${escape(r.opponentTeam)}` : `<strong>${olympiaLink(r.olympiaTeam)}</strong>`;
       const score = (r.olympiaScore != null && r.opponentScore != null)
         ? (r.isHome ? `${r.olympiaScore} – ${r.opponentScore}` : `${r.opponentScore} – ${r.olympiaScore}`)
-        : "n/g";
+        : "n/p";
       html += unifiedMatchRow({
         date: formatDDMM(r.date),
         homeHtml, awayHtml,
@@ -2564,8 +2633,32 @@ function setFavoriteTeam(code) {
   } catch {}
 }
 
+// Standings: the all-Belgium standings page (klassementen.html) in a frame that grows with it.
+function renderStandings() {
+  const main = document.getElementById("main");
+  main.innerHTML = '<iframe id="standings-frame" class="embed-frame" title="Standings" src="klassementen.html?embed=1"></iframe>';
+  const fr = document.getElementById("standings-frame");
+  fr.addEventListener("load", () => {
+    let doc = null; try { doc = fr.contentDocument; } catch (e) {}
+    if (!doc) { fr.style.height = "80vh"; return; }   // file:// preview: no access, fixed height
+    const fit = () => { fr.style.height = doc.documentElement.scrollHeight + "px"; };
+    new ResizeObserver(fit).observe(doc.body); fit();
+  });
+}
+function syncHeader() {
+  const bar = document.getElementById("datebar");
+  if (bar) bar.style.display = SITE === "calendar" && state.view === "layout" ? "" : "none";
+  const btn = document.getElementById("date-btn");
+  if (btn && state.date) {
+    const d = new Date(state.date + "T00:00:00");
+    btn.textContent = d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" }) +
+      (d.getFullYear() !== new Date().getFullYear() ? " " + d.getFullYear() : "");
+  }
+}
 function render() {
+  syncHeader();
   renderFavoriteChip();
+  if (state.view === "standings") { renderStandings(); return; }
   if (state.view === "teams") { renderTeams(); return; }
   if (state.view === "week")  { renderWeek();  return; }
   if (state.view === "stats") { renderStats(); return; }
@@ -2584,11 +2677,11 @@ function renderFavoriteChip() {
   }
   if (!state.favoriteTeam || SITE === "data") { bar.innerHTML = ""; bar.style.display = "none"; return; }
   bar.style.display = "";
-  bar.innerHTML = `<button class="fav-chip" type="button" title="Open favoriet team">
+  bar.innerHTML = `<button class="fav-chip" type="button" title="Open favourite team">
       <span class="fav-star">★</span>
-      <span class="fav-text">Favoriet: ${escape(state.favoriteTeam)}</span>
+      <span class="fav-text">Favourite: ${escape(state.favoriteTeam)}</span>
     </button>
-    <button class="fav-clear" type="button" title="Verwijder favoriet">✕</button>`;
+    <button class="fav-clear" type="button" title="Remove favourite">✕</button>`;
   bar.querySelector(".fav-chip").addEventListener("click", () => navigateToTeam(state.favoriteTeam));
   bar.querySelector(".fav-clear").addEventListener("click", () => { setFavoriteTeam(null); renderFavoriteChip(); });
 }
@@ -2618,7 +2711,7 @@ function fieldLabel(fieldCode, subpath) {
   if (!fieldCode) return "";
   const sub = (Array.isArray(subpath) ? subpath : []).join("");
   // Format: "Veld 5A" (half), "Veld 5B1a" (eighth), "Veld 2 (volledig)" (full field).
-  return sub ? `Veld ${fieldCode}${sub}` : `Veld ${fieldCode} (volledig)`;
+  return sub ? `Pitch ${fieldCode}${sub}` : `Pitch ${fieldCode} (full)`;
 }
 
 // ----- Site split -----
@@ -2630,16 +2723,17 @@ let siteApplied = false;
 function applySite() {
   if (siteApplied) return;
   siteApplied = true;
-  const keep = SITE === "data" ? ["stats"] : ["layout", "week", "teams"];
+  const keep = SITE === "data" ? ["stats"] : ["layout", "week", "teams", "standings"];
   document.querySelectorAll("header .tabs button").forEach(b => { if (!keep.includes(b.dataset.view)) b.remove(); });
   if (SITE !== "data") return;
   state.view = "stats";
   document.querySelector('header .tabs button[data-view="stats"]').classList.add("active");
   document.title = "HC Olympia — Statistiek";
   document.querySelector("header h1 .sub").textContent = "Statistiek";
-  ["prev", "date", "next"].forEach(id => document.getElementById(id).style.display = "none");
-  const nav = document.querySelector("header .navlink");
-  nav.href = "index.html"; nav.title = "Clubs en teams (wachtwoord)"; nav.textContent = "Clubs en teams ▶";
+  document.getElementById("datebar").style.display = "none";
+  const nav = document.createElement("a");
+  nav.className = "navlink"; nav.href = "index.html"; nav.title = "Clubs en teams (wachtwoord)"; nav.textContent = "Clubs en teams ▶";
+  document.querySelector("header .hnav").appendChild(nav);
   if (EMBED) {
     document.querySelector("header").style.display = "none";
     document.getElementById("main").style.padding = "0 0 24px";
@@ -2657,11 +2751,16 @@ function init() {
   state.poolGames  = data.poolGames;
   state.allClubs   = data.allClubs;
   state.updated    = data.updated;
-  document.getElementById("status").textContent = `Bijgewerkt: ${fmtUpdated(data.updated)}`;
+  document.getElementById("status").textContent = `${SITE === "data" ? "Bijgewerkt" : "Updated"} ${fmtUpdated(data.updated)}`;
 
   document.getElementById("date").value = state.date;
   document.getElementById("date").addEventListener("change", e => {
     state.date = e.target.value; state.activeSlot = null; render();
+  });
+  document.getElementById("date-btn").addEventListener("click", () => {
+    const inp = document.getElementById("date");
+    try { if (inp.showPicker) { inp.showPicker(); return; } } catch (e) {}
+    inp.focus(); inp.click();
   });
   document.getElementById("prev").addEventListener("click", () => shiftDay(-1));
   document.getElementById("next").addEventListener("click", () => shiftDay(+1));
