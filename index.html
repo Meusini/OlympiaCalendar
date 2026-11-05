@@ -2601,7 +2601,10 @@ function fieldLabel(fieldCode, subpath) {
 // OlympiaCalendar shows Veldbezetting, Resultaten, Teams; OlympiaData shows Statistiek only.
 const SITE = document.documentElement.dataset.site === "data" ? "data" : "calendar";
 const CALENDAR_URL = "https://meusini.github.io/OlympiaCalendar/";
+let siteApplied = false;
 function applySite() {
+  if (siteApplied) return;
+  siteApplied = true;
   const keep = SITE === "data" ? ["stats"] : ["layout", "week", "teams"];
   document.querySelectorAll("header .tabs button").forEach(b => { if (!keep.includes(b.dataset.view)) b.remove(); });
   if (SITE !== "data") return;
@@ -2618,7 +2621,7 @@ function applySite() {
 }
 
 // ----- Boot -----
-(function init() {
+function init() {
   applySite();
   const data = loadEmbedded();
   state.fieldGames = data.fieldGames;
@@ -2675,7 +2678,54 @@ function applySite() {
     }
   });
   render();
-})();
+}
+
+// OlympiaData: the Statistiek data is encrypted (see HockeyCensus/stats_key.js). The census
+// password unwraps the data key from #stats-key; the data key decrypts #stats-box into
+// #games-data, then the page boots as usual. The password is kept in sessionStorage for this
+// tab only, so moving between Clubs en teams and Statistiek asks once.
+const PW_KEY = "olympia_pw";
+async function openStats(pw) {
+  const unb64 = t => Uint8Array.from(atob(t), c => c.charCodeAt(0));
+  const wrapped = JSON.parse(document.getElementById("stats-key").textContent);
+  const box = JSON.parse(document.getElementById("stats-box").textContent);
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+  const kek = await crypto.subtle.deriveKey({ name:"PBKDF2", salt:unb64(wrapped.salt), iterations:wrapped.iter, hash:"SHA-256" },
+    base, { name:"AES-GCM", length:256 }, false, ["decrypt"]);
+  const dek = await crypto.subtle.decrypt({ name:"AES-GCM", iv:unb64(wrapped.iv) }, kek, unb64(wrapped.ct));
+  const key = await crypto.subtle.importKey("raw", dek, "AES-GCM", false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({ name:"AES-GCM", iv:unb64(box.iv) }, key, unb64(box.ct));
+  return new TextDecoder().decode(plain);
+}
+async function unlockStats(pw, quiet) {
+  const err = document.getElementById("stats-err");
+  if (!quiet) err.textContent = "Bezig…";
+  let json;
+  try { json = await openStats(pw); }
+  catch (e) {
+    try { sessionStorage.removeItem(PW_KEY); } catch {}
+    if (!quiet) err.textContent = "Fout wachtwoord.";
+    return;
+  }
+  try { sessionStorage.setItem(PW_KEY, pw); } catch {}
+  document.getElementById("games-data").textContent = json;
+  init();   // outside the try: a page bug must not look like a wrong password
+}
+function showStatsLock() {
+  applySite();
+  document.getElementById("main").innerHTML =
+    `<div style="max-width:360px;margin:12vh auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px">
+      <h2 style="margin:0 0 12px;font-size:16px">Beveiligde pagina</h2>
+      <form id="stats-unlock" style="display:flex;gap:8px"><input id="stats-pw" type="password" placeholder="Wachtwoord" autocomplete="current-password" style="flex:1;min-width:0;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit" autofocus /><button style="background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit;cursor:pointer">Open</button></form>
+      <div id="stats-err" style="color:#ff7a90;font-size:13px;margin-top:10px;min-height:18px"></div></div>`;
+  document.getElementById("stats-unlock").addEventListener("submit", e => {
+    e.preventDefault(); unlockStats(document.getElementById("stats-pw").value);
+  });
+  let saved = null;
+  try { saved = sessionStorage.getItem(PW_KEY); } catch {}
+  if (saved) unlockStats(saved, true);
+}
+if (SITE === "data") showStatsLock(); else init();
 </script>
 </body>
 </html>

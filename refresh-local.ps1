@@ -49,7 +49,8 @@ try {
         Write-Host "Pushed refreshed index.html."
     }
 
-    # OlympiaData (Meusini/OlympiaData): statistiek.html is derived from index.html.
+    # OlympiaData (Meusini/OlympiaData): statistiek.html is derived from index.html, data encrypted.
+    # stats_key.json changes when build_page.js re-wraps the key (new census password).
     $data = Join-Path (Split-Path -Parent $repo) 'OlympiaData'
     if (-not (Test-Path (Join-Path $data '.git'))) { throw "OlympiaData clone missing at $data" }
     Push-Location $data
@@ -57,12 +58,13 @@ try {
         git pull --ff-only --quiet
         if ($LASTEXITCODE -ne 0) { throw "OlympiaData git pull failed (exit $LASTEXITCODE)" }
         node (Join-Path $repo 'build_data_site.js') $data
-        if ($LASTEXITCODE -ne 0) { throw "build_data_site.js failed (exit $LASTEXITCODE)" }
-        if (-not (git status --porcelain -- statistiek.html)) {
+        if ($LASTEXITCODE -eq 2) { Write-Host "OlympiaData: statistiek not set up yet (run node stats_key.js in HockeyCensus)." }
+        elseif ($LASTEXITCODE -ne 0) { throw "build_data_site.js failed (exit $LASTEXITCODE)" }
+        if (-not (git status --porcelain -- statistiek.html stats_key.json)) {
             Write-Host "OlympiaData: no changes."
         }
         else {
-            git add statistiek.html
+            git add statistiek.html stats_key.json
             git commit --quiet -m "chore: refresh statistiek (auto)"
             if ($LASTEXITCODE -ne 0) { throw "OlympiaData commit failed (exit $LASTEXITCODE)" }
             git push --quiet origin main
