@@ -163,6 +163,11 @@
     for (const id of ['kind', 'cat', 'gender']) if (saved[id] != null) $(id).value = saved[id];
     if (saved.ours != null) $('ours').checked = saved.ours;
   } catch (e) {}
+  // The calendar passes its season selector (?kind=indoor|outdoor); standalone, Dec-Feb defaults to indoor.
+  { const pk = new URLSearchParams(location.search).get('kind'); const mo = new Date().getMonth() + 1;
+    let saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+    if (pk === 'indoor' || pk === 'outdoor') $('kind').value = pk;
+    else if (saved.kind == null) $('kind').value = (mo === 12 || mo <= 2) ? 'indoor' : 'outdoor'; }
   function persist() {
     try { localStorage.setItem(KEY, JSON.stringify({ kind: $('kind').value, cat: $('cat').value, gender: $('gender').value, ours: $('ours').checked })); } catch (e) {}
   }
@@ -227,7 +232,9 @@
                       divRank(a.division) - divRank(b.division) || a.group.localeCompare(b.group));
 
     $('status').textContent = `${pools.length} pools · updated ${fmtDate(s.updated)}`;
-    if (!pools.length) { $('main').innerHTML = '<div class="empty">No pools for this selection.</div>'; return; }
+    if (!pools.length) { $('main').innerHTML = kind === 'indoor' && !s.pools.some(p => kindOf(p) === 'indoor')
+      ? '<div class="empty">No indoor standings yet. Indoor tables appear here after the first indoor match day (end of November).</div>'
+      : '<div class="empty">No pools for this selection.</div>'; return; }
 
     let html = '', cur = null;
     for (const p of pools) {

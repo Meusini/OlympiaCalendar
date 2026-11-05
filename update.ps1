@@ -130,7 +130,8 @@ function ParseIsoDate([string]$ddmmyyyy) {
 # published pools that key is still unique.
 # SeasonOf stays separate so an Indoor and an Outdoor pool sharing a name can be told
 # apart while both are listed (the Jan-Feb overlap).
-$SeasonMarker = '\b(Outdoor|Indoor|Trimmers|Recreatief)\s+Week\b'
+# "Week" is optional: the API answers "U11G-1 Indoor" to some clients, "U11G-1 Indoor Week" to others.
+$SeasonMarker = '\b(Outdoor|Indoor|Trimmers|Recreatief)(\s+Week)?\b'
 function PoolKey([string]$s) {
     if ([string]::IsNullOrWhiteSpace($s)) { return "" }
     $core = $s -replace $SeasonMarker, ''
@@ -222,6 +223,8 @@ foreach ($row in $progResp.data) {
     $oppTeam   = if ($isHome) { $a.team } else { $h.team }
     $ourSeason = if ($isHome) { $h.season } else { $a.season }
     if ($ourSeason) { $teamSeason[$ourTeam] = $ourSeason }
+    # Indoor and outdoor are separate teams with separate pools; everything else counts as outdoor.
+    $season = if ($ourSeason -eq 'indoor') { 'indoor' } else { 'outdoor' }
 
     # Parse field for home games (used by both fieldGames + teamGames so the Teams view
     # can show a "Veld X" badge that links into Veldindeling).
@@ -231,7 +234,7 @@ foreach ($row in $progResp.data) {
     }
 
     # teamGames: every Olympia game (home + away); home rows carry field info too
-    $tKey = "$iso|$time|$div|$ourTeam|$oppClub|$oppTeam|$isHome"
+    $tKey = "$iso|$time|$div|$ourTeam|$season|$oppClub|$oppTeam|$isHome"
     if (-not $seenTeam.ContainsKey($tKey)) {
         $seenTeam[$tKey] = $true
         $teamGames.Add([pscustomobject]@{
@@ -240,6 +243,7 @@ foreach ($row in $progResp.data) {
             isHome       = $isHome
             division     = $div
             olympiaTeam  = $ourTeam
+            season       = $season
             opponentClub = $oppClub
             opponentTeam = $oppTeam
             fieldCode    = $(if ($fieldForTeam) { $fieldForTeam.fieldCode } else { $null })
@@ -290,6 +294,7 @@ foreach ($row in $resResp.data) {
     $ourTeam = if ($isHome) { $h.team } else { $a.team }
     $oppClub = if ($isHome) { $a.club } else { $h.club }
     $oppTeam = if ($isHome) { $a.team } else { $h.team }
+    $season  = if ((& { if ($isHome) { $h.season } else { $a.season } }) -eq 'indoor') { 'indoor' } else { 'outdoor' }
 
     $hScore = $null; $aScore = $null
     if ($scoreRaw -match '^\s*(\d+)\s*-\s*(\d+)\s*$') {
@@ -299,7 +304,7 @@ foreach ($row in $resResp.data) {
     $ourScore = if ($isHome) { $hScore } else { $aScore }
     $oppScore = if ($isHome) { $aScore } else { $hScore }
 
-    $key = "$iso|$time|$div|$ourTeam|$oppClub|$oppTeam|$isHome"
+    $key = "$iso|$time|$div|$ourTeam|$season|$oppClub|$oppTeam|$isHome"
     if ($seenRes.ContainsKey($key)) { $dupRes++; continue }
     $seenRes[$key] = $true
 
@@ -309,6 +314,7 @@ foreach ($row in $resResp.data) {
         isHome       = $isHome
         division     = $div
         olympiaTeam  = $ourTeam
+        season       = $season
         opponentClub = $oppClub
         opponentTeam = $oppTeam
         score        = $scoreRaw
@@ -331,8 +337,9 @@ function AddDiv([hashtable]$dict, [string]$team, [string]$div) {
     if (-not $bucket.ContainsKey($div)) { $bucket[$div] = 0 }
     $bucket[$div]++
 }
-foreach ($g in $teamGames) { AddDiv $teamDivUpcoming $g.olympiaTeam $g.division }
-foreach ($g in $results)   { AddDiv $teamDivPast     $g.olympiaTeam $g.division }
+# Key = "code|season": U10B-1 outdoor and U10B-1 indoor are two teams in two pools.
+foreach ($g in $teamGames) { AddDiv $teamDivUpcoming "$($g.olympiaTeam)|$($g.season)" $g.division }
+foreach ($g in $results)   { AddDiv $teamDivPast     "$($g.olympiaTeam)|$($g.season)" $g.division }
 $allTeamCodes = New-Object 'System.Collections.Generic.HashSet[string]'
 foreach ($k in $teamDivUpcoming.Keys) { [void]$allTeamCodes.Add($k) }
 foreach ($k in $teamDivPast.Keys)     { [void]$allTeamCodes.Add($k) }
@@ -370,6 +377,23 @@ if ($poolMap.Count -eq 0 -and (Test-Path $poolMapFile)) {
         Write-Host ("  kalender page gave no pools -- using pool_map.json ({0} teams, saved {1})" -f $poolSeed.Count, $saved.updated)
     } catch { Write-Host "  WARN: could not read pool_map.json: $_" }
 }
+
+# Second fallback: the standings archive (standings/<season>.json, kept by archive.js) lists
+# every pool with its id and season, indoor included. pool_map.json only knows the pools of
+# teams seen while the kalender page still listed pools (outdoor, before 2026-10-19).
+$archMap = @{}
+try {
+    $archFile = Get-ChildItem -Path (Join-Path $here 'standings') -Filter '*.json' |
+        Where-Object { $_.Name -match '^\d{4}-\d{2}\.json$' } | Sort-Object Name | Select-Object -Last 1
+    if ($archFile) {
+        $arch = Get-Content -Path $archFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
+        foreach ($p in $arch.pools.PSObject.Properties) {
+            $k = PoolKey $p.Value.label
+            if ($k -and -not $archMap.ContainsKey("$k|$($p.Value.kind)")) { $archMap["$k|$($p.Value.kind)"] = [string]$p.Name }
+        }
+        Write-Host ("  standings archive: {0} pools for the pool lookup ({1})" -f $archMap.Count, $archFile.Name)
+    }
+} catch { Write-Host "  WARN: could not read the standings archive: $_" }
 
 # ----- 7. Resolve each Olympia team to a poolid, fetch standing + pool-wide games -----
 $teams = New-Object System.Collections.Generic.List[object]
@@ -434,26 +458,31 @@ function FetchPoolGames([string]$poolId) {
     return ,$arr.ToArray()
 }
 
-foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
-    if ([string]::IsNullOrEmpty($teamCode)) { continue }
+foreach ($teamKey in ($allTeamCodes | Sort-Object)) {
+    if ([string]::IsNullOrEmpty($teamKey)) { continue }
+    $teamCode = ($teamKey -split '\|')[0]
+    $season   = ($teamKey -split '\|')[1]
     # Prefer the most common UPCOMING-game division (currently active pool).
     # Only fall back to past-game frequency if the team has no scheduled games.
     $primaryDiv = $null
-    if ($teamDivUpcoming.ContainsKey($teamCode) -and $teamDivUpcoming[$teamCode].Count -gt 0) {
-        $divs = $teamDivUpcoming[$teamCode].GetEnumerator() | Sort-Object Value -Descending
+    if ($teamDivUpcoming.ContainsKey($teamKey) -and $teamDivUpcoming[$teamKey].Count -gt 0) {
+        $divs = $teamDivUpcoming[$teamKey].GetEnumerator() | Sort-Object Value -Descending
         $primaryDiv = $divs[0].Key
-    } elseif ($teamDivPast.ContainsKey($teamCode) -and $teamDivPast[$teamCode].Count -gt 0) {
-        $divs = $teamDivPast[$teamCode].GetEnumerator() | Sort-Object Value -Descending
+    } elseif ($teamDivPast.ContainsKey($teamKey) -and $teamDivPast[$teamKey].Count -gt 0) {
+        $divs = $teamDivPast[$teamKey].GetEnumerator() | Sort-Object Value -Descending
         $primaryDiv = $divs[0].Key
     }
     if ([string]::IsNullOrEmpty($primaryDiv)) { continue }
     # Prefer the season-qualified key so an indoor team never picks up an outdoor pool.
     $divKey = PoolKey $primaryDiv
     $poolId = $null
-    if ($teamSeason.ContainsKey($teamCode)) { $poolId = $poolMap["$divKey|$($teamSeason[$teamCode])"] }
-    if (-not $poolId) { $poolId = $poolMap[$divKey] }
-    if (-not $poolId -and $poolSeed.ContainsKey($teamCode)) { $poolId = $poolSeed[$teamCode] }
-    if (-not $poolId) { Write-Host ("  WARN: no poolid for {0} -- division '{1}'" -f $teamCode, $primaryDiv) }
+    $poolId = $poolMap["$divKey|$season"]
+    if (-not $poolId -and $season -eq 'outdoor') { $poolId = $poolMap[$divKey] }
+    if (-not $poolId) { $poolId = $archMap["$divKey|$season"] }
+    # pool_map.json keys: plain code = outdoor (as before), "code|indoor" = indoor.
+    $seedKey = if ($season -eq 'indoor') { "$teamCode|indoor" } else { $teamCode }
+    if (-not $poolId -and $poolSeed.ContainsKey($seedKey)) { $poolId = $poolSeed[$seedKey] }
+    if (-not $poolId) { Write-Host ("  WARN: no poolid for {0} ({1}) -- division '{2}'" -f $teamCode, $season, $primaryDiv) }
 
     $standing = $null
     # U7-U9: the federation keeps no scores for these ages, so their pools never have a
@@ -494,6 +523,7 @@ foreach ($teamCode in ($allTeamCodes | Sort-Object)) {
 
     $teams.Add([pscustomobject]@{
         code     = $teamCode
+        season   = $season
         division = $primaryDiv
         poolId   = $poolId
         standing = $standing
@@ -508,7 +538,7 @@ Write-Host ("  {0} Olympia teams; {1} unique pools with standings; {2} pools wit
 if ($poolMap.Count -gt 0) {
     try {
         $tm = [ordered]@{}
-        foreach ($t in ($teams | Sort-Object code)) { if ($t.poolId) { $tm[$t.code] = [ordered]@{ poolId = [string]$t.poolId; division = $t.division } } }
+        foreach ($t in ($teams | Sort-Object code, season)) { if ($t.poolId) { $tm[$(if ($t.season -eq 'indoor') { "$($t.code)|indoor" } else { $t.code })] = [ordered]@{ poolId = [string]$t.poolId; division = $t.division } } }
         if ($tm.Count -gt 0) {
             $out = [ordered]@{
                 note    = "Fallback for update.ps1: team code -> poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none."
@@ -576,7 +606,7 @@ try {
 
         # Results get the same protection: an empty answer for one window must not wipe
         # weeks of results and statistics from the page. A fresh row always wins.
-        $resKey = { param($g) "$($g.date)|$($g.time)|$($g.olympiaTeam)|$($g.opponentClub)|$($g.opponentTeam)|$($g.isHome)" }
+        $resKey = { param($g) "$($g.date)|$($g.time)|$($g.olympiaTeam)|$(if ($g.season) { $g.season } else { 'outdoor' })|$($g.opponentClub)|$($g.opponentTeam)|$($g.isHome)" }
         $have = @{}
         foreach ($g in $resultsArr) { $have[(& $resKey $g)] = $true }
         $extra = New-Object System.Collections.Generic.List[object]

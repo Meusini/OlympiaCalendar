@@ -28,7 +28,7 @@ const BOX_RE = /<script id="stats-box" type="application\/json">([\s\S]*?)<\/scr
 // Statistiek > Clubs: W/G/V per club over every outdoor league pool in Belgium, from the standings
 // archive (standings/<season>.json, kept by archive.js). U7-U9 and cups have no standings.
 // Joint teams of two clubs ("Ping/Well M-1") are left out: they belong to neither club alone.
-// Row: [club, seg, sex, played, won, draw, lost, teams]; seg adult|upper|mid, sex B|G|X (mixed).
+// Row: [club, seg, sex, played, won, draw, lost, teams, kind]; seg adult|upper|mid, sex B|G|X (mixed), kind outdoor|indoor.
 const MONTHS = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 function clubOf(team) {
   return String(team || '').replace(/\s+(U\d+[BG]?|D|H|G|JL|JM|M|L|T)\s?-?\s?\d+.*$/i, '').trim();
@@ -40,9 +40,10 @@ function allClubs() {
   const pools = Object.values(JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8')).pools || {});
   const agg = new Map();
   let used = 0, joint = 0, last = '';
+  const byKind = { outdoor: 0, indoor: 0 };
   for (const p of pools) {
     const st = p.snapshot;
-    if (!st || p.kind !== 'outdoor' || /cup|test/i.test(p.comp || '')) continue;
+    if (!st || (p.kind !== 'outdoor' && p.kind !== 'indoor') || /cup|test/i.test(p.comp || '')) continue;
     const c = st.columns || [], ix = n => c.indexOf(n);
     const iT = ix('Team'), iP = ix('Played'), iW = ix('Won'), iD = ix('Draw'), iL = ix('Lost');
     if ([iT, iP, iW, iD, iL].some(i => i < 0)) continue;
@@ -50,20 +51,20 @@ function allClubs() {
     if (age !== null && age < 10) continue;
     const seg = age === null ? 'adult' : age >= 14 ? 'upper' : 'mid';
     const sex = p.gender === 'M' ? 'B' : p.gender === 'F' ? 'G' : 'X';
-    used++;
+    used++; byKind[p.kind]++;
     if ((p.lastChecked || '') > last) last = p.lastChecked;
     for (const r of st.rows) {
       if (/\//.test(r[iT])) { joint++; continue; }
       const club = clubOf(r[iT]);
       if (!club || !(+r[iP] > 0)) continue;
-      const k = club + '|' + seg + '|' + sex;
-      const o = agg.get(k) || [club, seg, sex, 0, 0, 0, 0, 0];
+      const k = club + '|' + seg + '|' + sex + '|' + p.kind;
+      const o = agg.get(k) || [club, seg, sex, 0, 0, 0, 0, 0, p.kind];
       o[3] += +r[iP] || 0; o[4] += +r[iW] || 0; o[5] += +r[iD] || 0; o[6] += +r[iL] || 0; o[7]++;
       agg.set(k, o);
     }
   }
   const d = last ? new Date(last) : null;
-  return { pools: used, joint, asOf: d ? d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() : '',
+  return { pools: used, poolsByKind: byKind, joint, asOf: d ? d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() : '',
     rows: [...agg.values()].sort((a, b) => a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]) || a[2].localeCompare(b[2])) };
 }
 

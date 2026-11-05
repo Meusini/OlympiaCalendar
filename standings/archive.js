@@ -74,10 +74,10 @@ function eligible(p) {
   if (/Cup|Test-competitie/i.test(p.label)) return false;
   return true;
 }
-// Indoor runs Dec-Feb; outdoor everything except the summer break.
+// Indoor runs mid-Nov to Feb (2026-27: first Olympia indoor match 28 Nov); outdoor everything except the summer break.
 function inWindow(p) {
   const mo = now.getMonth() + 1;
-  if (p.kind === 'indoor') return mo === 12 || mo <= 2;
+  if (p.kind === 'indoor') return (mo === 11 && now.getDate() >= 15) || mo === 12 || mo <= 2;
   return !(mo === 7 || (mo === 8 && now.getDate() < 15));
 }
 

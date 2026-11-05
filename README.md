@@ -14,6 +14,14 @@ The Statistiek code still lives in `index.html`. `<html data-site="calendar">` h
 which shows only Statistiek. `refresh-local.ps1` runs it after `update.ps1` and pushes both repos.
 `census.html` here is a redirect to OlympiaData.
 
+## Indoor and outdoor
+
+Indoor and outdoor are separate teams in separate pools on hockey.be (U10B-1 plays both). `update.ps1`
+tags every match, result and team with `season` (outdoor | indoor) and keys teams as code + season; indoor
+pool ids come from the standings archive (`standings/<season>.json`). The calendar has an All / Outdoor /
+Indoor selector for Results, Teams and Standings; OlympiaData Statistiek has the same toggle, defaulting
+to the season being played. The archive checks indoor pools from 15 November to February.
+
 ## Local use
 
 Double-click `index.html` or open it in any browser. The page renders from the data
