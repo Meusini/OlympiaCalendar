@@ -2600,7 +2600,8 @@ function fieldLabel(fieldCode, subpath) {
 // ----- Site split -----
 // OlympiaCalendar shows Veldbezetting, Resultaten, Teams; OlympiaData shows Statistiek only.
 const SITE = document.documentElement.dataset.site === "data" ? "data" : "calendar";
-const CALENDAR_URL = "https://meusini.github.io/OlympiaCalendar/";
+// ?embed=1: shown inside the Clubs en teams page (Olympia > Statistiek), so no header of its own.
+const EMBED = SITE === "data" && new URLSearchParams(location.search).get("embed") === "1";
 let siteApplied = false;
 function applySite() {
   if (siteApplied) return;
@@ -2615,9 +2616,10 @@ function applySite() {
   ["prev", "date", "next"].forEach(id => document.getElementById(id).style.display = "none");
   const nav = document.querySelector("header .navlink");
   nav.href = "index.html"; nav.title = "Clubs en teams (wachtwoord)"; nav.textContent = "Clubs en teams ▶";
-  const cal = document.createElement("a");
-  cal.className = "navlink"; cal.href = CALENDAR_URL; cal.textContent = "◀ Kalender";
-  nav.before(cal);
+  if (EMBED) {
+    document.querySelector("header").style.display = "none";
+    document.getElementById("main").style.padding = "0 0 24px";
+  }
 }
 
 // ----- Boot -----
