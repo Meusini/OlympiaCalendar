@@ -1,5 +1,8 @@
 ﻿<!doctype html>
-<html lang="nl">
+<html lang="nl" data-site="calendar">
+<!-- data-site: "calendar" = OlympiaCalendar (Veldbezetting, Resultaten, Teams).
+     build_data_site.js copies this file to OlympiaData/statistiek.html with data-site="data",
+     which keeps only the Statistiek view. One source, two sites: edit here, never in the copy. -->
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -2555,7 +2558,7 @@ function renderFavoriteChip() {
     bar.id = "fav-bar";
     document.querySelector("header").after(bar);
   }
-  if (!state.favoriteTeam) { bar.innerHTML = ""; bar.style.display = "none"; return; }
+  if (!state.favoriteTeam || SITE === "data") { bar.innerHTML = ""; bar.style.display = "none"; return; }
   bar.style.display = "";
   bar.innerHTML = `<button class="fav-chip" type="button" title="Open favoriet team">
       <span class="fav-star">★</span>
@@ -2568,6 +2571,7 @@ function renderFavoriteChip() {
 
 // Navigate to a team page from anywhere a team name was clicked.
 function navigateToTeam(code) {
+  if (SITE === "data") return;   // OlympiaData has no Teams view
   state.selectedTeam = code;
   state.view = "teams";
   document.querySelectorAll("header .tabs button").forEach(b =>
@@ -2593,8 +2597,29 @@ function fieldLabel(fieldCode, subpath) {
   return sub ? `Veld ${fieldCode}${sub}` : `Veld ${fieldCode} (volledig)`;
 }
 
+// ----- Site split -----
+// OlympiaCalendar shows Veldbezetting, Resultaten, Teams; OlympiaData shows Statistiek only.
+const SITE = document.documentElement.dataset.site === "data" ? "data" : "calendar";
+const CALENDAR_URL = "https://meusini.github.io/OlympiaCalendar/";
+function applySite() {
+  const keep = SITE === "data" ? ["stats"] : ["layout", "week", "teams"];
+  document.querySelectorAll("header .tabs button").forEach(b => { if (!keep.includes(b.dataset.view)) b.remove(); });
+  if (SITE !== "data") return;
+  state.view = "stats";
+  document.querySelector('header .tabs button[data-view="stats"]').classList.add("active");
+  document.title = "HC Olympia — Statistiek";
+  document.querySelector("header h1 .sub").textContent = "Statistiek";
+  ["prev", "date", "next"].forEach(id => document.getElementById(id).style.display = "none");
+  const nav = document.querySelector("header .navlink");
+  nav.href = "index.html"; nav.title = "Clubs en teams (wachtwoord)"; nav.textContent = "Clubs en teams ▶";
+  const cal = document.createElement("a");
+  cal.className = "navlink"; cal.href = CALENDAR_URL; cal.textContent = "◀ Kalender";
+  nav.before(cal);
+}
+
 // ----- Boot -----
 (function init() {
+  applySite();
   const data = loadEmbedded();
   state.fieldGames = data.fieldGames;
   state.teamGames  = data.teamGames;

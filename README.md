@@ -4,6 +4,16 @@ Single-page web app showing daily field assignments, team standings, and weekly 
 for HC Olympia Antwerpen. Reads live from the hockey.be Sportlink API on a weekly schedule
 and serves a fully static `index.html`.
 
+## Two sites
+
+- **OlympiaCalendar** (this repo, https://meusini.github.io/OlympiaCalendar/): Veldbezetting, Resultaten, Teams, Klassementen.
+- **OlympiaData** (Meusini/OlympiaData, https://meusini.github.io/OlympiaData/): the password-locked clubs/teams census and Statistiek.
+
+The Statistiek code still lives in `index.html`. `<html data-site="calendar">` hides it here;
+`build_data_site.js` copies the page to `../OlympiaData/statistiek.html` with `data-site="data"`,
+which shows only Statistiek. `refresh-local.ps1` runs it after `update.ps1` and pushes both repos.
+`census.html` here is a redirect to OlympiaData.
+
 ## Local use
 
 Double-click `index.html` or open it in any browser. The page renders from the data
