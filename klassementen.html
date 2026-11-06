@@ -81,6 +81,8 @@
   html.embed body { background:transparent; }
   html.embed header { position:static; padding:0 0 14px; background:transparent; border-bottom:none; backdrop-filter:none; -webkit-backdrop-filter:none; }
   html.embed header .back, html.embed header h1, html.embed header .grow { display:none; }
+  /* in the calendar the header's season selector drives this; one control, not two */
+  html.embed #kind { display:none; }
   html.embed main { padding:0 0 24px; }
   @media (max-width: 720px) {
     header { padding:10px 16px; display:grid; grid-template-columns:1fr 1fr; }

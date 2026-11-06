@@ -244,6 +244,8 @@ foreach ($row in $progResp.data) {
             division     = $div
             olympiaTeam  = $ourTeam
             season       = $season
+            # Venue as hockey.be names it ("Ath. Keerbergen", "BRAX - Indoor 4"); empty on our own pitches.
+            venue        = $(if ($fieldForTeam) { "" } else { $fieldRaw })
             opponentClub = $oppClub
             opponentTeam = $oppTeam
             fieldCode    = $(if ($fieldForTeam) { $fieldForTeam.fieldCode } else { $null })
