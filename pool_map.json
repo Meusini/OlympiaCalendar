@@ -302,10 +302,6 @@
                                 "poolId":  "12221",
                                 "division":  "U7 Girls - Reg. 2 A"
                             },
-                  "U7G-8":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
                   "U8B-1":  {
                                 "poolId":  "12229",
                                 "division":  "U8 Boys - Reg. 1 A"
@@ -318,15 +314,7 @@
                                 "poolId":  "12229",
                                 "division":  "U8 Boys - Reg. 1 A"
                             },
-                  "U8B-4":  {
-                                "poolId":  "12230",
-                                "division":  "U8 Boys - Reg. 2 A"
-                            },
                   "U8B-5":  {
-                                "poolId":  "12230",
-                                "division":  "U8 Boys - Reg. 2 A"
-                            },
-                  "U8B-6":  {
                                 "poolId":  "12230",
                                 "division":  "U8 Boys - Reg. 2 A"
                             },
