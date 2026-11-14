@@ -12,6 +12,9 @@ and serves a fully static `index.html`.
 The Statistiek code still lives in `index.html`. `<html data-site="calendar">` hides it here;
 `build_data_site.js` copies the page to `../OlympiaData/statistiek.html` with `data-site="data"`,
 which shows only Statistiek. `refresh-local.ps1` runs it after `update.ps1` and pushes both repos.
+It then rebuilds the census Team Strength and Club Strength tabs (`../HockeyCensus/rounds.js` + `strength_box.js`)
+into `../OlympiaData/strength.json`, encrypted with the Statistiek data key; the census page loads it after unlock,
+so these tabs refresh daily without the census password. Member counts and fees still need `node build_page.js`.
 `census.html` here is a redirect to OlympiaData.
 
 ## Indoor and outdoor
