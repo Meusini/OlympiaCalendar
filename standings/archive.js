@@ -47,11 +47,13 @@ const STORE = path.join(DIR, `${SEASON}.json`);
 // "U19 Boys Outdoor Week - Reg. 2 - A"
 // "Open League Men Outdoor Week - Reg. 2 - OL - HV - A"
 // "Men Indoor Week - Nat. 1 - B"
-const SEASON_MARKER = /\s*\b(Outdoor|Indoor|Trimmers|Recreatief)\s+Week\b/;
+// Since ~10 Nov 2026 hockey.be drops "Week" ("U19 Boys Outdoor - Reg. 2 - A"), so the marker is the last
+// word of the competition head, with or without "Week".
+const SEASON_MARKER = /\s+(Outdoor|Indoor|Trimmers|Recreatief)(?:\s+Week)?\s*$/;
 function parseLabel(label) {
-  const m = label.match(SEASON_MARKER);
-  const kind = m ? m[1].toLowerCase() : '';
   const [head, ...rest] = label.split(' - ');
+  const m = head.match(SEASON_MARKER);
+  const kind = m ? m[1].toLowerCase() : '';
   const comp = head.replace(SEASON_MARKER, '').trim();
   const age = (comp.match(/^U(\d+)/) || [])[1];
   let gender = '';

@@ -60,17 +60,35 @@ try {
         node (Join-Path $repo 'build_data_site.js') $data
         if ($LASTEXITCODE -eq 2) { Write-Host "OlympiaData: statistiek not set up yet (run node stats_key.js in HockeyCensus)." }
         elseif ($LASTEXITCODE -ne 0) { throw "build_data_site.js failed (exit $LASTEXITCODE)" }
-        if (-not (git status --porcelain -- statistiek.html stats_key.json)) {
+        # Census Team Strength / Club Strength tabs (2026-11-14): rebuilt from the standings archive and
+        # encrypted with the Statistiek data key into strength.json, so no census password is needed.
+        # A failure here does not block Statistiek; it fails the run after the push.
+        $census = Join-Path (Split-Path -Parent $repo) 'HockeyCensus'
+        $strengthErr = $null
+        Push-Location $census
+        try {
+            node rounds.js | Out-Null
+            if ($LASTEXITCODE -ne 0) { $strengthErr = "rounds.js failed (exit $LASTEXITCODE)" }
+            else {
+                $env:STRENGTH_OUT = Join-Path $data 'strength.json'
+                node strength_box.js
+                if ($LASTEXITCODE -ne 0) { $strengthErr = "strength_box.js failed (exit $LASTEXITCODE)" }
+                Remove-Item Env:STRENGTH_OUT
+            }
+        }
+        finally { Pop-Location }
+        if (-not (git status --porcelain -- statistiek.html stats_key.json strength.json)) {
             Write-Host "OlympiaData: no changes."
         }
         else {
-            git add statistiek.html stats_key.json
-            git commit --quiet -m "chore: refresh statistiek (auto)"
+            git add statistiek.html stats_key.json strength.json
+            git commit --quiet -m "chore: refresh statistiek and strength (auto)"
             if ($LASTEXITCODE -ne 0) { throw "OlympiaData commit failed (exit $LASTEXITCODE)" }
             git push --quiet origin main
             if ($LASTEXITCODE -ne 0) { throw "OlympiaData push failed (exit $LASTEXITCODE)" }
-            Write-Host "Pushed refreshed statistiek.html to OlympiaData."
+            Write-Host "Pushed refreshed statistiek/strength to OlympiaData."
         }
+        if ($strengthErr) { throw $strengthErr }
     }
     finally { Pop-Location }
     Write-Host "=== ok ==="
