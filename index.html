@@ -986,7 +986,7 @@
     <div class="tabs">
       <button data-view="layout" class="active">Pitches</button>
       <button data-view="week">Results</button>
-      <button data-view="stats">Statistiek</button>
+      <button data-view="stats">Statistics</button>
       <button data-view="teams">Teams</button>
       <button data-view="standings">Standings</button>
     </div>
@@ -1262,7 +1262,7 @@ function fmtDateAPI(d) {
 function fmtUpdated(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return "—";
-  return d.toLocaleString(SITE === "data" ? "nl-BE" : "en-GB", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
+  return d.toLocaleString("en-GB", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
 }
 
 // ----- Age class from team name (U7G-3, D-2, G-1, JL-1, T-1) -----
@@ -2167,7 +2167,7 @@ function statsGroup(code) {
                   label:`U${m[1]} ${m[2].toUpperCase()==="B"?"Boys":"Girls"}` };
   const c = teamCategory(code);
   const sex = (c==="H"||c==="G"||c==="JM") ? "B" : (c==="D"||c==="JL") ? "G" : "";
-  return { age:c, sex, youth:false, key:c, label:(TEAM_GROUP_LABEL[c]||c).replace(" (senior)","") };
+  return { age:c, sex, youth:false, key:c, label:TEAM_GROUP_LABEL_EN[c]||c };
 }
 function tally(list) {
   const t = { n:0, w:0, d:0, l:0 };
@@ -2187,13 +2187,13 @@ function wdlBar(t, mini) {
 // rank (optional) · name · full W/G/V bar with percentages · matches played
 function statRow(o) {
   const cls = ["srow", o.rank == null ? "norank" : "", o.ours ? "ours" : "", o.attrs ? "click" : ""].filter(Boolean).join(" ");
-  return `<li class="${cls}" ${o.attrs || ""}>${o.rank == null ? "" : `<span class="rk">${o.rank}</span>`}<span class="nm">${escape(o.label)}</span>${wdlBar(o.t)}<span class="ct" title="wedstrijden">${o.t.n}</span></li>`;
+  return `<li class="${cls}" ${o.attrs || ""}>${o.rank == null ? "" : `<span class="rk">${o.rank}</span>`}<span class="nm">${escape(o.label)}</span>${wdlBar(o.t)}<span class="ct" title="matches">${o.t.n}</span></li>`;
 }
 function shortRange(a, b) {
   const A = new Date(a+"T00:00:00"), B = new Date(b+"T00:00:00");
-  if (a === b) return `${A.getDate()} ${MONTHS_NL[A.getMonth()]}`;
-  if (A.getMonth() === B.getMonth()) return `${A.getDate()}–${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
-  return `${A.getDate()} ${MONTHS_NL[A.getMonth()]} – ${B.getDate()} ${MONTHS_NL[B.getMonth()]}`;
+  if (a === b) return `${A.getDate()} ${MONTHS_EN[A.getMonth()]}`;
+  if (A.getMonth() === B.getMonth()) return `${A.getDate()}–${B.getDate()} ${MONTHS_EN[B.getMonth()]}`;
+  return `${A.getDate()} ${MONTHS_EN[A.getMonth()]} – ${B.getDate()} ${MONTHS_EN[B.getMonth()]}`;
 }
 // Club comparison — season W/G/V per club, summed over the standings of every pool in
 // which Olympia has a team. Costs no extra requests: update.ps1 already embeds those
@@ -2258,21 +2258,21 @@ function renderClubCompare(main, s) {
 
   let html = `<div class="stats"><div class="stats-filters">
     <div class="view-toggle">${tog("mode","olympia","Olympia")}${tog("mode","clubs","Clubs")}</div><span class="break"></span>
-    ${A ? `<div class="view-toggle">${tog("season","outdoor","Outdoor")}${tog("season","indoor","Indoor")}${tog("season","all","Alle")}</div>` : ""}
-    <div class="view-toggle">${tog("seg","all","Alle")}${tog("seg","adult","Volwassenen")}${tog("seg","upper","Bovenbouw")}${tog("seg","mid","Middenbouw")}</div>
-    <div class="view-toggle">${tog("csex","all","Alle")}${tog("csex","B","Boys")}${tog("csex","G","Girls")}</div>
+    ${A ? `<div class="view-toggle">${tog("season","outdoor","Outdoor")}${tog("season","indoor","Indoor")}${tog("season","all","All")}</div>` : ""}
+    <div class="view-toggle">${tog("seg","all","All")}${tog("seg","adult","Adults")}${tog("seg","upper","Older&nbsp;youth")}${tog("seg","mid","Middle&nbsp;youth")}</div>
+    <div class="view-toggle">${tog("csex","all","All")}${tog("csex","B","Boys")}${tog("csex","G","Girls")}</div>
   </div>`;
   if (!rows.length) {
-    html += `<div class="empty">Nog geen gespeelde wedstrijden voor deze selectie.</div></div>`;
+    html += `<div class="empty">No matches played yet for this selection.</div></div>`;
   } else {
     const me = rows.findIndex(o => o.club === "Olympia");
     if (me >= 0) {
       const o = rows[me];
-      html += `<div class="stats-head"><div class="big">${me+1}<small>van ${rows.length} clubs</small></div><div class="n">${pctOf(o.w,o.n)}% gewonnen · ${o.n} wedstrijden</div></div>`;
+      html += `<div class="stats-head"><div class="big">${me+1}<small>of ${rows.length} clubs</small></div><div class="n">${pctOf(o.w,o.n)}% won · ${o.n} matches</div></div>`;
     }
     html += `<ul class="srows">` + rows.map((o, i) => statRow({ rank:i+1, label:o.club, t:o, ours:o.club==="Olympia" })).join("") + `</ul>`;
     html += `
-      <div class="stats-note">${A ? `Stand van het seizoen in alle ${poolCount} ${s.season === "all" ? "outdoor- en indoor" : s.season} competitiereeksen van België (U10 tot volwassenen; U7–U9 en bekers hebben geen klassement), bijgewerkt tot ${A.asOf}.${A.joint ? ` ${A.joint} gezamenlijke teams van twee clubs niet meegeteld.` : ""}` : `Stand van het seizoen, enkel in de ${poolCount} reeksen waar Olympia speelt.`}${hidden ? ` ${hidden} club${hidden===1?"":"s"} met minder dan ${CLUB_MIN_PLAYED} wedstrijden niet getoond.` : ""}</div></div>`;
+      <div class="stats-note">${A ? `Season standings in all ${poolCount} ${s.season === "all" ? "outdoor and indoor" : s.season} league pools in Belgium (U10 to adults; U7–U9 and cups have no standings), updated to ${String(A.asOf).replace(/[a-z]+/, m => MONTHS_EN[MONTHS_NL.indexOf(m)] || m)}.${A.joint ? ` ${A.joint} joint teams of two clubs not counted.` : ""}` : `Season standings, only in the ${poolCount} pools where Olympia plays.`}${hidden ? ` ${hidden} club${hidden===1?"":"s"} with fewer than ${CLUB_MIN_PLAYED} matches not shown.` : ""}</div></div>`;
   }
   main.innerHTML = html;
   main.querySelectorAll("[data-sf]").forEach(b => b.addEventListener("click", () => { s[b.dataset.sf] = b.dataset.sv; render(); }));
@@ -2316,24 +2316,24 @@ function renderStats() {
   const tog = (name, val, label) => `<button data-sf="${name}" data-sv="${val}" class="${s[name]===val?'active':''}">${label}</button>`;
   let html = `<div class="stats"><div class="stats-filters">
     <div class="view-toggle">${tog("mode","olympia","Olympia")}${tog("mode","clubs","Clubs")}</div><span class="break"></span>
-    <div class="view-toggle">${tog("season","outdoor","Outdoor")}${tog("season","indoor","Indoor")}${tog("season","all","Alle")}</div>
-    <div class="view-toggle">${tog("period","season","Seizoen")}${tog("period","week","Speeldag")}${tog("period","range","Periode")}</div>`;
-  if (s.period === "week") html += `<select id="st-week" aria-label="Speeldag">${weekKeys.map(k =>
+    <div class="view-toggle">${tog("season","outdoor","Outdoor")}${tog("season","indoor","Indoor")}${tog("season","all","All")}</div>
+    <div class="view-toggle">${tog("period","season","Season")}${tog("period","week","Matchday")}${tog("period","range","Period")}</div>`;
+  if (s.period === "week") html += `<select id="st-week" aria-label="Matchday">${weekKeys.map(k =>
       `<option value="${k}"${k===s.week?" selected":""}>${shortRange(weeks.get(k).min, weeks.get(k).max)}</option>`).join("")}</select>`;
-  if (s.period === "range") html += `<input type="date" id="st-from" value="${s.from}" aria-label="Van"><span class="dash">–</span><input type="date" id="st-to" value="${s.to}" aria-label="Tot">`;
+  if (s.period === "range") html += `<input type="date" id="st-from" value="${s.from}" aria-label="From"><span class="dash">–</span><input type="date" id="st-to" value="${s.to}" aria-label="To">`;
   html += `<span class="break"></span>
-    <div class="view-toggle">${tog("cat","all","Alle")}${tog("cat","youth","Jeugd")}${tog("cat","adult","Volwassenen")}</div>
-    <div class="view-toggle">${tog("sex","all","Alle")}${tog("sex","B","Boys")}${tog("sex","G","Girls")}</div>
-    <select id="st-age" aria-label="Leeftijdsgroep"><option value="all">Alle leeftijden</option>${ageSet.map(a =>
-      `<option value="${a}"${a===s.age?" selected":""}>${escape((TEAM_GROUP_LABEL[a]||a).replace(" (senior)",""))}</option>`).join("")}</select>
+    <div class="view-toggle">${tog("cat","all","All")}${tog("cat","youth","Youth")}${tog("cat","adult","Adults")}</div>
+    <div class="view-toggle">${tog("sex","all","All")}${tog("sex","B","Boys")}${tog("sex","G","Girls")}</div>
+    <select id="st-age" aria-label="Age group"><option value="all">All ages</option>${ageSet.map(a =>
+      `<option value="${a}"${a===s.age?" selected":""}>${escape(TEAM_GROUP_LABEL_EN[a]||a)}</option>`).join("")}</select>
   </div>`;
 
   if (!t.n) {
-    html += `<div class="empty">Geen gespeelde wedstrijden voor deze selectie.</div></div>`;
+    html += `<div class="empty">No matches played for this selection.</div></div>`;
   } else {
-    html += `<div class="stats-head"><div class="big">${pctOf(t.w,t.n)}%<small>gewonnen</small></div><div class="n">${t.n} wedstrijd${t.n===1?"":"en"}</div></div>
+    html += `<div class="stats-head"><div class="big">${pctOf(t.w,t.n)}%<small>won</small></div><div class="n">${t.n} match${t.n===1?"":"es"}</div></div>
       ${wdlBar(t)}
-      <div class="wdl-key"><span><b>${t.w}</b> gewonnen</span><span><b>${t.d}</b> gelijk</span><span><b>${t.l}</b> verloren</span></div>`;
+      <div class="wdl-key"><span><b>${t.w}</b> won</span><span><b>${t.d}</b> drawn</span><span><b>${t.l}</b> lost</span></div>`;
 
     // Breakdown: by group, or by team once a single group is selected
     const groupKeys = new Set(list.map(r => statsGroup(r.olympiaTeam).key));
@@ -2365,7 +2365,7 @@ function renderStats() {
       if (s.age !== "all" && g.age !== s.age) return false;
       return true;
     }).length;
-    if (skipped) html += `<div class="stats-note">${skipped} wedstrijd${skipped===1?"":"en"} zonder ingevulde score niet meegeteld.</div>`;
+    if (skipped) html += `<div class="stats-note">${skipped} match${skipped===1?"":"es"} without a score entered not counted.</div>`;
     html += `</div>`;
   }
   main.innerHTML = html;
@@ -2788,11 +2788,11 @@ function applySite() {
   if (SITE !== "data") return;
   state.view = "stats";
   document.querySelector('header .tabs button[data-view="stats"]').classList.add("active");
-  document.title = "HC Olympia — Statistiek";
-  document.querySelector("header h1 .sub").textContent = "Statistiek";
+  document.title = "HC Olympia — Statistics"; document.documentElement.lang = "en";
+  document.querySelector("header h1 .sub").textContent = "Statistics";
   document.getElementById("datebar").style.display = "none";
   const nav = document.createElement("a");
-  nav.className = "navlink"; nav.href = "index.html"; nav.title = "Clubs en teams (wachtwoord)"; nav.textContent = "Clubs en teams ▶";
+  nav.className = "navlink"; nav.href = "index.html"; nav.title = "Clubs and teams (password)"; nav.textContent = "Clubs and teams ▶";
   document.querySelector("header .hnav").appendChild(nav);
   if (EMBED) {
     document.querySelector("header").style.display = "none";
@@ -2812,7 +2812,7 @@ function init() {
   state.allClubs   = data.allClubs;
   for (const t of state.teams || []) t.key = teamKeyOf(t.code, seasonOf(t));
   state.updated    = data.updated;
-  document.getElementById("status").textContent = `${SITE === "data" ? "Bijgewerkt" : "Updated"} ${fmtUpdated(data.updated)}`;
+  document.getElementById("status").textContent = `Updated ${fmtUpdated(data.updated)}`;
 
   document.getElementById("date").value = state.date;
   document.getElementById("date").addEventListener("change", e => {
@@ -2890,12 +2890,12 @@ async function openStats(pw) {
 }
 async function unlockStats(pw, quiet) {
   const err = document.getElementById("stats-err");
-  if (!quiet) err.textContent = "Bezig…";
+  if (!quiet) err.textContent = "Working…";
   let json;
   try { json = await openStats(pw); }
   catch (e) {
     try { sessionStorage.removeItem(PW_KEY); } catch {}
-    if (!quiet) err.textContent = "Fout wachtwoord.";
+    if (!quiet) err.textContent = "Wrong password.";
     return;
   }
   try { sessionStorage.setItem(PW_KEY, pw); } catch {}
@@ -2906,8 +2906,8 @@ function showStatsLock() {
   applySite();
   document.getElementById("main").innerHTML =
     `<div style="max-width:360px;margin:12vh auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px">
-      <h2 style="margin:0 0 12px;font-size:16px">Beveiligde pagina</h2>
-      <form id="stats-unlock" style="display:flex;gap:8px"><input id="stats-pw" type="password" placeholder="Wachtwoord" autocomplete="current-password" style="flex:1;min-width:0;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit" autofocus /><button style="background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit;cursor:pointer">Open</button></form>
+      <h2 style="margin:0 0 12px;font-size:16px">Protected page</h2>
+      <form id="stats-unlock" style="display:flex;gap:8px"><input id="stats-pw" type="password" placeholder="Password" autocomplete="current-password" style="flex:1;min-width:0;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit" autofocus /><button style="background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font:inherit;cursor:pointer">Open</button></form>
       <div id="stats-err" style="color:#ff7a90;font-size:13px;margin-top:10px;min-height:18px"></div></div>`;
   document.getElementById("stats-unlock").addEventListener("submit", e => {
     e.preventDefault(); unlockStats(document.getElementById("stats-pw").value);
