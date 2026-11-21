@@ -1,6 +1,6 @@
 {
     "note":  "Fallback for update.ps1: team code -\u003e poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none.",
-    "updated":  "2026-11-20",
+    "updated":  "2026-11-21",
     "teams":  {
                   "D-1":  {
                               "poolId":  "11767",
@@ -358,10 +358,6 @@
                                        "poolId":  "12454",
                                        "division":  "U9 Boys - Reg. 1 C"
                                    },
-                  "U9B-2":  {
-                                "poolId":  "11953",
-                                "division":  "U9 Boys - Reg. 2 I"
-                            },
                   "U9G-1|indoor":  {
                                        "poolId":  "12442",
                                        "division":  "U9 Girls - Reg. 1 B"
@@ -374,10 +370,6 @@
                                        "poolId":  "12447",
                                        "division":  "U9 Girls - Reg. 2 E"
                                    },
-                  "U9G-2":  {
-                                "poolId":  "11923",
-                                "division":  "U9 Girls - Reg. 1 C"
-                            },
                   "U9G-3":  {
                                 "poolId":  "11930",
                                 "division":  "U9 Girls - Reg. 2 G"
