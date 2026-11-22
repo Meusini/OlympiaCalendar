@@ -1,6 +1,6 @@
 {
     "note":  "Fallback for update.ps1: team code -\u003e poolId of the pool the team was last seen in. Rewritten after every run that resolves pools from the kalender page; read when that page yields none.",
-    "updated":  "2026-11-21",
+    "updated":  "2026-11-22",
     "teams":  {
                   "D-1":  {
                               "poolId":  "11767",
@@ -250,110 +250,6 @@
                                  "poolId":  "12208",
                                  "division":  "U19 Girls - Reg. 3 E"
                              },
-                  "U7B-1":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7B-2":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7B-3":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7B-4":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7B-5":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7B-7":  {
-                                "poolId":  "12224",
-                                "division":  "U7 Boys - Reg. 2 A"
-                            },
-                  "U7G-1":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U7G-2":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U7G-3":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U7G-5":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U7G-6":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U7G-7":  {
-                                "poolId":  "12221",
-                                "division":  "U7 Girls - Reg. 2 A"
-                            },
-                  "U8B-1":  {
-                                "poolId":  "12229",
-                                "division":  "U8 Boys - Reg. 1 A"
-                            },
-                  "U8B-2":  {
-                                "poolId":  "12229",
-                                "division":  "U8 Boys - Reg. 1 A"
-                            },
-                  "U8B-3":  {
-                                "poolId":  "12229",
-                                "division":  "U8 Boys - Reg. 1 A"
-                            },
-                  "U8B-5":  {
-                                "poolId":  "12230",
-                                "division":  "U8 Boys - Reg. 2 A"
-                            },
-                  "U8B-7":  {
-                                "poolId":  "12230",
-                                "division":  "U8 Boys - Reg. 2 A"
-                            },
-                  "U8B-8":  {
-                                "poolId":  "12231",
-                                "division":  "U8 Boys - Reg. 3 A"
-                            },
-                  "U8G-1":  {
-                                "poolId":  "12226",
-                                "division":  "U8 Girls - Reg. 1 A"
-                            },
-                  "U8G-2":  {
-                                "poolId":  "12226",
-                                "division":  "U8 Girls - Reg. 1 A"
-                            },
-                  "U8G-3":  {
-                                "poolId":  "12227",
-                                "division":  "U8 Girls - Reg. 2 A"
-                            },
-                  "U8G-4":  {
-                                "poolId":  "12227",
-                                "division":  "U8 Girls - Reg. 2 A"
-                            },
-                  "U8G-5":  {
-                                "poolId":  "12227",
-                                "division":  "U8 Girls - Reg. 2 A"
-                            },
-                  "U8G-6":  {
-                                "poolId":  "12227",
-                                "division":  "U8 Girls - Reg. 2 A"
-                            },
-                  "U8G-7":  {
-                                "poolId":  "12228",
-                                "division":  "U8 Girls - Reg. 3 A"
-                            },
-                  "U8G-8":  {
-                                "poolId":  "12228",
-                                "division":  "U8 Girls - Reg. 3 A"
-                            },
                   "U9B-1|indoor":  {
                                        "poolId":  "12454",
                                        "division":  "U9 Boys - Reg. 1 C"
@@ -362,21 +258,9 @@
                                        "poolId":  "12442",
                                        "division":  "U9 Girls - Reg. 1 B"
                                    },
-                  "U9G-1":  {
-                                "poolId":  "11922",
-                                "division":  "U9 Girls - Reg. 1 B"
-                            },
                   "U9G-2|indoor":  {
                                        "poolId":  "12447",
                                        "division":  "U9 Girls - Reg. 2 E"
-                                   },
-                  "U9G-3":  {
-                                "poolId":  "11930",
-                                "division":  "U9 Girls - Reg. 2 G"
-                            },
-                  "U9G-4":  {
-                                "poolId":  "11938",
-                                "division":  "U9 Girls - Reg. 3 E"
-                            }
+                                   }
               }
 }
