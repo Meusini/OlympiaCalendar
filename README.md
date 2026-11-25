@@ -40,15 +40,19 @@ the retired `update.ps1`) is gone. `update.js` (helpers in `hockeybe.js`) reads 
 the site's "Download overzicht" button instead, then rewrites the `<script id="games-data">` block:
 
 - 2 calls for every Olympia match, outdoor and indoor, 180 days back to 90 days ahead, with scores.
-- 0-2 calls for the pool list (id + full label), when a label is new or the copy is a week old.
-- 1 call per scored Olympia pool for the whole season, only when a match in that pool was due since
-  its last call, or weekly. Each pool's copy is kept in `.cache/pools/` (not committed).
-- Calls are 15-40 s apart in random order, so a Monday run takes ~25 min.
+- About 2 calls (Mondays 4) to keep the **match store** current (`matchstore.js`): every Belgian
+  match, read without a filter for the last 3 days, the next 14 days, and once more a week after it
+  was played, for score corrections. The store (`.cache/matches/`, not committed) holds the whole
+  season and is shared with the standings archive, so no match is fetched twice. Filling it for a
+  new season takes one call per week since the start (13 for 2026-27).
+- 0-2 calls for the pool list (id + full label), when a label is unknown, at most daily.
+- Calls are 15-40 s apart in random order. The name tag is `ResultsTracker/<date>`.
 
 The new site no longer publishes the **pitch per match**, **league tables** or **Trimmers** matches.
-League tables are computed from the pool results (3/1/0 points, then goal difference, then goals
-scored). Pitches of future home matches are kept from the last data that had them; new home matches
-have none until the club supplies pitch data. Test hooks: `HB_TODAY`, `HB_OFFLINE`, `HB_GAP_MS`, `--out`.
+League tables are computed from the matches in the store (`tables.js`: 3/1/0 points, then most
+wins, goal difference, goals scored; withdrawn teams left out). Pitches of future home matches are
+kept from the last data that had them; new home matches have none until the club supplies pitch
+data. Test hooks: `HB_TODAY`, `HB_GAP_MS`, `HB_NO_SYNC`, `--out`. Store status: `node matchstore.js --status`.
 
 ## Training schedule
 
@@ -64,18 +68,16 @@ home match on the same pitch area is flagged ⚠ rather than hidden.
 ## Standings archive (klassementen.html)
 
 `klassementen.html` shows the standing of every Belgian league pool, not just Olympia's,
-and keeps them after the season ends. `standings/archive.js` fetches them into
-`standings/<season>.json`; `standings/build_page.js` embeds those files into the page.
+and keeps them after the season ends. `standings/archive.js` computes them from the match store
+(see above) into `standings/<season>.json`, without any call to hockey.be;
+`standings/build_page.js` embeds those files into the page. Until 25 Nov 2026 it fetched the
+official tables (~100 calls a day); those stay until a pool has played more matches.
 
 - A pool's saved table is replaced only when its total of games played went up, so the
   youth tables that end in November stay as they were on the last match day.
 - U7-U9 are skipped: the federation keeps no rankings there. Cups are skipped too.
-- The load is spread: each pool has one weekday slot (Mon-Thu, `poolId % 4`), so a full
-  sweep is ~100 calls a day, 3-8 s apart, after the weekend's games. Pools that have not
-  moved for 3 checks drop to every other week. Indoor pools are only checked Dec-Feb.
 - Runs from the **OlympiaCalendar Standings** scheduled task (`archive-local.ps1`,
   Mon-Thu 12:15), which commits and pushes like the daily refresh. Log: `archive-local.log`.
-- Fill or re-check everything at once: `node standings/archive.js --all --gap=1500,3000`.
 
 ## Published online
 

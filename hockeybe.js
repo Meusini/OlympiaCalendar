@@ -77,13 +77,19 @@ function parsePoolList(html) { // filter checkboxes -> { poolId: "Category – P
 // across categories, so the team code decides: U12B-2 -> "U12 Boys", D-x -> women, etc.
 function categoryOk(code, cat) {
   let m;
+  // A team without a club link arrives as "La Louvière U11B-1": keep only the code.
+  code = (code.match(/(?:U\d+[BG]|[A-Z]{1,3})-\d+$/) || [code])[0];
   if ((m = code.match(/^U(\d+)([BG])-/))) return cat === `U${m[1]} ${m[2] === 'B' ? 'Boys' : 'Girls'}`;
-  if (/^D-/.test(code)) return /Women|Ladies/.test(cat) && !/Junior Ladies/.test(cat);
-  if (/^H-/.test(code)) return /\bMen\b|Men's/.test(cat);
-  if (/^G-/.test(code)) return /Gentlemen/.test(cat);
+  if (/^JM-/.test(code)) return cat === '35+';
+  if (/^M-/.test(code)) return /^45\+/.test(cat);
+  // Women's leagues are "Women"/"Dames", the ladies' leagues (L teams) "Ladies"; indoor men's
+  // lower national leagues are "Heren", the gentlemen's "Gentleman".
+  if (/^D-/.test(code)) return /Women|Dames/.test(cat);
+  if (/^H-/.test(code)) return /\bMen\b|Men's|Heren/.test(cat);
+  if (/^G-/.test(code)) return /Gentlem[ae]n/.test(cat);
   if (/^JL-/.test(code)) return /Junior Ladies/.test(cat);
   if (/^T-/.test(code)) return /Trimmers/.test(cat);
-  if (/^L-/.test(code)) return /Ladies/.test(cat);
+  if (/^L-/.test(code)) return /Ladies/.test(cat) && !/Junior/.test(cat);
   return false;
 }
 
@@ -97,12 +103,15 @@ function resolvePool(code, short, poolList) {
   return null;
 }
 
-const unix = iso => Math.floor(new Date(iso + 'T00:00:00+01:00').getTime() / 1000);
+// Period bounds in Belgian local time (the box runs on it): from 00:00 on the first day to
+// 23:59:59 on the last, so the last day's matches are included.
+const unix = (iso, end) => Math.floor(new Date(iso + (end ? 'T23:59:59' : 'T00:00:00')).getTime() / 1000);
 const programUrl = (season, from, to, extra) =>
-  `${BASE}/competition/download-program-data?programType=${PROGRAM_TYPE[season]}&period=${unix(from)}%20-%20${unix(to)}${extra}`;
+  `${BASE}/competition/download-program-data?programType=${PROGRAM_TYPE[season]}&period=${unix(from)}%20-%20${unix(to, true)}${extra}`;
+const allUrl = (season, from, to) => programUrl(season, from, to, '');
 const clubUrl = (season, from, to, search) => programUrl(season, from, to, `&search=${encodeURIComponent(search)}`);
 const poolUrl = (season, from, to, poolId) => programUrl(season, from, to, `&pool%5B%5D=${poolId}`);
-const poolListUrl = (season, from, to) => `${BASE}/competition-overview/${PROGRAM_PAGE[season]}/?period=${unix(from)}%20-%20${unix(to)}`;
+const poolListUrl = (season, from, to) => `${BASE}/competition-overview/${PROGRAM_PAGE[season]}/?period=${unix(from)}%20-%20${unix(to, true)}`;
 
 // Season windows. Outdoor: Aug-Jun, indoor: Oct-Mar (indoor pools start late Nov).
 function seasonWindow(season, todayIso) {
@@ -148,5 +157,5 @@ function makeFetcher({ minGapMs, maxGapMs, log }) {
 
 module.exports = {
   parseRows, parsePoolList, resolvePool, categoryOk, normLabel, isoDate, seasonWindow,
-  clubUrl, poolUrl, poolListUrl, makeFetcher, Challenged, PROGRAM_TYPE, userAgent,
+  clubUrl, poolUrl, poolListUrl, allUrl, makeFetcher, Challenged, PROGRAM_TYPE, userAgent,
 };

@@ -1,54 +1,36 @@
-// archive.js -- keep the latest standing of every Belgian league pool, per season.
+// archive.js -- keep the latest table of every Belgian league pool, per season.
 //
-// Usage:
-//   node standings/archive.js            (scheduled run: only the pools due today)
-//   node standings/archive.js --all      (every eligible pool, e.g. the first fill)
-//   node standings/archive.js --gap=3000,8000   (random pause between calls, ms)
+// Since the hockey.be relaunch (25 Nov 2026) the site publishes no tables, only matches.
+// This script makes no calls of its own: it computes every pool's table (../tables.js) from
+// the shared match store (../matchstore.js), which the daily 06:30 refresh keeps current.
+// Before the relaunch it fetched ~100 official tables a day; those stay in the file until a
+// pool has played more matches than they show.
 //
-// Rule (Bart, 2026-10-25): a pool's saved standing is replaced only when the total of
-// "Played" went up. Otherwise the saved one stays -- youth leagues stop in November and
-// their final table must survive whatever hockey.be shows afterwards.
+// Usage: node standings/archive.js
 //
-// Spreading the load: each pool belongs to one weekday slot (Mon..Thu, poolId % 4), so a
-// full sweep of ~400 outdoor pools is ~100 calls a day, after the weekend's games. A pool
-// whose standing has not moved for 3 checks is only re-checked every other week. A pool
-// that missed its slot (machine off) is picked up on the next run.
+// Rule (2026-10-25): a pool's saved table is replaced only when the total of "Played" went
+// up. Otherwise the saved one stays -- youth leagues stop in November and their final table
+// must survive whatever hockey.be shows afterwards.
 //
 // Output: standings/<season>.json, e.g. standings/2026-27.json. build_page.js turns the
-// season files into klassementen.html.
+// season files into klassementen.html; HockeyCensus/rounds.js reads them too, so the fields
+// (label, kind, comp, age, gender, division, group, snapshot{fetchedAt,totalPlayed,columns,rows})
+// keep the shape of the old feed.
 
 const fs = require('fs');
 const path = require('path');
+const MS = require('../matchstore');
+const { computeTable } = require('../tables');
 
-const UA = 'OlympiaCalendar/1.0 (+https://github.com/Meusini/OlympiaCalendar)';
-const API = 'https://hockey.be/wp-json/sportlink-api';
-const KALENDER = 'https://hockey.be/nl/competitie/kalender-resultaten-en-rangschikkingen/';
 const DIR = __dirname;
-
-const args = process.argv.slice(2);
-const ALL = args.includes('--all');
-const gapArg = (args.find(a => a.startsWith('--gap=')) || '').slice(6);
-const [GAP_MIN, GAP_MAX] = gapArg ? gapArg.split(',').map(Number) : [3000, 8000];
-
-const DAY = 24 * 3600 * 1000;
 const now = new Date();
-const todayIso = now.toISOString().slice(0, 10);
-
-// Season runs Aug -> Jul. Pool ids are new every season, so each season gets its own file.
-function seasonOf(d) {
-  const y = d.getFullYear();
-  const start = d.getMonth() >= 6 ? y : y - 1;   // July counts as the new season
-  return `${start}-${String((start + 1) % 100).padStart(2, '0')}`;
-}
-const SEASON = seasonOf(now);
+const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+const SEASON = MS.seasonName(todayIso);
 const STORE = path.join(DIR, `${SEASON}.json`);
 
-// ----- label parsing -----
-// "U19 Boys Outdoor Week - Reg. 2 - A"
-// "Open League Men Outdoor Week - Reg. 2 - OL - HV - A"
-// "Men Indoor Week - Nat. 1 - B"
-// Since ~10 Nov 2026 hockey.be drops "Week" ("U19 Boys Outdoor - Reg. 2 - A"), so the marker is the last
-// word of the competition head, with or without "Week".
+// ----- labels -----
+// Old feed: "U19 Boys Outdoor - Reg. 2 - A". New site: "U19 Boys – Reg. 2 A" (category, en dash,
+// pool). Pools first seen on the new site get a label in the old shape so readers parse both.
 const SEASON_MARKER = /\s+(Outdoor|Indoor|Trimmers|Recreatief)(?:\s+Week)?\s*$/;
 function parseLabel(label) {
   const [head, ...rest] = label.split(' - ');
@@ -59,132 +41,82 @@ function parseLabel(label) {
   let gender = '';
   if (/\b(Boys|Men|Gentlemen|Gentleman|Heren)\b/i.test(comp)) gender = 'M';
   else if (/\b(Girls|Women|Ladies|Dames)\b/i.test(comp)) gender = 'F';
-  return {
-    kind,                       // outdoor | indoor | trimmers | recreatief
-    comp,                       // "U19 Boys", "Open League Men", ...
-    age: age ? Number(age) : null,
-    gender,
-    division: rest[0] || '',    // "Nat. 1", "Reg. 2", ...
-    group: rest.slice(1).join(' - '),
-  };
+  return { kind, comp, age: age ? Number(age) : null, gender, division: rest[0] || '', group: rest.slice(1).join(' - ') };
+}
+function oldStyleLabel(newLabel, type) {
+  const [cat, ...restParts] = newLabel.split(' – ');
+  const rest = restParts.join(' – ');
+  const kind = /Trimmers/.test(cat) ? 'Trimmers' : type === 'indoor' ? 'Indoor' : 'Outdoor';
+  const m = rest.match(/^((?:Nat|Reg)\.\s*\S+)\s*(?:-\s*)?(.*)$/);
+  const division = m ? m[1] : rest, group = m ? m[2] : '';
+  return `${cat.replace(/\s+Trimmers$/, '')} ${kind} - ${division}${group ? ' - ' + group : ''}`;
 }
 
-// U7-U9 keep no standings (federation rule since 2020-21: "plus aucun classement
-// jusqu'en U9"). Cups are knock-out rounds, not tables.
+// U7-U9 keep no standings (federation rule since 2020-21). Cups are knock-out rounds.
 function eligible(p) {
   if (p.age && p.age <= 9) return false;
   if (/Cup|Test-competitie/i.test(p.label)) return false;
   return true;
 }
-// Indoor runs mid-Nov to Feb (2026-27: first Olympia indoor match 28 Nov); outdoor everything except the summer break.
-function inWindow(p) {
-  const mo = now.getMonth() + 1;
-  if (p.kind === 'indoor') return (mo === 11 && now.getDate() >= 15) || mo === 12 || mo <= 2;
-  return !(mo === 7 || (mo === 8 && now.getDate() < 15));
-}
 
-// ----- http -----
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const gap = () => sleep(GAP_MIN + Math.random() * (GAP_MAX - GAP_MIN));
-let consecutive403 = 0;
-async function get(url, asText) {
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(60000) });
-      if (res.status === 403) consecutive403++;
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      consecutive403 = 0;
-      return asText ? await res.text() : await res.json();
-    } catch (e) {
-      if (attempt === 3) throw new Error(`GET ${url} failed after 3 attempts: ${e.message}`);
-      console.log(`  retry ${attempt}/3 (${e.message}) ${url}`);
-      await sleep(15000 * attempt);
-    }
-  }
-}
-const strip = v => typeof v === 'string' ? v.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').trim() : v;
-
-// ----- store -----
 function load() {
   if (!fs.existsSync(STORE)) return { season: SEASON, updated: null, pools: {} };
   return JSON.parse(fs.readFileSync(STORE, 'utf8'));
 }
 function save(store) {
   store.updated = new Date().toISOString();
-  const tmp = STORE + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify(store, null, 1) + '\n');
-  fs.renameSync(tmp, STORE);
+  fs.writeFileSync(STORE + '.tmp', JSON.stringify(store, null, 1) + '\n');
+  fs.renameSync(STORE + '.tmp', STORE);
 }
 
-async function poolList() {
-  try {
-    const html = await get(KALENDER, true);
-    const sel = (html.match(/<select name="poolid"[^>]*>([\s\S]*?)<\/select>/) || [])[1] || '';
-    return [...sel.matchAll(/<option value="(\d+)"[^>]*>([^<]+)<\/option>/g)]
-      .map(m => ({ id: m[1], label: m[2].replace(/&amp;/g, '&').trim() }));
-  } catch (e) {
-    console.log(`  WARN: pool list fetch failed: ${e.message}`);
-    return [];
-  }
-}
-
-function due(p, slot) {
-  if (ALL) return true;
-  const since = p.lastChecked ? (now - new Date(p.lastChecked)) / DAY : Infinity;
-  const interval = (p.unchanged || 0) >= 3 ? 13 : 6;
-  if (since === Infinity) return slot;                 // new pool: wait for its own day
-  if (slot && since >= interval) return true;
-  return since >= interval + 3;                        // missed its day: catch up
-}
-
-async function main() {
+function main() {
   const store = load();
-  console.log(`=== standings archive ${now.toISOString()} season ${SEASON}${ALL ? ' (--all)' : ''} ===`);
+  console.log(`=== standings archive ${now.toISOString()} season ${SEASON} (from the match store) ===`);
+  const poolList = MS.loadPoolList();
+  const matches = MS.poolMatches(todayIso);
+  const stamp = now.toISOString();
 
-  const listed = await poolList();
-  console.log(`  pool list: ${listed.length} pools`);
-  if (!listed.length) console.log('  pool list empty -- working from the pools already in the store');
-  for (const { id, label } of listed) {
-    const p = store.pools[id] || (store.pools[id] = { firstSeen: todayIso });
-    Object.assign(p, { label, ...parseLabel(label), lastListed: todayIso });
+  // Pools on the site's pool list or with matches in the store; new ones get their metadata.
+  let added = 0;
+  for (const type of MS.TYPES) for (const [id, raw] of Object.entries(poolList[type] || {})) {
+    if (!store.pools[id]) {
+      const label = oldStyleLabel(raw, type);
+      store.pools[id] = { firstSeen: todayIso, label, ...parseLabel(label) };
+      added++;
+    }
+    store.pools[id].lastListed = poolList.fetched || todayIso;
   }
 
-  const weekday = now.getDay();                        // Mon=1 .. Thu=4
-  const todo = Object.entries(store.pools).filter(([id, p]) =>
-    eligible({ ...p, label: p.label }) && inWindow(p) && due(p, weekday >= 1 && weekday <= 4 && (Number(id) % 4) + 1 === weekday));
-  console.log(`  due today: ${todo.length} pools (gap ${GAP_MIN}-${GAP_MAX} ms)`);
-
-  let changed = 0, kept = 0, empty = 0, failed = 0, n = 0;
-  for (const [id, p] of todo) {
-    if (consecutive403 >= 4) { console.log('  ABORT: repeated 403s -- Cloudflare is challenging this connection'); break; }
-    await gap();
-    n++;
-    let resp;
-    try { resp = await get(`${API}/standing?poolid=${id}`); }
-    catch (e) { console.log(`  WARN ${id}: ${e.message}`); failed++; continue; }
-    p.lastChecked = new Date().toISOString();
-
-    const columns = (resp.columns || []).map(c => c.title);
-    const rows = (resp.data || []).map(r => r.map(strip));
-    const iPlayed = columns.indexOf('Played');
-    if (!rows.length || iPlayed < 0) { p.unchanged = (p.unchanged || 0) + 1; empty++; continue; }
-    const total = rows.reduce((s, r) => s + (Number(r[iPlayed]) || 0), 0);
-
+  let changed = 0, kept = 0, noMatches = 0, considered = 0;
+  for (const [id, p] of Object.entries(store.pools)) {
+    if (!eligible(p)) continue;
+    const m = matches[id];
+    if (!m) { noMatches++; continue; }
+    considered++;
+    // Shoot-out bonus points (national youth): the new site shows only the drawn score, so keep
+    // each team's bonus from the last official table before it is first replaced.
+    if (p.snapshot && !p.snapshot.source && !p.bonus) {
+      const c = p.snapshot.columns, iW = c.indexOf('Won'), iD = c.indexOf('Draw'), iP = c.indexOf('Points');
+      const b = {};
+      for (const r of p.snapshot.rows) { const extra = Number(r[iP]) - 3 * Number(r[iW]) - Number(r[iD]); if (extra > 0) b[r[1]] = extra; }
+      if (Object.keys(b).length) { p.bonus = b; console.log(`  ${id} ${p.label}: shoot-out bonus kept for ${Object.keys(b).length} teams`); }
+    }
+    const table = computeTable(m.rows, todayIso, { numeric: true, bonus: p.bonus || null });
+    if (!table) { noMatches++; continue; }
+    p.lastChecked = stamp;
     const snap = p.snapshot;
-    if (!snap || total > snap.totalPlayed) {
-      p.snapshot = { fetchedAt: p.lastChecked, totalPlayed: total, columns, rows };
+    if (!snap || table.totalPlayed > snap.totalPlayed) {
+      p.snapshot = { fetchedAt: stamp, totalPlayed: table.totalPlayed, columns: table.columns, rows: table.rows, source: 'computed from hockey.be matches' };
       p.unchanged = 0;
       changed++;
     } else {
-      if (total < snap.totalPlayed) console.log(`  NOTE ${id} ${p.label}: played went down ${snap.totalPlayed} -> ${total}, keeping saved table`);
+      if (table.totalPlayed < snap.totalPlayed) console.log(`  NOTE ${id} ${p.label}: played ${table.totalPlayed} against ${snap.totalPlayed} saved, keeping saved table`);
       p.unchanged = (p.unchanged || 0) + 1;
       kept++;
     }
-    if (n % 25 === 0) { save(store); console.log(`  ... ${n}/${todo.length}`); }
   }
   save(store);
-  console.log(`  done: ${n} calls -- ${changed} updated, ${kept} kept, ${empty} empty, ${failed} failed`);
-  if (failed > todo.length / 2 && todo.length > 4) process.exitCode = 1;
+  console.log(`  ${considered} pools with matches: ${changed} updated, ${kept} kept; ${noMatches} without matches in the store; ${added} new pools`);
 }
 
-main().catch(e => { console.error(e); process.exitCode = 1; });
+main();

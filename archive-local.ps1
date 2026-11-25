@@ -3,9 +3,10 @@
 # Same reason as refresh-local.ps1: hockey.be's Cloudflare challenge blocks GitHub-hosted
 # runners, so this runs here and pushes the result for Pages to serve.
 #
-# Registered as the "OlympiaCalendar Standings" scheduled task, Mon-Thu at 12:15. Each day
-# standings/archive.js checks about a quarter of the pools (see the note at its top), then
-# build_page.js re-embeds them into klassementen.html.
+# Registered as the "OlympiaCalendar Standings" scheduled task, Mon-Thu at 12:15. Since the
+# hockey.be relaunch (25 Nov 2026) standings/archive.js makes no calls: it computes every pool's
+# table from the match store the 06:30 refresh keeps current. build_page.js then re-embeds them
+# into klassementen.html.
 # Log: archive-local.log (rotated at 1 MB, previous kept as .1)
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
