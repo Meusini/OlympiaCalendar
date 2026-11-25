@@ -35,7 +35,17 @@ try {
     git pull --ff-only --quiet
     if ($LASTEXITCODE -ne 0) { throw "git pull failed (exit $LASTEXITCODE)" }
 
-    & (Join-Path $repo 'update.ps1')
+    # update.js reads the relaunched hockey.be site (25 Nov 2026); update.ps1 read the old
+    # WordPress feed, which is gone. Its calls are spaced 15-40 s apart, so a run after a
+    # full weekend takes ~25 min. Node output only reaches the transcript through Write-Host.
+    $nodeOut = & node (Join-Path $repo 'update.js')
+    $nodeExit = $LASTEXITCODE
+    $nodeOut | ForEach-Object { Write-Host $_ }
+    if ($nodeExit -ne 0) {
+        $failLine = $nodeOut | Where-Object { $_ -like 'FAILED:*' } | Select-Object -Last 1
+        if ($failLine) { throw ($failLine -replace '^FAILED:\s*', '') }
+        throw "update.js failed (exit $nodeExit)"
+    }
 
     if (-not (git status --porcelain -- index.html pool_map.json)) {
         Write-Host "No data changes this run."

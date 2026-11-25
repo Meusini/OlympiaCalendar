@@ -1,8 +1,7 @@
 # HC Olympia — Velden & Teams
 
 Single-page web app showing daily field assignments, team standings, and weekly results
-for HC Olympia Antwerpen. Reads live from the hockey.be Sportlink API on a weekly schedule
-and serves a fully static `index.html`.
+for HC Olympia Antwerpen. Reads the hockey.be website once a day and serves a fully static `index.html`.
 
 ## Two sites
 
@@ -11,7 +10,7 @@ and serves a fully static `index.html`.
 
 The Statistiek code still lives in `index.html`. `<html data-site="calendar">` hides it here;
 `build_data_site.js` copies the page to `../OlympiaData/statistiek.html` with `data-site="data"`,
-which shows only Statistiek. `refresh-local.ps1` runs it after `update.ps1` and pushes both repos.
+which shows only Statistiek. `refresh-local.ps1` runs it after `update.js` and pushes both repos.
 It then rebuilds the census Team Strength and Club Strength tabs (`../HockeyCensus/rounds.js` + `strength_box.js`)
 into `../OlympiaData/strength.json`, encrypted with the Statistiek data key; the census page loads it after unlock,
 so these tabs refresh daily without the census password. Member counts and fees still need `node build_page.js`.
@@ -19,9 +18,9 @@ so these tabs refresh daily without the census password. Member counts and fees 
 
 ## Indoor and outdoor
 
-Indoor and outdoor are separate teams in separate pools on hockey.be (U10B-1 plays both). `update.ps1`
-tags every match, result and team with `season` (outdoor | indoor) and keys teams as code + season; indoor
-pool ids come from the standings archive (`standings/<season>.json`). The calendar has an All / Outdoor /
+Indoor and outdoor are separate teams in separate pools on hockey.be (U10B-1 plays both). `update.js`
+tags every match, result and team with `season` (outdoor | indoor) and keys teams as code + season; pool
+ids come from the pool list on the hockey.be program pages. The calendar has an All / Outdoor /
 Indoor selector for Results, Teams and Standings; OlympiaData Statistiek has the same toggle, defaulting
 to the season being played. The archive checks indoor pools from 15 November to February.
 
@@ -33,12 +32,23 @@ embedded inside the file — no network call at load time.
 ## Refreshing the schedule data
 
 ```powershell
-pwsh -File update.ps1
+node update.js
 ```
 
-This script pulls upcoming games, past results, pool standings, and pool-wide weekly games
-from `hockey.be/wp-json/sportlink-api/*`, then rewrites the `<script id="games-data">`
-block inside `index.html`.
+hockey.be was relaunched on 25 Nov 2026 and the old JSON feed (`/wp-json/sportlink-api/*`, read by
+the retired `update.ps1`) is gone. `update.js` (helpers in `hockeybe.js`) reads the HTML table behind
+the site's "Download overzicht" button instead, then rewrites the `<script id="games-data">` block:
+
+- 2 calls for every Olympia match, outdoor and indoor, 180 days back to 90 days ahead, with scores.
+- 0-2 calls for the pool list (id + full label), when a label is new or the copy is a week old.
+- 1 call per scored Olympia pool for the whole season, only when a match in that pool was due since
+  its last call, or weekly. Each pool's copy is kept in `.cache/pools/` (not committed).
+- Calls are 15-40 s apart in random order, so a Monday run takes ~25 min.
+
+The new site no longer publishes the **pitch per match**, **league tables** or **Trimmers** matches.
+League tables are computed from the pool results (3/1/0 points, then goal difference, then goals
+scored). Pitches of future home matches are kept from the last data that had them; new home matches
+have none until the club supplies pitch data. Test hooks: `HB_TODAY`, `HB_OFFLINE`, `HB_GAP_MS`, `--out`.
 
 ## Training schedule
 
@@ -47,7 +57,7 @@ static block in `index.html` — the `TRAINING_SCHEDULE` constant near the top o
 Trainings render inside Veldbezetting next to the matches (hatched, dashed blocks; quarters
 A–D as on the sheet). Conditietraining is left out because it uses no pitch. The schedule only
 applies inside the outdoor windows in `TRAINING_SEASONS` (late Aug → end Nov, Mar → Jun);
-edit both constants by hand when the club publishes a new version. `update.ps1` never touches
+edit both constants by hand when the club publishes a new version. `update.js` never touches
 them — it only rewrites the `<script id="games-data">` block. A training that collides with a
 home match on the same pitch area is flagged ⚠ rather than hidden.
 
@@ -72,13 +82,13 @@ and keeps them after the season ends. `standings/archive.js` fetches them into
 Deployed via GitHub Pages from this repo's `main` branch.
 
 The daily refresh runs on Bart's machine, not in CI. The **OlympiaCalendar Refresh**
-scheduled task runs `refresh-local.ps1` at 07:30 — it pulls, runs `update.ps1`, and
+scheduled task runs `refresh-local.ps1` at 06:30 — it pulls, runs `update.js`, and
 commits and pushes `index.html` if the data changed. Pages then serves the new version.
 
-It lives there because hockey.be sits behind Cloudflare, which serves its JavaScript
-challenge to GitHub-hosted runners: the first request of a process succeeds and every
-one after it returns 403, whatever the pacing. From a home connection all ~150 calls of
-a full run pass untouched. `.github/workflows/refresh.yml` is kept on manual trigger
+It lives there because hockey.be sits behind Cloudflare, which served its JavaScript
+challenge to GitHub-hosted runners on the old site: the first request of a process succeeded and
+every one after it returned 403, whatever the pacing. `update.js` stops the run on a 403, a 429 or
+a challenge page rather than retrying into it. `.github/workflows/refresh.yml` is kept on manual trigger
 only, for the day a self-hosted runner on a normal connection makes CI viable again.
 
 Check on it with `Get-ScheduledTask OlympiaCalendar*`, or read `refresh-local.log`.
