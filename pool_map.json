@@ -1,6 +1,6 @@
 {
  "note": "team code -> poolId of the pool the team plays in now. Written by update.js.",
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "teams": {
   "D-1": {
    "poolId": "11767",
@@ -57,10 +57,6 @@
   "U10B-1|indoor": {
    "poolId": "12495",
    "division": "U10 Boys - Reg. 1 E"
-  },
-  "U10B-1": {
-   "poolId": "11983",
-   "division": "U10 Boys - Reg. 1 C"
   },
   "U10B-2|indoor": {
    "poolId": "12483",
