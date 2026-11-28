@@ -1,6 +1,6 @@
 {
  "note": "team code -> poolId of the pool the team plays in now. Written by update.js.",
- "updated": "2026-11-27",
+ "updated": "2026-11-28",
  "teams": {
   "D-1": {
    "poolId": "11767",
